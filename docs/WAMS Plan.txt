@@ -1,0 +1,15 @@
+WAMS Plan
+
++ produce JSON graph structure from Julia into files (HE)
+
++ read JSON graph into JS
++ parse JSON graph
++ perform layout with KlayJS
+
+- render diagram with three.js
+  - just rectangles, polylines and text
+  - with icons
+  
+- produce Modelica icons in suitable format for three.js rendering (HE)
+- render diagram with icons
+
