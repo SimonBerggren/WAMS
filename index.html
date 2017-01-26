@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>KIELER Web Service For Layout</title>
+        <meta http-equiv='content-type' content='text/html; charset=utf-8'>
+        <link href="styles/bootstrap-3.0.2.min.css" rel="stylesheet">
+        <link href="styles/prettify.css" type="text/css" rel="stylesheet">
+        <link href="styles/style.css" type="text/css" rel="stylesheet">
+        <script src="scripts/jquery-1.10.2.min.js"></script>
+        <script src="scripts/bootstrap-3.0.2.min.js"></script>
+        <script src="scripts/prettify.js"></script>
+        <script src="scripts/jquery.stickytableheaders.min.js"></script>
+        		<link href="styles/prettify.css" type="text/css" rel="stylesheet" />
+        
+        				<script src="scripts/jquery.event.drag.js"></script>
+        <script src="scripts/jquery.mousewheel.js"></script>
+        <script src="scripts/jquery.svg.js"></script>
+        <script src="scripts/jquery.svg.extras.js"></script>
+        <script src="scripts/prettify.js"></script>
+        
+        <style>
+        	body, html {
+        	  height: 100%;
+        					}
+        	
+        	.alert-error {
+        		font-size: 13px;
+        	}
+        
+        	[class*="span"] {
+        		margin-left: 0px;	
+        	}
+        	
+          	#srcArea, #configArea {
+        		width: 100%;
+        		height: 300px;	
+        		font-size: 10px;
+        	}
+        	
+        	#resGraph {
+        		width: 100%;
+        		height: 100%;
+        	}
+        	
+        	.row {
+        	    margin-bottom: 5px;  
+        	}
+        	
+        	svg {
+        		width: 100%;
+        		height: 100%;
+        	}
+        
+        	textarea {
+        		resize: none;
+        	}
+        	
+        	.pre-scrollable {
+        		max-height: 500px;
+        	}
+        	
+        	pre.prettyprint {
+        		border: 1px solid rgba(0, 0, 0, 0.15);
+        	}
+        </style>
+        <style>
+            body {
+                padding-top: 70px;
+            } 
+            pre.prettyprint {
+                padding: 9px;
+            }
+        </style>
+        <script>
+          $(function() {
+              // remove leading whitespace from each code element 
+              $('.prettyprint').each(function() {
+               var code = $(this);
+               var text = code.html();
+               if (text) {
+                  var lines = text.split("\n");
+                  if (lines.length > 0) {
+                      var match = /^\s+(.+)$/.exec(lines[0]);
+                      if (match && match.length > 1) {
+                        var length = match[0].length - match[1].length;         
+                        var strippedLines = $.map(lines, function(e, i) {
+                            var woWhitespaces = e.substring(length);
+                            return woWhitespaces;
+                        });
+                      }
+                      // replace with the whitespace free code
+                      code.html(strippedLines.join("\n"));
+                  }
+               }
+              });
+              
+              prettyPrint();
+          });
+        </script>
+    </head>
+    <body>
+
+        <header class="navbar navbar-inverse navbar-fixed-top">
+          <div class="container">
+              <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse">
+                  <span class="sr-only">Toggle navigation</span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="Index.html">KIELER</a>
+              </div>
+            <nav class="nav navbar-nav" role="navigation">
+              <div class="collapse navbar-collapse" id="navbar-collapse">
+                <ul class="nav navbar-nav">
+                  <li><a href='Providedlayout.html'>Provided Layout</a></li>
+                  <li><a href='Serviceinterface.html'>Service Interface</a></li>
+                  <li><a href='Downloads.html'>Downloads</a></li>
+                  <li><a href='Contact.html'>Contact</a></li>
+                  <li><a href='Live.html'>Live</a></li>
+                </ul>
+              </div>
+            </nav>
+          </div>
+        </header>
+                            
+        <div class="container">	
+        	<div class="row">
+        		<div id="srcGraph" class="col-md-8">
+        			<h4>Input Graph <small><a href="Providedlayout.html#formats">See Formats</a></small></h4>
+                    <textarea id="srcArea">
+                    </textarea>
+        		</div>
+        		<div id="config" class="col-md-4">
+        			<h4>Config <small><a href="Providedlayout.html#algorithms">See Layout Options</a></small></h4>
+                    <textarea id="configArea">
+                    </textarea>
+        		</div>
+        	</div>
+        	<div class="row">
+        	    <div class="col-md-12">
+        		<div class="col-md-3 input-group">
+        			<span class="input-group-addon">Input Format</span>
+        			<select id="inputFormat" class="form-control">
+        				<option  value="de.cau.cs.kieler.kgraph">KGraph</option><option  value="gov.nist.math.matrix">Matrix</option><option  value="org.graphviz.dot">Dot</option><option  value="de.uni-passau.fim.gml">GML</option><option  value="org.graphdrawing.graphml">GraphML</option><option selected="selected" value="org.json">JSON</option><option  value="net.ogdf.ogml">OGML</option><option  value="org.w3.svg">SVG</option>
+        			</select>
+        		</div>
+        		<div class=" col-md-3 input-group">
+        			<span class="input-group-addon">Output Format</span>
+        			<select id="outputFormat" class="form-control">
+        				<option  value="de.cau.cs.kieler.kgraph">KGraph</option><option  value="gov.nist.math.matrix">Matrix</option><option  value="org.graphviz.dot">Dot</option><option  value="de.uni-passau.fim.gml">GML</option><option  value="org.graphdrawing.graphml">GraphML</option><option  value="org.json">JSON</option><option  value="net.ogdf.ogml">OGML</option><option selected="selected" value="org.w3.svg">SVG</option>
+        			</select>
+        		</div>
+        		<button id="layout" class="btn pull-right" style="margin-right: 10px">Layout</button><span id="working"></span>
+        		</div>
+        	</div>
+        
+        	<div class="row">
+        	    <div class="col-md-12">
+        		   <div id="errorDiv" class="alert alert-error" style="display: none;"></div>
+        		</div>
+        	</div>
+        </div>	
+         
+         <!-- the svg gets the remaining size, i.e full display area -->
+         <div id="resGraph"></div>
+         
+        <script>
+        $(function() {
+          
+          // add tabbing behavior to the textareas
+          $('textarea').keydown(function(e) {
+          
+           if (e.keyCode === 9) { // tab
+             var start = this.selectionStart;
+             var end = this.selectionEnd;
+             
+             // replace textarea content with text before + tabs + text after
+             $(this).val($(this).val().substring(0, start)
+               + "    " // 4 spaces
+               + $(this).val().substring(end));
+               
+             // move cursor 
+             this.selectionStart = this.selectionEnd = start + 4;
+             
+             // prevent the default tab behavior
+             e.preventDefault();
+           }
+          });
+        
+        	// init the svg with zoom and pan
+        	$('#resGraph').svg();
+        	$('#resGraph').addScalability();
+        	$('#resGraph').addDraggable();
+        	
+        	var svg = $('#resGraph');
+        	
+        	$('#layout').click(function() {
+        		var graph = $("#srcArea").val();
+        		var config = '{' + $('#configArea').val() + '}';
+        		var iFormat = $('#inputFormat > option:selected').val();
+        		var oFormat = $('#outputFormat > option:selected').val();
+        		
+        		$.ajax({
+        			type: 'POST',
+        			url: '/layout',
+        			contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+        			data: {
+        				graph: graph,
+        				config: config,
+        				iFormat: iFormat,
+        				oFormat: oFormat
+        			}, 
+        			success: function(svggraph) {
+        			    
+        			    // answer is application/x-www-form-urlencoded
+        				svggraph = decodeURIComponent(svggraph.replace(/\+/g, '%20'));
+        				
+        				// if not svg, surround with pretty print
+        				if (oFormat != "org.w3.svg") {
+        				  // replace xml markup for displaying
+                          svggraph = svggraph.replace(/>/g, '&gt;').replace(/</g, '&lt;');
+                          // make it look nice 
+                          svggraph = "<pre class='pre-scrollable prettyprint'>" + svggraph + "</pre>";
+        				}
+        
+        				svg.html(svggraph);
+        				
+        				// center the graph horizontally
+        				var svgRect = $('g#group')[0].getBoundingClientRect();
+        				var offset = ($(document).width() - svgRect.width) / 2; 
+        				var g = svg.svg('get').getElementById('group');
+        				// we put a 1 for the y value as the IE seems to omit 0s 
+        				// what breaks our regex in the draggable addon
+        				g.setAttribute('transform', 'translate(' + offset + ', 1)');
+        				
+        				// show graph section and hide errorDiv
+        				$('#resGraph').show();
+        				$('#errorDiv').hide();
+        				
+        				// call the prettifier
+        				prettyPrint();
+        			},
+        			error: function(error) {
+        				// hide the graph section
+        				$('#resGraph').hide();
+        				// show errorDiv
+        				try {
+        				    var errorJson = JSON.parse(error.responseText);
+        				    var errorPre = "<h4>Error:</h4> " + errorJson.message;
+        				    if (errorJson.throwable) {
+        				        errorPre += "<br /><br /><pre>" + errorJson.throwable + "</pre>";    
+        				    }
+        				} catch (err) {
+        				    var errorPre =  "<h4>Unknown Error.</h4>";
+        				}
+        				$('#errorDiv').html(errorPre);
+        				$('#errorDiv').show();	
+        			}
+        		});
+        	});
+        	
+        	// add initial example data
+        	var exGraph = "{\n  id: \"root\",  \n   children: [{\n      id: \"n1\",  \n     labels: [ { text: \"n1\" } ],\n     width: 100, \n      height: 100\n   },{\n       id: \"n2\", \n      labels: [ { text: \"n2\" } ],\n     width: 100,\n       height: 50,\n       ports: [{\n         id: \"n2_p1\",\n            width: 10,\n            height: 10\n        }],\n       children: [{  \n            id: \"n3\",  \n         labels: [ { text: \"n3\" } ],\n         width: 20,\n            height: 20\n        },{\n           id: \"n4\", \n          labels: [ { text: \"n4\" } ],\n         width: 20,\n            height: 20}\n       ],\n        edges: [{\n         id: \"e4\",  \n         source: \"n3\",\n           target: \"n4\"\n        }]\n    },{\n       id: \"n5\",\n       labels: [ { text: \"n5\" } ],\n     width: 100,\n       height: 50\n    }],\n   edges: [{\n     id: \"e1\",  \n     labels: [ { text: \"e1\" } ],\n     source: \"n1\",\n       target: \"n2\",\n       targetPort: \"n2_p1\"\n },{\n       id: \"e2\",  \n     labels: [ { text: \"e2\" } ],\n     source: \"n1\",\n       target: \"n5\"\n    }]\n}";
+        	$('#srcArea').val(exGraph);
+        	var exConfig = "spacing: 100,\nalgorithm: de.cau.cs.kieler.klay.layered,\nedgeRouting: ORTHOGONAL";
+        	$('#configArea').val(exConfig);
+        });
+        </script>
+        
+        <script>
+            var offset = $('.navbar').height();
+            $("html:not(.legacy) table").stickyTableHeaders({fixedOffset: offset});
+        </script>
+    </body>
+</html>
