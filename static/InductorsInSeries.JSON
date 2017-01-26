@@ -1,0 +1,180 @@
+  {
+  "id": "InductorsInSeries",
+  "class": "InductorsInSeries",
+  "labels": [{"text": "InductorsInSeries"}],
+  "properties": {"de.cau.cs.kieler.portConstraints": "FIXED_SIDE"},
+  "width": 30,
+  "height": 30
+  , "children": [
+    {
+    "id": "V",
+    "class": "ConstantVoltage",
+    "labels": [{"text": "V"}],
+    "properties": {"de.cau.cs.kieler.portConstraints": "FIXED_SIDE"},
+    "width": 30,
+    "height": 30
+    , "ports": [
+      {
+      "id": "Vp",
+      "class": "Pin",
+      "labels": [{"text": "p"}],
+      "properties": {"de.cau.cs.kieler.portSide": "WEST"},
+      "width": 3,
+      "height": 3
+      }
+    , 
+      {
+      "id": "Vn",
+      "class": "Pin",
+      "labels": [{"text": "n"}],
+      "properties": {"de.cau.cs.kieler.portSide": "EAST"},
+      "width": 3,
+      "height": 3
+      }
+    ]
+    }
+  , 
+    {
+    "id": "L1",
+    "class": "Inductor",
+    "labels": [{"text": "L1"}],
+    "properties": {"de.cau.cs.kieler.portConstraints": "FIXED_SIDE"},
+    "width": 30,
+    "height": 30
+    , "ports": [
+      {
+      "id": "L1p",
+      "class": "Pin",
+      "labels": [{"text": "p"}],
+      "properties": {"de.cau.cs.kieler.portSide": "WEST"},
+      "width": 3,
+      "height": 3
+      }
+    , 
+      {
+      "id": "L1n",
+      "class": "Pin",
+      "labels": [{"text": "n"}],
+      "properties": {"de.cau.cs.kieler.portSide": "EAST"},
+      "width": 3,
+      "height": 3
+      }
+    ]
+    }
+  , 
+    {
+    "id": "R1",
+    "class": "Resistor",
+    "labels": [{"text": "R1"}],
+    "properties": {"de.cau.cs.kieler.portConstraints": "FIXED_SIDE"},
+    "width": 30,
+    "height": 30
+    , "ports": [
+      {
+      "id": "R1p",
+      "class": "Pin",
+      "labels": [{"text": "p"}],
+      "properties": {"de.cau.cs.kieler.portSide": "WEST"},
+      "width": 3,
+      "height": 3
+      }
+    , 
+      {
+      "id": "R1n",
+      "class": "Pin",
+      "labels": [{"text": "n"}],
+      "properties": {"de.cau.cs.kieler.portSide": "EAST"},
+      "width": 3,
+      "height": 3
+      }
+    ]
+    }
+  , 
+    {
+    "id": "R2",
+    "class": "Resistor",
+    "labels": [{"text": "R2"}],
+    "properties": {"de.cau.cs.kieler.portConstraints": "FIXED_SIDE"},
+    "width": 30,
+    "height": 30
+    , "ports": [
+      {
+      "id": "R2p",
+      "class": "Pin",
+      "labels": [{"text": "p"}],
+      "properties": {"de.cau.cs.kieler.portSide": "WEST"},
+      "width": 3,
+      "height": 3
+      }
+    , 
+      {
+      "id": "R2n",
+      "class": "Pin",
+      "labels": [{"text": "n"}],
+      "properties": {"de.cau.cs.kieler.portSide": "EAST"},
+      "width": 3,
+      "height": 3
+      }
+    ]
+    }
+  , 
+    {
+    "id": "L2",
+    "class": "Inductor",
+    "labels": [{"text": "L2"}],
+    "properties": {"de.cau.cs.kieler.portConstraints": "FIXED_SIDE"},
+    "width": 30,
+    "height": 30
+    , "ports": [
+      {
+      "id": "L2p",
+      "class": "Pin",
+      "labels": [{"text": "p"}],
+      "properties": {"de.cau.cs.kieler.portSide": "WEST"},
+      "width": 3,
+      "height": 3
+      }
+    , 
+      {
+      "id": "L2n",
+      "class": "Pin",
+      "labels": [{"text": "n"}],
+      "properties": {"de.cau.cs.kieler.portSide": "EAST"},
+      "width": 3,
+      "height": 3
+      }
+    ]
+    }
+  ]
+  , "edges": [
+    {"source": "V",
+     "sourcePort": "Vp",
+     "target": "L1",
+     "targetPort": "L1p"}
+  , 
+    {"source": "L1",
+     "sourcePort": "L1n",
+     "target": "R1",
+     "targetPort": "R1p"}
+  , 
+    {"source": "L1",
+     "sourcePort": "L1n",
+     "target": "R2",
+     "targetPort": "R2p"}
+  , 
+    {"source": "R1",
+     "sourcePort": "R1n",
+     "target": "L2",
+     "targetPort": "L2p"}
+  , 
+    {"source": "R2",
+     "sourcePort": "R2n",
+     "target": "L2",
+     "targetPort": "L2p"}
+  , 
+    {"source": "L2",
+     "sourcePort": "L2n",
+     "target": "V",
+     "targetPort": "Vn"}
+  ]
+  }

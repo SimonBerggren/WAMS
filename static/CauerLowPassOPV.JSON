@@ -1,0 +1,1332 @@
+{
+"id": "CauerLowPassOPV",
+"class": "CauerLowPassOPV",
+"labels": [{"text": "CauerLowPassOPV"}],
+"properties": {"de.cau.cs.kieler.portConstraints": "FIXED_SIDE"},
+"width": 30,
+"height": 30
+, "children": [
+  {
+  "id": "C1",
+  "class": "Capacitor",
+  "labels": [{"text": "C1"}],
+  "properties": {"de.cau.cs.kieler.portConstraints": "FIXED_SIDE"},
+  "width": 30,
+  "height": 30
+  , "ports": [
+    {
+    "id": "C1p",
+    "class": "Pin",
+    "labels": [{"text": "p"}],
+    "properties": {"de.cau.cs.kieler.portSide": "WEST"},
+    "width": 3,
+    "height": 3
+    }
+  , 
+    {
+    "id": "C1n",
+    "class": "Pin",
+    "labels": [{"text": "n"}],
+    "properties": {"de.cau.cs.kieler.portSide": "EAST"},
+    "width": 3,
+    "height": 3
+    }
+  ]
+  }
+, 
+  {
+  "id": "C2",
+  "class": "Capacitor",
+  "labels": [{"text": "C2"}],
+  "properties": {"de.cau.cs.kieler.portConstraints": "FIXED_SIDE"},
+  "width": 30,
+  "height": 30
+  , "ports": [
+    {
+    "id": "C2p",
+    "class": "Pin",
+    "labels": [{"text": "p"}],
+    "properties": {"de.cau.cs.kieler.portSide": "WEST"},
+    "width": 3,
+    "height": 3
+    }
+  , 
+    {
+    "id": "C2n",
+    "class": "Pin",
+    "labels": [{"text": "n"}],
+    "properties": {"de.cau.cs.kieler.portSide": "EAST"},
+    "width": 3,
+    "height": 3
+    }
+  ]
+  }
+, 
+  {
+  "id": "C3",
+  "class": "Capacitor",
+  "labels": [{"text": "C3"}],
+  "properties": {"de.cau.cs.kieler.portConstraints": "FIXED_SIDE"},
+  "width": 30,
+  "height": 30
+  , "ports": [
+    {
+    "id": "C3p",
+    "class": "Pin",
+    "labels": [{"text": "p"}],
+    "properties": {"de.cau.cs.kieler.portSide": "WEST"},
+    "width": 3,
+    "height": 3
+    }
+  , 
+    {
+    "id": "C3n",
+    "class": "Pin",
+    "labels": [{"text": "n"}],
+    "properties": {"de.cau.cs.kieler.portSide": "EAST"},
+    "width": 3,
+    "height": 3
+    }
+  ]
+  }
+, 
+  {
+  "id": "C4",
+  "class": "Capacitor",
+  "labels": [{"text": "C4"}],
+  "properties": {"de.cau.cs.kieler.portConstraints": "FIXED_SIDE"},
+  "width": 30,
+  "height": 30
+  , "ports": [
+    {
+    "id": "C4p",
+    "class": "Pin",
+    "labels": [{"text": "p"}],
+    "properties": {"de.cau.cs.kieler.portSide": "WEST"},
+    "width": 3,
+    "height": 3
+    }
+  , 
+    {
+    "id": "C4n",
+    "class": "Pin",
+    "labels": [{"text": "n"}],
+    "properties": {"de.cau.cs.kieler.portSide": "EAST"},
+    "width": 3,
+    "height": 3
+    }
+  ]
+  }
+, 
+  {
+  "id": "C5",
+  "class": "Capacitor",
+  "labels": [{"text": "C5"}],
+  "properties": {"de.cau.cs.kieler.portConstraints": "FIXED_SIDE"},
+  "width": 30,
+  "height": 30
+  , "ports": [
+    {
+    "id": "C5p",
+    "class": "Pin",
+    "labels": [{"text": "p"}],
+    "properties": {"de.cau.cs.kieler.portSide": "WEST"},
+    "width": 3,
+    "height": 3
+    }
+  , 
+    {
+    "id": "C5n",
+    "class": "Pin",
+    "labels": [{"text": "n"}],
+    "properties": {"de.cau.cs.kieler.portSide": "EAST"},
+    "width": 3,
+    "height": 3
+    }
+  ]
+  }
+, 
+  {
+  "id": "R1",
+  "class": "Resistor",
+  "labels": [{"text": "R1"}],
+  "properties": {"de.cau.cs.kieler.portConstraints": "FIXED_SIDE"},
+  "width": 30,
+  "height": 30
+  , "ports": [
+    {
+    "id": "R1p",
+    "class": "Pin",
+    "labels": [{"text": "p"}],
+    "properties": {"de.cau.cs.kieler.portSide": "WEST"},
+    "width": 3,
+    "height": 3
+    }
+  , 
+    {
+    "id": "R1n",
+    "class": "Pin",
+    "labels": [{"text": "n"}],
+    "properties": {"de.cau.cs.kieler.portSide": "EAST"},
+    "width": 3,
+    "height": 3
+    }
+  ]
+  }
+, 
+  {
+  "id": "R2",
+  "class": "Resistor",
+  "labels": [{"text": "R2"}],
+  "properties": {"de.cau.cs.kieler.portConstraints": "FIXED_SIDE"},
+  "width": 30,
+  "height": 30
+  , "ports": [
+    {
+    "id": "R2p",
+    "class": "Pin",
+    "labels": [{"text": "p"}],
+    "properties": {"de.cau.cs.kieler.portSide": "WEST"},
+    "width": 3,
+    "height": 3
+    }
+  , 
+    {
+    "id": "R2n",
+    "class": "Pin",
+    "labels": [{"text": "n"}],
+    "properties": {"de.cau.cs.kieler.portSide": "EAST"},
+    "width": 3,
+    "height": 3
+    }
+  ]
+  }
+, 
+  {
+  "id": "R3",
+  "class": "Resistor",
+  "labels": [{"text": "R3"}],
+  "properties": {"de.cau.cs.kieler.portConstraints": "FIXED_SIDE"},
+  "width": 30,
+  "height": 30
+  , "ports": [
+    {
+    "id": "R3p",
+    "class": "Pin",
+    "labels": [{"text": "p"}],
+    "properties": {"de.cau.cs.kieler.portSide": "WEST"},
+    "width": 3,
+    "height": 3
+    }
+  , 
+    {
+    "id": "R3n",
+    "class": "Pin",
+    "labels": [{"text": "n"}],
+    "properties": {"de.cau.cs.kieler.portSide": "EAST"},
+    "width": 3,
+    "height": 3
+    }
+  ]
+  }
+, 
+  {
+  "id": "Op1",
+  "class": "IdealOpAmp3Pin",
+  "labels": [{"text": "Op1"}],
+  "properties": {"de.cau.cs.kieler.portConstraints": "FIXED_SIDE"},
+  "width": 30,
+  "height": 30
+  , "ports": [
+    {
+    "id": "Op1in_p",
+    "class": "Pin",
+    "labels": [{"text": "in_p"}],
+    "properties": {"de.cau.cs.kieler.portSide": "WEST"},
+    "width": 3,
+    "height": 3
+    }
+  , 
+    {
+    "id": "Op1in_n",
+    "class": "Pin",
+    "labels": [{"text": "in_n"}],
+    "properties": {"de.cau.cs.kieler.portSide": "WEST"},
+    "width": 3,
+    "height": 3
+    }
+  , 
+    {
+    "id": "Op1out",
+    "class": "Pin",
+    "labels": [{"text": "out"}],
+    "properties": {"de.cau.cs.kieler.portSide": "EAST"},
+    "width": 3,
+    "height": 3
+    }
+  ]
+  }
+, 
+  {
+  "id": "G",
+  "class": "Ground",
+  "labels": [{"text": "G"}],
+  "properties": {"de.cau.cs.kieler.portConstraints": "FIXED_SIDE"},
+  "width": 30,
+  "height": 30
+  , "ports": [
+    {
+    "id": "Gp",
+    "class": "Pin",
+    "labels": [{"text": "p"}],
+    "properties": {"de.cau.cs.kieler.portSide": "NORTH"},
+    "width": 3,
+    "height": 3
+    }
+  ]
+  }
+, 
+  {
+  "id": "R4",
+  "class": "Resistor",
+  "labels": [{"text": "R4"}],
+  "properties": {"de.cau.cs.kieler.portConstraints": "FIXED_SIDE"},
+  "width": 30,
+  "height": 30
+  , "ports": [
+    {
+    "id": "R4p",
+    "class": "Pin",
+    "labels": [{"text": "p"}],
+    "properties": {"de.cau.cs.kieler.portSide": "WEST"},
+    "width": 3,
+    "height": 3
+    }
+  , 
+    {
+    "id": "R4n",
+    "class": "Pin",
+    "labels": [{"text": "n"}],
+    "properties": {"de.cau.cs.kieler.portSide": "EAST"},
+    "width": 3,
+    "height": 3
+    }
+  ]
+  }
+, 
+  {
+  "id": "R5",
+  "class": "Resistor",
+  "labels": [{"text": "R5"}],
+  "properties": {"de.cau.cs.kieler.portConstraints": "FIXED_SIDE"},
+  "width": 30,
+  "height": 30
+  , "ports": [
+    {
+    "id": "R5p",
+    "class": "Pin",
+    "labels": [{"text": "p"}],
+    "properties": {"de.cau.cs.kieler.portSide": "WEST"},
+    "width": 3,
+    "height": 3
+    }
+  , 
+    {
+    "id": "R5n",
+    "class": "Pin",
+    "labels": [{"text": "n"}],
+    "properties": {"de.cau.cs.kieler.portSide": "EAST"},
+    "width": 3,
+    "height": 3
+    }
+  ]
+  }
+, 
+  {
+  "id": "Op2",
+  "class": "IdealOpAmp3Pin",
+  "labels": [{"text": "Op2"}],
+  "properties": {"de.cau.cs.kieler.portConstraints": "FIXED_SIDE"},
+  "width": 30,
+  "height": 30
+  , "ports": [
+    {
+    "id": "Op2in_p",
+    "class": "Pin",
+    "labels": [{"text": "in_p"}],
+    "properties": {"de.cau.cs.kieler.portSide": "WEST"},
+    "width": 3,
+    "height": 3
+    }
+  , 
+    {
+    "id": "Op2in_n",
+    "class": "Pin",
+    "labels": [{"text": "in_n"}],
+    "properties": {"de.cau.cs.kieler.portSide": "WEST"},
+    "width": 3,
+    "height": 3
+    }
+  , 
+    {
+    "id": "Op2out",
+    "class": "Pin",
+    "labels": [{"text": "out"}],
+    "properties": {"de.cau.cs.kieler.portSide": "EAST"},
+    "width": 3,
+    "height": 3
+    }
+  ]
+  }
+, 
+  {
+  "id": "Op3",
+  "class": "IdealOpAmp3Pin",
+  "labels": [{"text": "Op3"}],
+  "properties": {"de.cau.cs.kieler.portConstraints": "FIXED_SIDE"},
+  "width": 30,
+  "height": 30
+  , "ports": [
+    {
+    "id": "Op3in_p",
+    "class": "Pin",
+    "labels": [{"text": "in_p"}],
+    "properties": {"de.cau.cs.kieler.portSide": "WEST"},
+    "width": 3,
+    "height": 3
+    }
+  , 
+    {
+    "id": "Op3in_n",
+    "class": "Pin",
+    "labels": [{"text": "in_n"}],
+    "properties": {"de.cau.cs.kieler.portSide": "WEST"},
+    "width": 3,
+    "height": 3
+    }
+  , 
+    {
+    "id": "Op3out",
+    "class": "Pin",
+    "labels": [{"text": "out"}],
+    "properties": {"de.cau.cs.kieler.portSide": "EAST"},
+    "width": 3,
+    "height": 3
+    }
+  ]
+  }
+, 
+  {
+  "id": "G1",
+  "class": "Ground",
+  "labels": [{"text": "G1"}],
+  "properties": {"de.cau.cs.kieler.portConstraints": "FIXED_SIDE"},
+  "width": 30,
+  "height": 30
+  , "ports": [
+    {
+    "id": "G1p",
+    "class": "Pin",
+    "labels": [{"text": "p"}],
+    "properties": {"de.cau.cs.kieler.portSide": "NORTH"},
+    "width": 3,
+    "height": 3
+    }
+  ]
+  }
+, 
+  {
+  "id": "R6",
+  "class": "Resistor",
+  "labels": [{"text": "R6"}],
+  "properties": {"de.cau.cs.kieler.portConstraints": "FIXED_SIDE"},
+  "width": 30,
+  "height": 30
+  , "ports": [
+    {
+    "id": "R6p",
+    "class": "Pin",
+    "labels": [{"text": "p"}],
+    "properties": {"de.cau.cs.kieler.portSide": "WEST"},
+    "width": 3,
+    "height": 3
+    }
+  , 
+    {
+    "id": "R6n",
+    "class": "Pin",
+    "labels": [{"text": "n"}],
+    "properties": {"de.cau.cs.kieler.portSide": "EAST"},
+    "width": 3,
+    "height": 3
+    }
+  ]
+  }
+, 
+  {
+  "id": "R7",
+  "class": "Resistor",
+  "labels": [{"text": "R7"}],
+  "properties": {"de.cau.cs.kieler.portConstraints": "FIXED_SIDE"},
+  "width": 30,
+  "height": 30
+  , "ports": [
+    {
+    "id": "R7p",
+    "class": "Pin",
+    "labels": [{"text": "p"}],
+    "properties": {"de.cau.cs.kieler.portSide": "WEST"},
+    "width": 3,
+    "height": 3
+    }
+  , 
+    {
+    "id": "R7n",
+    "class": "Pin",
+    "labels": [{"text": "n"}],
+    "properties": {"de.cau.cs.kieler.portSide": "EAST"},
+    "width": 3,
+    "height": 3
+    }
+  ]
+  }
+, 
+  {
+  "id": "C6",
+  "class": "Capacitor",
+  "labels": [{"text": "C6"}],
+  "properties": {"de.cau.cs.kieler.portConstraints": "FIXED_SIDE"},
+  "width": 30,
+  "height": 30
+  , "ports": [
+    {
+    "id": "C6p",
+    "class": "Pin",
+    "labels": [{"text": "p"}],
+    "properties": {"de.cau.cs.kieler.portSide": "WEST"},
+    "width": 3,
+    "height": 3
+    }
+  , 
+    {
+    "id": "C6n",
+    "class": "Pin",
+    "labels": [{"text": "n"}],
+    "properties": {"de.cau.cs.kieler.portSide": "EAST"},
+    "width": 3,
+    "height": 3
+    }
+  ]
+  }
+, 
+  {
+  "id": "R8",
+  "class": "Resistor",
+  "labels": [{"text": "R8"}],
+  "properties": {"de.cau.cs.kieler.portConstraints": "FIXED_SIDE"},
+  "width": 30,
+  "height": 30
+  , "ports": [
+    {
+    "id": "R8p",
+    "class": "Pin",
+    "labels": [{"text": "p"}],
+    "properties": {"de.cau.cs.kieler.portSide": "WEST"},
+    "width": 3,
+    "height": 3
+    }
+  , 
+    {
+    "id": "R8n",
+    "class": "Pin",
+    "labels": [{"text": "n"}],
+    "properties": {"de.cau.cs.kieler.portSide": "EAST"},
+    "width": 3,
+    "height": 3
+    }
+  ]
+  }
+, 
+  {
+  "id": "R9",
+  "class": "Resistor",
+  "labels": [{"text": "R9"}],
+  "properties": {"de.cau.cs.kieler.portConstraints": "FIXED_SIDE"},
+  "width": 30,
+  "height": 30
+  , "ports": [
+    {
+    "id": "R9p",
+    "class": "Pin",
+    "labels": [{"text": "p"}],
+    "properties": {"de.cau.cs.kieler.portSide": "WEST"},
+    "width": 3,
+    "height": 3
+    }
+  , 
+    {
+    "id": "R9n",
+    "class": "Pin",
+    "labels": [{"text": "n"}],
+    "properties": {"de.cau.cs.kieler.portSide": "EAST"},
+    "width": 3,
+    "height": 3
+    }
+  ]
+  }
+, 
+  {
+  "id": "R10",
+  "class": "Resistor",
+  "labels": [{"text": "R10"}],
+  "properties": {"de.cau.cs.kieler.portConstraints": "FIXED_SIDE"},
+  "width": 30,
+  "height": 30
+  , "ports": [
+    {
+    "id": "R10p",
+    "class": "Pin",
+    "labels": [{"text": "p"}],
+    "properties": {"de.cau.cs.kieler.portSide": "WEST"},
+    "width": 3,
+    "height": 3
+    }
+  , 
+    {
+    "id": "R10n",
+    "class": "Pin",
+    "labels": [{"text": "n"}],
+    "properties": {"de.cau.cs.kieler.portSide": "EAST"},
+    "width": 3,
+    "height": 3
+    }
+  ]
+  }
+, 
+  {
+  "id": "Op4",
+  "class": "IdealOpAmp3Pin",
+  "labels": [{"text": "Op4"}],
+  "properties": {"de.cau.cs.kieler.portConstraints": "FIXED_SIDE"},
+  "width": 30,
+  "height": 30
+  , "ports": [
+    {
+    "id": "Op4in_p",
+    "class": "Pin",
+    "labels": [{"text": "in_p"}],
+    "properties": {"de.cau.cs.kieler.portSide": "WEST"},
+    "width": 3,
+    "height": 3
+    }
+  , 
+    {
+    "id": "Op4in_n",
+    "class": "Pin",
+    "labels": [{"text": "in_n"}],
+    "properties": {"de.cau.cs.kieler.portSide": "WEST"},
+    "width": 3,
+    "height": 3
+    }
+  , 
+    {
+    "id": "Op4out",
+    "class": "Pin",
+    "labels": [{"text": "out"}],
+    "properties": {"de.cau.cs.kieler.portSide": "EAST"},
+    "width": 3,
+    "height": 3
+    }
+  ]
+  }
+, 
+  {
+  "id": "Op5",
+  "class": "IdealOpAmp3Pin",
+  "labels": [{"text": "Op5"}],
+  "properties": {"de.cau.cs.kieler.portConstraints": "FIXED_SIDE"},
+  "width": 30,
+  "height": 30
+  , "ports": [
+    {
+    "id": "Op5in_p",
+    "class": "Pin",
+    "labels": [{"text": "in_p"}],
+    "properties": {"de.cau.cs.kieler.portSide": "WEST"},
+    "width": 3,
+    "height": 3
+    }
+  , 
+    {
+    "id": "Op5in_n",
+    "class": "Pin",
+    "labels": [{"text": "in_n"}],
+    "properties": {"de.cau.cs.kieler.portSide": "WEST"},
+    "width": 3,
+    "height": 3
+    }
+  , 
+    {
+    "id": "Op5out",
+    "class": "Pin",
+    "labels": [{"text": "out"}],
+    "properties": {"de.cau.cs.kieler.portSide": "EAST"},
+    "width": 3,
+    "height": 3
+    }
+  ]
+  }
+, 
+  {
+  "id": "C7",
+  "class": "Capacitor",
+  "labels": [{"text": "C7"}],
+  "properties": {"de.cau.cs.kieler.portConstraints": "FIXED_SIDE"},
+  "width": 30,
+  "height": 30
+  , "ports": [
+    {
+    "id": "C7p",
+    "class": "Pin",
+    "labels": [{"text": "p"}],
+    "properties": {"de.cau.cs.kieler.portSide": "WEST"},
+    "width": 3,
+    "height": 3
+    }
+  , 
+    {
+    "id": "C7n",
+    "class": "Pin",
+    "labels": [{"text": "n"}],
+    "properties": {"de.cau.cs.kieler.portSide": "EAST"},
+    "width": 3,
+    "height": 3
+    }
+  ]
+  }
+, 
+  {
+  "id": "C8",
+  "class": "Capacitor",
+  "labels": [{"text": "C8"}],
+  "properties": {"de.cau.cs.kieler.portConstraints": "FIXED_SIDE"},
+  "width": 30,
+  "height": 30
+  , "ports": [
+    {
+    "id": "C8p",
+    "class": "Pin",
+    "labels": [{"text": "p"}],
+    "properties": {"de.cau.cs.kieler.portSide": "WEST"},
+    "width": 3,
+    "height": 3
+    }
+  , 
+    {
+    "id": "C8n",
+    "class": "Pin",
+    "labels": [{"text": "n"}],
+    "properties": {"de.cau.cs.kieler.portSide": "EAST"},
+    "width": 3,
+    "height": 3
+    }
+  ]
+  }
+, 
+  {
+  "id": "C9",
+  "class": "Capacitor",
+  "labels": [{"text": "C9"}],
+  "properties": {"de.cau.cs.kieler.portConstraints": "FIXED_SIDE"},
+  "width": 30,
+  "height": 30
+  , "ports": [
+    {
+    "id": "C9p",
+    "class": "Pin",
+    "labels": [{"text": "p"}],
+    "properties": {"de.cau.cs.kieler.portSide": "WEST"},
+    "width": 3,
+    "height": 3
+    }
+  , 
+    {
+    "id": "C9n",
+    "class": "Pin",
+    "labels": [{"text": "n"}],
+    "properties": {"de.cau.cs.kieler.portSide": "EAST"},
+    "width": 3,
+    "height": 3
+    }
+  ]
+  }
+, 
+  {
+  "id": "R11",
+  "class": "Resistor",
+  "labels": [{"text": "R11"}],
+  "properties": {"de.cau.cs.kieler.portConstraints": "FIXED_SIDE"},
+  "width": 30,
+  "height": 30
+  , "ports": [
+    {
+    "id": "R11p",
+    "class": "Pin",
+    "labels": [{"text": "p"}],
+    "properties": {"de.cau.cs.kieler.portSide": "WEST"},
+    "width": 3,
+    "height": 3
+    }
+  , 
+    {
+    "id": "R11n",
+    "class": "Pin",
+    "labels": [{"text": "n"}],
+    "properties": {"de.cau.cs.kieler.portSide": "EAST"},
+    "width": 3,
+    "height": 3
+    }
+  ]
+  }
+, 
+  {
+  "id": "n1",
+  "class": "Pin",
+  "labels": [{"text": "n1"}],
+  "properties": {"de.cau.cs.kieler.portSide": "EAST"},
+  "width": 3,
+  "height": 3
+  }
+, 
+  {
+  "id": "n2",
+  "class": "Pin",
+  "labels": [{"text": "n2"}],
+  "properties": {"de.cau.cs.kieler.portSide": "EAST"},
+  "width": 3,
+  "height": 3
+  }
+, 
+  {
+  "id": "n3",
+  "class": "Pin",
+  "labels": [{"text": "n3"}],
+  "properties": {"de.cau.cs.kieler.portSide": "EAST"},
+  "width": 3,
+  "height": 3
+  }
+, 
+  {
+  "id": "n4",
+  "class": "Pin",
+  "labels": [{"text": "n4"}],
+  "properties": {"de.cau.cs.kieler.portSide": "EAST"},
+  "width": 3,
+  "height": 3
+  }
+, 
+  {
+  "id": "n5",
+  "class": "Pin",
+  "labels": [{"text": "n5"}],
+  "properties": {"de.cau.cs.kieler.portSide": "EAST"},
+  "width": 3,
+  "height": 3
+  }
+, 
+  {
+  "id": "p1",
+  "class": "Pin",
+  "labels": [{"text": "p1"}],
+  "properties": {"de.cau.cs.kieler.portSide": "WEST"},
+  "width": 3,
+  "height": 3
+  }
+, 
+  {
+  "id": "n6",
+  "class": "Pin",
+  "labels": [{"text": "n6"}],
+  "properties": {"de.cau.cs.kieler.portSide": "EAST"},
+  "width": 3,
+  "height": 3
+  }
+, 
+  {
+  "id": "n7",
+  "class": "Pin",
+  "labels": [{"text": "n7"}],
+  "properties": {"de.cau.cs.kieler.portSide": "EAST"},
+  "width": 3,
+  "height": 3
+  }
+, 
+  {
+  "id": "n8",
+  "class": "Pin",
+  "labels": [{"text": "n8"}],
+  "properties": {"de.cau.cs.kieler.portSide": "EAST"},
+  "width": 3,
+  "height": 3
+  }
+, 
+  {
+  "id": "p2",
+  "class": "Pin",
+  "labels": [{"text": "p2"}],
+  "properties": {"de.cau.cs.kieler.portSide": "WEST"},
+  "width": 3,
+  "height": 3
+  }
+, 
+  {
+  "id": "out1",
+  "class": "Pin",
+  "labels": [{"text": "out1"}],
+  "properties": {"de.cau.cs.kieler.portSide": "EAST"},
+  "width": 3,
+  "height": 3
+  }
+, 
+  {
+  "id": "p3",
+  "class": "Pin",
+  "labels": [{"text": "p3"}],
+  "properties": {"de.cau.cs.kieler.portSide": "WEST"},
+  "width": 3,
+  "height": 3
+  }
+, 
+  {
+  "id": "n9",
+  "class": "Pin",
+  "labels": [{"text": "n9"}],
+  "properties": {"de.cau.cs.kieler.portSide": "EAST"},
+  "width": 3,
+  "height": 3
+  }
+, 
+  {
+  "id": "n10",
+  "class": "Pin",
+  "labels": [{"text": "n10"}],
+  "properties": {"de.cau.cs.kieler.portSide": "EAST"},
+  "width": 3,
+  "height": 3
+  }
+, 
+  {
+  "id": "n11",
+  "class": "Pin",
+  "labels": [{"text": "n11"}],
+  "properties": {"de.cau.cs.kieler.portSide": "EAST"},
+  "width": 3,
+  "height": 3
+  }
+, 
+  {
+  "id": "G2",
+  "class": "Ground",
+  "labels": [{"text": "G2"}],
+  "properties": {"de.cau.cs.kieler.portConstraints": "FIXED_SIDE"},
+  "width": 30,
+  "height": 30
+  , "ports": [
+    {
+    "id": "G2p",
+    "class": "Pin",
+    "labels": [{"text": "p"}],
+    "properties": {"de.cau.cs.kieler.portSide": "NORTH"},
+    "width": 3,
+    "height": 3
+    }
+  ]
+  }
+, 
+  {
+  "id": "n12",
+  "class": "Pin",
+  "labels": [{"text": "n12"}],
+  "properties": {"de.cau.cs.kieler.portSide": "EAST"},
+  "width": 3,
+  "height": 3
+  }
+, 
+  {
+  "id": "n13",
+  "class": "Pin",
+  "labels": [{"text": "n13"}],
+  "properties": {"de.cau.cs.kieler.portSide": "EAST"},
+  "width": 3,
+  "height": 3
+  }
+, 
+  {
+  "id": "p4",
+  "class": "Pin",
+  "labels": [{"text": "p4"}],
+  "properties": {"de.cau.cs.kieler.portSide": "WEST"},
+  "width": 3,
+  "height": 3
+  }
+, 
+  {
+  "id": "n14",
+  "class": "Pin",
+  "labels": [{"text": "n14"}],
+  "properties": {"de.cau.cs.kieler.portSide": "EAST"},
+  "width": 3,
+  "height": 3
+  }
+, 
+  {
+  "id": "G3",
+  "class": "Ground",
+  "labels": [{"text": "G3"}],
+  "properties": {"de.cau.cs.kieler.portConstraints": "FIXED_SIDE"},
+  "width": 30,
+  "height": 30
+  , "ports": [
+    {
+    "id": "G3p",
+    "class": "Pin",
+    "labels": [{"text": "p"}],
+    "properties": {"de.cau.cs.kieler.portSide": "NORTH"},
+    "width": 3,
+    "height": 3
+    }
+  ]
+  }
+, 
+  {
+  "id": "G4",
+  "class": "Ground",
+  "labels": [{"text": "G4"}],
+  "properties": {"de.cau.cs.kieler.portConstraints": "FIXED_SIDE"},
+  "width": 30,
+  "height": 30
+  , "ports": [
+    {
+    "id": "G4p",
+    "class": "Pin",
+    "labels": [{"text": "p"}],
+    "properties": {"de.cau.cs.kieler.portSide": "NORTH"},
+    "width": 3,
+    "height": 3
+    }
+  ]
+  }
+, 
+  {
+  "id": "V",
+  "class": "ConstantVoltage",
+  "labels": [{"text": "V"}],
+  "properties": {"de.cau.cs.kieler.portConstraints": "FIXED_SIDE"},
+  "width": 30,
+  "height": 30
+  , "ports": [
+    {
+    "id": "Vp",
+    "class": "Pin",
+    "labels": [{"text": "p"}],
+    "properties": {"de.cau.cs.kieler.portSide": "WEST"},
+    "width": 3,
+    "height": 3
+    }
+  , 
+    {
+    "id": "Vn",
+    "class": "Pin",
+    "labels": [{"text": "n"}],
+    "properties": {"de.cau.cs.kieler.portSide": "EAST"},
+    "width": 3,
+    "height": 3
+    }
+  ]
+  }
+, 
+  {
+  "id": "Ground1",
+  "class": "Ground",
+  "labels": [{"text": "Ground1"}],
+  "properties": {"de.cau.cs.kieler.portConstraints": "FIXED_SIDE"},
+  "width": 30,
+  "height": 30
+  , "ports": [
+    {
+    "id": "Ground1p",
+    "class": "Pin",
+    "labels": [{"text": "p"}],
+    "properties": {"de.cau.cs.kieler.portSide": "NORTH"},
+    "width": 3,
+    "height": 3
+    }
+  ]
+  }
+]
+, "edges": [
+  {"source": "Op1",
+   "sourcePort": "Op1in_p",
+   "target": "G",
+   "targetPort": "Gp"}
+, 
+  {"source": "G1",
+   "sourcePort": "G1p",
+   "target": "Op2",
+   "targetPort": "Op2in_p"}
+, 
+  {"source": "R1",
+   "sourcePort": "R1n",
+   "target": "n1"}
+, 
+  {"source": "n1",
+   "target": "Op1",
+   "targetPort": "Op1in_n"}
+, 
+  {"source": "C2",
+   "sourcePort": "C2n",
+   "target": "n1"}
+, 
+  {"source": "R2",
+   "sourcePort": "R2n",
+   "target": "n2"}
+, 
+  {"source": "n1",
+   "target": "n2"}
+, 
+  {"source": "n2",
+   "target": "n3"}
+, 
+  {"source": "n3",
+   "target": "C1",
+   "targetPort": "C1p"}
+, 
+  {"source": "n3",
+   "target": "R3",
+   "targetPort": "R3p"}
+, 
+  {"source": "C1",
+   "sourcePort": "C1n",
+   "target": "n4"}
+, 
+  {"source": "R3",
+   "sourcePort": "R3n",
+   "target": "n4"}
+, 
+  {"source": "n4",
+   "target": "Op1",
+   "targetPort": "Op1out"}
+, 
+  {"source": "R4",
+   "sourcePort": "R4p",
+   "target": "Op1",
+   "targetPort": "Op1out"}
+, 
+  {"source": "C5",
+   "sourcePort": "C5p",
+   "target": "Op1",
+   "targetPort": "Op1out"}
+, 
+  {"source": "R4",
+   "sourcePort": "R4n",
+   "target": "n5"}
+, 
+  {"source": "n5",
+   "target": "Op2",
+   "targetPort": "Op2in_n"}
+, 
+  {"source": "C3",
+   "sourcePort": "C3p",
+   "target": "n5"}
+, 
+  {"source": "R5",
+   "sourcePort": "R5n",
+   "target": "n5"}
+, 
+  {"source": "R5",
+   "sourcePort": "R5p",
+   "target": "p1"}
+, 
+  {"source": "C2",
+   "sourcePort": "C2p",
+   "target": "p1"}
+, 
+  {"source": "C3",
+   "sourcePort": "C3n",
+   "target": "n6"}
+, 
+  {"source": "n6",
+   "target": "Op2",
+   "targetPort": "Op2out"}
+, 
+  {"source": "R2",
+   "sourcePort": "R2p",
+   "target": "n6"}
+, 
+  {"source": "Op2",
+   "sourcePort": "Op2out",
+   "target": "R7",
+   "targetPort": "R7p"}
+, 
+  {"source": "R7",
+   "sourcePort": "R7n",
+   "target": "n7"}
+, 
+  {"source": "n7",
+   "target": "Op3",
+   "targetPort": "Op3in_n"}
+, 
+  {"source": "C5",
+   "sourcePort": "C5n",
+   "target": "n7"}
+, 
+  {"source": "R6",
+   "sourcePort": "R6n",
+   "target": "n8"}
+, 
+  {"source": "n7",
+   "target": "n8"}
+, 
+  {"source": "C6",
+   "sourcePort": "C6p",
+   "target": "p2"}
+, 
+  {"source": "n8",
+   "target": "p2"}
+, 
+  {"source": "C4",
+   "sourcePort": "C4n",
+   "target": "p2"}
+, 
+  {"source": "C6",
+   "sourcePort": "C6n",
+   "target": "Op3",
+   "targetPort": "Op3out"}
+, 
+  {"source": "R9",
+   "sourcePort": "R9p",
+   "target": "Op3",
+   "targetPort": "Op3out"}
+, 
+  {"source": "Op3",
+   "sourcePort": "Op3out",
+   "target": "out1"}
+, 
+  {"source": "p1",
+   "target": "out1"}
+, 
+  {"source": "out1",
+   "target": "C8",
+   "targetPort": "C8p"}
+, 
+  {"source": "C4",
+   "sourcePort": "C4p",
+   "target": "p3"}
+, 
+  {"source": "p3",
+   "target": "R8",
+   "targetPort": "R8p"}
+, 
+  {"source": "R8",
+   "sourcePort": "R8n",
+   "target": "n9"}
+, 
+  {"source": "n9",
+   "target": "n10"}
+, 
+  {"source": "R9",
+   "sourcePort": "R9n",
+   "target": "n10"}
+, 
+  {"source": "n10",
+   "target": "Op4",
+   "targetPort": "Op4in_n"}
+, 
+  {"source": "n9",
+   "target": "C7",
+   "targetPort": "C7p"}
+, 
+  {"source": "C7",
+   "sourcePort": "C7n",
+   "target": "n11"}
+, 
+  {"source": "R6",
+   "sourcePort": "R6p",
+   "target": "n11"}
+, 
+  {"source": "n11",
+   "target": "Op4",
+   "targetPort": "Op4out"}
+, 
+  {"source": "Op4",
+   "sourcePort": "Op4out",
+   "target": "R10",
+   "targetPort": "R10p"}
+, 
+  {"source": "G2",
+   "sourcePort": "G2p",
+   "target": "Op3",
+   "targetPort": "Op3in_p"}
+, 
+  {"source": "R11",
+   "sourcePort": "R11n",
+   "target": "n12"}
+, 
+  {"source": "p3",
+   "target": "n12"}
+, 
+  {"source": "C9",
+   "sourcePort": "C9n",
+   "target": "n13"}
+, 
+  {"source": "n12",
+   "target": "n13"}
+, 
+  {"source": "n13",
+   "target": "Op5",
+   "targetPort": "Op5out"}
+, 
+  {"source": "C9",
+   "sourcePort": "C9p",
+   "target": "p4"}
+, 
+  {"source": "R11",
+   "sourcePort": "R11p",
+   "target": "p4"}
+, 
+  {"source": "R10",
+   "sourcePort": "R10n",
+   "target": "n14"}
+, 
+  {"source": "p4",
+   "target": "n14"}
+, 
+  {"source": "Op5",
+   "sourcePort": "Op5in_n",
+   "target": "n14"}
+, 
+  {"source": "C8",
+   "sourcePort": "C8n",
+   "target": "n14"}
+, 
+  {"source": "Op4",
+   "sourcePort": "Op4in_p",
+   "target": "G3",
+   "targetPort": "G3p"}
+, 
+  {"source": "Op5",
+   "sourcePort": "Op5in_p",
+   "target": "G4",
+   "targetPort": "G4p"}
+, 
+  {"source": "V",
+   "sourcePort": "Vp",
+   "target": "Ground1",
+   "targetPort": "Ground1p"}
+, 
+  {"source": "V",
+   "sourcePort": "Vn",
+   "target": "R1",
+   "targetPort": "R1p"}
+]
+}
