@@ -1,0 +1,155 @@
+{
+	"metadata": {
+		"version": 4.4,
+		"type": "Object",
+		"generator": "Object3D.toJSON"
+	},
+	"geometries": [
+		{
+			"uuid": "B27AB7C4-3BFC-466D-B2C3-6A68ADC3E91E",
+			"type": "CylinderBufferGeometry",
+			"radiusTop": 1,
+			"radiusBottom": 1,
+			"height": 2,
+			"radialSegments": 32,
+			"heightSegments": 1,
+			"openEnded": false
+		},
+		{
+			"uuid": "760129FA-02BF-43D7-B992-F5E00F7B623A",
+			"type": "CylinderBufferGeometry",
+			"radiusTop": 1,
+			"radiusBottom": 1,
+			"height": 2,
+			"radialSegments": 32,
+			"heightSegments": 1,
+			"openEnded": false
+		},
+		{
+			"uuid": "9871A6A0-DE82-4DF7-93E0-AD8F6517CF1A",
+			"type": "SphereBufferGeometry",
+			"radius": 1,
+			"widthSegments": 32,
+			"heightSegments": 16,
+			"phiStart": 0,
+			"phiLength": 6.283185,
+			"thetaStart": 0,
+			"thetaLength": 3.141593
+		}],
+	"materials": [
+		{
+			"uuid": "34488A2D-99B0-4E27-ACA5-388BA6522C34",
+			"type": "MeshStandardMaterial",
+			"color": 15117594,
+			"roughness": 0.5,
+			"metalness": 0.5,
+			"emissive": 0,
+			"depthFunc": 3,
+			"depthTest": true,
+			"depthWrite": true,
+			"skinning": false,
+			"morphTargets": false
+		},
+		{
+			"uuid": "4EB0C676-A793-4159-893E-5391ECA5CD30",
+			"type": "MeshStandardMaterial",
+			"color": 16744448,
+			"roughness": 0.5,
+			"metalness": 0.5,
+			"emissive": 0,
+			"depthFunc": 3,
+			"depthTest": true,
+			"depthWrite": true,
+			"skinning": false,
+			"morphTargets": false
+		},
+		{
+			"uuid": "596822E5-FB95-4182-93BA-3592D8C73596",
+			"type": "MeshStandardMaterial",
+			"color": 0,
+			"roughness": 0.5,
+			"metalness": 0.5,
+			"emissive": 0,
+			"depthFunc": 3,
+			"depthTest": true,
+			"depthWrite": true,
+			"skinning": false,
+			"morphTargets": false
+		},
+		{
+			"uuid": "5C771833-D3CC-4B34-912F-8225ADBD41E6",
+			"type": "MeshStandardMaterial",
+			"color": 8388608,
+			"roughness": 0.5,
+			"metalness": 0.5,
+			"emissive": 0,
+			"depthFunc": 3,
+			"depthTest": true,
+			"depthWrite": true,
+			"skinning": false,
+			"morphTargets": false
+		}],
+	"object": {
+		"uuid": "DB15D5F0-8B69-4F03-9676-7FAAC25B533B",
+		"type": "Group",
+		"name": "Group 8",
+		"matrix": [1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1],
+		"children": [
+			{
+				"uuid": "7BAA38D3-8730-48EB-BE66-CA75769D7F9C",
+				"type": "Mesh",
+				"name": "Cylinder 1",
+				"matrix": [0,0.1,0,0,-0.5,0,0,0,0,0,0.1,0,2.527519,0,0,1],
+				"geometry": "B27AB7C4-3BFC-466D-B2C3-6A68ADC3E91E",
+				"material": "34488A2D-99B0-4E27-ACA5-388BA6522C34"
+			},
+			{
+				"uuid": "2F2B5C5A-A55F-446F-935D-CD8B29DAACAB",
+				"type": "Mesh",
+				"name": "Cylinder 1",
+				"matrix": [0,0.1,0,0,-0.5,0,0,0,0,0,0.1,0,-2.689416,0,0,1],
+				"geometry": "B27AB7C4-3BFC-466D-B2C3-6A68ADC3E91E",
+				"material": "34488A2D-99B0-4E27-ACA5-388BA6522C34"
+			},
+			{
+				"uuid": "3AFD31F5-F97C-4A8D-89A3-DC7DC5BEF4BA",
+				"type": "Mesh",
+				"name": "Cylinder 2",
+				"matrix": [0,1.01,0,0,-0.202,0,0,0,0,0,1.01,0,0.340312,0,0,1],
+				"geometry": "760129FA-02BF-43D7-B992-F5E00F7B623A",
+				"material": "4EB0C676-A793-4159-893E-5391ECA5CD30"
+			},
+			{
+				"uuid": "1C87460D-E16F-4171-8C12-E2219172B035",
+				"type": "Mesh",
+				"name": "Cylinder 2",
+				"matrix": [0,1.01,0,0,-0.202,0,0,0,0,0,1.01,0,-0.26501,0,0,1],
+				"geometry": "760129FA-02BF-43D7-B992-F5E00F7B623A",
+				"material": "596822E5-FB95-4182-93BA-3592D8C73596"
+			},
+			{
+				"uuid": "51169002-9F1F-4977-82CA-C5A966672667",
+				"type": "Mesh",
+				"name": "Sphere 7",
+				"matrix": [0.8,0,0,0,0,1.05,0,0,0,0,1.05,0,1.513117,0,0,1],
+				"geometry": "9871A6A0-DE82-4DF7-93E0-AD8F6517CF1A",
+				"material": "34488A2D-99B0-4E27-ACA5-388BA6522C34"
+			},
+			{
+				"uuid": "D037EDF9-7F31-4FD6-A060-D7980E223A95",
+				"type": "Mesh",
+				"name": "Sphere 7",
+				"matrix": [0.8,0,0,0,0,1.05,0,0,0,0,1.05,0,-1.495967,0,0,1],
+				"geometry": "9871A6A0-DE82-4DF7-93E0-AD8F6517CF1A",
+				"material": "34488A2D-99B0-4E27-ACA5-388BA6522C34"
+			},
+			{
+				"uuid": "9414D79F-B35C-4319-9B4C-63BE4995CB78",
+				"type": "Mesh",
+				"name": "Cylinder 2",
+				"matrix": [0,1.01,0,0,-0.202,0,0,0,0,0,1.01,0,-0.864312,0,0,1],
+				"geometry": "760129FA-02BF-43D7-B992-F5E00F7B623A",
+				"material": "5C771833-D3CC-4B34-912F-8225ADBD41E6"
+			}]
+	}
+}

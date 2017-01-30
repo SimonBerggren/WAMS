@@ -7,7 +7,9 @@ WAMS Plan
 + perform layout with KlayJS
 
 - render diagram with three.js
-  - just rectangles, polylines and text
+  	+ rectangles
+	- polylines
+	- text
   - with icons
   
 - produce Modelica icons in suitable format for three.js rendering (HE)

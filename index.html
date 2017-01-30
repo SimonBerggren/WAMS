@@ -10,13 +10,15 @@
         <script src="scripts/bootstrap-3.0.2.min.js"></script>
         <script src="scripts/prettify.js"></script>
         <script src="scripts/jquery.stickytableheaders.min.js"></script>
-        		<link href="styles/prettify.css" type="text/css" rel="stylesheet" />
+    		<link href="styles/prettify.css" type="text/css" rel="stylesheet" />
         
         				<script src="scripts/jquery.event.drag.js"></script>
         <script src="scripts/jquery.mousewheel.js"></script>
         <script src="scripts/jquery.svg.js"></script>
         <script src="scripts/jquery.svg.extras.js"></script>
         <script src="scripts/prettify.js"></script>
+
+        <script type="text/javascript" src="scripts/three.js"></script>
 
         <input type="file" id="files" name="files[]" />
 <output id="list"></output>
@@ -33,7 +35,6 @@ var result;
                   '</li>');
     }
     document.getElementById('list').innerHTML = '<ul>' + output.join('') + '</ul>';
-    console.log(document.getElementById('list').innerHTML);
 
     var reader = new FileReader();
 
@@ -197,10 +198,77 @@ var result;
         </div>	
          
          <!-- the svg gets the remaining size, i.e full display area -->
-         <div id="resGraph"></div>
+         <div id="resGrsaph"></div>
          
+          <div id="glcontainer"></div>
         <script type="text/javascript">
-        $(function() {
+        var cap;
+
+    $(function() {
+      var scene = new THREE.Scene();
+      var w = window.innerWidth;  // window.innerWidth / Height
+      var h = 600;
+      var camera = new THREE.PerspectiveCamera(45, w / h, 0.1, 1000);
+      var renderer = new THREE.WebGLRenderer();
+      renderer.autoClear = true;
+      renderer.setClearColor( 0xEEEEEE, 1 );
+      renderer.setSize(w, h);
+      var axis = new THREE.AxisHelper(20);
+
+      var loader = new THREE.ObjectLoader();
+
+      
+      loader.load(
+          // resource URL
+          "static/Capacitor.json",
+      
+          // pass the loaded data to the onLoad function.
+      //Here it is assumed to be an object
+          function ( obj ) {
+          //add the loaded object to the scene
+          this.cap = obj;
+              //scene.add( obj );
+          },
+      
+          // Function called when download progresses
+          function ( xhr ) {
+              //console.log( (xhr.loaded / xhr.total * 100) + '% loaded' );
+          },
+      
+          // Function called when download errors
+          function ( xhr ) {
+              console.error( 'An error happened loading an object!' );
+          }
+      );
+
+      var planeGeometry = new THREE.PlaneGeometry(10, 10, 1, 1);
+      var planeMaterial = new THREE.MeshBasicMaterial({color:0xCCCCCC});
+      var plane = new THREE.Mesh(planeGeometry, planeMaterial);
+      //plane.rotation.y = -0.5*Math.PI;
+      plane.position.x = 0;
+      plane.position.y = 0;
+      plane.position.z = -10;
+
+      scene.add(plane);
+
+
+      camera.position.x = 0;
+      camera.position.y = 0;
+      camera.position.z = 400;
+      camera.lookAt(plane.position);
+      var istrue = false;
+      function render() {
+              for(var i = 0; i < scene.children.length; ++i) {
+        scene.children[i].rotation.z += 0.01;
+      }
+      requestAnimationFrame(render)
+      renderer.render(scene, camera);
+
+
+      }
+
+      $("#glcontainer").append(renderer.domElement);
+      render();
           
           // add tabbing behavior to the textareas
           $('textarea').keydown(function(e) {
@@ -222,21 +290,85 @@ var result;
            }
           });
         
-        	// init the svg with zoom and pan
-        	$('#resGraph').svg();
-        	$('#resGraph').addScalability();
-        	$('#resGraph').addDraggable();
-        	
-        	var svg = $('#resGraph');
-        	// Check for the various File API support. 
-          var _this = this;
         	$('#layout').click(function() {
+            if(result === undefined) {
+              alert("no json component chosen!");
+              return;
+            }
+
             var worker = new Worker('klayjs.js');
                       
             var config = '{' + $('#configArea').val() + '}';
 
             worker.addEventListener('message', function (e) {
             var graph = e.data;
+            //console.log(graph);
+
+            var comps = graph.children;
+            var edges = graph.edges;
+
+            for(var i = 0; i < comps.length; ++i) {
+              var planeGeometry = new THREE.PlaneGeometry(comps[i].width, comps[i].height, 1, 1);
+              var planeMaterial = new THREE.MeshBasicMaterial({color:0xff0000});
+              var plane = new THREE.Mesh(planeGeometry, planeMaterial);
+              //plane.rotation.y = -0.5*Math.PI;
+              var x = comps[i].x + comps[i].width/2;
+              var y = comps[i].y + comps[i].height/2;
+              plane.position.x = x;
+              plane.position.y = y;
+              plane.position.z = -5;
+
+
+              console.log(cap);
+              var obj = cap.clone();
+              obj.position.x = x;
+              obj.position.y = y;
+              obj.position.z = -5;
+              obj.scale.x = obj.scale.y = obj.scale.z = 20;
+        
+              scene.add(obj);
+            }
+
+              for(var i = 0; i < edges.length; ++i) {
+              var planeGeometry = new THREE.PlaneGeometry(7, 7, 1, 1);
+              var planeMaterial = new THREE.MeshBasicMaterial({color:0xffff1a});
+              var plane = new THREE.Mesh(planeGeometry, planeMaterial);
+              //plane.rotation.y = -0.5*Math.PI;
+              var x = edges[i].sourcePoint.x;
+              var y = edges[i].sourcePoint.y;
+              plane.position.x = x;
+              plane.position.y = y;
+              plane.position.z = -3;
+        
+              scene.add(plane);
+                            var planeGeometry = new THREE.PlaneGeometry(7, 7, 1, 1);
+              var planeMaterial = new THREE.MeshBasicMaterial({color:0xffff1a});
+              var plane = new THREE.Mesh(planeGeometry, planeMaterial);
+              var x = edges[i].targetPoint.x;
+              var y = edges[i].targetPoint.y;
+              plane.position.x = x;
+              plane.position.y = y;
+              plane.position.z = -3;
+        
+              scene.add(plane);
+
+              var bendPoints = edges[i].bendPoints;
+              if(bendPoints !== undefined)
+              for(var j = 0; j < edges[i].bendPoints.length; ++j) {
+              var planeGeometry = new THREE.PlaneGeometry(2, 2, 1, 1);
+              var planeMaterial = new THREE.MeshBasicMaterial({color:0x33cc33});
+              var plane = new THREE.Mesh(planeGeometry, planeMaterial);
+              //plane.rotation.y = -0.5*Math.PI;
+              var x = edges[i].bendPoints[j].x;
+              var y = edges[i].bendPoints[j].y;
+              plane.position.x = x;
+              plane.position.y = y;
+              plane.position.z = -5;
+        
+              scene.add(plane);
+              }
+
+            }
             });
 
             var graph = JSON.parse(result);
@@ -247,7 +379,7 @@ var result;
         	});
             });
         	
-        	var exConfig = "spacing: 100,\nalgorithm: de.cau.cs.kieler.klay.layered,\nedgeRouting: ORTHOGONAL";
+        	var exConfig = "spacing: 0,\nalgorithm: de.cau.cs.kieler.klay.layered,\nedgeRouting: ORTHOGONAL";
         	$('#configArea').val(exConfig);
         });
         </script>
