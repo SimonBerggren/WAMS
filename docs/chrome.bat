@@ -1,0 +1,1 @@
+START chrome.exe "C:\Users\Simon\Desktop\wams\index.html" --allow-file-access-from-files

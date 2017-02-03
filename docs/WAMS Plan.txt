@@ -8,8 +8,9 @@ WAMS Plan
 
 - render diagram with three.js
   	+ rectangles
-	- polylines
-	- text
+	+ polylines
+	+ text
+	- correctly placed text
   - with icons
   
 - produce Modelica icons in suitable format for three.js rendering (HE)
