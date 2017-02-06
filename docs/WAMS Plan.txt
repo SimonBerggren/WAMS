@@ -12,7 +12,25 @@ WAMS Plan
 	+ text
 	- correctly placed text
   - with icons
-  
+
+- ortographic/perspectiv view
+
+- enable manual layout utilizing x and y attributes
+
 - produce Modelica icons in suitable format for three.js rendering (HE)
+  + format three.js JSON
+  + produced by three.js/editor, Clara.io
+  + Resistor
+  + Capacitor (simple)
+  + Op Amp (simple)
+  - voltage source
+
 - render diagram with icons
 
+- enable camera mouse control
+
+- enable picking
+
+- enable cloning
+
+- enable coupling 
