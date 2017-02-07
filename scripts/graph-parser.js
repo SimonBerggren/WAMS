@@ -6,6 +6,18 @@ function plane(x, y, w, h, c, z) {
 	return plane;    
 }
 
+var IdealOpAmp3Pin;
+var Capacitor;
+var Resistor;
+
+
+function loadFiles() {
+	var loader = new THREE.ObjectLoader();
+	loader.load("static/IdealOpAmp3Pin.json", function (obj) { IdealOpAmp3Pin = obj.clone(); } );
+	loader.load("static/Capacitor.json", function (obj) { Capacitor = obj.clone(); } );
+	loader.load("static/Resistor.json", function (obj) { Resistor = obj.clone(); } );
+}
+
 function makeTextSprite( message, parameters )
 {
 	if ( parameters === undefined ) parameters = {};
@@ -111,19 +123,45 @@ function display_graph(graph, scene) {
 	    		get_comps(c.children, c.edges, obj);
 	    	}
 	
+	    	var cl = c.class;
 	    	var w = c.width;
 	    	var h = c.height;
 	    	var x = c.x + w/2 + offsetX;
 	    	var y = c.y + h/2 + offsetY;
- 
      	  	var tx = c.x + w + offsetX;
      	  	var ty = c.y + offsetY;
  
      	  	var text = makeTextSprite(c.id);
  		  	text.position.set(c.x,c.y,0);
  		  	scene.add(text);
- 
-   		  	scene.add(plane(x, y, w, h, 0xff0000, -7));
+
+	    	switch(cl) {
+	    		case "IdealOpAmp3Pin":
+	    		var amp = IdealOpAmp3Pin.clone();
+	    		amp.position.x = x;
+	    		amp.position.y = y;
+	    		amp.scale.x = amp.scale.y = amp.scale.z = 10;
+	    		amp.rotation.y = Math.PI;	
+	    		scene.add(amp);
+	    		break;
+	    		case "Capacitor":
+	    		var cap = Capacitor.clone();
+	    		cap.position.x = x;
+	    		cap.position.y = y;
+	    		cap.scale.x = cap.scale.y = cap.scale.z = 20;
+	    		scene.add(cap);
+	    		break;
+	    		case "Resistor":
+	    		var res = Resistor.clone();
+	    		res.position.x = x;
+	    		res.position.y = y;
+	    		res.scale.x = res.scale.y = res.scale.z = 10;
+	    		scene.add(res);
+	    		break;
+	    		default:
+   		  		scene.add(plane(x, y, w, h, 0xff0000, -7));
+	    		break;
+	    	}
 		}
 	
   		for(var i = 0; i < edges.length; ++i) {

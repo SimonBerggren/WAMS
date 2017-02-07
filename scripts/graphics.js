@@ -1,7 +1,9 @@
 $(function() {
+
   var grabbing_graph = false;
   var graph;
   var scene = new THREE.Scene();
+  loadFiles(scene);
   var w = window.innerWidth;
   var h = 600;
 
