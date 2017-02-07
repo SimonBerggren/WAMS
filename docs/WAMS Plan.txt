@@ -13,11 +13,13 @@ WAMS Plan
 	- correctly placed text
   - with icons
 
-- ortographic/perspectiv view
+- ortographic/perspective view
 
-- enable manual layout utilizing x and y attributes
+- enable manual layout utilizing x and y attributes and bendpoints
 
 - produce Modelica icons in suitable format for three.js rendering (HE)
+  - load SVG
+  - test with manually generated SVG icons
   + format three.js JSON
   + produced by three.js/editor, Clara.io
   + Resistor
