@@ -72,7 +72,7 @@
 				"uuid": "E34D08A6-3246-48BC-99C6-CD24D89F3361",
 				"type": "Mesh",
 				"name": "Box 6",
-				"matrix": [0.203326,0,0,0,0,1,0,0,0,0,1,0,-0.242449,0,0,1],
+				"matrix": [0.203326,0,0,0,0,1,0,0,0,0,1,0,-0.25,0,0,1],
 				"geometry": "5EBAB172-E3D9-40D5-ABDE-B5ABC1DF2381",
 				"material": "2AD6B199-FF37-4FAA-89B7-5DE4CF6423BA"
 			},
@@ -128,6 +128,14 @@
 				"matrix": [0.303168,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1],
 				"geometry": "5EBAB172-E3D9-40D5-ABDE-B5ABC1DF2381",
 				"material": "21A7E151-ABA8-4A9D-AF28-7DD68535487A"
+			},
+			{
+				"uuid": "D7B89947-6D1C-454F-B791-399FBA8AC4D2",
+				"type": "Mesh",
+				"name": "Box 6",
+				"matrix": [0.203326,0,0,0,0,1,0,0,0,0,1,0,0.252859,0,0,1],
+				"geometry": "5EBAB172-E3D9-40D5-ABDE-B5ABC1DF2381",
+				"material": "2AD6B199-FF37-4FAA-89B7-5DE4CF6423BA"
 			}]
 	}
 }
