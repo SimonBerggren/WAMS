@@ -79,6 +79,7 @@
 		{
 			"uuid": "5C771833-D3CC-4B34-912F-8225ADBD41E6",
 			"type": "MeshStandardMaterial",
+			"name": "Ring1Material",
 			"color": 8388608,
 			"roughness": 0.5,
 			"metalness": 0.5,
@@ -107,7 +108,7 @@
 				"uuid": "2F2B5C5A-A55F-446F-935D-CD8B29DAACAB",
 				"type": "Mesh",
 				"name": "Cylinder 1",
-				"matrix": [0,0.1,0,0,-0.5,0,0,0,0,0,0.1,0,-2.689416,0,0,1],
+				"matrix": [0,0.1,0,0,-0.5,0,0,0,0,0,0.1,0,-2.540695,0,0,1],
 				"geometry": "B27AB7C4-3BFC-466D-B2C3-6A68ADC3E91E",
 				"material": "34488A2D-99B0-4E27-ACA5-388BA6522C34"
 			},
