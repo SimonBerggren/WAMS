@@ -6,66 +6,32 @@ function plane(x, y, w, h, c, z) {
 	return plane;    
 }
 
-var IdealOpAmp3Pin;
-var Capacitor;
-var Resistor;
-
+var icons = {};
 
 function loadFiles() {
 	var loader = new THREE.ObjectLoader();
-	loader.load("static/IdealOpAmp3Pin.json", function (obj) { IdealOpAmp3Pin = obj.clone(); } );
-	loader.load("static/Capacitor.json", function (obj) { Capacitor = obj.clone(); } );
-	loader.load("static/Resistor.json", function (obj) { Resistor = obj.clone(); } );
+	loader.load("static/icons/IdealOpAmp3Pin.json", function (obj) { icons["IdealOpAmp3Pin"] = obj.clone(); } );
+	loader.load("static/icons/Capacitor.json", function (obj) { icons["Capacitor"] = obj; } );
+	loader.load("static/icons/Resistor.json", function (obj) { icons["Resistor"] = obj; } );
+
 }
 
-function makeTextSprite( message, parameters )
-{
-	if ( parameters === undefined ) parameters = {};
-	
-	var fontface = parameters.hasOwnProperty("fontface") ? 
-		parameters["fontface"] : "Arial";
-	
-	var fontsize = parameters.hasOwnProperty("fontsize") ? 
-		parameters["fontsize"] : 24;
-	
-	var borderThickness = parameters.hasOwnProperty("borderThickness") ? 
-		parameters["borderThickness"] : 2;
-	
-	var borderColor = parameters.hasOwnProperty("borderColor") ?
-		parameters["borderColor"] : { r:0, g:0, b:0, a:1.0 };
-	
-	var backgroundColor = parameters.hasOwnProperty("backgroundColor") ?
-		parameters["backgroundColor"] : { r:255, g:255, b:255, a:1.0 };
-		
+function makeTextSprite(message) {
+	var fontface = "Arial";
+	var fontsize = 280;
+	var borderThickness = 0;
 	var canvas = document.createElement('canvas');
+	canvas.width = 64;
+	canvas.height = 64;
 	var context = canvas.getContext('2d');
 	context.font = "Bold " + fontsize + "px " + fontface;
-    
-	// get size data (height depends only on font size)
-	var metrics = context.measureText( message );
-	var textWidth = metrics.width;
-	
-	// background color
-	context.fillStyle   = "rgba(" + backgroundColor.r + "," + backgroundColor.g + ","
-								  + backgroundColor.b + "," + backgroundColor.a + ")";
-	// border color
-	context.strokeStyle = "rgba(" + borderColor.r + "," + borderColor.g + ","
-								  + borderColor.b + "," + borderColor.a + ")";
-	context.lineWidth = borderThickness;
-	//roundRect(context, borderThickness/2, borderThickness/2, textWidth + borderThickness, fontsize * 1.4 + borderThickness, 6);
-	// 1.4 is extra height factor for text below baseline: g,j,p,q.
-	
-	// text color
-	context.fillStyle = "rgba(0, 0, 0, 1.0)";
-	context.fillText( message, borderThickness, fontsize + borderThickness);
-	
-	// canvas contents will be used for a texture
+	context.fillText( message, 0, 0);
 	var texture = new THREE.Texture(canvas) 
 	texture.needsUpdate = true;
 	var spriteMaterial = new THREE.SpriteMaterial( 
 		{ map: texture } );
 	var sprite = new THREE.Sprite( spriteMaterial );
-	sprite.scale.set(100,100,1.0);
+	//sprite.scale.set(10,10,1.0);
 	return sprite;	
 }
 // function for drawing rounded rectangles
@@ -87,7 +53,7 @@ function roundRect(ctx, x, y, w, h, r)
 }
 
 // adds components, edges and connections to scene
-function display_graph(graph, scene) {
+function display_graph(graph, scene, camera) {
 	scene.children.forEach(function(object){
 	scene.remove(object);
 	});
@@ -98,9 +64,11 @@ function display_graph(graph, scene) {
 
     worker.addEventListener('message', function (e) {
     var graph = e.data;
+    console.log(graph);
     var comps = graph.children;
     var edges = graph.edges;
 	get_comps(comps, edges);
+	camera.setOriginalPosition({x:graph.width / 2, y:graph.height / 2, z:500})
     });
 
     var parsed_graph = JSON.parse(graph);
@@ -135,33 +103,28 @@ function display_graph(graph, scene) {
  		  	text.position.set(c.x,c.y,0);
  		  	scene.add(text);
 
+ 		  	var icon;
+ 		  	if (icons[cl] === undefined)
+ 		  		icon = plane(x, y, w, h, 0xff0000, -7);
+ 		  	else
+ 		  		icon = icons[cl].clone();
+
+ 		  	icon.position.x = x;
+ 		  	icon.position.y = y;
+
 	    	switch(cl) {
 	    		case "IdealOpAmp3Pin":
-	    		var amp = IdealOpAmp3Pin.clone();
-	    		amp.position.x = x;
-	    		amp.position.y = y;
-	    		amp.scale.x = amp.scale.y = amp.scale.z = 10;
-	    		amp.rotation.y = Math.PI;	
-	    		scene.add(amp);
+	    		icon.scale.x = icon.scale.y = icon.scale.z = 10;
+	    		icon.rotation.y = Math.PI;	
 	    		break;
 	    		case "Capacitor":
-	    		var cap = Capacitor.clone();
-	    		cap.position.x = x;
-	    		cap.position.y = y;
-	    		cap.scale.x = cap.scale.y = cap.scale.z = 20;
-	    		scene.add(cap);
+	    		icon.scale.x = icon.scale.y = icon.scale.z = 20;
 	    		break;
 	    		case "Resistor":
-	    		var res = Resistor.clone();
-	    		res.position.x = x;
-	    		res.position.y = y;
-	    		res.scale.x = res.scale.y = res.scale.z = 10;
-	    		scene.add(res);
-	    		break;
-	    		default:
-   		  		scene.add(plane(x, y, w, h, 0xff0000, -7));
+	    		icon.scale.x = icon.scale.y = icon.scale.z = 10;
 	    		break;
 	    	}
+ 		  	scene.add(icon);
 		}
 	
   		for(var i = 0; i < edges.length; ++i) {

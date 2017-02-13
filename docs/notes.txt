@@ -1,3 +1,3 @@
-Make the algorithm-parser recursive because components may have children in children in children etc
+
 
 Shift between Orthographic and Perspective camera possible threejs/examples/canvas_camera_orthographic2
