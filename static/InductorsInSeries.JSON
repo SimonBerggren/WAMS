@@ -9,6 +9,9 @@
   {
   "id": "V",
   "class": "ConstantVoltage",
+  "parameters": {
+    "V" : 10
+  },
   "labels": [{"text": "V"}],
   "properties": {"de.cau.cs.kieler.portConstraints": "FIXED_SIDE"},
   "width": 30,
@@ -37,6 +40,9 @@
   {
   "id": "L1",
   "class": "Inductor",
+  "parameters": {
+    "L" : 1
+  },
   "labels": [{"text": "L1"}],
   "properties": {"de.cau.cs.kieler.portConstraints": "FIXED_SIDE"},
   "width": 30,
@@ -65,6 +71,9 @@
   {
   "id": "R1",
   "class": "Resistor",
+  "parameters": {
+    "R" : 100
+  },
   "labels": [{"text": "R1"}],
   "properties": {"de.cau.cs.kieler.portConstraints": "FIXED_SIDE"},
   "width": 30,
@@ -93,6 +102,9 @@
   {
   "id": "R2",
   "class": "Resistor",
+  "parameters": {
+    "R" : 100
+  },
   "labels": [{"text": "R2"}],
   "properties": {"de.cau.cs.kieler.portConstraints": "FIXED_SIDE"},
   "width": 30,
@@ -121,6 +133,9 @@
   {
   "id": "L2",
   "class": "Inductor",
+  "parameters": {
+    "L" : 1
+  },
   "labels": [{"text": "L2"}],
   "properties": {"de.cau.cs.kieler.portConstraints": "FIXED_SIDE"},
   "width": 30,
