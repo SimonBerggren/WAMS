@@ -1,39 +1,4 @@
-function Text(x1, y1, x2, y2, string, lineColor, level, translate, scale) {
-    if (translate === undefined) {
-      translate = [0,0,0]
-    } if (scale === undefined) {
-      scale = [1,1,1]
-    }
-          textCanvas = document.createElement("canvas");
-          textContext = textCanvas.getContext("2d");
-          textCanvas.width = textContext.width = 8000;
-          textCanvas.height = textContext.height = 2000;
-          var col= "#"+new THREE.Color(lineColor[0], lineColor[1], lineColor[2]).getHexString();
-          textContext.fillStyle = col;
-          var text = string;
-          var textDimensions;
-          var fontSize = 4;
-          do {
-              textContext.font = ++fontSize + "px Arial";
-              textDimensions = textContext.measureText(text);
-          } while (fontSize < textContext.height && textDimensions.width < textContext.width);
-          textContext.textAlign = "center";
-          textContext.textBaseline = "middle";
-          textContext.fillText(text, textCanvas.width/2, textCanvas.height/2);
-          textTexture = new THREE.Texture(textCanvas);
-          textTexture.needsUpdate = true;
-          material = new THREE.MeshPhongMaterial({map: textTexture, side: THREE.DoubleSide});
-          material.transparent = true;
-          geometry = new THREE.PlaneBufferGeometry(x2-x1, y2-y1);
-          mesh = new THREE.Mesh(geometry, material);
-          mesh.position.set((x1+x2)/2, (y1+y2)/2, level*delta*scale[0]);
-          mesh.userData.origColor = 0x1c6cc8;
-          mesh.userData.pickingAllowed = true;
-          calculateBoundingBox(mesh);
-    return mesh;
-}
-
-
+(function(){Math.clamp=function(a,b,c){return Math.max(b,Math.min(c,a));}})();
 
 $(function() {
   var perspective_camera = true;
@@ -57,6 +22,8 @@ $(function() {
   var w = window.innerWidth;
   var h = 600;
 
+
+
   var renderer = new THREE.WebGLRenderer();
   renderer.setClearColor( 0xEEEEEE, 1 );
   renderer.setSize(w, h);
@@ -68,6 +35,7 @@ $(function() {
 
    , 1000);
   camera.position.z = 400;
+  var controls = new THREE.FlyControls( camera );
 
   var omx = 0;
   var omy = 0;
@@ -75,12 +43,20 @@ $(function() {
   var dmy = 0;
 
   function render() {
+    requestAnimationFrame(render)
+    var delta = clock.getDelta();
     if (leftmousedown_graph) {
-        camera.position.x -= dmx / camera.zoom;
-        camera.position.y += dmy / camera.zoom;
+        camera.position.x -= dmx * 5;
+        camera.position.y += dmy * 5;
     } else if (rightmousedown_graph) {
-      camera.rotation.y -= dmx / 750;
-      camera.rotation.x  -= dmy / 750;
+      controls.movementSpeed = 0.33;
+      var x = dmx * 50;
+      var y =  dmy * 50;
+      var limit = 1000;
+      x = Math.clamp(x, -limit, limit);
+      y = Math.clamp(y, -limit, limit);
+      controls.updateMouse(x, y);
+      controls.update( delta );
     }
     if (keys.W) {
       camera.moveFwd(1);
@@ -92,8 +68,6 @@ $(function() {
             camera.moveRight(1);
     }
       dmx = dmy = 0;
-
-    requestAnimationFrame(render)
     renderer.render(scene, camera);
   }
 
@@ -105,6 +79,7 @@ $(function() {
   }).bind('DOMMouseScroll mousewheel', function(event) {
     camera.moveBwd(event.originalEvent.wheelDeltaY);
   }).append(renderer.domElement);
+  var clock = new THREE.Clock();
   render();
   $(document).on('contextmenu', function(event) {
     event.preventDefault();
@@ -112,13 +87,11 @@ $(function() {
     leftmousedown_graph = false;
     rightmousedown_graph = false;
   }).on('mousemove', function(event) {
-    var mx = event.clientX;
-    var my = event.clientY;
-    
-    dmx = mx - omx;
-    dmy = my - omy;
-    omx = mx;
-    omy = my;
+
+    dmx = event.originalEvent.movementX;
+    dmy = event.originalEvent.movementY;
+
+    return;
   }).on('keydown', function (event) {
     var key = event.keyCode;
     if (key === TAB) {

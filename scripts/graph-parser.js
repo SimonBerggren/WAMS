@@ -1,3 +1,38 @@
+function Text(x1, y1, x2, y2, string, lineColor, level, translate, scale) {
+    if (translate === undefined) {
+      translate = [0,0,0]
+    } if (scale === undefined) {
+      scale = [1,1,1]
+    }
+          textCanvas = document.createElement("canvas");
+          textContext = textCanvas.getContext("2d");
+          textCanvas.width = textContext.width = 8000;
+          textCanvas.height = textContext.height = 2000;
+          var col= "#"+new THREE.Color(lineColor[0], lineColor[1], lineColor[2]).getHexString();
+          textContext.fillStyle = col;
+          var text = string;
+          var textDimensions;
+          var fontSize = 4;
+          do {
+              textContext.font = ++fontSize + "px Arial";
+              textDimensions = textContext.measureText(text);
+          } while (fontSize < textContext.height && textDimensions.width < textContext.width);
+          textContext.textAlign = "center";
+          textContext.textBaseline = "middle";
+          textContext.fillText(text, textCanvas.width/2, textCanvas.height/2);
+          textTexture = new THREE.Texture(textCanvas);
+          textTexture.needsUpdate = true;
+          material = new THREE.MeshPhongMaterial({map: textTexture, side: THREE.DoubleSide});
+          material.transparent = true;
+          geometry = new THREE.PlaneBufferGeometry(x2-x1, y2-y1);
+          mesh = new THREE.Mesh(geometry, material);
+          mesh.position.set((x1+x2)/2, (y1+y2)/2, level*delta*scale[0]);
+          mesh.userData.origColor = 0x1c6cc8;
+          mesh.userData.pickingAllowed = true;
+          calculateBoundingBox(mesh);
+    return mesh;
+}
+
 function plane(x, y, w, h, c, z) {
 	var plane = new THREE.Mesh(new THREE.PlaneGeometry(w, h, 1, 1), new THREE.MeshBasicMaterial({color:c}));
 	plane.position.x = x;
@@ -16,22 +51,21 @@ function loadFiles() {
 
 }
 
-function makeTextSprite(message) {
+function makeTextSprite(x, y, message) {
 	var fontface = "Arial";
-	var fontsize = 280;
+	var fontsize = 5;
 	var borderThickness = 0;
 	var canvas = document.createElement('canvas');
-	canvas.width = 64;
-	canvas.height = 64;
 	var context = canvas.getContext('2d');
+	canvas.width = context.width = 64;
+	canvas.height = context.height = 64;
 	context.font = "Bold " + fontsize + "px " + fontface;
-	context.fillText( message, 0, 0);
+	context.fillText(message, canvas.width/2, canvas.height/2);
 	var texture = new THREE.Texture(canvas) 
 	texture.needsUpdate = true;
-	var spriteMaterial = new THREE.SpriteMaterial( 
-		{ map: texture } );
-	var sprite = new THREE.Sprite( spriteMaterial );
-	//sprite.scale.set(10,10,1.0);
+	var material = new THREE.SpriteMaterial({ map: texture });
+	var sprite = new THREE.Sprite(material);
+	sprite.scale.set(10,10,1.0);
 	return sprite;	
 }
 // function for drawing rounded rectangles
@@ -52,6 +86,106 @@ function roundRect(ctx, x, y, w, h, r)
 	ctx.stroke();   
 }
 
+var font;
+var size = 5;
+var height = 1;
+var curveSegments = 0;
+var bevelThickness = 0;
+var bevelSize = 0;
+var bevelEnabled = 0;
+var material;
+var extrudeMaterial = 1;
+var hover = 30;
+
+$(function() {
+	var loader = new THREE.FontLoader();
+	loader.load( 'static/fonts/helvetiker_regular.typeface.json', function ( response ) {
+	font = response;
+					material = new THREE.MultiMaterial( [
+					new THREE.MeshPhongMaterial( { color: 0, shading: THREE.FlatShading } ), // front
+					new THREE.MeshPhongMaterial( { color: 0, shading: THREE.SmoothShading } ) // side
+				] );
+	});
+});
+
+function createText(group, text, x, y) {
+
+	textGeo = new THREE.TextGeometry( text, {
+
+		font: font,
+
+		size: size,
+		height: height,
+		curveSegments: curveSegments,
+
+		bevelThickness: bevelThickness,
+		bevelSize: bevelSize,
+		bevelEnabled: bevelEnabled,
+
+		material: material,
+		extrudeMaterial: extrudeMaterial
+
+	});
+
+	textGeo.computeBoundingBox();
+	textGeo.computeVertexNormals();
+
+	// "fix" side normals by removing z-component of normals for side faces
+	// (this doesn't work well for beveled geometry as then we lose nice curvature around z-axis)
+
+	if ( false ) {
+
+		var triangleAreaHeuristics = 0.1 * ( height * size );
+
+		for ( var i = 0; i < textGeo.faces.length; i ++ ) {
+
+			var face = textGeo.faces[ i ];
+
+			if ( face.materialIndex == 1 ) {
+
+				for ( var j = 0; j < face.vertexNormals.length; j ++ ) {
+
+					face.vertexNormals[ j ].z = 0;
+					face.vertexNormals[ j ].normalize();
+
+				}
+
+				var va = textGeo.vertices[ face.a ];
+				var vb = textGeo.vertices[ face.b ];
+				var vc = textGeo.vertices[ face.c ];
+
+				var s = THREE.GeometryUtils.triangleArea( va, vb, vc );
+
+				if ( s > triangleAreaHeuristics ) {
+
+					for ( var j = 0; j < face.vertexNormals.length; j ++ ) {
+
+						face.vertexNormals[ j ].copy( face.normal );
+
+					}
+
+				}
+
+			}
+
+		}
+
+	}
+
+	var centerOffset = -0.5 * ( textGeo.boundingBox.max.x - textGeo.boundingBox.min.x );
+
+	textMesh1 = new THREE.Mesh( textGeo, material );
+
+	textMesh1.position.x = x + centerOffset;
+	textMesh1.position.y = y - (height / 2);
+	textMesh1.position.z = 15;
+
+	textMesh1.rotation.x = 0;
+	textMesh1.rotation.y = Math.PI * 2;
+
+	group.add( textMesh1 );
+}
+
 // adds components, edges and connections to scene
 function display_graph(graph, scene, camera) {
 	scene.children.forEach(function(object){
@@ -64,7 +198,6 @@ function display_graph(graph, scene, camera) {
 
     worker.addEventListener('message', function (e) {
     var graph = e.data;
-    console.log(graph);
     var comps = graph.children;
     var edges = graph.edges;
 	get_comps(comps, edges);
@@ -99,18 +232,20 @@ function display_graph(graph, scene, camera) {
      	  	var tx = c.x + w + offsetX;
      	  	var ty = c.y + offsetY;
  
-     	  	var text = makeTextSprite(c.id);
- 		  	text.position.set(c.x,c.y,0);
- 		  	scene.add(text);
+ 	  	    var group = new THREE.Group();
+  			scene.add(group);
+  			createText(group, cl, x, y); 			
 
  		  	var icon;
  		  	if (icons[cl] === undefined)
- 		  		icon = plane(x, y, w, h, 0xff0000, -7);
+ 		  		icon = plane(x, y, w, h, 0xff0000, 0);
  		  	else
  		  		icon = icons[cl].clone();
 
  		  	icon.position.x = x;
  		  	icon.position.y = y;
+ 		  	icon.position.z = 0;
+
 
 	    	switch(cl) {
 	    		case "IdealOpAmp3Pin":
@@ -136,11 +271,11 @@ function display_graph(graph, scene, camera) {
     		var targetX = edge.targetPoint.x + offsetX;
     		var targetY = edge.targetPoint.y + offsetY;
 
-  			scene.add(plane(sourceX, sourceY, s, s, 0xffff1a, -5));
-  			scene.add(plane(targetX, targetY, s, s, 0xffff1a, -5));
+  			scene.add(plane(sourceX, sourceY, s, s, 0xffff1a, 0));
+  			scene.add(plane(targetX, targetY, s, s, 0xffff1a, 0));
 
 			var line = new THREE.Geometry();
-    		line.vertices.push(new THREE.Vector3(sourceX, sourceY, -10));
+    		line.vertices.push(new THREE.Vector3(sourceX, sourceY, 0));
 
     		var bendPoints = edge.bendPoints;
 			if (bendPoints !== undefined) {
@@ -150,11 +285,11 @@ function display_graph(graph, scene, camera) {
     				var bendY = bend.y + offsetY;
 
     				scene.add(plane(bendX, bendY, 0, 0, 0x33cc33, -3));
-    				line.vertices.push(new THREE.Vector3(bendX, bendY, -10));
+    				line.vertices.push(new THREE.Vector3(bendX, bendY, 0));
    				}
 		  	}
 
-  			line.vertices.push(new THREE.Vector3(targetX, targetY, -10));
+  			line.vertices.push(new THREE.Vector3(targetX, targetY, 0));
 			scene.add(new THREE.Line(line, new THREE.LineBasicMaterial({color: 0x0000ff})));
     	}
 	}
