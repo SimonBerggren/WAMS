@@ -9,12 +9,16 @@ $(function() {
     W: false,
     A: false,
     S: false,
-    D: false
+    D: false,
+    Q: false,
+    E: false
   }
   var W = 87;
     var A = 65;
     var S = 83;
     var D = 68;
+    var Q = 81;
+    var E = 69;
     var TAB = 9;
     var ESC = 27;
   var scene = new THREE.Scene();
@@ -66,6 +70,10 @@ $(function() {
               camera.moveLeft(1);
     } else if (keys.D) {
             camera.moveRight(1);
+    } if (keys.Q) {
+            camera.RollLeft(0.02);
+    } else if (keys.E) {
+            camera.RollRight(0.02);
     }
       dmx = dmy = 0;
     renderer.render(scene, camera);
@@ -88,8 +96,20 @@ $(function() {
     rightmousedown_graph = false;
   }).on('mousemove', function(event) {
 
-    dmx = event.originalEvent.movementX;
-    dmy = event.originalEvent.movementY;
+    var mx = 0;
+    var my = 0;
+
+    if (event.target.tagName === "CANVAS") {
+      var rect = event.target.getBoundingClientRect();
+      mx = event.clientX - rect.left,
+      my = event.clientY - rect.top
+    };
+
+    dmx = omx - mx;
+    dmy = omy - my;
+
+    omx = mx;
+    omy = my;
 
     return;
   }).on('keydown', function (event) {
@@ -112,6 +132,10 @@ $(function() {
             keys.A = true;
     } else if (key === D) {
               keys.D = true;
+    } else if (key === Q) {
+              keys.Q = true;
+    } else if (key === E) {
+              keys.E = true;
     }
   }).on('keyup', function(event) {
     var key = event.keyCode;
@@ -123,6 +147,10 @@ $(function() {
             keys.A = false;
     } else if (key === D) {
               keys.D = false;
+    } else if (key === Q) {
+              keys.Q = false;
+    } else if (key === E) {
+              keys.E = false;
     } else if (key === ESC) {
       camera.reset();
     }

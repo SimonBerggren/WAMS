@@ -177,12 +177,12 @@ THREE.CombinedCamera.prototype.moveLeft = function( distance ) {
   this.translateX(-distance);
 }
 
-THREE.CombinedCamera.prototype.rotateX = function( rotation ) {
-  this.rotation.y += rotation;
+THREE.CombinedCamera.prototype.RollRight = function( rotation ) {
+  this.rotation.z -= rotation;
 }
 
-THREE.CombinedCamera.prototype.rotateY = function( rotation ) {
-  this.rotation.x += rotation;
+THREE.CombinedCamera.prototype.RollLeft = function( rotation ) {
+  this.rotation.z += rotation;
 }
 
 THREE.CombinedCamera.prototype.reset = function() {
