@@ -7,32 +7,38 @@ WAMS Plan
 + perform layout with KlayJS
 
 - render diagram with three.js
-  	+ rectangles
-	+ polylines
-	+ text
-	- correctly placed text
-  - with icons
+  + rectangles
+  + polylines
+  + text
+  + correctly placed text
+  + with icons
+  - wider lines or cylinders
 
-- ortographic/perspective view
++ ortographic/perspective view
 
 - enable manual layout utilizing x and y attributes and bendpoints
+  - check if properties attribute present, if so do automatic layout
 
 - produce Modelica icons in suitable format for three.js rendering (HE)
-  - load SVG
-  - test with manually generated SVG icons
   + format three.js JSON
   + produced by three.js/editor, Clara.io
   + Resistor
   + Capacitor (simple)
   + Op Amp (simple)
   - voltage source
+  - ground
+  - test with manually generated SVG icons
 
-- render diagram with icons
+- load SVG
 
-- enable camera mouse control
++ enable camera mouse control
+
+- investigate icon animation (HE)
 
 - enable picking
 
 - enable cloning
 
 - enable coupling 
+
+- 
