@@ -26,12 +26,9 @@ $(function() {
   var w = window.innerWidth;
   var h = 600;
 
-
-
   var renderer = new THREE.WebGLRenderer();
   renderer.setClearColor( 0xEEEEEE, 1 );
   renderer.setSize(w, h);
-
 
   var minZoom = 0.1;
   var camera = new THREE.CombinedCamera(w/2, h/2,
@@ -156,12 +153,20 @@ $(function() {
     }
   });
 
-	$('#layout').click(function() {
+	$('#calculate').click(function() {
     if(graph === undefined) {
       alert("no diagram chosen!");
       return;
     }
-    display_graph(graph, scene, camera);
+    calculate_graph(graph, scene, camera);
+  });
+
+$('#display').click(function(event) {
+    if(graph === undefined) {
+      alert("no diagram chosen!");
+      return;
+    }
+    display_graph(graph, scene, camera, true);
   });
 
   $('#files').change(

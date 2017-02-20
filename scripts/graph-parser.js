@@ -186,36 +186,56 @@ function createText(group, text, x, y) {
 	group.add( textMesh1 );
 }
 
-// adds components, edges and connections to scene
-function display_graph(graph, scene, camera) {
-	scene.children.forEach(function(object){
-	scene.remove(object);
-	});
-	this.graph = graph;
+var scene = undefined;
 
+function calculate_graph(graph, s, camera) {
 	var worker = new Worker('klayjs.js');
     var config = '{' + "spacing: 0,\nalgorithm: de.cau.cs.kieler.klay.layered,\nedgeRouting: ORTHOGONAL" + '}';
-
+    var _g = graph;
+    var _s = s;
+    var _c = camera;
+    
     worker.addEventListener('message', function (e) {
-    var graph = e.data;
-    var comps = graph.children;
-    var edges = graph.edges;
-	get_comps(comps, edges);
-	camera.setOriginalPosition({x:graph.width / 2, y:graph.height / 2, z:500})
+    	var g = e.data;
+		display_graph(g, _s, _c);
+		
     });
 
     var parsed_graph = JSON.parse(graph);
-    worker.postMessage({
-      graph: parsed_graph,
-      options: config
+		worker.postMessage({
+		graph: parsed_graph,
+		options: config
 	});
+}
 
-	function get_comps(comps, edges, parent) {
+// adds components, edges and connections to scene
+function display_graph(graph, s, camera, display) {
+	scene = s;
+	for( var i = scene.children.length - 1; i >= 0; i--) { 
+			scene.remove(scene.children[i]);
+	}
+	if (display !== undefined) {
+	var parsed_graph = JSON.parse(graph);
+	for (var i = 0; i < parsed_graph.length; ++i) {
+		var g = parsed_graph[i];
+		var comps = g.children;
+		var edges = g.edges;
+		get_comps(comps, edges);
+		camera.setOriginalPosition({x:g.width / 2, y:g.height / 2, z:500})
+	}
+} else {
+		var comps = graph.children;
+		var edges = graph.edges;
+		get_comps(comps, edges);
+		camera.setOriginalPosition({x:graph.width / 2, y:graph.height / 2, z:500})
+}
+}
+
+function get_comps(comps, edges, parent) {
 		var offsetX = (parent === undefined) ? 0 : parent.x;
 		var offsetY = (parent === undefined) ? 0 : parent.y;
 
     	for(var i = 0; i < comps.length; ++i) {
-	
     		var c = comps[i];
 	    	if (c.children !== undefined) {
 	    		var obj = c;
@@ -223,7 +243,7 @@ function display_graph(graph, scene, camera) {
 	    		obj.y += offsetY;
 	    		get_comps(c.children, c.edges, obj);
 	    	}
-	
+			var name = c.id;
 	    	var cl = c.class;
 	    	var w = c.width;
 	    	var h = c.height;
@@ -234,7 +254,7 @@ function display_graph(graph, scene, camera) {
  
  	  	    var group = new THREE.Group();
   			scene.add(group);
-  			createText(group, cl, x, y); 			
+  			createText(group, name, x, y); 			
 
  		  	var icon;
  		  	if (icons[cl] === undefined)
@@ -245,7 +265,6 @@ function display_graph(graph, scene, camera) {
  		  	icon.position.x = x;
  		  	icon.position.y = y;
  		  	icon.position.z = 0;
-
 
 	    	switch(cl) {
 	    		case "IdealOpAmp3Pin":
@@ -293,4 +312,3 @@ function display_graph(graph, scene, camera) {
 			scene.add(new THREE.Line(line, new THREE.LineBasicMaterial({color: 0x0000ff})));
     	}
 	}
-}
