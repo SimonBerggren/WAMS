@@ -1,0 +1,15 @@
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg viewBox="0 0 1276.000000 795.000000" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+	<polygon fill="rgb(255,255,255)" stroke="rgb(0,0,255)" stroke-opacity="1" points="889.800000,497.500000 379.200000,199.650000 379.200000,795.350000 889.800000,497.500000"/>
+	<polyline fill="none" stroke="rgb(0,0,255)" stroke-opacity="1" points="251.550000,284.750000 379.200000,284.750000"/>
+	<polyline fill="none" stroke="rgb(0,0,255)" stroke-opacity="1" points="251.550000,710.250000 379.200000,710.250000"/>
+	<polyline fill="none" stroke="rgb(0,0,255)" stroke-opacity="1" points="889.800000,497.500000 1017.450000,497.500000"/>
+	<polyline fill="none" stroke="rgb(0,0,255)" stroke-opacity="1" points="430.260000,361.340000 515.360000,361.340000"/>
+	<polyline fill="none" stroke="rgb(0,0,255)" stroke-opacity="1" points="468.555000,582.600000 468.555000,671.955000"/>
+	<polyline fill="none" stroke="rgb(0,0,255)" stroke-opacity="1" points="421.750000,629.405000 515.360000,629.405000"/>
+	<text x="638.755" y="84.765" fill="rgb(0,0,255)" dominant-baseline="central" font-size="170" font-family="Arial" text-anchor="middle">name</text>
+	<rect fill="rgb(0,0,255)" stroke="rgb(0,0,255)" stroke-opacity="1" x="166.45" y="667.7" width="85.1" height="85.1"/>
+	<rect fill="rgb(255,255,255)" stroke="rgb(0,0,255)" stroke-opacity="1" x="166.45" y="242.2" width="85.1" height="85.1"/>
+	<rect fill="rgb(0,0,255)" stroke="rgb(0,0,255)" stroke-opacity="1" x="1017.45" y="454.95" width="85.1" height="85.1"/>
+</svg>

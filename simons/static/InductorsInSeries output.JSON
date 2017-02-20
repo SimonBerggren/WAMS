@@ -1,0 +1,503 @@
+[{
+  "children": [
+    {
+      "class": "ConstantVoltage",
+      "height": 30,
+      "id": "V",
+      "labels": [{
+        "height": 0,
+        "text": "V",
+        "width": 0,
+        "x": 0,
+        "y": 0
+      }],
+      "padding": {
+        "bottom": 0,
+        "left": 0,
+        "right": 0,
+        "top": 0
+      },
+      "parameters": {"V": 10},
+      "ports": [
+        {
+          "class": "Pin",
+          "height": 3,
+          "id": "Vp",
+          "labels": [{
+            "height": 0,
+            "text": "p",
+            "width": 0,
+            "x": -3,
+            "y": 6
+          }],
+          "padding": {
+            "bottom": 0,
+            "left": 0,
+            "right": 0,
+            "top": 0
+          },
+          "properties": {"de.cau.cs.kieler.portSide": "WEST"},
+          "width": 3,
+          "x": -3,
+          "y": 13.5
+        },
+        {
+          "class": "Pin",
+          "height": 3,
+          "id": "Vn",
+          "labels": [{
+            "height": 0,
+            "text": "n",
+            "width": 0,
+            "x": 6,
+            "y": 6
+          }],
+          "padding": {
+            "bottom": 0,
+            "left": 0,
+            "right": 0,
+            "top": 0
+          },
+          "properties": {"de.cau.cs.kieler.portSide": "EAST"},
+          "width": 3,
+          "x": 30,
+          "y": 13.5
+        }
+      ],
+      "properties": {"de.cau.cs.kieler.portConstraints": "FIXED_SIDE"},
+      "width": 30,
+      "x": 340,
+      "y": 12
+    },
+    {
+      "class": "Inductor",
+      "height": 30,
+      "id": "L1",
+      "labels": [{
+        "height": 0,
+        "text": "L1",
+        "width": 0,
+        "x": 0,
+        "y": 0
+      }],
+      "padding": {
+        "bottom": 0,
+        "left": 0,
+        "right": 0,
+        "top": 0
+      },
+      "parameters": {"L": 1},
+      "ports": [
+        {
+          "class": "Pin",
+          "height": 3,
+          "id": "L1p",
+          "labels": [{
+            "height": 0,
+            "text": "p",
+            "width": 0,
+            "x": -3,
+            "y": 6
+          }],
+          "padding": {
+            "bottom": 0,
+            "left": 0,
+            "right": 0,
+            "top": 0
+          },
+          "properties": {"de.cau.cs.kieler.portSide": "WEST"},
+          "width": 3,
+          "x": -3,
+          "y": 13.5
+        },
+        {
+          "class": "Pin",
+          "height": 3,
+          "id": "L1n",
+          "labels": [{
+            "height": 0,
+            "text": "n",
+            "width": 0,
+            "x": 6,
+            "y": 6
+          }],
+          "padding": {
+            "bottom": 0,
+            "left": 0,
+            "right": 0,
+            "top": 0
+          },
+          "properties": {"de.cau.cs.kieler.portSide": "EAST"},
+          "width": 3,
+          "x": 30,
+          "y": 13.5
+        }
+      ],
+      "properties": {"de.cau.cs.kieler.portConstraints": "FIXED_SIDE"},
+      "width": 30,
+      "x": 158,
+      "y": 142
+    },
+    {
+      "class": "Resistor",
+      "height": 30,
+      "id": "R1",
+      "labels": [{
+        "height": 0,
+        "text": "R1",
+        "width": 0,
+        "x": 0,
+        "y": 0
+      }],
+      "padding": {
+        "bottom": 0,
+        "left": 0,
+        "right": 0,
+        "top": 0
+      },
+      "parameters": {"R": 100},
+      "ports": [
+        {
+          "class": "Pin",
+          "height": 3,
+          "id": "R1p",
+          "labels": [{
+            "height": 0,
+            "text": "p",
+            "width": 0,
+            "x": -3,
+            "y": 6
+          }],
+          "padding": {
+            "bottom": 0,
+            "left": 0,
+            "right": 0,
+            "top": 0
+          },
+          "properties": {"de.cau.cs.kieler.portSide": "WEST"},
+          "width": 3,
+          "x": -3,
+          "y": 13.5
+        },
+        {
+          "class": "Pin",
+          "height": 3,
+          "id": "R1n",
+          "labels": [{
+            "height": 0,
+            "text": "n",
+            "width": 0,
+            "x": 6,
+            "y": 6
+          }],
+          "padding": {
+            "bottom": 0,
+            "left": 0,
+            "right": 0,
+            "top": 0
+          },
+          "properties": {"de.cau.cs.kieler.portSide": "EAST"},
+          "width": 3,
+          "x": 30,
+          "y": 13.5
+        }
+      ],
+      "properties": {"de.cau.cs.kieler.portConstraints": "FIXED_SIDE"},
+      "width": 30,
+      "x": 340,
+      "y": 142
+    },
+    {
+      "class": "Resistor",
+      "height": 30,
+      "id": "R2",
+      "labels": [{
+        "height": 0,
+        "text": "R2",
+        "width": 0,
+        "x": 0,
+        "y": 0
+      }],
+      "padding": {
+        "bottom": 0,
+        "left": 0,
+        "right": 0,
+        "top": 0
+      },
+      "parameters": {"R": 100},
+      "ports": [
+        {
+          "class": "Pin",
+          "height": 3,
+          "id": "R2p",
+          "labels": [{
+            "height": 0,
+            "text": "p",
+            "width": 0,
+            "x": -3,
+            "y": 6
+          }],
+          "padding": {
+            "bottom": 0,
+            "left": 0,
+            "right": 0,
+            "top": 0
+          },
+          "properties": {"de.cau.cs.kieler.portSide": "WEST"},
+          "width": 3,
+          "x": -3,
+          "y": 13.5
+        },
+        {
+          "class": "Pin",
+          "height": 3,
+          "id": "R2n",
+          "labels": [{
+            "height": 0,
+            "text": "n",
+            "width": 0,
+            "x": 6,
+            "y": 6
+          }],
+          "padding": {
+            "bottom": 0,
+            "left": 0,
+            "right": 0,
+            "top": 0
+          },
+          "properties": {"de.cau.cs.kieler.portSide": "EAST"},
+          "width": 3,
+          "x": 30,
+          "y": 13.5
+        }
+      ],
+      "properties": {"de.cau.cs.kieler.portConstraints": "FIXED_SIDE"},
+      "width": 30,
+      "x": 340,
+      "y": 272
+    },
+    {
+      "class": "Inductor",
+      "height": 30,
+      "id": "L2",
+      "labels": [{
+        "height": 0,
+        "text": "L2",
+        "width": 0,
+        "x": 0,
+        "y": 0
+      }],
+      "padding": {
+        "bottom": 0,
+        "left": 0,
+        "right": 0,
+        "top": 0
+      },
+      "parameters": {"L": 1},
+      "ports": [
+        {
+          "class": "Pin",
+          "height": 3,
+          "id": "L2p",
+          "labels": [{
+            "height": 0,
+            "text": "p",
+            "width": 0,
+            "x": -3,
+            "y": 6
+          }],
+          "padding": {
+            "bottom": 0,
+            "left": 0,
+            "right": 0,
+            "top": 0
+          },
+          "properties": {"de.cau.cs.kieler.portSide": "WEST"},
+          "width": 3,
+          "x": -3,
+          "y": 13.5
+        },
+        {
+          "class": "Pin",
+          "height": 3,
+          "id": "L2n",
+          "labels": [{
+            "height": 0,
+            "text": "n",
+            "width": 0,
+            "x": 6,
+            "y": 6
+          }],
+          "padding": {
+            "bottom": 0,
+            "left": 0,
+            "right": 0,
+            "top": 0
+          },
+          "properties": {"de.cau.cs.kieler.portSide": "EAST"},
+          "width": 3,
+          "x": 30,
+          "y": 13.5
+        }
+      ],
+      "properties": {"de.cau.cs.kieler.portConstraints": "FIXED_SIDE"},
+      "width": 30,
+      "x": 522,
+      "y": 142
+    }
+  ],
+  "class": "InductorsInSeries",
+  "edges": [
+    {
+      "bendPoints": [
+        {
+          "x": 12,
+          "y": 27
+        },
+        {
+          "x": 12,
+          "y": 157
+        }
+      ],
+      "id": "id1",
+      "source": "V",
+      "sourcePoint": {
+        "x": 337,
+        "y": 27
+      },
+      "sourcePort": "Vp",
+      "target": "L1",
+      "targetPoint": {
+        "x": 155,
+        "y": 157
+      },
+      "targetPort": "L1p"
+    },
+    {
+      "bendPoints": [],
+      "id": "id2",
+      "source": "L1",
+      "sourcePoint": {
+        "x": 191,
+        "y": 157
+      },
+      "sourcePort": "L1n",
+      "target": "R1",
+      "targetPoint": {
+        "x": 337,
+        "y": 157
+      },
+      "targetPort": "R1p"
+    },
+    {
+      "bendPoints": [
+        {
+          "x": 264,
+          "y": 157
+        },
+        {
+          "x": 264,
+          "y": 287
+        }
+      ],
+      "id": "id3",
+      "source": "L1",
+      "sourcePoint": {
+        "x": 191,
+        "y": 157
+      },
+      "sourcePort": "L1n",
+      "target": "R2",
+      "targetPoint": {
+        "x": 337,
+        "y": 287
+      },
+      "targetPort": "R2p"
+    },
+    {
+      "bendPoints": [],
+      "id": "id4",
+      "source": "R1",
+      "sourcePoint": {
+        "x": 373,
+        "y": 157
+      },
+      "sourcePort": "R1n",
+      "target": "L2",
+      "targetPoint": {
+        "x": 519,
+        "y": 157
+      },
+      "targetPort": "L2p"
+    },
+    {
+      "bendPoints": [
+        {
+          "x": 446,
+          "y": 287
+        },
+        {
+          "x": 446,
+          "y": 157
+        }
+      ],
+      "id": "id5",
+      "source": "R2",
+      "sourcePoint": {
+        "x": 373,
+        "y": 287
+      },
+      "sourcePort": "R2n",
+      "target": "L2",
+      "targetPoint": {
+        "x": 519,
+        "y": 157
+      },
+      "targetPort": "L2p"
+    },
+    {
+      "bendPoints": [
+        {
+          "x": 628,
+          "y": 157
+        },
+        {
+          "x": 628,
+          "y": 27
+        }
+      ],
+      "id": "id6",
+      "source": "L2",
+      "sourcePoint": {
+        "x": 555,
+        "y": 157
+      },
+      "sourcePort": "L2n",
+      "target": "V",
+      "targetPoint": {
+        "x": 373,
+        "y": 27
+      },
+      "targetPort": "Vn"
+    }
+  ],
+  "height": 314,
+  "id": "InductorsInSeries",
+  "labels": [{
+    "height": 0,
+    "text": "InductorsInSeries",
+    "width": 0,
+    "x": 0,
+    "y": 0
+  }],
+  "padding": {
+    "bottom": 0,
+    "left": 0,
+    "right": 0,
+    "top": 0
+  },
+  "properties": {"de.cau.cs.kieler.portConstraints": "FIXED_SIDE"},
+  "width": 640,
+  "x": 0,
+  "y": 0
+}]

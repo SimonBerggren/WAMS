@@ -76,6 +76,18 @@ $(function() {
     renderer.render(scene, camera);
   }
 
+  var map = new THREE.TextureLoader().load( "static/icons/IdealOpAmp3Pin.svg", function(obj) {
+  var material = new THREE.SpriteMaterial( { map: map, color: 0xffffff} ); 
+  var sprite = new THREE.Sprite( material ); 
+  console.log(sprite);
+  sprite.position.set(0,0,400);
+  sprite.scale.set(100,100,100);
+  scene.add( sprite );
+} ); 
+
+
+
+
   $('#glcontainer').on('mousedown', function(event) {
     if(event.button == 0)
     leftmousedown_graph = true;
