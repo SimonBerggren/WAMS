@@ -44,32 +44,10 @@ function plane(x, y, w, h, c, z) {
 var icons = {};
 
 function loadFiles() {
-//   var map = new THREE.TextureLoader().load( "static/icons/IdealOpAmp3Pin.svg", function(obj) {
-//   var material = new THREE.SpriteMaterial( { map: map, color: 0xffffff} ); 
-//   var sprite = new THREE.Sprite( material ); 
-//   icons[""] = sprite;
-// } ); 
-
-var scale = 10;
-	var loader = new THREE.TextureLoader();
-	loader.load("static/icons/IdealOpAmp3Pin.svg", function (obj) { 
-	    var material = new THREE.SpriteMaterial( { map: obj, color: 0xffffff} ); 
-  		var sprite = new THREE.Sprite( material ); 
-  		sprite.scale.set(scale, scale, scale);
-		icons["IdealOpAmp3Pin"] = sprite;
-	} );
-	loader.load("static/icons/Capacitor.svg", function (obj) {
-	 	    var material = new THREE.SpriteMaterial( { map: obj, color: 0xffffff} ); 
-  		var sprite = new THREE.Sprite( material ); 
-  		sprite.scale.set(scale, scale, scale);
-		icons["Capacitor"] = sprite;
-	} );
-	loader.load("static/icons/Resistor.svg", function (obj) { 
-			    var material = new THREE.SpriteMaterial( { map: obj, color: 0xffffff} ); 
-  		var sprite = new THREE.Sprite( material ); 
-  		sprite.scale.set(scale, scale, scale);
-		icons["Resistor"] = sprite;
-	} );
+	var loader = new THREE.ObjectLoader();
+	loader.load("static/icons/IdealOpAmp3Pin.json", function (obj) { icons["IdealOpAmp3Pin"] = obj.clone(); } );
+	loader.load("static/icons/Capacitor.json", function (obj) { icons["Capacitor"] = obj; } );
+	loader.load("static/icons/Resistor.json", function (obj) { icons["Resistor"] = obj; } );
 
 }
 
@@ -290,14 +268,14 @@ function get_comps(comps, edges, parent) {
 
 	    	switch(cl) {
 	    		case "IdealOpAmp3Pin":
-	    		icon.scale.x = icon.scale.y = icon.scale.z = 50;
-	    		//icon.rotation.y = Math.PI;	
+	    		icon.scale.x = icon.scale.y = icon.scale.z = 10;
+	    		icon.rotation.y = Math.PI;	
 	    		break;
 	    		case "Capacitor":
-	    		icon.scale.x = icon.scale.y = icon.scale.z = 50;
+	    		icon.scale.x = icon.scale.y = icon.scale.z = 20;
 	    		break;
 	    		case "Resistor":
-	    		icon.scale.x = icon.scale.y = icon.scale.z = 50;
+	    		icon.scale.x = icon.scale.y = icon.scale.z = 10;
 	    		break;
 	    	}
  		  	scene.add(icon);
