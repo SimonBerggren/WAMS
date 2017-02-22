@@ -1,0 +1,55 @@
+<svg width="55.0" height="55.0" viewBox="-2.5 -2.5 55.0 55.0" version="1.1" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <path d="M0.5,22.55 L12.75,22.55 L12.75,27.45 L0.5,27.45 Z" style="stroke:#404040; fill:url(#fb40404040c0c0c0);" />
+  <path d="M37.25,22.55 L49.5,22.55 L49.5,27.45 L37.25,27.45 Z" style="stroke:#404040; fill:url(#fb40404040c0c0c0);" />
+  <path d="M5.4,31.125 L10.3,31.125" style="stroke:#000000; fill:none;" />
+  <path d="M39.7,31.125 L44.6,31.125" style="stroke:#000000; fill:none;" />
+  <path d="M7.85,31.125 L7.85,42.15" style="stroke:#000000; fill:none;" />
+  <path d="M42.15,31.125 L42.15,42.15" style="stroke:#000000; fill:none;" />
+  <path d="M5.4,18.875 L10.3,18.875" style="stroke:#000000; fill:none;" />
+  <path d="M39.7,18.875 L44.6,18.875" style="stroke:#000000; fill:none;" />
+  <path d="M7.85,13.975 L7.85,18.875" style="stroke:#000000; fill:none;" />
+  <path d="M42.15,13.975 L42.15,18.875" style="stroke:#000000; fill:none;" />
+  <path d="M7.85,42.15 L42.15,42.15" style="stroke:#000000; fill:none;" />
+  <path d="M12.75,15.2 Q12.75,12.75 15.2,12.75 Q25.0,12.75 34.8,12.75 Q37.25,12.75 37.25,15.2 Q37.25,25.0 37.25,34.8 Q37.25,37.25 34.8,37.25 Q25.0,37.25 15.2,37.25 Q12.75,37.25 12.75,34.8 Q12.75,25.0 12.75,15.2 Z" style="stroke:#404040; fill:url(#fb40404040ffffff);" />
+  <text x="25.0" y="5.4" dy=".33em" style="fill:#0000ff; text-anchor:middle; font-size:9.8px;">J4</text>
+  <text x="25.0" y="49.5" dy=".33em" style="fill:#000000; text-anchor:middle; font-size:9.8px;">J=1</text>
+  <path d="M12.75,15.2 Q12.75,12.75 15.2,12.75 Q25.0,12.75 34.8,12.75 Q37.25,12.75 37.25,15.2 Q37.25,25.0 37.25,34.8 Q37.25,37.25 34.8,37.25 Q25.0,37.25 15.2,37.25 Q12.75,37.25 12.75,34.8 Q12.75,25.0 12.75,15.2 Z" style="stroke:#404040; fill:none;" />
+  <g class="Port">
+    <metadata xmlns:vda="http://fat-ak30.eas.iis.fraunhofer.de/exchange/vda_meta">
+      <vda:meta name="Name">J4.flange_a</vda:meta>
+      <vda:meta name="X">0.5</vda:meta>
+      <vda:meta name="Y">25.0</vda:meta>
+    </metadata>
+    <ellipse cx="0.5" cy="25.0" rx="2.45" ry="2.45" style="stroke:#000000; fill:#5f5f5f;" />
+  </g>
+  <g class="Port">
+    <metadata xmlns:vda="http://fat-ak30.eas.iis.fraunhofer.de/exchange/vda_meta">
+      <vda:meta name="Name">J4.flange_b</vda:meta>
+      <vda:meta name="X">49.5</vda:meta>
+      <vda:meta name="Y">25.0</vda:meta>
+    </metadata>
+    <ellipse cx="49.549" cy="25.0" rx="2.45" ry="2.45" style="stroke:#000000; fill:#ffffff;" />
+  </g>
+  <defs>
+    <linearGradient id="fb40404040c0c0c0" x1="0%" y1="0%" x2="50%" y2="0%" spreadMethod="reflect" gradientTransform="rotate(90.0)">
+      <stop offset="0%" stop-color="#404040" stop-opacity="1" />
+      <stop offset="3%" stop-color="#5c5c5c" stop-opacity="1" />
+      <stop offset="10%" stop-color="#787878" stop-opacity="1" />
+      <stop offset="22%" stop-color="#909090" stop-opacity="1" />
+      <stop offset="38%" stop-color="#a4a4a4" stop-opacity="1" />
+      <stop offset="57%" stop-color="#b3b3b3" stop-opacity="1" />
+      <stop offset="78%" stop-color="#bdbdbd" stop-opacity="1" />
+      <stop offset="100%" stop-color="#c0c0c0" stop-opacity="1" />
+    </linearGradient>
+    <linearGradient id="fb40404040ffffff" x1="0%" y1="0%" x2="50%" y2="0%" spreadMethod="reflect" gradientTransform="rotate(90.0)">
+      <stop offset="0%" stop-color="#404040" stop-opacity="1" />
+      <stop offset="3%" stop-color="#6b6b6b" stop-opacity="1" />
+      <stop offset="10%" stop-color="#939393" stop-opacity="1" />
+      <stop offset="22%" stop-color="#b7b7b7" stop-opacity="1" />
+      <stop offset="38%" stop-color="#d5d5d5" stop-opacity="1" />
+      <stop offset="57%" stop-color="#ececec" stop-opacity="1" />
+      <stop offset="78%" stop-color="#fafafa" stop-opacity="1" />
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="1" />
+    </linearGradient>
+  </defs>
+</svg>
