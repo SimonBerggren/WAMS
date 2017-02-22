@@ -78,16 +78,17 @@ function loadJSON(name, x, y, w, h) {
 }
 
 function loadSVG(name, x, y, w, h) {
-	var scale = 10;
+	var scale = 75;
 	svgloader.load("static/icons/"+ name +".svg", function (obj) { 
 	    var material = new THREE.SpriteMaterial( { map: obj, color: 0xffffff} ); 
   		var sprite = new THREE.Sprite( material ); 
   		sprite.scale.set(scale, scale, scale);
+  		sprite.position.set(x,y,0);
+  		scene.add(sprite);
 	}, function(status) {
 		
 	}, function(error) {
 		scene.add(plane(x, y, w, h, 0xff0000, 0));
-
 	});
 }
 
