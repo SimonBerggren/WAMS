@@ -32,7 +32,7 @@ function Text(x1, y1, x2, y2, string, lineColor, level, translate, scale) {
           calculateBoundingBox(mesh);
     return mesh;
 }
-
+var scene = undefined;
 function plane(x, y, w, h, c, z) {
 	var plane = new THREE.Mesh(new THREE.PlaneGeometry(w, h, 1, 1), new THREE.MeshBasicMaterial({color:c}));
 	plane.position.x = x;
@@ -42,13 +42,54 @@ function plane(x, y, w, h, c, z) {
 }
 
 var icons = {};
+var jsonloader = new THREE.ObjectLoader();
+var svgloader = new THREE.TextureLoader();
 
 function loadFiles() {
-	var loader = new THREE.ObjectLoader();
-	loader.load("static/icons/IdealOpAmp3Pin.json", function (obj) { icons["IdealOpAmp3Pin"] = obj.clone(); } );
-	loader.load("static/icons/Capacitor.json", function (obj) { icons["Capacitor"] = obj; } );
-	loader.load("static/icons/Resistor.json", function (obj) { icons["Resistor"] = obj; } );
 
+}
+
+function loadJSON(name, x, y, w, h) {
+	jsonloader.load("static/icons/" + name + ".json"
+	, function(obj) {
+ 		  	obj.position.x = x;
+ 		  	obj.position.y = y;
+ 		  	obj.position.z = 0;
+
+	    	switch(name) {
+	    		case "IdealOpAmp3Pin":
+	    		obj.scale.x = obj.scale.y = obj.scale.z = 10;
+	    		obj.rotation.y = Math.PI;	
+	    		break;
+	    		case "Capacitor":
+	    		obj.scale.x = obj.scale.y = obj.scale.z = 20;
+	    		break;
+	    		case "Resistor":
+	    		obj.scale.x = obj.scale.y = obj.scale.z = 10;
+	    		break;
+	    	}
+ 		  	scene.add(obj);
+
+	}, function(status) {
+		
+	}, function(error) {
+		loadSVG(name, x, y, w, h);
+	})
+}
+
+function loadSVG(name, x, y, w, h) {
+	var scale = 75;
+	svgloader.load("static/icons/"+ name +".svg", function (obj) { 
+	    var material = new THREE.SpriteMaterial( { map: obj, color: 0xffffff} ); 
+  		var sprite = new THREE.Sprite( material ); 
+  		sprite.scale.set(scale, scale, scale);
+  		sprite.position.set(x,y,0);
+  		scene.add(sprite);
+	}, function(status) {
+		
+	}, function(error) {
+		scene.add(plane(x, y, w, h, 0xff0000, 0));
+	});
 }
 
 function makeTextSprite(x, y, message) {
@@ -147,7 +188,6 @@ function createText(group, text, x, y) {
 
 					face.vertexNormals[ j ].z = 0;
 					face.vertexNormals[ j ].normalize();
-
 				}
 
 				var va = textGeo.vertices[ face.a ];
@@ -186,7 +226,7 @@ function createText(group, text, x, y) {
 	group.add( textMesh1 );
 }
 
-var scene = undefined;
+
 
 function calculate_graph(graph, s, camera) {
 	var worker = new Worker('klayjs.js');
@@ -256,29 +296,30 @@ function get_comps(comps, edges, parent) {
   			scene.add(group);
   			createText(group, name, x, y); 			
 
- 		  	var icon;
- 		  	if (icons[cl] === undefined)
- 		  		icon = plane(x, y, w, h, 0xff0000, 0);
- 		  	else
- 		  		icon = icons[cl].clone();
+  			loadJSON(cl, x, y, w, h);
+ 		  	// var icon;
+ 		  	// if (icons[cl] === undefined)
+ 		  	// 	icon = plane(x, y, w, h, 0xff0000, 0);
+ 		  	// else
+ 		  	// 	icon = icons[cl].clone();
 
- 		  	icon.position.x = x;
- 		  	icon.position.y = y;
- 		  	icon.position.z = 0;
+ 		  	// icon.position.x = x;
+ 		  	// icon.position.y = y;
+ 		  	// icon.position.z = 0;
 
-	    	switch(cl) {
-	    		case "IdealOpAmp3Pin":
-	    		icon.scale.x = icon.scale.y = icon.scale.z = 10;
-	    		icon.rotation.y = Math.PI;	
-	    		break;
-	    		case "Capacitor":
-	    		icon.scale.x = icon.scale.y = icon.scale.z = 20;
-	    		break;
-	    		case "Resistor":
-	    		icon.scale.x = icon.scale.y = icon.scale.z = 10;
-	    		break;
-	    	}
- 		  	scene.add(icon);
+	    	// switch(cl) {
+	    	// 	case "IdealOpAmp3Pin":
+	    	// 	icon.scale.x = icon.scale.y = icon.scale.z = 10;
+	    	// 	icon.rotation.y = Math.PI;	
+	    	// 	break;
+	    	// 	case "Capacitor":
+	    	// 	icon.scale.x = icon.scale.y = icon.scale.z = 20;
+	    	// 	break;
+	    	// 	case "Resistor":
+	    	// 	icon.scale.x = icon.scale.y = icon.scale.z = 10;
+	    	// 	break;
+	    	// }
+ 		  	// scene.add(icon);
 		}
 	
   		for(var i = 0; i < edges.length; ++i) {
