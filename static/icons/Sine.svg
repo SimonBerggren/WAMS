@@ -1,0 +1,18 @@
+<svg width="60.0" height="60.0" viewBox="-5.0 -5.0 60.0 60.0" version="1.1" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <path d="M0.5,0.5 L49.5,0.5 L49.5,49.5 L0.5,49.5 Z" style="stroke:#00007f; fill:#ffffff;" />
+  <text x="25.0" y="-6.85" dy=".33em" style="fill:#0000ff; text-anchor:middle; font-size:9.8px;">sin2</text>
+  <path d="M5.4,8.34 L5.4,44.6" style="stroke:#c0c0c0; fill:none;" />
+  <path d="M5.4,2.95 L3.44,8.34 L7.36,8.34 L5.4,2.95 Z" style="stroke:#c0c0c0; fill:#c0c0c0;" />
+  <path d="M2.95,25.0 L41.66,25.0" style="stroke:#c0c0c0; fill:none;" />
+  <path d="M47.05,25.0 L41.66,23.04 L41.66,26.96 L47.05,25.0 Z" style="stroke:#c0c0c0; fill:#c0c0c0;" />
+  <path d="M5.4,25.0 L6.784,20.81 Q8.168,16.621 9.051,14.306 Q9.933,11.99 10.717,10.361 Q11.501,8.732 12.199,7.727 Q12.897,6.723 13.583,6.172 Q14.269,5.621 14.955,5.535 Q15.641,5.449 16.327,5.841 Q17.013,6.233 17.711,7.078 Q18.41,7.924 19.096,9.185 Q19.782,10.447 20.566,12.321 Q21.35,14.196 22.338,17.001 Q23.327,19.806 25.401,26.176 Q27.475,32.546 28.357,34.923 Q29.239,37.299 30.023,39.014 Q30.807,40.729 31.493,41.819 Q32.179,42.909 32.877,43.559 Q33.575,44.208 34.261,44.404 Q34.947,44.6 35.633,44.306 Q36.319,44.012 37.017,43.265 Q37.716,42.518 38.402,41.342 Q39.088,40.166 39.872,38.365 Q40.656,36.564 41.648,33.82 Q42.64,31.076 43.62,28.038 L44.6,25.0" style="stroke:#000000; fill:none;" />
+  <text x="25.735" y="57.34" dy=".33em" style="fill:#000000; text-anchor:middle; font-size:9.8px;">freqHz=0.2</text>
+  <g class="Port">
+    <metadata xmlns:vda="http://fat-ak30.eas.iis.fraunhofer.de/exchange/vda_meta">
+      <vda:meta name="Name">sin2.y</vda:meta>
+      <vda:meta name="X">51.95</vda:meta>
+      <vda:meta name="Y">25.0</vda:meta>
+    </metadata>
+    <path d="M49.5,22.55 L54.4,25.0 L49.5,27.45 L49.5,22.55 Z" style="stroke:#00007f; fill:#ffffff;" />
+  </g>
+</svg>
