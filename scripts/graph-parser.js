@@ -32,6 +32,7 @@ function Text(x1, y1, x2, y2, string, lineColor, level, translate, scale) {
           calculateBoundingBox(mesh);
     return mesh;
 }
+
 var scene = undefined;
 function plane(x, y, w, h, c, z) {
 	var plane = new THREE.Mesh(new THREE.PlaneGeometry(w, h, 1, 1), new THREE.MeshBasicMaterial({color:c}));
@@ -78,18 +79,40 @@ function loadJSON(name, x, y, w, h) {
 }
 
 function loadSVG(name, x, y, w, h) {
-	var scale = 75;
-	svgloader.load("static/icons/"+ name +".svg", function (obj) { 
-	    var material = new THREE.SpriteMaterial( { map: obj, color: 0xffffff} ); 
-  		var sprite = new THREE.Sprite( material ); 
-  		sprite.scale.set(scale, scale, scale);
-  		sprite.position.set(x,y,0);
-  		scene.add(sprite);
-	}, function(status) {
+	var canvas = document.createElement('canvas');
+canvas.width=512;
+canvas.height=512;
+canvas.style.background="white";
+var ctx = canvas.getContext("2d");
+ctx.beginPath();
+ctx.rect(0, 0, 512, 512);
+ctx.fillStyle = "white";
+ctx.fill();
+	canvg(canvas, "static/icons/" + name + ".svg");
+var texture = new THREE.Texture(canvas);
+texture.needsUpdate = true;
+var boxMaterial = new THREE.MeshLambertMaterial({map:texture});
+boxMaterial.needsUpdate = true;
+var boxGeometry2 = new THREE.BoxGeometry( 50, 50, 1 );
+var mainBoxObject = new THREE.Mesh(boxGeometry2,boxMaterial);
+// Move it back so we can see it
+mainBoxObject.position.set(x,y,0);
+// Add it to the main scene
+scene.add(mainBoxObject);
+	
+	//scene.add(plane(x, y, w, h, 0xff0000, 0));
+
+	// var scale = 75;
+	// svgloader.load("static/icons/"+ name +".svg", function (obj) { 
+	//     var material = new THREE.SpriteMaterial( { map: obj, color: 0xffffff} ); 
+ //  		var sprite = new THREE.Sprite( material ); 
+ //  		sprite.scale.set(scale, scale, scale);
+ //  		sprite.position.set(x,y,0);
+ //  		scene.add(sprite);
+	// }, function(status) {
 		
-	}, function(error) {
-		scene.add(plane(x, y, w, h, 0xff0000, 0));
-	});
+	// }, function(error) {
+	// });
 }
 
 function makeTextSprite(x, y, message) {
