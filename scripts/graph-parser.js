@@ -50,8 +50,21 @@ function loadFiles() {
 
 }
 
+function UrlExists(url, iftrue, iffalse)
+{
+$.get(url)
+    .done(function() { 
+        iftrue();
+    }).fail(function() { 
+        iffalse();
+    })
+}
+
 function loadJSON(name, x, y, w, h) {
-	jsonloader.load("static/icons/" + name + ".json"
+
+	var url = "static/icons/" + name + ".json";
+	UrlExists(url, function() {
+			jsonloader.load(url
 	, function(obj) {
  		  	obj.position.x = x;
  		  	obj.position.y = y;
@@ -70,15 +83,18 @@ function loadJSON(name, x, y, w, h) {
 	    		break;
 	    	}
  		  	scene.add(obj);
-
-	}, function(status) {
-		
-	}, function(error) {
-		loadSVG(name, x, y, w, h);
 	})
+	}, function() {
+		loadSVG(name, x, y, w, h);
+	});
+
+
 }
 
 function loadSVG(name, x, y, w, h) {
+
+		var url = "static/icons/" + name + ".svg";
+	UrlExists(url, function() {
 	var canvas = document.createElement('canvas');
 canvas.width=512;
 canvas.height=512;
@@ -88,7 +104,7 @@ ctx.beginPath();
 ctx.rect(0, 0, 512, 512);
 ctx.fillStyle = "white";
 ctx.fill();
-	canvg(canvas, "static/icons/" + name + ".svg");
+	canvg(canvas, url);
 var texture = new THREE.Texture(canvas);
 texture.needsUpdate = true;
 var boxMaterial = new THREE.MeshLambertMaterial({map:texture});
@@ -99,6 +115,12 @@ var mainBoxObject = new THREE.Mesh(boxGeometry2,boxMaterial);
 mainBoxObject.position.set(x,y,0);
 // Add it to the main scene
 scene.add(mainBoxObject);
+	}, function() {
+		scene.add(plane(x, y, w, h, 0xff0000, 0));
+	});
+	
+
+
 	
 	//scene.add(plane(x, y, w, h, 0xff0000, 0));
 
