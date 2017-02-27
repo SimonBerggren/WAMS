@@ -26,8 +26,8 @@ $(function() {
   var w = window.innerWidth;
   var h = 600;
 
-  var renderer = new THREE.WebGLRenderer();
-  renderer.setClearColor( 0xEEEEEE, 1 );
+  var renderer = new THREE.WebGLRenderer({alpha: true});
+  renderer.setClearColor( "white", 1 );
   renderer.setSize(w, h);
 
   var minZoom = 0.1;
