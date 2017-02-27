@@ -1,8 +1,8 @@
 {
 "id": "Modelica.Mechanics.Rotational.Examples.CoupledClutches",
 "class": "Modelica.Mechanics.Rotational.Examples.CoupledClutches",
-"width": 50,
-"height": 50,
+"width": 500,
+"height": 500,
 "parameters": {
   "freqHz": "0.2",
   "T2": "0.4",
@@ -12,34 +12,61 @@
 {
   "id": "J1",
   "class": "Inertia",
-  "width": 50,
-  "height": 50,
+  "width": 500,
+  "height": 500,
   "parameters": {
     "J": "1",
     "stateSelect": "StateSelect.default"},
-  "labels": [{"text": "J1"}]},
+  "labels": [{"text": "J1"}],
+  "ports": [
+{
+    "id": "J1.flange_a",
+    "class": "Flange_a",
+    "width": 500,
+    "height": 500,
+    "labels": [{"text": "J1.flange_a"}]},
+{
+    "id": "J1.flange_b",
+    "class": "Flange_b",
+    "width": 500,
+    "height": 500,
+    "labels": [{"text": "J1.flange_b"}]}]},
 {
   "id": "torque",
   "class": "Torque",
-  "width": 50,
-  "height": 50,
-  "labels": [{"text": "torque"}]},
+  "width": 500,
+  "height": 500,
+  "labels": [{"text": "torque"}],
+  "ports": [
+{
+    "id": "torque.tau",
+    "class": "RealInput",
+    "width": 500,
+    "height": 500,
+    "labels": [{"text": "torque.tau"}]}]},
 {
   "id": "clutch1",
   "class": "Clutch",
-  "width": 50,
-  "height": 50,
+  "width": 500,
+  "height": 500,
   "parameters": {
     "mue_pos": "[0, 0.5]",
     "peak": "1.1",
     "cgeo": "1",
     "fn_max": "20"},
-  "labels": [{"text": "clutch1"}]},
+  "labels": [{"text": "clutch1"}],
+  "ports": [
+{
+    "id": "clutch1.f_normalized",
+    "class": "RealInput",
+    "width": 500,
+    "height": 500,
+    "labels": [{"text": "clutch1.f_normalized"}]}]},
 {
   "id": "sin1",
   "class": "Sine",
-  "width": 50,
-  "height": 50,
+  "width": 500,
+  "height": 500,
   "parameters": {
     "amplitude": "10",
     "freqHz": "5",
@@ -50,65 +77,118 @@
 {
   "id": "step1",
   "class": "Step",
-  "width": 50,
-  "height": 50,
+  "width": 500,
+  "height": 500,
   "parameters": {
     "height": "1"},
   "labels": [{"text": "step1"}]},
 {
   "id": "J2",
   "class": "Inertia",
-  "width": 50,
-  "height": 50,
+  "width": 500,
+  "height": 500,
   "parameters": {
     "J": "1",
     "stateSelect": "StateSelect.default"},
-  "labels": [{"text": "J2"}]},
+  "labels": [{"text": "J2"}],
+  "ports": [
+{
+    "id": "J2.flange_a",
+    "class": "Flange_a",
+    "width": 500,
+    "height": 500,
+    "labels": [{"text": "J2.flange_a"}]},
+{
+    "id": "J2.flange_b",
+    "class": "Flange_b",
+    "width": 500,
+    "height": 500,
+    "labels": [{"text": "J2.flange_b"}]}]},
 {
   "id": "clutch2",
   "class": "Clutch",
-  "width": 50,
-  "height": 50,
+  "width": 500,
+  "height": 500,
   "parameters": {
     "mue_pos": "[0, 0.5]",
     "peak": "1.1",
     "cgeo": "1",
     "fn_max": "20"},
-  "labels": [{"text": "clutch2"}]},
+  "labels": [{"text": "clutch2"}],
+  "ports": [
+{
+    "id": "clutch2.f_normalized",
+    "class": "RealInput",
+    "width": 500,
+    "height": 500,
+    "labels": [{"text": "clutch2.f_normalized"}]}]},
 {
   "id": "J3",
   "class": "Inertia",
-  "width": 50,
-  "height": 50,
+  "width": 500,
+  "height": 500,
   "parameters": {
     "J": "1",
     "stateSelect": "StateSelect.default"},
-  "labels": [{"text": "J3"}]},
+  "labels": [{"text": "J3"}],
+  "ports": [
+{
+    "id": "J3.flange_a",
+    "class": "Flange_a",
+    "width": 500,
+    "height": 500,
+    "labels": [{"text": "J3.flange_a"}]},
+{
+    "id": "J3.flange_b",
+    "class": "Flange_b",
+    "width": 500,
+    "height": 500,
+    "labels": [{"text": "J3.flange_b"}]}]},
 {
   "id": "clutch3",
   "class": "Clutch",
-  "width": 50,
-  "height": 50,
+  "width": 500,
+  "height": 500,
   "parameters": {
     "mue_pos": "[0, 0.5]",
     "peak": "1.1",
     "cgeo": "1",
     "fn_max": "20"},
-  "labels": [{"text": "clutch3"}]},
+  "labels": [{"text": "clutch3"}],
+  "ports": [
+{
+    "id": "clutch3.f_normalized",
+    "class": "RealInput",
+    "width": 500,
+    "height": 500,
+    "labels": [{"text": "clutch3.f_normalized"}]}]},
 {
   "id": "J4",
   "class": "Inertia",
-  "width": 50,
-  "height": 50,
+  "width": 500,
+  "height": 500,
   "parameters": {
     "J": "1",
     "stateSelect": "StateSelect.default"},
-  "labels": [{"text": "J4"}]},
+  "labels": [{"text": "J4"}],
+  "ports": [
+{
+    "id": "J4.flange_a",
+    "class": "Flange_a",
+    "width": 500,
+    "height": 500,
+    "labels": [{"text": "J4.flange_a"}]},
+{
+    "id": "J4.flange_b",
+    "class": "Flange_b",
+    "width": 500,
+    "height": 500,
+    "labels": [{"text": "J4.flange_b"}]}]},
 {
   "id": "sin2",
   "class": "Sine",
-  "width": 50,
-  "height": 50,
+  "width": 500,
+  "height": 500,
   "parameters": {
     "amplitude": "1",
     "freqHz": "freqHz",
@@ -119,19 +199,26 @@
 {
   "id": "step2",
   "class": "Step",
-  "width": 50,
-  "height": 50,
+  "width": 500,
+  "height": 500,
   "parameters": {
     "height": "1"},
   "labels": [{"text": "step2"}]},
 {
   "id": "fixed",
   "class": "Fixed",
-  "width": 50,
-  "height": 50,
+  "width": 500,
+  "height": 500,
   "parameters": {
     "phi0": "0"},
-  "labels": [{"text": "fixed"}]}],
+  "labels": [{"text": "fixed"}],
+  "ports": [
+{
+    "id": "fixed.flange",
+    "class": "Flange_b",
+    "width": 500,
+    "height": 500,
+    "labels": [{"text": "fixed.flange"}]}]}],
 "edges": [
 {"id": "id1",
   "source": "torque",
