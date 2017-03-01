@@ -22,7 +22,6 @@ $(function() {
     var TAB = 9;
     var ESC = 27;
   var scene = new THREE.Scene();
-  loadFiles(scene);
   var w = window.innerWidth;
   var h = 600;
 

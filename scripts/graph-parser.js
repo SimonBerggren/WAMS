@@ -83,12 +83,11 @@ function loadJSON(name, x, y, w, h) {
 	    		break;
 	    	}
  		  	scene.add(obj);
+ 		  	createText(scene, name, x, y); 
 	})
 	}, function() {
 		loadSVG(name, x, y, w, h);
 	});
-
-
 }
 
 function loadSVG(name, x, y, w, h) {
@@ -107,16 +106,15 @@ ctx.fill();
 	canvg(canvas, url);
 var texture = new THREE.Texture(canvas);
 texture.needsUpdate = true;
-var boxMaterial = new THREE.MeshLambertMaterial({map:texture});
-boxMaterial.needsUpdate = true;
+var boxMaterial = new THREE.MeshBasicMaterial({map:texture});
 var boxGeometry2 = new THREE.BoxGeometry( 50, 50, 1 );
 var mainBoxObject = new THREE.Mesh(boxGeometry2,boxMaterial);
-// Move it back so we can see it
 mainBoxObject.position.set(x,y,0);
-// Add it to the main scene
 scene.add(mainBoxObject);
+
 	}, function() {
 		scene.add(plane(x, y, w, h, 0xff0000, 0));
+		createText(scene, name, x, y); 
 	});
 	
 
@@ -199,6 +197,7 @@ function createText(group, text, x, y) {
 	textGeo = new THREE.TextGeometry( text, {
 
 		font: font,
+		color: "white",
 
 		size: size,
 		height: height,
@@ -339,7 +338,7 @@ function get_comps(comps, edges, parent) {
  
  	  	    var group = new THREE.Group();
   			scene.add(group);
-  			createText(group, name, x, y); 			
+  						
 
   			loadJSON(cl, x, y, w, h);
  		  	// var icon;
