@@ -1,0 +1,18 @@
+<svg width="600.0" height="600.0" viewBox="-50.0 -50.0 600.0 600.0" version="1.1" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <path d="M0.5,0.5 L499.5,0.5 L499.5,499.5 L0.5,499.5 Z" style="stroke:#00007f; fill:#ffffff;" />
+  <text x="250.0" y="-74.35" dy=".33em" style="fill:#0000ff; text-anchor:middle; font-size:99.8px;">sin2</text>
+  <path d="M50.4,80.34 L50.4,449.6" style="stroke:#c0c0c0; fill:none;" />
+  <path d="M50.4,25.45 L30.44,80.34 L70.36,80.34 L50.4,25.45 Z" style="stroke:#c0c0c0; fill:#c0c0c0;" />
+  <path d="M25.45,250.0 L419.66,250.0" style="stroke:#c0c0c0; fill:none;" />
+  <path d="M474.55,250.0 L419.66,230.04 L419.66,269.96 L474.55,250.0 Z" style="stroke:#c0c0c0; fill:#c0c0c0;" />
+  <path d="M50.4,250.0 L64.497,207.336 Q78.593,164.671 87.576,141.093 Q96.558,117.516 104.542,100.924 Q112.526,84.332 119.636,74.102 Q126.747,63.873 133.733,58.259 Q140.719,52.646 147.705,51.772 Q154.691,50.899 161.677,54.891 Q168.663,58.883 175.774,67.491 Q182.885,76.098 189.871,88.948 Q196.856,101.797 204.841,120.884 Q212.825,139.971 222.892,168.538 Q232.959,197.106 254.079,261.976 Q275.2,326.846 284.182,351.048 Q293.164,375.249 301.148,392.714 Q309.132,410.179 316.118,421.282 Q323.104,432.385 330.214,438.996 Q337.325,445.608 344.311,447.604 Q351.297,449.6 358.283,446.606 Q365.269,443.612 372.38,436.002 Q379.491,428.393 386.477,416.417 Q393.463,404.441 401.447,386.102 Q409.431,367.764 419.535,339.82 Q429.64,311.876 439.62,280.938 L449.6,250.0" style="stroke:#000000; fill:none;" />
+  <text x="257.485" y="579.34" dy=".33em" style="fill:#000000; text-anchor:middle; font-size:99.8px;">freqHz=0.2</text>
+  <g class="Port">
+    <metadata xmlns:vda="http://fat-ak30.eas.iis.fraunhofer.de/exchange/vda_meta">
+      <vda:meta name="Name">sin2.y</vda:meta>
+      <vda:meta name="X">524.45</vda:meta>
+      <vda:meta name="Y">250.0</vda:meta>
+    </metadata>
+    <path d="M499.5,225.05 L549.4,250.0 L499.5,274.95 L499.5,225.05 Z" style="stroke:#00007f; fill:#ffffff;" />
+  </g>
+</svg>

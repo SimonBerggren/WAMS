@@ -33,38 +33,107 @@ function Text(x1, y1, x2, y2, string, lineColor, level, translate, scale) {
     return mesh;
 }
 
+var scene = undefined;
 function plane(x, y, w, h, c, z) {
 	var plane = new THREE.Mesh(new THREE.PlaneGeometry(w, h, 1, 1), new THREE.MeshBasicMaterial({color:c}));
 	plane.position.x = x;
 	plane.position.y = y;
 	plane.position.z = z;
+	plane.name="plane";
 	return plane;    
 }
 
 var icons = {};
+var jsonloader = new THREE.ObjectLoader();
+var svgloader = new THREE.TextureLoader();
 
 function loadFiles() {
-var scale = 10;
-	var loader = new THREE.TextureLoader();
-	loader.load("static/icons/IdealOpAmp3Pin.svg", function (obj) { 
-	    var material = new THREE.SpriteMaterial( { map: obj, color: 0xffffff} ); 
-  		var sprite = new THREE.Sprite( material ); 
-  		sprite.scale.set(scale, scale, scale);
-		icons["IdealOpAmp3Pin"] = sprite;
-	} );
-	loader.load("static/icons/Capacitor.svg", function (obj) {
-	 	    var material = new THREE.SpriteMaterial( { map: obj, color: 0xffffff} ); 
-  		var sprite = new THREE.Sprite( material ); 
-  		sprite.scale.set(scale, scale, scale);
-		icons["Capacitor"] = sprite;
-	} );
-	loader.load("static/icons/Resistor.svg", function (obj) { 
-			    var material = new THREE.SpriteMaterial( { map: obj, color: 0xffffff} ); 
-  		var sprite = new THREE.Sprite( material ); 
-  		sprite.scale.set(scale, scale, scale);
-		icons["Resistor"] = sprite;
-	} );
 
+}
+
+function UrlExists(url, iftrue, iffalse)
+{
+$.get(url)
+    .done(function() { 
+        iftrue();
+    }).fail(function() { 
+        iffalse();
+    })
+}
+
+function loadJSON(name, x, y, w, h) {
+
+	var url = "static/icons/" + name + ".json";
+	UrlExists(url, function() {
+			jsonloader.load(url
+	, function(obj) {
+ 		  	obj.position.x = x;
+ 		  	obj.position.y = y;
+ 		  	obj.position.z = 0;
+
+	    	switch(name) {
+	    		case "IdealOpAmp3Pin":
+	    		obj.scale.x = obj.scale.y = obj.scale.z = 10;
+	    		obj.rotation.y = Math.PI;	
+	    		break;
+	    		case "Capacitor":
+	    		obj.scale.x = obj.scale.y = obj.scale.z = 20;
+	    		break;
+	    		case "Resistor":
+	    		obj.scale.x = obj.scale.y = obj.scale.z = 10;
+	    		break;
+	    	}
+ 		  	scene.add(obj);
+ 		  	createText(scene, name, x, y); 
+	})
+	}, function() {
+		loadSVG(name, x, y, w, h);
+	});
+}
+
+function loadSVG(name, x, y, w, h) {
+
+		var url = "static/icons/" + name + ".svg";
+	UrlExists(url, function() {
+	var canvas = document.createElement('canvas');
+canvas.width=512;
+canvas.height=512;
+canvas.style.background="white";
+var ctx = canvas.getContext("2d");
+ctx.beginPath();
+ctx.rect(0, 0, 512, 512);
+ctx.fillStyle = "white";
+ctx.fill();
+	canvg(canvas, url);
+var texture = new THREE.Texture(canvas);
+texture.needsUpdate = true;
+var boxMaterial = new THREE.MeshBasicMaterial({map:texture});
+var boxGeometry2 = new THREE.BoxGeometry( 50, 50, 1 );
+var mainBoxObject = new THREE.Mesh(boxGeometry2,boxMaterial);
+mainBoxObject.position.set(x,y,0);
+scene.add(mainBoxObject);
+
+	}, function() {
+		scene.add(plane(x, y, w, h, 0xff0000, 0));
+		createText(scene, name, x, y); 
+	});
+	
+
+
+	
+	//scene.add(plane(x, y, w, h, 0xff0000, 0));
+
+	// var scale = 75;
+	// svgloader.load("static/icons/"+ name +".svg", function (obj) { 
+	//     var material = new THREE.SpriteMaterial( { map: obj, color: 0xffffff} ); 
+ //  		var sprite = new THREE.Sprite( material ); 
+ //  		sprite.scale.set(scale, scale, scale);
+ //  		sprite.position.set(x,y,0);
+ //  		scene.add(sprite);
+	// }, function(status) {
+		
+	// }, function(error) {
+	// });
 }
 
 function makeTextSprite(x, y, message) {
@@ -129,6 +198,7 @@ function createText(group, text, x, y) {
 	textGeo = new THREE.TextGeometry( text, {
 
 		font: font,
+		color: "white",
 
 		size: size,
 		height: height,
@@ -163,7 +233,6 @@ function createText(group, text, x, y) {
 
 					face.vertexNormals[ j ].z = 0;
 					face.vertexNormals[ j ].normalize();
-
 				}
 
 				var va = textGeo.vertices[ face.a ];
@@ -202,7 +271,7 @@ function createText(group, text, x, y) {
 	group.add( textMesh1 );
 }
 
-var scene = undefined;
+
 
 function calculate_graph(graph, s, camera) {
 	var worker = new Worker('klayjs.js');
@@ -228,6 +297,7 @@ function calculate_graph(graph, s, camera) {
 function display_graph(graph, s, camera, display) {
 	scene = s;
 	for( var i = scene.children.length - 1; i >= 0; i--) { 
+		if (scene.children[i].name !== "important")
 			scene.remove(scene.children[i]);
 	}
 	if (display !== undefined) {
@@ -270,31 +340,31 @@ function get_comps(comps, edges, parent) {
  
  	  	    var group = new THREE.Group();
   			scene.add(group);
-  			createText(group, name, x, y); 			
 
- 		  	var icon;
- 		  	if (icons[cl] === undefined)
- 		  		icon = plane(x, y, w, h, 0xff0000, 0);
- 		  	else
- 		  		icon = icons[cl].clone();
+  			loadJSON(cl, x, y, w, h);
+ 		  	// var icon;
+ 		  	// if (icons[cl] === undefined)
+ 		  	// 	icon = plane(x, y, w, h, 0xff0000, 0);
+ 		  	// else
+ 		  	// 	icon = icons[cl].clone();
 
- 		  	icon.position.x = x;
- 		  	icon.position.y = y;
- 		  	icon.position.z = 0;
+ 		  	// icon.position.x = x;
+ 		  	// icon.position.y = y;
+ 		  	// icon.position.z = 0;
 
-	    	switch(cl) {
-	    		case "IdealOpAmp3Pin":
-	    		icon.scale.x = icon.scale.y = icon.scale.z = 50;
-	    		//icon.rotation.y = Math.PI;	
-	    		break;
-	    		case "Capacitor":
-	    		icon.scale.x = icon.scale.y = icon.scale.z = 50;
-	    		break;
-	    		case "Resistor":
-	    		icon.scale.x = icon.scale.y = icon.scale.z = 50;
-	    		break;
-	    	}
- 		  	scene.add(icon);
+	    	// switch(cl) {
+	    	// 	case "IdealOpAmp3Pin":
+	    	// 	icon.scale.x = icon.scale.y = icon.scale.z = 10;
+	    	// 	icon.rotation.y = Math.PI;	
+	    	// 	break;
+	    	// 	case "Capacitor":
+	    	// 	icon.scale.x = icon.scale.y = icon.scale.z = 20;
+	    	// 	break;
+	    	// 	case "Resistor":
+	    	// 	icon.scale.x = icon.scale.y = icon.scale.z = 10;
+	    	// 	break;
+	    	// }
+ 		  	// scene.add(icon);
 		}
 	
   		for(var i = 0; i < edges.length; ++i) {

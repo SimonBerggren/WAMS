@@ -1,0 +1,44 @@
+<svg width="700.0" height="683.333" viewBox="-100.0 -91.667 683.333 683.333" version="1.1" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <path d="M125.25,549.4 L175.15,499.5" style="stroke:#000000; fill:none;" />
+  <path d="M175.15,549.4 L225.05,499.5" style="stroke:#000000; fill:none;" />
+  <path d="M225.05,549.4 L274.95,499.5" style="stroke:#000000; fill:none;" />
+  <path d="M274.95,549.4 L324.85,499.5" style="stroke:#000000; fill:none;" />
+  <path d="M175.15,499.5 L324.85,499.5" style="stroke:#000000; fill:none;" />
+  <text x="250.0" y="25.45" dy=".33em" style="fill:#0000ff; text-anchor:middle; font-size:99.8px;">torque</text>
+  <text x="-3.243" y="373.503" dy=".33em" style="fill:#000000; text-anchor:middle; font-size:102.295px;">tau</text>
+  <path d="M30.44,250.0 L60.38,212.575 Q90.32,175.15 125.25,147.705 Q160.18,120.26 202.595,107.785 Q245.01,95.31 282.435,102.795 Q319.86,110.28 344.81,125.25 Q369.76,140.22 389.72,160.18 Q409.68,180.14 424.65,197.605 Q439.62,215.07 452.095,232.535 L464.57,250.0" style="stroke:#000000; stroke-width:1.247; fill:none;" />
+  <path d="M464.57,250.0 L414.67,105.29 L342.315,182.635 L464.57,250.0 Z" style="stroke:#000000; fill:#000000;" />
+  <path d="M175.15,324.85 L324.85,324.85" style="stroke:#000000; fill:none;" />
+  <path d="M250.0,324.85 L250.0,501.995" style="stroke:#000000; fill:none;" />
+  <path d="M175.15,374.75 L225.05,324.85" style="stroke:#000000; fill:none;" />
+  <path d="M225.05,374.75 L274.95,324.85" style="stroke:#000000; fill:none;" />
+  <path d="M274.95,374.75 L324.85,324.85" style="stroke:#000000; fill:none;" />
+  <path d="M115.27,354.79 L135.23,337.325 Q155.19,319.86 182.635,304.89 Q210.08,289.92 235.03,287.425 Q259.98,284.93 282.435,289.92 Q304.89,294.91 322.355,304.89 Q339.82,314.87 354.79,327.345 Q369.76,339.82 379.74,352.295 Q389.72,364.77 399.7,379.74 L409.68,394.71" style="stroke:#000000; fill:none;" />
+  <path d="M97.805,414.67 L140.22,354.79 L105.29,339.82 L97.805,414.67 Z" style="stroke:#000000; fill:#000000;" />
+  <g class="Port">
+    <metadata xmlns:vda="http://fat-ak30.eas.iis.fraunhofer.de/exchange/vda_meta">
+      <vda:meta name="Name">torque.flange</vda:meta>
+      <vda:meta name="X">499.5</vda:meta>
+      <vda:meta name="Y">250.0</vda:meta>
+    </metadata>
+    <ellipse cx="499.999" cy="250.0" rx="24.95" ry="24.95" style="stroke:#000000; fill:#ffffff;" />
+  </g>
+  <g class="Port">
+    <metadata xmlns:vda="http://fat-ak30.eas.iis.fraunhofer.de/exchange/vda_meta">
+      <vda:meta name="Name">torque.support</vda:meta>
+      <vda:meta name="X">250.0</vda:meta>
+      <vda:meta name="Y">499.5</vda:meta>
+    </metadata>
+    <ellipse cx="250.0" cy="499.5" rx="24.95" ry="24.95" style="stroke:#000000; fill:#5f5f5f;" />
+    <path d="M212.575,462.075 L287.425,462.075 L287.425,536.925 L212.575,536.925 Z" style="stroke:#c0c0c0; fill:#c0c0c0;" />
+    <ellipse cx="250.0" cy="499.5" rx="24.95" ry="24.95" style="stroke:#000000; fill:#5f5f5f;" />
+  </g>
+  <g class="Port">
+    <metadata xmlns:vda="http://fat-ak30.eas.iis.fraunhofer.de/exchange/vda_meta">
+      <vda:meta name="Name">torque.tau</vda:meta>
+      <vda:meta name="X">-49.4</vda:meta>
+      <vda:meta name="Y">250.0</vda:meta>
+    </metadata>
+    <path d="M-99.3,200.1 L0.5,250.0 L-99.3,299.9 L-99.3,200.1 Z" style="stroke:#00007f; fill:#00007f;" />
+  </g>
+</svg>

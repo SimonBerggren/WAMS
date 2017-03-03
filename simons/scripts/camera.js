@@ -1,3 +1,5 @@
+var PERSP_CAMERA;
+
 THREE.CombinedCamera = function ( width, height, fov, near, far, orthoNear, orthoFar ) {
 
   THREE.Camera.call( this );
@@ -18,14 +20,24 @@ THREE.CombinedCamera = function ( width, height, fov, near, far, orthoNear, orth
 
   this.toPerspective();
 
+  PERSP_CAMERA = new THREE.PerspectiveCamera( fov, width / height, near, far );
+  this.add(PERSP_CAMERA);
+
 };
+
+var CAMERA_OBJ = undefined;
+var CAMERA_OBJ2 = undefined;
+var CONTROLS = undefined;
+
 
 THREE.CombinedCamera.prototype = Object.create( THREE.Camera.prototype );
 THREE.CombinedCamera.prototype.constructor = THREE.CombinedCamera;
 
-THREE.CombinedCamera.prototype.toPerspective = function () {
+THREE.CombinedCamera.prototype.getPerspective = function () {
+  return this.cameraP;
+}
 
-  // Switches to the Perspective Camera
+THREE.CombinedCamera.prototype.toPerspective = function () {
 
   this.near = this.cameraP.near;
   this.far = this.cameraP.far;
@@ -162,41 +174,49 @@ THREE.CombinedCamera.prototype.setZoom = function( zoom ) {
 };
 
 THREE.CombinedCamera.prototype.moveFwd = function( distance ) {
-  this.translateZ(-distance);
+  var d = CONTROLS.getDirection();
+  var p = CAMERA_OBJ.position;
+  CAMERA_OBJ.position.set(p.x + d.x * distance, p.y + d.y * distance, p.z + d.z * distance);
+  this.update();
 }
 
 THREE.CombinedCamera.prototype.moveBwd = function( distance ) {
-  this.translateZ(distance);
+  var d = CONTROLS.getDirection();
+  var p = CAMERA_OBJ.position;
+  CAMERA_OBJ.position.set(p.x + d.x * -distance, p.y + d.y * -distance, p.z + d.z * -distance);
+  this.update();
 }
 
 THREE.CombinedCamera.prototype.moveRight = function( distance ) {
-  this.translateX(distance);
+  var d = CONTROLS.getRight();
+  var p = CAMERA_OBJ.position;
+  CAMERA_OBJ.position.set(p.x + d.x * distance, p.y + d.y * distance, p.z + d.z * distance);
+  this.update();
 }
 
 THREE.CombinedCamera.prototype.moveLeft = function( distance ) {
-  this.translateX(-distance);
+  var d = CONTROLS.getRight();
+  var p = CAMERA_OBJ.position;
+  CAMERA_OBJ.position.set(p.x + d.x * -distance, p.y + d.y * -distance, p.z + d.z * -distance);
+  this.update();
 }
 
 THREE.CombinedCamera.prototype.RollRight = function( rotation ) {
-  this.rotation.z -= rotation;
 }
 
 THREE.CombinedCamera.prototype.RollLeft = function( rotation ) {
-  this.rotation.z += rotation;
 }
 
 THREE.CombinedCamera.prototype.reset = function() {
   this.rotation.x = 0;
   this.rotation.y = 0;
   this.rotation.z = 0;
-  this.position.x = this.originalPosition.x;
-  this.position.y = this.originalPosition.y;
-  this.position.z = this.originalPosition.z;
+  this.position = new THREE.Vector3(0,0,0);
+};
+
+THREE.CombinedCamera.prototype.update = function() {
 };
 
 THREE.CombinedCamera.prototype.setOriginalPosition = function(position) {
-  this.originalPosition = position;
-  this.position.x = position.x;
-  this.position.y = position.y;
-  this.position.z = position.z;
+  CAMERA_OBJ.position.set(position.x, position.y, position.z);
 };

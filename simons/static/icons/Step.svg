@@ -1,0 +1,18 @@
+<svg width="600.0" height="600.0" viewBox="-50.0 -50.0 600.0 600.0" version="1.1" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <path d="M0.5,0.5 L499.5,0.5 L499.5,499.5 L0.5,499.5 Z" style="stroke:#00007f; fill:#ffffff;" />
+  <text x="250.0" y="-74.35" dy=".33em" style="fill:#0000ff; text-anchor:middle; font-size:99.8px;">step2</text>
+  <path d="M50.4,80.34 L50.4,449.6" style="stroke:#c0c0c0; fill:none;" />
+  <path d="M50.4,25.45 L30.44,80.34 L70.36,80.34 L50.4,25.45 Z" style="stroke:#c0c0c0; fill:#c0c0c0;" />
+  <path d="M25.45,424.65 L454.59,424.65" style="stroke:#c0c0c0; fill:none;" />
+  <path d="M474.55,424.65 L419.66,404.69 L419.66,444.61 L474.55,424.65 Z" style="stroke:#c0c0c0; fill:#c0c0c0;" />
+  <path d="M50.4,424.65 L250.0,424.65 L250.0,125.25 L449.6,125.25" style="stroke:#000000; fill:none;" />
+  <text x="250.0" y="574.35" dy=".33em" style="fill:#000000; text-anchor:middle; font-size:99.8px;">startTime=0.9</text>
+  <g class="Port">
+    <metadata xmlns:vda="http://fat-ak30.eas.iis.fraunhofer.de/exchange/vda_meta">
+      <vda:meta name="Name">step2.y</vda:meta>
+      <vda:meta name="X">524.45</vda:meta>
+      <vda:meta name="Y">250.0</vda:meta>
+    </metadata>
+    <path d="M499.5,225.05 L549.4,250.0 L499.5,274.95 L499.5,225.05 Z" style="stroke:#00007f; fill:#ffffff;" />
+  </g>
+</svg>
