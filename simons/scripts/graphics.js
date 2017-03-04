@@ -124,10 +124,10 @@ camera.moveRight(camera_speed);
       if (picked_object !== undefined)
         if (picked_object.material.color === undefined) {
           for (var i = 0; i < picked_object.material.materials.length; ++i) {
-            picked_object.material.materials[i].set(0xff0000);
+            picked_object.material.materials[i].set("white");
           }
     } else {
-      picked_object.material.color.set( 0xff0000 );
+      picked_object.material.color.set( "white" );
     }
       if (intersects[0].object.type !== "Line" && intersects[0].object.name !== "plane") {
         picked_object = intersects[0].object;
@@ -145,10 +145,10 @@ camera.moveRight(camera_speed);
     else if (picked_object !== undefined) {
       if (picked_object.material.color === undefined) {
           for (var i = 0; i < picked_object.material.materials.length; ++i) {
-            picked_object.material.materials[i].set(0xff0000);
+            picked_object.material.materials[i].set("white");
           }
     } else {
-      picked_object.material.color.set( 0xff0000 );
+      picked_object.material.color.set( "white" );
     }
       picked_object = undefined;
     }
