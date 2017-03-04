@@ -55,8 +55,8 @@ scene.add( light );
     requestAnimationFrame(render)
     var delta = clock.getDelta();
     if (leftmousedown_graph) {
-        camera.position.x -= dmx * 5;
-        camera.position.y += dmy * 5;
+        //camera.position.x -= dmx * 5;
+        //camera.position.y += dmy * 5;
     } else if (rightmousedown_graph) {
       controls.movementSpeed = 0.33;
       var x = dmx / 10;
@@ -220,8 +220,9 @@ $('#display-model').click(function(event) {
       return;
     }
     displaying_graph = false;
+
     clearScene();
-    loadJSON(file_name, 0, 0, 0, 0);
+    loadJSON(graph, 0, 0, 0, 0, file_name);
     camera.setOriginalPosition({x:0,y:0,z:200});
   });
 
@@ -230,6 +231,7 @@ $('#display-model').click(function(event) {
   var file = e.target.files[0];
   file_name = file.name.split(".")[0];
   var reader = new FileReader();
+  console.log(file);
   reader.onload = (function(readFile) {
     return function(e) {
       graph = reader.result;

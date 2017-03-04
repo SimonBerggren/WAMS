@@ -209,6 +209,8 @@ THREE.CombinedCamera.prototype.RollLeft = function( rotation ) {
 
 THREE.CombinedCamera.prototype.reset = function() {
   CAMERA_OBJ.position.set(this.oPos.x, this.oPos.y, this.oPos.z);
+  CAMERA_OBJ.rotation.y = 0;
+  CAMERA_OBJ2.rotation.x = 0;
 };
 
 THREE.CombinedCamera.prototype.update = function() {
@@ -216,5 +218,5 @@ THREE.CombinedCamera.prototype.update = function() {
 
 THREE.CombinedCamera.prototype.setOriginalPosition = function(position) {
   this.oPos = new THREE.Vector3(position.x, position.y, position.z);
-  CAMERA_OBJ.position.set(this.oPos.x, this.oPos.y, this.oPos.z);
+  this.reset();
 };
