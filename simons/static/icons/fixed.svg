@@ -1,17 +1,17 @@
-<svg width="500.0" height="500.0" viewBox="-0.0 -0.0 500.0 500.0" version="1.1" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-  <text x="250.0" y="524.45" dy=".33em" style="fill:#0000ff; text-anchor:middle; font-size:99.8px;">fixed</text>
-  <path d="M50.4,349.8 L449.6,349.8" style="stroke:#000000; fill:none;" />
-  <path d="M449.6,349.8 L349.8,449.6" style="stroke:#000000; fill:none;" />
-  <path d="M349.8,349.8 L250.0,449.6" style="stroke:#000000; fill:none;" />
-  <path d="M250.0,349.8 L150.2,449.6" style="stroke:#000000; fill:none;" />
-  <path d="M150.2,349.8 L50.4,449.6" style="stroke:#000000; fill:none;" />
-  <path d="M250.0,349.8 L250.0,274.95" style="stroke:#000000; fill:none;" />
+<svg width="200.0" height="200.0" viewBox="-0.0 -0.0 200.0 200.0" version="1.1" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <text x="100.0" y="209.45" dy=".33em" style="fill:#0000ff; text-anchor:middle; font-size:39.8px;"></text>
+  <path d="M20.4,139.8 L179.6,139.8" style="stroke:#000000; fill:none;" />
+  <path d="M179.6,139.8 L139.8,179.6" style="stroke:#000000; fill:none;" />
+  <path d="M139.8,139.8 L100.0,179.6" style="stroke:#000000; fill:none;" />
+  <path d="M100.0,139.8 L60.2,179.6" style="stroke:#000000; fill:none;" />
+  <path d="M60.2,139.8 L20.4,179.6" style="stroke:#000000; fill:none;" />
+  <path d="M100.0,139.8 L100.0,109.95" style="stroke:#000000; fill:none;" />
   <g class="Port">
     <metadata xmlns:vda="http://fat-ak30.eas.iis.fraunhofer.de/exchange/vda_meta">
-      <vda:meta name="Name">fixed.flange</vda:meta>
-      <vda:meta name="X">250.0</vda:meta>
-      <vda:meta name="Y">250.0</vda:meta>
+      <vda:meta name="Name">flange</vda:meta>
+      <vda:meta name="X">100.0</vda:meta>
+      <vda:meta name="Y">100.0</vda:meta>
     </metadata>
-    <ellipse cx="249.501" cy="250.0" rx="24.95" ry="24.95" transform="rotate(180.0 249.501 250.0)" style="stroke:#000000; fill:#ffffff;" />
+    <ellipse cx="99.801" cy="100.0" rx="9.95" ry="9.95" transform="rotate(180.0 99.801 100.0)" style="stroke:#000000; fill:#ffffff;" />
   </g>
 </svg>

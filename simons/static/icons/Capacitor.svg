@@ -1,12 +1,24 @@
-<?xml version="1.0" standalone="no"?>
-<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
-<svg viewBox="0 0 1276.000000 753.000000" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-	<polyline fill="none" stroke="rgb(0,0,255)" stroke-opacity="1" points="612.970000,243.360000 612.970000,481.640000"/>
-	<polyline fill="none" stroke="rgb(0,0,255)" stroke-opacity="1" points="664.030000,243.360000 664.030000,481.640000"/>
-	<polyline fill="none" stroke="rgb(0,0,255)" stroke-opacity="1" points="255.550000,362.500000 612.970000,362.500000"/>
-	<polyline fill="none" stroke="rgb(0,0,255)" stroke-opacity="1" points="664.030000,362.500000 1021.450000,362.500000"/>
-	<text x="638.5" y="685.88" fill="rgb(0,0,0)" dominant-baseline="central" font-size="136" font-family="Arial" text-anchor="middle">C=C</text>
-	<text x="638.5" y="85.925" fill="rgb(0,0,255)" dominant-baseline="central" font-size="170" font-family="Arial" text-anchor="middle">name</text>
-	<rect fill="rgb(0,0,255)" stroke="rgb(0,0,255)" stroke-opacity="1" x="170.45" y="319.95" width="85.1" height="85.1"/>
-	<rect fill="rgb(255,255,255)" stroke="rgb(0,0,255)" stroke-opacity="1" x="1021.45" y="319.95" width="85.1" height="85.1"/>
+<svg width="220.0" height="220.0" viewBox="-10.0 -10.0 220.0 220.0" version="1.1" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <path d="M94.03,72.14 L94.03,127.86" style="stroke:#0000ff; fill:none;" />
+  <path d="M105.97,72.14 L105.97,127.86" style="stroke:#0000ff; fill:none;" />
+  <path d="M10.45,100.0 L94.03,100.0" style="stroke:#0000ff; fill:none;" />
+  <path d="M105.97,100.0 L189.55,100.0" style="stroke:#0000ff; fill:none;" />
+  <text x="100.0" y="175.62" dy=".33em" style="fill:#000000; text-anchor:middle; font-size:31.84px;">C=1</text>
+  <text x="100.0" y="35.325" dy=".33em" style="fill:#0000ff; text-anchor:middle; font-size:39.8px;"></text>
+  <g class="Port">
+    <metadata xmlns:vda="http://fat-ak30.eas.iis.fraunhofer.de/exchange/vda_meta">
+      <vda:meta name="Name">p</vda:meta>
+      <vda:meta name="X">0.5</vda:meta>
+      <vda:meta name="Y">100.0</vda:meta>
+    </metadata>
+    <path d="M-9.45,90.05 L10.45,90.05 L10.45,109.95 L-9.45,109.95 Z" style="stroke:#0000ff; fill:#0000ff;" />
+  </g>
+  <g class="Port">
+    <metadata xmlns:vda="http://fat-ak30.eas.iis.fraunhofer.de/exchange/vda_meta">
+      <vda:meta name="Name">n</vda:meta>
+      <vda:meta name="X">199.5</vda:meta>
+      <vda:meta name="Y">100.0</vda:meta>
+    </metadata>
+    <path d="M209.45,90.05 L189.55,90.05 L189.55,109.95 L209.45,109.95 Z" style="stroke:#0000ff; fill:#ffffff;" />
+  </g>
 </svg>

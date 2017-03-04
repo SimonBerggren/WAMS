@@ -1,38 +1,38 @@
-<svg width="640.909" height="650.0" viewBox="-70.455 -75.0 650.0 650.0" version="1.1" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-  <path d="M0.5,225.05 L175.15,225.05 L175.15,274.95 L0.5,274.95 Z" style="stroke:#404040; fill:url(#fb40404040c0c0c0);" />
-  <path d="M175.15,100.3 L225.05,100.3 L225.05,399.7 L175.15,399.7 Z" style="stroke:#404040; fill:url(#fb40404040ffffff);" />
-  <path d="M175.15,100.3 L225.05,100.3 L225.05,399.7 L175.15,399.7 Z" style="stroke:#404040; fill:none;" />
-  <path d="M274.95,100.3 L324.85,100.3 L324.85,399.7 L274.95,399.7 Z" style="stroke:#404040; fill:url(#fb40404040ffffff);" />
-  <path d="M274.95,100.3 L324.85,100.3 L324.85,399.7 L274.95,399.7 Z" style="stroke:#404040; fill:none;" />
-  <path d="M324.85,225.05 L499.5,225.05 L499.5,274.95 L324.85,274.95 Z" style="stroke:#404040; fill:url(#fb40404040c0c0c0);" />
-  <path d="M175.15,150.2 L100.3,125.25 L100.3,175.15 L175.15,150.2 Z" style="stroke:#00007f; fill:#00007f;" />
-  <path d="M324.85,150.2 L399.7,125.25 L399.7,175.15 L324.85,150.2 Z" style="stroke:#00007f; fill:#00007f;" />
-  <path d="M250.0,25.45 L474.55,75.35 L474.55,150.2 L324.85,150.2" style="stroke:#00007f; fill:none;" />
-  <path d="M250.0,25.45 L25.45,75.35 L25.45,150.2 L175.15,150.2" style="stroke:#00007f; fill:none;" />
-  <text x="250.0" y="474.55" dy=".33em" style="fill:#0000ff; text-anchor:middle; font-size:99.8px;">clutch3</text>
+<svg width="256.364" height="260.0" viewBox="-28.182 -30.0 260.0 260.0" version="1.1" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <path d="M0.5,90.05 L70.15,90.05 L70.15,109.95 L0.5,109.95 Z" style="stroke:#404040; fill:url(#fb40404040c0c0c0);" />
+  <path d="M70.15,40.3 L90.05,40.3 L90.05,159.7 L70.15,159.7 Z" style="stroke:#404040; fill:url(#fb40404040ffffff);" />
+  <path d="M70.15,40.3 L90.05,40.3 L90.05,159.7 L70.15,159.7 Z" style="stroke:#404040; fill:none;" />
+  <path d="M109.95,40.3 L129.85,40.3 L129.85,159.7 L109.95,159.7 Z" style="stroke:#404040; fill:url(#fb40404040ffffff);" />
+  <path d="M109.95,40.3 L129.85,40.3 L129.85,159.7 L109.95,159.7 Z" style="stroke:#404040; fill:none;" />
+  <path d="M129.85,90.05 L199.5,90.05 L199.5,109.95 L129.85,109.95 Z" style="stroke:#404040; fill:url(#fb40404040c0c0c0);" />
+  <path d="M70.15,60.2 L40.3,50.25 L40.3,70.15 L70.15,60.2 Z" style="stroke:#00007f; fill:#00007f;" />
+  <path d="M129.85,60.2 L159.7,50.25 L159.7,70.15 L129.85,60.2 Z" style="stroke:#00007f; fill:#00007f;" />
+  <path d="M100.0,10.45 L189.55,30.35 L189.55,60.2 L129.85,60.2" style="stroke:#00007f; fill:none;" />
+  <path d="M100.0,10.45 L10.45,30.35 L10.45,60.2 L70.15,60.2" style="stroke:#00007f; fill:none;" />
+  <text x="100.0" y="189.55" dy=".33em" style="fill:#0000ff; text-anchor:middle; font-size:39.8px;"></text>
   <g class="Port">
     <metadata xmlns:vda="http://fat-ak30.eas.iis.fraunhofer.de/exchange/vda_meta">
-      <vda:meta name="Name">clutch3.flange_a</vda:meta>
+      <vda:meta name="Name">flange_a</vda:meta>
       <vda:meta name="X">0.5</vda:meta>
-      <vda:meta name="Y">250.0</vda:meta>
+      <vda:meta name="Y">100.0</vda:meta>
     </metadata>
-    <ellipse cx="0.5" cy="250.0" rx="24.95" ry="24.95" style="stroke:#000000; fill:#5f5f5f;" />
+    <ellipse cx="0.5" cy="100.0" rx="9.95" ry="9.95" style="stroke:#000000; fill:#5f5f5f;" />
   </g>
   <g class="Port">
     <metadata xmlns:vda="http://fat-ak30.eas.iis.fraunhofer.de/exchange/vda_meta">
-      <vda:meta name="Name">clutch3.flange_b</vda:meta>
-      <vda:meta name="X">499.5</vda:meta>
-      <vda:meta name="Y">250.0</vda:meta>
+      <vda:meta name="Name">flange_b</vda:meta>
+      <vda:meta name="X">199.5</vda:meta>
+      <vda:meta name="Y">100.0</vda:meta>
     </metadata>
-    <ellipse cx="499.999" cy="250.0" rx="24.95" ry="24.95" style="stroke:#000000; fill:#ffffff;" />
+    <ellipse cx="199.699" cy="100.0" rx="9.95" ry="9.95" style="stroke:#000000; fill:#ffffff;" />
   </g>
   <g class="Port">
     <metadata xmlns:vda="http://fat-ak30.eas.iis.fraunhofer.de/exchange/vda_meta">
-      <vda:meta name="Name">clutch3.f_normalized</vda:meta>
-      <vda:meta name="X">195.11</vda:meta>
-      <vda:meta name="Y">-24.45</vda:meta>
+      <vda:meta name="Name">f_normalized</vda:meta>
+      <vda:meta name="X">78.11</vda:meta>
+      <vda:meta name="Y">-9.45</vda:meta>
     </metadata>
-    <path d="M200.1,-74.35 L250.0,25.45 L299.9,-74.35 L200.1,-74.35 Z" style="stroke:#00007f; fill:#00007f;" />
+    <path d="M80.1,-29.35 L100.0,10.45 L119.9,-29.35 L80.1,-29.35 Z" style="stroke:#00007f; fill:#00007f;" />
   </g>
   <defs>
     <linearGradient id="fb40404040c0c0c0" x1="0%" y1="0%" x2="50%" y2="0%" spreadMethod="reflect" gradientTransform="rotate(90.0)">

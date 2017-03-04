@@ -1,15 +1,34 @@
-<?xml version="1.0" standalone="no"?>
-<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
-<svg viewBox="0 0 1276.000000 795.000000" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-	<polygon fill="rgb(255,255,255)" stroke="rgb(0,0,255)" stroke-opacity="1" points="889.800000,497.500000 379.200000,199.650000 379.200000,795.350000 889.800000,497.500000"/>
-	<polyline fill="none" stroke="rgb(0,0,255)" stroke-opacity="1" points="251.550000,284.750000 379.200000,284.750000"/>
-	<polyline fill="none" stroke="rgb(0,0,255)" stroke-opacity="1" points="251.550000,710.250000 379.200000,710.250000"/>
-	<polyline fill="none" stroke="rgb(0,0,255)" stroke-opacity="1" points="889.800000,497.500000 1017.450000,497.500000"/>
-	<polyline fill="none" stroke="rgb(0,0,255)" stroke-opacity="1" points="430.260000,361.340000 515.360000,361.340000"/>
-	<polyline fill="none" stroke="rgb(0,0,255)" stroke-opacity="1" points="468.555000,582.600000 468.555000,671.955000"/>
-	<polyline fill="none" stroke="rgb(0,0,255)" stroke-opacity="1" points="421.750000,629.405000 515.360000,629.405000"/>
-	<text x="638.755" y="84.765" fill="rgb(0,0,255)" dominant-baseline="central" font-size="170" font-family="Arial" text-anchor="middle">name</text>
-	<rect fill="rgb(0,0,255)" stroke="rgb(0,0,255)" stroke-opacity="1" x="166.45" y="667.7" width="85.1" height="85.1"/>
-	<rect fill="rgb(255,255,255)" stroke="rgb(0,0,255)" stroke-opacity="1" x="166.45" y="242.2" width="85.1" height="85.1"/>
-	<rect fill="rgb(0,0,255)" stroke="rgb(0,0,255)" stroke-opacity="1" x="1017.45" y="454.95" width="85.1" height="85.1"/>
+<svg width="220.0" height="220.0" viewBox="-10.0 -10.0 220.0 220.0" version="1.1" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <path d="M159.7,100.0 L40.3,30.35 L40.3,169.65 L159.7,100.0 Z" style="stroke:#0000ff; fill:#ffffff;" />
+  <path d="M10.45,50.25 L40.3,50.25" style="stroke:#0000ff; fill:none;" />
+  <path d="M10.45,149.75 L40.3,149.75" style="stroke:#0000ff; fill:none;" />
+  <path d="M159.7,100.0 L189.55,100.0" style="stroke:#0000ff; fill:none;" />
+  <path d="M52.24,68.16 L72.14,68.16" style="stroke:#0000ff; fill:none;" />
+  <path d="M61.195,119.9 L61.195,140.795" style="stroke:#0000ff; fill:none;" />
+  <path d="M50.25,130.845 L72.14,130.845" style="stroke:#0000ff; fill:none;" />
+  <text x="100.995" y="3.485" dy=".33em" style="fill:#0000ff; text-anchor:middle; font-size:39.8px;"></text>
+  <g class="Port">
+    <metadata xmlns:vda="http://fat-ak30.eas.iis.fraunhofer.de/exchange/vda_meta">
+      <vda:meta name="Name">in_p</vda:meta>
+      <vda:meta name="X">0.5</vda:meta>
+      <vda:meta name="Y">149.75</vda:meta>
+    </metadata>
+    <path d="M-9.45,139.8 L10.45,139.8 L10.45,159.7 L-9.45,159.7 Z" style="stroke:#0000ff; fill:#0000ff;" />
+  </g>
+  <g class="Port">
+    <metadata xmlns:vda="http://fat-ak30.eas.iis.fraunhofer.de/exchange/vda_meta">
+      <vda:meta name="Name">in_n</vda:meta>
+      <vda:meta name="X">0.5</vda:meta>
+      <vda:meta name="Y">50.25</vda:meta>
+    </metadata>
+    <path d="M-9.45,40.3 L10.45,40.3 L10.45,60.2 L-9.45,60.2 Z" style="stroke:#0000ff; fill:#ffffff;" />
+  </g>
+  <g class="Port">
+    <metadata xmlns:vda="http://fat-ak30.eas.iis.fraunhofer.de/exchange/vda_meta">
+      <vda:meta name="Name">out</vda:meta>
+      <vda:meta name="X">199.5</vda:meta>
+      <vda:meta name="Y">100.0</vda:meta>
+    </metadata>
+    <path d="M189.55,90.05 L209.45,90.05 L209.45,109.95 L189.55,109.95 Z" style="stroke:#0000ff; fill:#0000ff;" />
+  </g>
 </svg>
