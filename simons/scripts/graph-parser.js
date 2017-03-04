@@ -292,14 +292,15 @@ function calculate_graph(graph, s, camera) {
 		options: config
 	});
 }
-
-// adds components, edges and connections to scene
-function display_graph(graph, s, camera, display) {
-	scene = s;
+function clearScene() {
 	for( var i = scene.children.length - 1; i >= 0; i--) { 
 		if (scene.children[i].name !== "important")
 			scene.remove(scene.children[i]);
 	}
+}
+// adds components, edges and connections to scene
+function display_graph(graph, s, camera, display) {
+	scene = s;
 	if (display !== undefined) {
 	var parsed_graph = JSON.parse(graph);
 	for (var i = 0; i < parsed_graph.length; ++i) {

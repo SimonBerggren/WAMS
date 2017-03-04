@@ -5,6 +5,7 @@ $(function() {
   var leftmousedown_graph = false;
   var rightmousedown_graph = false;
   var picked_object = undefined;
+  var displaying_graph = false;
   var graph;
   var keys = {
     W: false,
@@ -22,7 +23,10 @@ $(function() {
     var E = 69;
     var TAB = 9;
     var ESC = 27;
-  var scene = new THREE.Scene();
+    scene = new THREE.Scene();
+  var light = new THREE.AmbientLight( "white" ); // soft white light
+  light.name="important";
+scene.add( light );
   var w = window.innerWidth;
   var h = 600;
 
@@ -108,6 +112,8 @@ camera.moveRight(camera_speed);
     rect = event.target.getBoundingClientRect();
     mx = event.clientX - rect.left;
     my = event.clientY - rect.top;
+    if (displaying_graph) {
+
     var mouse = new THREE.Vector2();
     mouse.x = ( mx / rect.width ) * 2 - 1;
     mouse.y = - ( my / rect.height ) * 2 + 1;
@@ -126,6 +132,7 @@ camera.moveRight(camera_speed);
     else if (picked_object !== undefined) {
       picked_object.material.color.set( "white" );
       picked_object = undefined;
+    }
     }
     dmx = omx - mx;
     dmy = omy - my;
@@ -183,6 +190,8 @@ camera.moveRight(camera_speed);
       alert("no diagram chosen!");
       return;
     }
+    displaying_graph = true;
+    clearScene();
     calculate_graph(graph, scene, camera);
   });
 
@@ -191,12 +200,26 @@ $('#display').click(function(event) {
       alert("no diagram chosen!");
       return;
     }
+    displaying_graph = true;
+    clearScene();
     display_graph(graph, scene, camera, true);
+  });
+var file_name;
+$('#display-model').click(function(event) {
+    if(graph === undefined) {
+      alert("no model chosen!");
+      return;
+    }
+    displaying_graph = false;
+    clearScene();
+    loadJSON(file_name, 0, 0, 0, 0);
+    camera.setOriginalPosition({x:0,y:0,z:200});
   });
 
   $('#files').change(
   function(e) {
   var file = e.target.files[0];
+  file_name = file.name.split(".")[0];
   var reader = new FileReader();
   reader.onload = (function(readFile) {
     return function(e) {

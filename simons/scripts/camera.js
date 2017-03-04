@@ -208,15 +208,13 @@ THREE.CombinedCamera.prototype.RollLeft = function( rotation ) {
 }
 
 THREE.CombinedCamera.prototype.reset = function() {
-  this.rotation.x = 0;
-  this.rotation.y = 0;
-  this.rotation.z = 0;
-  this.position = new THREE.Vector3(0,0,0);
+  CAMERA_OBJ.position.set(this.oPos.x, this.oPos.y, this.oPos.z);
 };
 
 THREE.CombinedCamera.prototype.update = function() {
 };
 
 THREE.CombinedCamera.prototype.setOriginalPosition = function(position) {
-  CAMERA_OBJ.position.set(position.x, position.y, position.z);
+  this.oPos = new THREE.Vector3(position.x, position.y, position.z);
+  CAMERA_OBJ.position.set(this.oPos.x, this.oPos.y, this.oPos.z);
 };
