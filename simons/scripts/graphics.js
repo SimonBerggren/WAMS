@@ -113,7 +113,6 @@ camera.moveRight(camera_speed);
     mx = event.clientX - rect.left;
     my = event.clientY - rect.top;
     if (displaying_graph) {
-
     var mouse = new THREE.Vector2();
     mouse.x = ( mx / rect.width ) * 2 - 1;
     mouse.y = - ( my / rect.height ) * 2 + 1;
@@ -123,14 +122,24 @@ camera.moveRight(camera_speed);
     var intersects = raycaster.intersectObjects(scene.children);
     if (intersects.length > 0) {
       if (picked_object !== undefined)
-        picked_object.material.color.set( 0xff0000 );
+        picked_object.material.color.set( "white" );
       if (intersects[0].object.type !== "Line" && intersects[0].object.name !== "plane") {
         picked_object = intersects[0].object;
-        picked_object.material.color.set( 0xff0000 );
+        
+         if (picked_object.material !== undefined && picked_object.material.color !== undefined) {
+      picked_object.material.color.set( 0xff0000 );
+    } else {
+      console.log(picked_object);
+    }
+
       }
     }
     else if (picked_object !== undefined) {
+      if (picked_object.material !== undefined && picked_object.material.color !== undefined) {
       picked_object.material.color.set( "white" );
+    } else {
+      console.log(picked_object);
+    }
       picked_object = undefined;
     }
     }
