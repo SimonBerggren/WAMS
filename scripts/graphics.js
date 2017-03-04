@@ -4,6 +4,8 @@ $(function() {
   var perspective_camera = true;
   var leftmousedown_graph = false;
   var rightmousedown_graph = false;
+  var picked_object = undefined;
+  var displaying_graph = false;
   var graph;
   var keys = {
     W: false,
@@ -21,22 +23,29 @@ $(function() {
     var E = 69;
     var TAB = 9;
     var ESC = 27;
-  var scene = new THREE.Scene();
+    scene = new THREE.Scene();
+  var light = new THREE.AmbientLight( "white" ); // soft white light
+  light.name="important";
+scene.add( light );
   var w = window.innerWidth;
   var h = 600;
 
   var renderer = new THREE.WebGLRenderer({alpha: true});
   renderer.setClearColor( "white", 1 );
   renderer.setSize(w, h);
+  var rect = undefined;
 
   var minZoom = 0.1;
-  var camera = new THREE.CombinedCamera(w/2, h/2,
-   45, 1, 1000, -500
+  var camera = new THREE.CombinedCamera(w/2, h/2,50, 1, 1000, -500, 1000);
+  var controls = new THREE.PointerLockControls( camera );
 
-   , 1000);
-  camera.position.z = 400;
-  var controls = new THREE.FlyControls( camera );
-
+  CAMERA_OBJ = controls.getObject();
+  CAMERA_OBJ2 = controls.getObject2();
+  CONTROLS = controls;
+  scene.add (CAMERA_OBJ);
+  CAMERA_OBJ.position.set(0,0,200);
+  CAMERA_OBJ2.position.set(0,0,0);
+  camera.position.set(0,0,0);
   var omx = 0;
   var omy = 0;
   var dmx = 0;
@@ -46,26 +55,26 @@ $(function() {
     requestAnimationFrame(render)
     var delta = clock.getDelta();
     if (leftmousedown_graph) {
-        camera.position.x -= dmx * 5;
-        camera.position.y += dmy * 5;
+        //camera.position.x -= dmx * 5;
+        //camera.position.y += dmy * 5;
     } else if (rightmousedown_graph) {
       controls.movementSpeed = 0.33;
-      var x = dmx * 50;
-      var y =  dmy * 50;
+      var x = dmx / 10;
+      var y =  dmy / 10;
       var limit = 1000;
       x = Math.clamp(x, -limit, limit);
       y = Math.clamp(y, -limit, limit);
-      controls.updateMouse(x, y);
-      controls.update( delta );
+      controls.update( x, y );
     }
+    var camera_speed = 5;
     if (keys.W) {
-      camera.moveFwd(1);
+      camera.moveFwd(camera_speed);
     } else if (keys.S) {
-            camera.moveBwd(1);
+      camera.moveBwd(camera_speed);
     } if (keys.A) {
-              camera.moveLeft(1);
+      camera.moveLeft(camera_speed);
     } else if (keys.D) {
-            camera.moveRight(1);
+camera.moveRight(camera_speed);
     } if (keys.Q) {
             camera.RollLeft(0.02);
     } else if (keys.E) {
@@ -74,22 +83,17 @@ $(function() {
       dmx = dmy = 0;
     renderer.render(scene, camera);
   }
-
-  var map = new THREE.TextureLoader().load( "static/icons/IdealOpAmp3Pin.svg", function(obj) {
-  var material = new THREE.SpriteMaterial( { map: map, color: 0xffffff} ); 
-  var sprite = new THREE.Sprite( material ); 
-  
-  sprite.position.set(0,0,400);
-  sprite.scale.set(100,100,100);
-  scene.add( sprite );
-} ); 
-
-
+  var saved_mousex = undefined;
+  var saved_mousey = undefined;
   $('#glcontainer').on('mousedown', function(event) {
+
     if(event.button == 0)
-    leftmousedown_graph = true;
-  else if (event.button == 2)
+        leftmousedown_graph = true;
+    else if (event.button == 2) {
+      if (!rightmousedown_graph) 
+        ;
     rightmousedown_graph = true;
+    }
   }).bind('DOMMouseScroll mousewheel', function(event) {
     camera.moveBwd(event.originalEvent.wheelDeltaY);
   }).append(renderer.domElement);
@@ -104,13 +108,41 @@ $(function() {
 
     var mx = 0;
     var my = 0;
+    
+    rect = event.target.getBoundingClientRect();
+    mx = event.clientX - rect.left;
+    my = event.clientY - rect.top;
+    if (displaying_graph) {
+    var mouse = new THREE.Vector2();
+    mouse.x = ( mx / rect.width ) * 2 - 1;
+    mouse.y = - ( my / rect.height ) * 2 + 1;
+    var raycaster = new THREE.Raycaster();
+    camera.update();
+    raycaster.setFromCamera(mouse, PERSP_CAMERA);
+    var intersects = raycaster.intersectObjects(scene.children);
+    if (intersects.length > 0) {
+      if (picked_object !== undefined)
+        picked_object.material.color.set( "white" );
+      if (intersects[0].object.type !== "Line" && intersects[0].object.name !== "plane") {
+        picked_object = intersects[0].object;
+        
+         if (picked_object.material !== undefined && picked_object.material.color !== undefined) {
+      picked_object.material.color.set( 0xff0000 );
+    } else {
+      console.log(picked_object);
+    }
 
-    if (event.target.tagName === "CANVAS") {
-      var rect = event.target.getBoundingClientRect();
-      mx = event.clientX - rect.left,
-      my = event.clientY - rect.top
-    };
-
+      }
+    }
+    else if (picked_object !== undefined) {
+      if (picked_object.material !== undefined && picked_object.material.color !== undefined) {
+      picked_object.material.color.set( "white" );
+    } else {
+      console.log(picked_object);
+    }
+      picked_object = undefined;
+    }
+    }
     dmx = omx - mx;
     dmy = omy - my;
 
@@ -167,6 +199,8 @@ $(function() {
       alert("no diagram chosen!");
       return;
     }
+    displaying_graph = true;
+    clearScene();
     calculate_graph(graph, scene, camera);
   });
 
@@ -175,13 +209,29 @@ $('#display').click(function(event) {
       alert("no diagram chosen!");
       return;
     }
+    displaying_graph = true;
+    clearScene();
     display_graph(graph, scene, camera, true);
+  });
+var file_name;
+$('#display-model').click(function(event) {
+    if(graph === undefined) {
+      alert("no model chosen!");
+      return;
+    }
+    displaying_graph = false;
+
+    clearScene();
+    loadJSON(graph, 0, 0, 0, 0, file_name);
+    camera.setOriginalPosition({x:0,y:0,z:200});
   });
 
   $('#files').change(
   function(e) {
   var file = e.target.files[0];
+  file_name = file.name.split(".")[0];
   var reader = new FileReader();
+  console.log(file);
   reader.onload = (function(readFile) {
     return function(e) {
       graph = reader.result;

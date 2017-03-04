@@ -8,9 +8,6 @@
         <script src="scripts/jquery-1.10.2.min.js"></script>
         <script src="scripts/bootstrap-3.0.2.min.js"></script>
         <script src="scripts/three.js"></script>
-                <script src="http://canvg.github.io/canvg/rgbcolor.js"></script> 
-        <script src="http://canvg.github.io/canvg/StackBlur.js"></script>
-        <script src="scripts/canvg.js"></script>
     </head>
     <body>
         <header class="navbar navbar-inverse navbar-fixed-top">
@@ -72,7 +69,6 @@
           holeIndices.push( holeIndex );
           holeIndex += holes[ i ].length;
           addContour( vertices, holes[ i ] );
-
         }
 
         var result = earcut( vertices, holeIndices, 2 );
@@ -94,6 +90,7 @@
             <button class="btn"><input type="file" id="files" name="files[]" /></button>
             <button id="calculate" class="btn">Calculate</button>
             <button id="display" class="btn">Display</button>
+            <button id="display-model" class="btn">Display Model</button>
           </div>
         </div>
         <div id="glcontainer"></div>
@@ -105,8 +102,6 @@
         <div style="margin:10px;">
         <h4><strong>Camera controls:</strong></h4>
         <strong>W/A/S/D</strong> Move around.
-        <br>
-        <strong>Q/E</strong> Spin around.
         <br>
         <strong>Right-Click + mouse-move:</strong> Look around.
         <br>

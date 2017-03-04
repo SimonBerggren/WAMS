@@ -39,12 +39,14 @@ function plane(x, y, w, h, c, z) {
 	plane.position.x = x;
 	plane.position.y = y;
 	plane.position.z = z;
+	plane.name="plane";
 	return plane;    
 }
 
 var icons = {};
 var jsonloader = new THREE.ObjectLoader();
 var svgloader = new THREE.TextureLoader();
+var objloader = new THREE.ObjectLoader();
 
 function loadFiles() {
 
@@ -60,7 +62,18 @@ $.get(url)
     })
 }
 
-function loadJSON(name, x, y, w, h) {
+function loadJSON(name, x, y, w, h, n) {
+
+	if (n !== undefined) {		
+
+		var scale = 10;
+
+		var obj = objloader.parse( JSON.parse(name) );
+		obj.scale.x = obj.scale.y = obj.scale.z = scale;
+		createText(scene, n, x, y); 
+		scene.add(obj);
+		return;
+	}
 
 	var url = "static/icons/" + name + ".json";
 	UrlExists(url, function() {
@@ -94,25 +107,14 @@ function loadSVG(name, x, y, w, h) {
 
 		var url = "static/icons/" + name + ".svg";
 	UrlExists(url, function() {
-	var canvas = document.createElement('canvas');
-canvas.width=512;
-canvas.height=512;
-canvas.style.background="white";
-var ctx = canvas.getContext("2d");
-ctx.beginPath();
-ctx.rect(0, 0, 512, 512);
-ctx.fillStyle = "white";
-ctx.fill();
-	canvg(canvas, url);
-var texture = new THREE.Texture(canvas);
-texture.needsUpdate = true;
-var boxMaterial = new THREE.MeshBasicMaterial({map:texture});
-var boxGeometry2 = new THREE.BoxGeometry( 50, 50, 1 );
-var mainBoxObject = new THREE.Mesh(boxGeometry2,boxMaterial);
-mainBoxObject.position.set(x,y,0);
-scene.add(mainBoxObject);
-
-	}, function() {
+	svgloader.load(url, function (obj) { 
+		var boxMaterial = new THREE.MeshBasicMaterial({map:obj});
+		var boxGeometry2 = new THREE.BoxGeometry( 50, 50, 1 );
+		var mainBoxObject = new THREE.Mesh(boxGeometry2,boxMaterial);
+		mainBoxObject.position.set(x,y,0);
+		scene.add(mainBoxObject);
+	});
+}, function() {
 		scene.add(plane(x, y, w, h, 0xff0000, 0));
 		createText(scene, name, x, y); 
 	});
@@ -291,13 +293,15 @@ function calculate_graph(graph, s, camera) {
 		options: config
 	});
 }
-
+function clearScene() {
+	for( var i = scene.children.length - 1; i >= 0; i--) { 
+		if (scene.children[i].name !== "important")
+			scene.remove(scene.children[i]);
+	}
+}
 // adds components, edges and connections to scene
 function display_graph(graph, s, camera, display) {
 	scene = s;
-	for( var i = scene.children.length - 1; i >= 0; i--) { 
-			scene.remove(scene.children[i]);
-	}
 	if (display !== undefined) {
 	var parsed_graph = JSON.parse(graph);
 	for (var i = 0; i < parsed_graph.length; ++i) {
@@ -338,7 +342,6 @@ function get_comps(comps, edges, parent) {
  
  	  	    var group = new THREE.Group();
   			scene.add(group);
-  						
 
   			loadJSON(cl, x, y, w, h);
  		  	// var icon;

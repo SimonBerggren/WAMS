@@ -95,25 +95,14 @@ function loadSVG(name, x, y, w, h) {
 
 		var url = "static/icons/" + name + ".svg";
 	UrlExists(url, function() {
-	var canvas = document.createElement('canvas');
-canvas.width=512;
-canvas.height=512;
-canvas.style.background="white";
-var ctx = canvas.getContext("2d");
-ctx.beginPath();
-ctx.rect(0, 0, 512, 512);
-ctx.fillStyle = "white";
-ctx.fill();
-	canvg(canvas, url);
-var texture = new THREE.Texture(canvas);
-texture.needsUpdate = true;
-var boxMaterial = new THREE.MeshBasicMaterial({map:texture});
-var boxGeometry2 = new THREE.BoxGeometry( 50, 50, 1 );
-var mainBoxObject = new THREE.Mesh(boxGeometry2,boxMaterial);
-mainBoxObject.position.set(x,y,0);
-scene.add(mainBoxObject);
-
-	}, function() {
+	svgloader.load(url, function (obj) { 
+		var boxMaterial = new THREE.MeshBasicMaterial({map:obj});
+		var boxGeometry2 = new THREE.BoxGeometry( 50, 50, 1 );
+		var mainBoxObject = new THREE.Mesh(boxGeometry2,boxMaterial);
+		mainBoxObject.position.set(x,y,0);
+		scene.add(mainBoxObject);
+	});
+}, function() {
 		scene.add(plane(x, y, w, h, 0xff0000, 0));
 		createText(scene, name, x, y); 
 	});
