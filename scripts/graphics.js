@@ -112,7 +112,13 @@ camera.moveRight(camera_speed);
     rect = event.target.getBoundingClientRect();
     mx = event.clientX - rect.left;
     my = event.clientY - rect.top;
-    if (displaying_graph) {
+    if (leftmousedown_graph) {
+      if (picked_object !== undefined) {
+        picked_object.position.x -= dmx * 3;
+        picked_object.position.y += dmy * 3;
+      }
+    }
+    else if (displaying_graph) {
     var mouse = new THREE.Vector2();
     mouse.x = ( mx / rect.width ) * 2 - 1;
     mouse.y = - ( my / rect.height ) * 2 + 1;
@@ -131,7 +137,6 @@ camera.moveRight(camera_speed);
     } else {
       console.log(picked_object);
     }
-
       }
     }
     else if (picked_object !== undefined) {
