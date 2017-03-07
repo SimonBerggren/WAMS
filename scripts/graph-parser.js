@@ -66,11 +66,10 @@ function loadJSON(name, x, y, w, h, n) {
 
 	if (n !== undefined) {		
 
-		var scale = 10;
+		var scale = 100;
 
 		var obj = objloader.parse( JSON.parse(name) );
 		obj.scale.x = obj.scale.y = obj.scale.z = scale;
-		createText(scene, n, x, y); 
 		scene.add(obj);
 		return;
 	}

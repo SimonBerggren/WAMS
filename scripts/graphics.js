@@ -25,6 +25,10 @@ $(function() {
     var ESC = 27;
     scene = new THREE.Scene();
   var light = new THREE.AmbientLight( "white" ); // soft white light
+  var directionalLight = new THREE.DirectionalLight( 0xffeeee, 0.1 );
+  directionalLight.position.set(0,0,10);
+  directionalLight.name="important";
+  scene.add( directionalLight );
   light.name="important";
 scene.add( light );
   var w = window.innerWidth;
