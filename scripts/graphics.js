@@ -7,6 +7,10 @@ $(function() {
   var picked_object = undefined;
   var displaying_graph = false;
   var graph;
+  var _keys = [];
+  for (var i = 0; i < 256; ++i)
+    _keys[i] = false;
+
   var keys = {
     W: false,
     A: false,
@@ -15,7 +19,7 @@ $(function() {
     Q: false,
     E: false
   }
-  var W = 87;
+    var W = 87;
     var A = 65;
     var S = 83;
     var D = 68;
@@ -30,7 +34,7 @@ $(function() {
   directionalLight.name="important";
   scene.add( directionalLight );
   light.name="important";
-scene.add( light );
+  scene.add( light );
   var w = window.innerWidth;
   var h = 600;
 
@@ -54,7 +58,6 @@ scene.add( light );
   var omy = 0;
   var dmx = 0;
   var dmy = 0;
-
   function render() {
     requestAnimationFrame(render)
     var delta = clock.getDelta();
@@ -71,17 +74,17 @@ scene.add( light );
       controls.update( x, y );
     }
     var camera_speed = 5;
-    if (keys.W) {
+    if (_keys[W]) {
       camera.moveFwd(camera_speed);
-    } else if (keys.S) {
+    } else if (_keys[S]) {
       camera.moveBwd(camera_speed);
-    } if (keys.A) {
+    } if (_keys[A]) {
       camera.moveLeft(camera_speed);
-    } else if (keys.D) {
+    } else if (_keys[D]) {
 camera.moveRight(camera_speed);
-    } if (keys.Q) {
+    } if (_keys[Q]) {
             camera.RollLeft(0.02);
-    } else if (keys.E) {
+    } else if (_keys[E]) {
             camera.RollRight(0.02);
     }
       dmx = dmy = 0;
@@ -90,7 +93,6 @@ camera.moveRight(camera_speed);
   var saved_mousex = undefined;
   var saved_mousey = undefined;
   $('#glcontainer').on('mousedown', function(event) {
-
     if(event.button == 0)
         leftmousedown_graph = true;
     else if (event.button == 2) {
@@ -165,42 +167,17 @@ camera.moveRight(camera_speed);
       event.preventDefault();
       event.stopPropagation();
     perspective_camera = !perspective_camera;
-    if (perspective_camera) {
+    if (perspective_camera)
       camera.toPerspective();
-    }
-    else {
+    else
       camera.toOrthographic();
     }
-    } else if (key === W) {
-      keys.W = true;
-    } else if (key === S) {
-            keys.S = true;
-    } if (key === A) {
-            keys.A = true;
-    } else if (key === D) {
-              keys.D = true;
-    } else if (key === Q) {
-              keys.Q = true;
-    } else if (key === E) {
-              keys.E = true;
-    }
+    _keys[key] = true;
   }).on('keyup', function(event) {
     var key = event.keyCode;
-    if (key === W) {
-      keys.W = false;
-    } else if (key === S) {
-            keys.S = false;
-    } if (key === A) {
-            keys.A = false;
-    } else if (key === D) {
-              keys.D = false;
-    } else if (key === Q) {
-              keys.Q = false;
-    } else if (key === E) {
-              keys.E = false;
-    } else if (key === ESC) {
+    _keys[key] = false; 
+    if (key === ESC)
       camera.reset();
-    }
   });
 
 	$('#calculate').click(function() {
@@ -240,7 +217,6 @@ $('#display-model').click(function(event) {
   var file = e.target.files[0];
   file_name = file.name.split(".")[0];
   var reader = new FileReader();
-  console.log(file);
   reader.onload = (function(readFile) {
     return function(e) {
       graph = reader.result;
