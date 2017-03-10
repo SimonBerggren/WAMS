@@ -29,7 +29,6 @@ var CAMERA_OBJ = undefined;
 var CAMERA_OBJ2 = undefined;
 var CONTROLS = undefined;
 
-
 THREE.CombinedCamera.prototype = Object.create( THREE.Camera.prototype );
 THREE.CombinedCamera.prototype.constructor = THREE.CombinedCamera;
 

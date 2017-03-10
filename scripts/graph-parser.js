@@ -71,6 +71,7 @@ function loadJSON(name, x, y, w, h, n) {
 		var obj = objloader.parse( JSON.parse(name) );
 		obj.scale.x = obj.scale.y = obj.scale.z = scale;
 		scene.add(obj);
+		console.log(obj);
 		return;
 	}
 

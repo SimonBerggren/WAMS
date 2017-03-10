@@ -24,9 +24,9 @@ $(function() {
     var TAB = 9;
     var ESC = 27;
     scene = new THREE.Scene();
-  var light = new THREE.AmbientLight( "white" ); // soft white light
-  var directionalLight = new THREE.DirectionalLight( 0xffeeee, 0.1 );
+  var directionalLight = new THREE.DirectionalLight( 0xffffff, 1 );
   directionalLight.position.set(0,0,10);
+  var light = new THREE.AmbientLight( 0x2f4f4f ); // soft white light
   directionalLight.name="important";
   scene.add( directionalLight );
   light.name="important";
