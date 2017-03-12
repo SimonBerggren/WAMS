@@ -1,0 +1,70 @@
+{
+	"metadata": {
+		"version": 4.4,
+		"type": "Object",
+		"generator": "OCT3D"
+	},
+	"geometries": [
+		{
+			"uuid": "box",
+			"type": "BoxBufferGeometry",
+			"name": "Box",
+			"width": 1,
+			"height": 1,
+			"depth": 1
+		},
+    {
+			"uuid": "cylinder",
+			"type": "CylinderBufferGeometry",
+			"radiusTop": 0.5,
+			"radiusBottom": 0.5,
+			"height": 1,
+			"radialSegments": 32,
+			"heightSegments": 1,
+			"openEnded": false
+		}],
+	"object": {
+		"uuid": "B32BD43B-FCCC-474F-97A2-F68822B61219",
+		"type": "Group",
+		"name": "Group 1",
+		"matrix": [1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1]
+
+
+,
+"children": [
+{
+"uuid": "B32BD43B-FCCC-474F-97A2-F68822B61219",
+"type": "Group",
+"name": "Group 1",
+"matrix": [1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1]
+,
+  "children": [
+{
+    "uuid": "1",
+    "type": "Mesh",
+    "name": "boxBody1",
+    "matrix": [0.5, 0.0, 0.0, 0.0, 0.0, 0.06, 0.0, 0.0, 0.0, 0.0, 0.06, 0.0, 0.25, 0.0, 0.0, 1.0],
+    "geometry": "box",
+    "material": "1"},
+{
+    "uuid": "1",
+    "type": "Mesh",
+    "name": "boxBody2",
+    "matrix": [0.5, 0.0, 0.0, 0.0, 0.0, 0.06, 0.0, 0.0, 0.0, 0.0, 0.06, 0.0, 0.75, 0.0, 0.0, 1.0],
+    "geometry": "box",
+    "material": "2"}
+]}
+]
+},
+"materials": [
+{
+  "uuid": "1",
+  "type": "MeshPhongMaterial",
+  "color": "33023"
+},{
+  "uuid": "2",
+  "type": "MeshPhongMaterial",
+  "color": "33023"
+}]
+
+}
