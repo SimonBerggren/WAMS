@@ -87,10 +87,14 @@
                            
         <div class="container">
           <div class="row">
-            <button class="btn"><input type="file" id="files" name="files[]" /></button>
-            <button id="calculate" class="btn">Calculate</button>
-            <button id="display" class="btn">Display</button>
-            <button id="display-model" class="btn">Display Model</button>
+          <input style="display:none;" type="file" id="files" name="files[]" />
+            <input style="display:none;" type="file" id="animation" name="files[]" />
+            <button class="btn btn-default" onclick="document.getElementById('files').click();">Browse...</button>
+            <button id="calculate" class="btn btn-primary">Calculate Graph</button>
+            <button id="display" class="btn btn-primary">Display Graph</button>
+            <button id="display-model" class="btn btn-primary">Display Model</button>
+            <button id="animate-model" class="btn btn-primary">Animate Model</button>
+            <button class="btn btn-default" onclick="document.getElementById('animation').click();" >Browse Animation...</button>
           </div>
         </div>
         <div id="glcontainer"></div>

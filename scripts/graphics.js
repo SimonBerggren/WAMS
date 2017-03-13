@@ -6,19 +6,15 @@ $(function() {
   var rightmousedown_graph = false;
   var picked_object = undefined;
   var displaying_graph = false;
+  var playing_animation = false;
+  var animation = undefined;
+  var looping = true;
+  var animation_backwards = false;
   var graph;
   var _keys = [];
   for (var i = 0; i < 256; ++i)
     _keys[i] = false;
 
-  var keys = {
-    W: false,
-    A: false,
-    S: false,
-    D: false,
-    Q: false,
-    E: false
-  }
     var W = 87;
     var A = 65;
     var S = 83;
@@ -34,7 +30,7 @@ $(function() {
   directionalLight.name="important";
   scene.add( directionalLight );
   light.name="important";
-  scene.add( light );
+  scene.add(light);
   var w = window.innerWidth;
   var h = 600;
 
@@ -58,6 +54,8 @@ $(function() {
   var omy = 0;
   var dmx = 0;
   var dmy = 0;
+  var cl = 0;
+  var cc = 0;
   function render() {
     requestAnimationFrame(render)
     var delta = clock.getDelta();
@@ -87,7 +85,69 @@ camera.moveRight(camera_speed);
     } else if (_keys[E]) {
             camera.RollRight(0.02);
     }
-      dmx = dmy = 0;
+    dmx = dmy = 0;
+
+      if (playing_animation) {
+        if ((animation_backwards && cc >= 0) || cc < animation.time.length) {
+          if ((animation_backwards && cl >= 0) || animation.time[cc] < cl) {
+            for (var i = scene.children.length - 1; i >= 0; i--) {
+              if (scene.children[i] !== undefined && scene.children[i].name === "Group 1")
+                if (scene.children[i].children[0] !== undefined && scene.children[i].children[0].type === "Group") {
+                  var m1 = JSON.parse(animation.boxBody1[cc]);
+                  for(var j = 0; j < m1.length; j++)
+                    m1[j] = m1[j] * 100;
+                  var m = new THREE.Matrix4();
+                  m.set(
+                    m1[0], m1[4], m1[8], m1[12],
+                    m1[1], m1[5], m1[9], m1[13],
+                    m1[2], m1[6], m1[10], m1[14],
+                    m1[3], m1[7], m1[11], m1[15]
+                    );
+
+                  var obj = scene.children[i].children[0].children[0];
+                  obj.matrixAutoUpdate = false;
+                  obj.matrix.copy(m);
+                  obj.matrixWorldNeedsUpdate = true;
+                  obj.updateMatrixWorld();
+                  
+                  var m2 = JSON.parse(animation.boxBody2[cc]);
+                  for(var j = 0; j < m2.length; j++)
+                    m2[j] = m2[j] * 100;
+                   m.set(
+                    m2[0], m2[4], m2[8], m2[12],
+                    m2[1], m2[5], m2[9], m2[13],
+                    m2[2], m2[6], m2[10], m2[14],
+                    m2[3], m2[7], m2[11], m2[15]
+                    );
+                  
+                  var obj2 = scene.children[i].children[0].children[1];
+                  obj2.matrixAutoUpdate = false;
+                  obj2.matrix.multiply(m);
+                  obj2.matrixWorldNeedsUpdate = true;
+                  obj2.updateMatrixWorld();
+                  //scene.children[i].children[0].children[1].matrix.set(JSON.parse(animation.boxBody2[cc]));
+                }
+            }
+          }
+          if (animation_backwards) {
+            --cc;
+            cl-=delta;
+          } else {
+            ++cc;
+            cl+=delta;
+          }
+        } 
+
+        if ((animation_backwards && cc == 0) || cc == animation.time.length - 1) 
+            if (looping) {
+          animation_backwards = !animation_backwards;
+        } else {
+          playing_animation = false;
+          cc = 0;
+          cl = 0;
+        }
+      }
+
     renderer.render(scene, camera);
   }
   var saved_mousex = undefined;
@@ -147,7 +207,10 @@ camera.moveRight(camera_speed);
     }
     else if (picked_object !== undefined) {
       if (picked_object.material !== undefined && picked_object.material.color !== undefined) {
-      picked_object.material.color.set( "white" );
+        if (picked_object.name === "edge")
+          picked_object.material.color.set( "blue" );
+        else
+          picked_object.material.color.set( "white" );
     } else {
       console.log(picked_object);
     }
@@ -160,7 +223,6 @@ camera.moveRight(camera_speed);
     omx = mx;
     omy = my;
 
-    return;
   }).on('keydown', function (event) {
     var key = event.keyCode;
     if (key === TAB) {
@@ -211,6 +273,17 @@ $('#display-model').click(function(event) {
     loadJSON(graph, 0, 0, 0, 0, file_name);
     camera.setOriginalPosition({x:0,y:0,z:200});
   });
+$('#animate-model').click(function(event) {
+    if(graph === undefined) {
+      alert("no model chosen!");
+      return;
+    }
+    displaying_graph = false;
+    clearScene();
+    loadJSON(graph, 0, 0, 0, 0, file_name);
+    camera.setOriginalPosition({x:0,y:0,z:200});
+    playing_animation = true;
+  });
 
   $('#files').change(
   function(e) {
@@ -220,6 +293,17 @@ $('#display-model').click(function(event) {
   reader.onload = (function(readFile) {
     return function(e) {
       graph = reader.result;
+    };
+  })(file);
+  reader.readAsBinaryString(file);
+  });
+    $('#animation').change(
+  function(e) {
+  var reader = new FileReader();
+    var file = e.target.files[0];
+  reader.onload = (function(readFile) {
+    return function(e) {
+      animation = JSON.parse(reader.result);
     };
   })(file);
   reader.readAsBinaryString(file);

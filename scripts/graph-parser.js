@@ -13,6 +13,7 @@ function cylinderMesh(pointX, pointY) {
             edge.position.x = (pointY.x + pointX.x) / 2;
             edge.position.y = (pointY.y + pointX.y) / 2;
             edge.position.z = (pointY.z + pointX.z) / 2;
+            edge.name="edge"
             return edge;
 }
 
@@ -30,10 +31,11 @@ var icons = {};
 var jsonloader = new THREE.ObjectLoader();
 var svgloader = new THREE.TextureLoader();
 var objloader = new THREE.ObjectLoader();
+var lloader = new THREE.JSONLoader();
 
 function UrlExists(url, iftrue, iffalse)
 {
-$.get(url)
+	$.get(url)
     .done(function() { 
         iftrue();
     }).fail(function() { 
