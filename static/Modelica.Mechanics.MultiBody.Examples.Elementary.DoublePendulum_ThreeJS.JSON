@@ -35,7 +35,7 @@
 {
 "uuid": "B32BD43B-FCCC-474F-97A2-F68822B61219",
 "type": "Group",
-"name": "Group 1",
+"name": "DoublePendulum",
 "matrix": [1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1]
 ,
   "children": [
@@ -60,11 +60,13 @@
 {
   "uuid": "1",
   "type": "MeshPhongMaterial",
-  "color": "33023"
+  "color": "33023",
+  "shininess": 70
 },{
   "uuid": "2",
   "type": "MeshPhongMaterial",
-  "color": "33023"
+  "color": "33023",
+  "shininess": 70
 }]
 
 }
