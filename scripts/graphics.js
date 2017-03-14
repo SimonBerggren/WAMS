@@ -94,8 +94,6 @@ camera.moveRight(camera_speed);
               if (scene.children[i] !== undefined && scene.children[i].name === "Group 1")
                 if (scene.children[i].children[0] !== undefined && scene.children[i].children[0].type === "Group") {
                   var m1 = JSON.parse(animation.boxBody1[cc]);
-                  for(var j = 0; j < m1.length; j++)
-                    m1[j] = m1[j] * 100;
                   var m = new THREE.Matrix4();
                   m.set(
                     m1[0], m1[4], m1[8], m1[12],
@@ -111,8 +109,6 @@ camera.moveRight(camera_speed);
                   obj.updateMatrixWorld();
                   
                   var m2 = JSON.parse(animation.boxBody2[cc]);
-                  for(var j = 0; j < m2.length; j++)
-                    m2[j] = m2[j] * 100;
                    m.set(
                     m2[0], m2[4], m2[8], m2[12],
                     m2[1], m2[5], m2[9], m2[13],
@@ -122,7 +118,7 @@ camera.moveRight(camera_speed);
                   
                   var obj2 = scene.children[i].children[0].children[1];
                   obj2.matrixAutoUpdate = false;
-                  obj2.matrix.multiply(m);
+                  obj2.matrix.copy(m);
                   obj2.matrixWorldNeedsUpdate = true;
                   obj2.updateMatrixWorld();
                   //scene.children[i].children[0].children[1].matrix.set(JSON.parse(animation.boxBody2[cc]));
