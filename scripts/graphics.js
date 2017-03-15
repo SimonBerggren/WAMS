@@ -8,7 +8,8 @@ $(function() {
   var displaying_graph = false;
   var playing_animation = false;
   var animation = undefined;
-  var looping = true;
+  var looping = false;
+  var looping_bounce = false;
   var animation_backwards = false;
   var graph;
   var _keys = [];
@@ -89,7 +90,7 @@ camera.moveRight(camera_speed);
 
       if (playing_animation) {
         if ((animation_backwards && cc >= 0) || cc < animation.time.length) {
-          if ((animation_backwards && cl >= 0) || animation.time[cc] < cl) {
+          //if ((animation_backwards && cl >= 0) || animation.time[cc] < cl) {
             for (var i = scene.children.length - 1; i >= 0; i--) {
               if (scene.children[i] !== undefined && scene.children[i].name === "Group 1")
                 if (scene.children[i].children[0] !== undefined && scene.children[i].children[0].type === "Group") {
@@ -124,19 +125,31 @@ camera.moveRight(camera_speed);
                   //scene.children[i].children[0].children[1].matrix.set(JSON.parse(animation.boxBody2[cc]));
                 }
             }
-          }
-          if (animation_backwards) {
-            --cc;
-            cl-=delta;
-          } else {
-            ++cc;
-            cl+=delta;
-          }
+          //}
         } 
+          if (animation_backwards) {
+            cl-=delta;
+            while (animation.time[cc] > cl)
+            --cc;
+          } else {
+            cl+=delta;
+            while (animation.time[cc] < cl)
+            ++cc;
+          }
 
-        if ((animation_backwards && cc == 0) || cc == animation.time.length - 1) 
+        if ((animation_backwards && cc <= 0) || cc >= animation.time.length - 1) 
             if (looping) {
-          animation_backwards = !animation_backwards;
+          if (animation_backwards) {
+            cc = 0;
+          } else {
+            cc = animation.time.length - 1;
+          }
+          if (looping_bounce)
+            animation_backwards = !animation_backwards;
+          else {
+            cc = 0;
+            cl = 0;  
+          }
         } else {
           playing_animation = false;
           cc = 0;
@@ -303,6 +316,18 @@ $('#animate-model').click(function(event) {
     };
   })(file);
   reader.readAsBinaryString(file);
+  });
+
+    $('#looping').click(
+  function(e) {
+    looping = e.target.checked;
+  });
+
+$('#bouncing').click(
+  function(e) {
+    looping_bounce = e.target.checked;
+    if (!looping && looping_bounce)
+      document.getElementById("looping").checked = true;
   });
 
 });
