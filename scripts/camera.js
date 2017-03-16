@@ -1,5 +1,3 @@
-var PERSP_CAMERA;
-
 THREE.CombinedCamera = function ( width, height, fov, near, far, orthoNear, orthoFar ) {
 
   THREE.Camera.call( this );
@@ -19,10 +17,6 @@ THREE.CombinedCamera = function ( width, height, fov, near, far, orthoNear, orth
   this.zoom = 1;
 
   this.toPerspective();
-
-  PERSP_CAMERA = new THREE.PerspectiveCamera( fov, width / height, near, far );
-  this.add(PERSP_CAMERA);
-
 };
 
 var CAMERA_OBJ = undefined;

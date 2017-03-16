@@ -13,7 +13,8 @@ function cylinderMesh(pointX, pointY) {
             edge.position.x = (pointY.x + pointX.x) / 2;
             edge.position.y = (pointY.y + pointX.y) / 2;
             edge.position.z = (pointY.z + pointX.z) / 2;
-            edge.name="edge"
+            edge.name="pickable"
+            edge.userData = edge.material.color.clone();
             return edge;
 }
 
@@ -41,6 +42,13 @@ function UrlExists(url, iftrue, iffalse)
     }).fail(function() { 
         iffalse();
     })
+}
+
+function loadModel(model) {
+	var scale = 100;
+	var obj = objloader.parse(model);
+	obj.scale.x = obj.scale.y = obj.scale.z = scale;
+	scene.add(obj);
 }
 
 function loadJSON(name, x, y, w, h, n) {
@@ -90,6 +98,8 @@ function loadSVG(name, x, y, w, h) {
 		var boxGeometry2 = new THREE.BoxGeometry( 50, 50, 1 );
 		var mainBoxObject = new THREE.Mesh(boxGeometry2,boxMaterial);
 		mainBoxObject.position.set(x,y,0);
+		mainBoxObject.userData = mainBoxObject.material.color.clone();
+		mainBoxObject.name = "pickable";
 		scene.add(mainBoxObject);
 	});
 }, function() {

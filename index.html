@@ -2,114 +2,67 @@
 <html>
     <head>
         <title>WAMS</title>
+        <link rel="shortcut icon" href="favicon.ico" />
         <meta http-equiv='content-type' content='text/html; charset=utf-8'>
         <link href="styles/bootstrap-3.0.2.min.css" rel="stylesheet">
         <link href="styles/style.css" type="text/css" rel="stylesheet">
         <script src="scripts/jquery-1.10.2.min.js"></script>
         <script src="scripts/bootstrap-3.0.2.min.js"></script>
-        <script src="scripts/three.js"></script>
+        <link href="styles/bootstrap-slider.min.css" type="text/css" rel="stylesheet">
+        <script src="scripts/bootstrap-slider.min.js"></script>
     </head>
     <body>
-        <header class="navbar navbar-inverse navbar-fixed-top">
-          <div class="container">
-              <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse">
-                  <span class="sr-only">Toggle navigation</span>
-                  <span class="icon-bar"></span>
-                  <span class="icon-bar"></span>
-                  <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="Index.html">WAMS</a>
-              </div>
-            <nav class="nav navbar-nav" role="navigation">
-              <div class="collapse navbar-collapse" id="navbar-collapse">
-                <ul class="nav navbar-nav">
-                </ul>
-              </div>
-            </nav>
-          </div>
+        <header class="navbar navbar-fixed-top">
+            <a class="navbar-brand" href="Index.html">WAMS</a>
         </header>
-    <script src="scripts/GeometryUtils.js"></script>
-        <!-- replace built-in triangulation with Earcut -->
-    <script src="scripts/earcut.js"></script>
-    <script>
-      THREE.ShapeUtils.triangulateShape = function ( contour, holes ) {
-
-        function removeDupEndPts( points ) {
-
-          var l = points.length;
-          if ( l > 2 && points[ l - 1 ].equals( points[ 0 ] ) ) {
-
-            points.pop();
-
-          }
-
-        }
-
-        function addContour( vertices, contour ) {
-
-          for ( var i = 0; i < contour.length; i ++ ) {
-
-            vertices.push( contour[ i ].x );
-            vertices.push( contour[ i ].y );
-
-          }
-
-        }
-
-        removeDupEndPts( contour );
-        holes.forEach( removeDupEndPts );
-
-        var vertices = [];
-        addContour( vertices, contour );
-        var holeIndices = [];
-        var holeIndex = contour.length;
-        for ( i = 0; i < holes.length; i ++ ) {
-
-          holeIndices.push( holeIndex );
-          holeIndex += holes[ i ].length;
-          addContour( vertices, holes[ i ] );
-        }
-
-        var result = earcut( vertices, holeIndices, 2 );
-        var grouped = [];
-        for ( var i = 0; i < result.length; i += 3 ) {
-
-          grouped.push( result.slice( i, i + 3 ) );
-
-        }
-
-        return grouped;
-
-      };
-      
-    </script>
                            
         <div class="container">
           <div class="row">
-          <input style="display:none;" type="file" id="files" name="files[]" />
+          <input style="display:none;" type="file" id="file" name="files[]" />
+          <input style="display:none;" type="file" id="model" name="files[]" />
             <input style="display:none;" type="file" id="animation" name="files[]" />
-            <button class="btn btn-default" onclick="document.getElementById('files').click();">Browse...</button>
+          <div class="col-lg-4">
+            <button class="btn btn-default" onclick="document.getElementById('file').click();">Browse Graph...</button>
+            <div class="row"></div>
             <button id="calculate" class="btn btn-primary">Calculate Graph</button>
             <button id="display" class="btn btn-primary">Display Graph</button>
-            <button id="display-model" class="btn btn-primary">Display Model</button>
-            <button id="animate-model" class="btn btn-primary">Animate Model</button>
-            <input type="checkbox" id="looping">Looping</input>
-            <input type="checkbox" id="bouncing">Loop Bounce</input>
-            <button class="btn btn-default" onclick="document.getElementById('animation').click();" >Browse Animation...</button>
+          </div>
+          <div class="col-lg-2">
+            <button class="btn btn-default" onclick="document.getElementById('model').click();" id="browse-model">Browse Model...</button>
+            <div class="row"></div>
+            <button class="btn btn-default" onclick="document.getElementById('animation').click();" id="browse-animation">Browse Animation...</button>
+          </div>
+            <div class="col-lg-3">
+                <strong>Animation controls</strong>
+                <div class="row"></div>
+                <input class="animation-controls" id="animation-slider" data-slider-id='animation-slider-id' type="text" data-slider-min="0" data-slider-max="20" data-slider-step="0.1" data-slider-value="0"/>
+                <div class="row"></div>
+                <input type="checkbox" id="looping">Loop</input>
+                <input type="checkbox" id="bouncing">Bounce</input>
+                <div class="row"></div>
+            <button class="btn btn-primary animation-controls" id="play">Play</button>
+            <button class="btn btn-primary animation-controls" id="pause">Pause</button>
+            <button class="btn btn-primary animation-controls" id="stop">Stop</button>
+            <div class="row"></div>
+          </div>
           </div>
         </div>
+
         <div id="glcontainer"></div>
+
+        <script src="scripts/three.js"></script>
+        <script src="scripts/GeometryUtils.js"></script>
+        <script src="scripts/earcut.js"></script>
         <script src="scripts/camera-controls.js"></script>
-        <script src="scripts/FlyControls.js"></script>
         <script src="scripts/camera.js"></script>
         <script src="scripts/graph-parser.js"></script>
-        <script type="text/javascript" src="scripts/graphics.js"> </script>
+        <script src="scripts/graphics.js"></script>
+
         <div style="margin:10px;">
         <h4><strong>Camera controls:</strong></h4>
         <strong>W/A/S/D</strong> Move around.
-        <br>
-        <strong>Right-Click + mouse-move:</strong> Look around.
+        <!-- <br>
+        <strong>Right-Click + mouse-move:</strong> Look around. -->
         <br>
         <strong>Left-Click + mouse-move:</strong> Click and drag around in x- and y-axis.
         <br>

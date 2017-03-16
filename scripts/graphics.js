@@ -1,6 +1,23 @@
 (function(){Math.clamp=function(a,b,c){return Math.max(b,Math.min(c,a));}})();
+(function(){keyCode=function(a){return Math.max(b,Math.min(c,a));}})();
+
+var slider = new Slider('#animation-slider', {
+  formatter: function(value) {
+    return value;
+  },
+  min:0,
+  max:1,
+});
+
+
+
+slider.disable();
 
 $(function() {
+
+  $(document).find('.animation-controls').addClass('disabled');
+  $(document).find('#browse-animation').addClass('disabled');
+
   var perspective_camera = true;
   var leftmousedown_graph = false;
   var rightmousedown_graph = false;
@@ -11,7 +28,11 @@ $(function() {
   var looping = false;
   var looping_bounce = false;
   var animation_backwards = false;
+  var animated_objects = [];
+  var animated_object_names = [];
   var graph;
+  var model;
+  var animation_controls_enabled = false;
   var _keys = [];
   for (var i = 0; i < 256; ++i)
     _keys[i] = false;
@@ -89,72 +110,42 @@ camera.moveRight(camera_speed);
     dmx = dmy = 0;
 
       if (playing_animation) {
-        if ((animation_backwards && cc >= 0) || cc < animation.time.length) {
-          //if ((animation_backwards && cl >= 0) || animation.time[cc] < cl) {
-            for (var i = scene.children.length - 1; i >= 0; i--) {
-              if (scene.children[i] !== undefined && scene.children[i].name === "Group 1")
-                if (scene.children[i].children[0] !== undefined && scene.children[i].children[0].type === "Group") {
-                  var m1 = JSON.parse(animation.boxBody1[cc]);
-                  var m = new THREE.Matrix4();
-                  m.set(
-                    m1[0], m1[4], m1[8], m1[12],
-                    m1[1], m1[5], m1[9], m1[13],
-                    m1[2], m1[6], m1[10], m1[14],
-                    m1[3], m1[7], m1[11], m1[15]
-                    );
-
-                  var obj = scene.children[i].children[0].children[0];
-                  obj.matrixAutoUpdate = false;
-                  obj.matrix.copy(m);
-                  obj.matrixWorldNeedsUpdate = true;
-                  obj.updateMatrixWorld();
-                  
-                  var m2 = JSON.parse(animation.boxBody2[cc]);
-                   m.set(
-                    m2[0], m2[4], m2[8], m2[12],
-                    m2[1], m2[5], m2[9], m2[13],
-                    m2[2], m2[6], m2[10], m2[14],
-                    m2[3], m2[7], m2[11], m2[15]
-                    );
-                  
-                  var obj2 = scene.children[i].children[0].children[1];
-                  obj2.matrixAutoUpdate = false;
-                  obj2.matrix.copy(m);
-                  obj2.matrixWorldNeedsUpdate = true;
-                  obj2.updateMatrixWorld();
-                  //scene.children[i].children[0].children[1].matrix.set(JSON.parse(animation.boxBody2[cc]));
-                }
-            }
-          //}
-        } 
-          if (animation_backwards) {
-            cl-=delta;
-            while (animation.time[cc] > cl)
-            --cc;
-          } else {
-            cl+=delta;
-            while (animation.time[cc] < cl)
-            ++cc;
-          }
-
-        if ((animation_backwards && cc <= 0) || cc >= animation.time.length - 1) 
-            if (looping) {
-          if (animation_backwards) {
-            cc = 0;
-          } else {
-            cc = animation.time.length - 1;
-          }
-          if (looping_bounce)
-            animation_backwards = !animation_backwards;
-          else {
-            cc = 0;
-            cl = 0;  
-          }
-        } else {
-          playing_animation = false;
-          cc = 0;
-          cl = 0;
+        if ((animation_backwards && cc >= 0) || (!animation_backwards && cc < animation.time.length)) {
+          for (var i = 0; i < animated_objects.length; ++i) {
+            var obj = animated_objects[i];
+            var name = obj.name;
+            var m = JSON.parse(animation[name][cc]);
+            obj.matrixAutoUpdate = false;
+            obj.matrix.elements.set(m);
+          }; 
         }
+
+        if (animation_backwards) {
+          cl-=delta;
+          while (animation.time[cc] > cl)
+            --cc;
+        } else {
+          cl+=delta;
+          while (animation.time[cc] < cl)
+            ++cc;
+        }
+
+        if ((animation_backwards && cc <= 0) || (!animation_backwards && cc >= animation.time.length - 1)) 
+          if (looping) {
+            if (looping_bounce) {
+              animation_backwards = !animation_backwards;
+              cc = animation_backwards ? animation.time.length - 1 : 0;
+              cl = animation.time[cc];
+            } else {
+              if (animation_backwards)
+              animation_backwards = false;
+              cc = 0;
+              cl = 0;  
+            }
+          } else {
+            playing_animation = false;
+          }
+          slider.setValue(cl);
       }
 
     renderer.render(scene, camera);
@@ -198,31 +189,18 @@ camera.moveRight(camera_speed);
     mouse.x = ( mx / rect.width ) * 2 - 1;
     mouse.y = - ( my / rect.height ) * 2 + 1;
     var raycaster = new THREE.Raycaster();
-    camera.update();
     raycaster.setFromCamera(mouse, PERSP_CAMERA);
     var intersects = raycaster.intersectObjects(scene.children);
     if (intersects.length > 0) {
       if (picked_object !== undefined)
-        picked_object.material.color.set( "white" );
-      if (intersects[0].object.type !== "Line" && intersects[0].object.name !== "plane") {
+        picked_object.material.color.set( picked_object.userData );
+      if (intersects[0].object.name === "pickable") {
         picked_object = intersects[0].object;
-        
-         if (picked_object.material !== undefined && picked_object.material.color !== undefined) {
-      picked_object.material.color.set( 0xff0000 );
-    } else {
-      console.log(picked_object);
-    }
+        picked_object.material.color.set( 0xff0000 );
       }
     }
     else if (picked_object !== undefined) {
-      if (picked_object.material !== undefined && picked_object.material.color !== undefined) {
-        if (picked_object.name === "edge")
-          picked_object.material.color.set( "blue" );
-        else
-          picked_object.material.color.set( "white" );
-    } else {
-      console.log(picked_object);
-    }
+      picked_object.material.color.set( picked_object.userData );
       picked_object = undefined;
     }
     }
@@ -253,7 +231,7 @@ camera.moveRight(camera_speed);
 
 	$('#calculate').click(function() {
     if(graph === undefined) {
-      alert("no diagram chosen!");
+      alert("no graph chosen!");
       return;
     }
     displaying_graph = true;
@@ -263,71 +241,127 @@ camera.moveRight(camera_speed);
 
 $('#display').click(function(event) {
     if(graph === undefined) {
-      alert("no diagram chosen!");
+      alert("no graph chosen!");
       return;
     }
     displaying_graph = true;
     clearScene();
     display_graph(graph, scene, camera, true);
   });
+
 var file_name;
-$('#display-model').click(function(event) {
-    if(graph === undefined) {
-      alert("no model chosen!");
-      return;
-    }
-    displaying_graph = false;
-
-    clearScene();
-    loadJSON(graph, 0, 0, 0, 0, file_name);
-    camera.setOriginalPosition({x:0,y:0,z:200});
-  });
 $('#animate-model').click(function(event) {
-    if(graph === undefined) {
-      alert("no model chosen!");
+    if(model === undefined || animation === undefined) {
+      alert("no model or animation chosen!");
       return;
     }
-    displaying_graph = false;
-    clearScene();
-    loadJSON(graph, 0, 0, 0, 0, file_name);
-    camera.setOriginalPosition({x:0,y:0,z:200});
+    
     playing_animation = true;
+
+     
+
   });
 
-  $('#files').change(
-  function(e) {
+  $('#file').change( function(e) {
   var file = e.target.files[0];
   file_name = file.name.split(".")[0];
   var reader = new FileReader();
-  reader.onload = (function(readFile) {
-    return function(e) {
+  reader.onload = function(readFile) {
       graph = reader.result;
-    };
-  })(file);
+  };
   reader.readAsBinaryString(file);
   });
-    $('#animation').change(
-  function(e) {
-  var reader = new FileReader();
+
+  $('#animation').change( function(e) {
+    var reader = new FileReader();
     var file = e.target.files[0];
-  reader.onload = (function(readFile) {
-    return function(e) {
+    reader.onload = function(readFile) {
       animation = JSON.parse(reader.result);
+      $(document).find('.animation-controls').removeClass('disabled');
+
+      var loop_children = function(parent, func) {
+        for (var i = 0; i < parent.children.length; ++i) {
+          var child = parent.children[i];
+          if (child.children !== undefined && child.children.length > 0)
+            loop_children(child, func);
+          else
+            func(child);
+        }
+      };
+
+      animated_object_names = [];
+  loop_children(model.object, function(child) {
+    animated_object_names.push(child.name);
+  })
+  animated_objects = [];
+  loop_children(scene, function(child) {
+    for (var i = 0; i < animated_object_names.length; ++i)
+      if (child.name === animated_object_names[i]){
+        animated_objects.push(child);
+        animated_object_names.splice(i, 1);
+        break;
+      }
+    });
+
+  slider.setAttribute("max", animation.time[animation.time.length - 1]);
+  slider.refresh();
+  slider.enable();
+  cc = cl = 0;
+  slider.on("slide", function(value) {
+  //   playing_animation = false;
+  // cl = value;
+  // cc = (cl / animation.time[animation.time.length - 1]) * animation.time.length - 1;
+  // for (var i = 0; i < animated_objects.length; ++i) {
+  //   var obj = animated_objects[i];
+  //   var name = obj.name;
+  //   var m = JSON.parse(animation[name][cc]);
+  //   obj.matrixAutoUpdate = false;
+  //   obj.matrix.elements.set(m);
+  //   }; 
+  });
+
     };
-  })(file);
-  reader.readAsBinaryString(file);
+    reader.readAsBinaryString(file);
   });
 
-    $('#looping').click(
-  function(e) {
+  $('#model').change( function(e) {
+    var reader = new FileReader();
+    var file = e.target.files[0];
+    reader.onload = function(readFile) {
+      model = JSON.parse(reader.result);
+      displaying_graph = false;
+      clearScene();
+      loadModel(model);
+      camera.setOriginalPosition({x:0,y:0,z:200});
+
+      $(document).find('#browse-animation').removeClass('disabled');
+    };
+    reader.readAsBinaryString(file);
+  });
+
+  $('#looping').click( function(e) {
     looping = e.target.checked;
+    if (!looping && looping_bounce)
+      document.getElementById("bouncing").click();
   });
 
-$('#bouncing').click(
-  function(e) {
+  $('#bouncing').click( function(e) {
     looping_bounce = e.target.checked;
     if (!looping && looping_bounce)
-      document.getElementById("looping").checked = true;
+      document.getElementById("looping").click();
+  });
+
+  $('#play').click( function(e) {
+    playing_animation = true;
+  });
+
+  $('#pause').click( function(e) {
+    playing_animation = false;
+  });
+
+  $('#stop').click( function(e) {
+    playing_animation = false;
+    slider.setValue(cc = cl = 0);
   });
 
 });
