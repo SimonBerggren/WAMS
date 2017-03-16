@@ -22,6 +22,17 @@
 			"radialSegments": 32,
 			"heightSegments": 1,
 			"openEnded": false
+		},
+		{
+			"uuid": "sphere",
+			"type": "SphereBufferGeometry",
+			"radius": 0.5,
+			"widthSegments": 32,
+			"heightSegments": 16,
+			"phiStart": 0,
+			"phiLength": 6.283185,
+			"thetaStart": 0,
+			"thetaLength": 3.141593
 		}],
 	"object": {
 		"uuid": "B32BD43B-FCCC-474F-97A2-F68822B61219",
@@ -35,7 +46,7 @@
 {
 "uuid": "B32BD43B-FCCC-474F-97A2-F68822B61219",
 "type": "Group",
-"name": "Group 1",
+"name": "Cylinder",
 "matrix": [1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1]
 ,
     "children": [
@@ -85,7 +96,7 @@
 {
 "uuid": "B32BD43B-FCCC-474F-97A2-F68822B61219",
 "type": "Group",
-"name": "Group 1",
+"name": "Cylinder",
 "matrix": [1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1]
 ,
     "children": [
@@ -135,7 +146,7 @@
 {
 "uuid": "B32BD43B-FCCC-474F-97A2-F68822B61219",
 "type": "Group",
-"name": "Group 1",
+"name": "Cylinder",
 "matrix": [1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1]
 ,
     "children": [
@@ -185,7 +196,7 @@
 {
 "uuid": "B32BD43B-FCCC-474F-97A2-F68822B61219",
 "type": "Group",
-"name": "Group 1",
+"name": "Cylinder",
 "matrix": [1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1]
 ,
     "children": [
@@ -235,7 +246,7 @@
 {
 "uuid": "B32BD43B-FCCC-474F-97A2-F68822B61219",
 "type": "Group",
-"name": "Group 1",
+"name": "Cylinder",
 "matrix": [1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1]
 ,
     "children": [
@@ -285,7 +296,7 @@
 {
 "uuid": "B32BD43B-FCCC-474F-97A2-F68822B61219",
 "type": "Group",
-"name": "Group 1",
+"name": "Cylinder",
 "matrix": [1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1]
 ,
     "children": [
@@ -338,147 +349,183 @@
 {
   "uuid": "1",
   "type": "MeshPhongMaterial",
-  "color": "11842740"
+  "color": "11842740",
+  "shininess": 70
 },{
   "uuid": "2",
   "type": "MeshPhongMaterial",
-  "color": "200"
+  "color": "200",
+  "shininess": 70
 },{
   "uuid": "3",
   "type": "MeshPhongMaterial",
-  "color": "33023"
+  "color": "33023",
+  "shininess": 70
 },{
   "uuid": "4",
   "type": "MeshPhongMaterial",
-  "color": "11842740"
+  "color": "11842740",
+  "shininess": 70
 },{
   "uuid": "5",
   "type": "MeshPhongMaterial",
-  "color": "11842740"
+  "color": "11842740",
+  "shininess": 70
 },{
   "uuid": "6",
   "type": "MeshPhongMaterial",
-  "color": "33023"
+  "color": "33023",
+  "shininess": 70
 },{
   "uuid": "7",
   "type": "MeshPhongMaterial",
-  "color": "11842740"
+  "color": "11842740",
+  "shininess": 70
 },{
   "uuid": "8",
   "type": "MeshPhongMaterial",
-  "color": "200"
+  "color": "200",
+  "shininess": 70
 },{
   "uuid": "9",
   "type": "MeshPhongMaterial",
-  "color": "33023"
+  "color": "33023",
+  "shininess": 70
 },{
   "uuid": "10",
   "type": "MeshPhongMaterial",
-  "color": "11842740"
+  "color": "11842740",
+  "shininess": 70
 },{
   "uuid": "11",
   "type": "MeshPhongMaterial",
-  "color": "11842740"
+  "color": "11842740",
+  "shininess": 70
 },{
   "uuid": "12",
   "type": "MeshPhongMaterial",
-  "color": "33023"
+  "color": "33023",
+  "shininess": 70
 },{
   "uuid": "13",
   "type": "MeshPhongMaterial",
-  "color": "11842740"
+  "color": "11842740",
+  "shininess": 70
 },{
   "uuid": "14",
   "type": "MeshPhongMaterial",
-  "color": "200"
+  "color": "200",
+  "shininess": 70
 },{
   "uuid": "15",
   "type": "MeshPhongMaterial",
-  "color": "33023"
+  "color": "33023",
+  "shininess": 70
 },{
   "uuid": "16",
   "type": "MeshPhongMaterial",
-  "color": "11842740"
+  "color": "11842740",
+  "shininess": 70
 },{
   "uuid": "17",
   "type": "MeshPhongMaterial",
-  "color": "11842740"
+  "color": "11842740",
+  "shininess": 70
 },{
   "uuid": "18",
   "type": "MeshPhongMaterial",
-  "color": "33023"
+  "color": "33023",
+  "shininess": 70
 },{
   "uuid": "19",
   "type": "MeshPhongMaterial",
-  "color": "11842740"
+  "color": "11842740",
+  "shininess": 70
 },{
   "uuid": "20",
   "type": "MeshPhongMaterial",
-  "color": "200"
+  "color": "200",
+  "shininess": 70
 },{
   "uuid": "21",
   "type": "MeshPhongMaterial",
-  "color": "33023"
+  "color": "33023",
+  "shininess": 70
 },{
   "uuid": "22",
   "type": "MeshPhongMaterial",
-  "color": "11842740"
+  "color": "11842740",
+  "shininess": 70
 },{
   "uuid": "23",
   "type": "MeshPhongMaterial",
-  "color": "11842740"
+  "color": "11842740",
+  "shininess": 70
 },{
   "uuid": "24",
   "type": "MeshPhongMaterial",
-  "color": "33023"
+  "color": "33023",
+  "shininess": 70
 },{
   "uuid": "25",
   "type": "MeshPhongMaterial",
-  "color": "11842740"
+  "color": "11842740",
+  "shininess": 70
 },{
   "uuid": "26",
   "type": "MeshPhongMaterial",
-  "color": "200"
+  "color": "200",
+  "shininess": 70
 },{
   "uuid": "27",
   "type": "MeshPhongMaterial",
-  "color": "33023"
+  "color": "33023",
+  "shininess": 70
 },{
   "uuid": "28",
   "type": "MeshPhongMaterial",
-  "color": "11842740"
+  "color": "11842740",
+  "shininess": 70
 },{
   "uuid": "29",
   "type": "MeshPhongMaterial",
-  "color": "11842740"
+  "color": "11842740",
+  "shininess": 70
 },{
   "uuid": "30",
   "type": "MeshPhongMaterial",
-  "color": "33023"
+  "color": "33023",
+  "shininess": 70
 },{
   "uuid": "31",
   "type": "MeshPhongMaterial",
-  "color": "11842740"
+  "color": "11842740",
+  "shininess": 70
 },{
   "uuid": "32",
   "type": "MeshPhongMaterial",
-  "color": "200"
+  "color": "200",
+  "shininess": 70
 },{
   "uuid": "33",
   "type": "MeshPhongMaterial",
-  "color": "33023"
+  "color": "33023",
+  "shininess": 70
 },{
   "uuid": "34",
   "type": "MeshPhongMaterial",
-  "color": "11842740"
+  "color": "11842740",
+  "shininess": 70
 },{
   "uuid": "35",
   "type": "MeshPhongMaterial",
-  "color": "11842740"
+  "color": "11842740",
+  "shininess": 70
 },{
   "uuid": "36",
   "type": "MeshPhongMaterial",
-  "color": "33023"
+  "color": "33023",
+  "shininess": 70
 }]
 
 }
