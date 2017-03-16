@@ -9,8 +9,6 @@ var slider = new Slider('#animation-slider', {
   max:1,
 });
 
-
-
 slider.disable();
 
 $(function() {
@@ -46,6 +44,13 @@ $(function() {
     var TAB = 9;
     var ESC = 27;
     scene = new THREE.Scene();
+
+    function CustomSinCurve( scale ){
+
+  this.scale = ( scale === undefined ) ? 1 : scale;
+
+}
+
   var directionalLight = new THREE.DirectionalLight( 0xffffff, 1 );
   directionalLight.position.set(0,0,10);
   var light = new THREE.AmbientLight( 0x2f4f4f ); // soft white light
@@ -53,6 +58,7 @@ $(function() {
   scene.add( directionalLight );
   light.name="important";
   scene.add(light);
+
   var w = window.innerWidth;
   var h = 600;
 
@@ -235,7 +241,7 @@ camera.moveRight(camera_speed);
       return;
     }
     displaying_graph = true;
-    clearScene();
+    
     calculate_graph(graph, scene, camera);
   });
 
@@ -245,7 +251,7 @@ $('#display').click(function(event) {
       return;
     }
     displaying_graph = true;
-    clearScene();
+    
     display_graph(graph, scene, camera, true);
   });
 
@@ -330,7 +336,7 @@ $('#animate-model').click(function(event) {
     reader.onload = function(readFile) {
       model = JSON.parse(reader.result);
       displaying_graph = false;
-      clearScene();
+      
       loadModel(model);
       camera.setOriginalPosition({x:0,y:0,z:200});
 
@@ -362,6 +368,10 @@ $('#animate-model').click(function(event) {
   $('#stop').click( function(e) {
     playing_animation = false;
     slider.setValue(cc = cl = 0);
+  });
+
+  $('#clear').click( function(e) {
+    clearScene();
   });
 
 });
