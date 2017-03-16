@@ -7,7 +7,7 @@ function cylinderMesh(pointX, pointY) {
                 0, -1, 0, 0,
                 0, 0, 0, 1));
             var edgeGeometry = new THREE.CylinderGeometry(2, 2, direction.length(), 8, 1);
-            var edge = new THREE.Mesh(edgeGeometry, new THREE.MeshBasicMaterial( { color: 0x0000ff } ) );
+            var edge = new THREE.Mesh(edgeGeometry, new THREE.MeshPhongMaterial( { color: 0x00000 } ) );
             edge.applyMatrix(orientation);
             // position based on midpoints - there may be a better solution than this
             edge.position.x = (pointY.x + pointX.x) / 2;
@@ -18,9 +18,20 @@ function cylinderMesh(pointX, pointY) {
             return edge;
 }
 
+function Sphere(x, y) {
+var geometry = new THREE.SphereGeometry( 3, 5, 5);
+var material = new THREE.MeshPhongMaterial( {color: 0x000000} );
+var sphere = new THREE.Mesh( geometry, material );
+sphere.position.x = x;
+sphere.position.y = y;
+sphere.position.z = 0;
+return sphere;
+}
+
+
 var scene = undefined;
 function plane(x, y, w, h, c, z) {
-	var plane = new THREE.Mesh(new THREE.PlaneGeometry(w, h, 1, 1), new THREE.MeshBasicMaterial({color:c}));
+	var plane = new THREE.Mesh(new THREE.PlaneGeometry(w, h, 1, 1), new THREE.MeshPhongMaterial({color:c}));
 	plane.position.x = x;
 	plane.position.y = y;
 	plane.position.z = z;
@@ -253,6 +264,7 @@ function get_comps(comps, edges, parent) {
 	var offsetX = (parent === undefined) ? 0 : parent.x;
 	var offsetY = (parent === undefined) ? 0 : parent.y;
 
+	
 	for(var i = 0; i < comps.length; ++i) {
 		var c = comps[i];
     	if (c.children !== undefined) {
@@ -294,6 +306,8 @@ function get_comps(comps, edges, parent) {
 			var lastBend = bendPoints[bendPoints.length - 1];
 			scene.add(cylinderMesh(new THREE.Vector3(sourceX, sourceY, 0), new THREE.Vector3(firstBend.x + offsetX, firstBend.y + offsetY,0)));
   			for(var j = 0; j < bendPoints.length - 1; ++j) {
+
+
 				var bend = bendPoints[j];
 				var bendX = bend.x + offsetX;
 				var bendY = bend.y + offsetY;
@@ -301,8 +315,11 @@ function get_comps(comps, edges, parent) {
 				var bendX2 = bend2.x + offsetX;
 				var bendY2 = bend2.y + offsetY;
 
+  				scene.add(Sphere(bendX,bendY));
+
 				scene.add(cylinderMesh(new THREE.Vector3(bendX, bendY, 0), new THREE.Vector3(bendX2, bendY2,0)));
 			}
+			scene.add(Sphere(lastBend.x + offsetX,lastBend.y + offsetY));
 			scene.add(cylinderMesh(new THREE.Vector3(lastBend.x + offsetX, lastBend.y + offsetY,0), new THREE.Vector3(targetX, targetY, 0)));
 	  	} else {
 	  		scene.add(cylinderMesh(new THREE.Vector3(sourceX, sourceY, 0), new THREE.Vector3(targetX,targetY,0)));	
