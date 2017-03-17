@@ -1,0 +1,17 @@
+<svg width="200.0" height="200.0" viewBox="-0.0 -0.0 200.0 200.0" version="1.1" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <text x="100.0" y="209.45" dy=".33em" style="fill:#0000ff; text-anchor:middle; font-size:39.8px;"></text>
+  <path d="M20.4,139.8 L179.6,139.8" style="stroke:#000000; fill:none;" />
+  <path d="M179.6,139.8 L139.8,179.6" style="stroke:#000000; fill:none;" />
+  <path d="M139.8,139.8 L100.0,179.6" style="stroke:#000000; fill:none;" />
+  <path d="M100.0,139.8 L60.2,179.6" style="stroke:#000000; fill:none;" />
+  <path d="M60.2,139.8 L20.4,179.6" style="stroke:#000000; fill:none;" />
+  <path d="M100.0,139.8 L100.0,109.95" style="stroke:#000000; fill:none;" />
+  <g class="Port">
+    <metadata xmlns:vda="http://fat-ak30.eas.iis.fraunhofer.de/exchange/vda_meta">
+      <vda:meta name="Name">flange</vda:meta>
+      <vda:meta name="X">100.0</vda:meta>
+      <vda:meta name="Y">100.0</vda:meta>
+    </metadata>
+    <ellipse cx="99.801" cy="100.0" rx="9.95" ry="9.95" transform="rotate(180.0 99.801 100.0)" style="stroke:#000000; fill:#ffffff;" />
+  </g>
+</svg>
