@@ -19,7 +19,7 @@ function cylinderMesh(pointX, pointY) {
 }
 
 function Sphere(x, y) {
-var geometry = new THREE.SphereGeometry( 3, 5, 5);
+var geometry = new THREE.SphereGeometry( 2, 5, 5);
 var material = new THREE.MeshPhongMaterial( {color: 0x000000} );
 var sphere = new THREE.Mesh( geometry, material );
 sphere.position.x = x;
@@ -92,6 +92,15 @@ function loadJSON(name, x, y, w, h, n) {
 	    		obj.scale.x = obj.scale.y = obj.scale.z = 10;
 	    		break;
 	    	}
+	    	function setName(name, obj) {
+	    		obj.name = name;
+	    		if (obj.children !== undefined) {
+	    			for (var i = 0; i < obj.children.length; ++i){
+    					setName(name, obj.children[i]);
+	    			}
+	    		}
+	    	}
+	    	setName("pickable", obj);
  		  	scene.add(obj);
  		  	createText(scene, name, x, y); 
 	})
@@ -212,6 +221,8 @@ function createText(group, text, x, y) {
 	textMesh1.rotation.x = 0;
 	textMesh1.rotation.y = Math.PI * 2;
 
+	textMesh1.name="pickable";
+
 	group.add( textMesh1 );
 }
 
@@ -250,13 +261,11 @@ function display_graph(graph, s, camera, display) {
 			var comps = g.children;
 			var edges = g.edges;
 			get_comps(comps, edges);
-			camera.setOriginalPosition({x:g.width / 2, y:g.height / 2, z:500})
 		}
 	} else {
 		var comps = graph.children;
 		var edges = graph.edges;
 		get_comps(comps, edges);
-		camera.setOriginalPosition({x:graph.width / 2, y:graph.height / 2, z:500})
 	}
 }
 

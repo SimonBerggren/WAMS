@@ -12,9 +12,9 @@ var slider = new Slider('#animation-slider', {
 slider.disable();
 
 $(function() {
-
   $(document).find('.animation-controls').addClass('disabled');
   $(document).find('#browse-animation').addClass('disabled');
+  window.addEventListener('resize', onWindowResize, false);
 
   var perspective_camera = true;
   var leftmousedown_graph = false;
@@ -41,15 +41,12 @@ $(function() {
     var D = 68;
     var Q = 81;
     var E = 69;
+    var R = 82;
     var TAB = 9;
     var ESC = 27;
+    var CTRL = 17;
+    var SHIFT = 19;
     scene = new THREE.Scene();
-
-    function CustomSinCurve( scale ){
-
-  this.scale = ( scale === undefined ) ? 1 : scale;
-
-}
 
   var directionalLight = new THREE.DirectionalLight( 0xffffff, 1 );
   directionalLight.position.set(0,0,10);
@@ -65,11 +62,18 @@ $(function() {
   var renderer = new THREE.WebGLRenderer({alpha: true});
   renderer.setClearColor( "white", 1 );
   renderer.setSize(w, h);
+
   var rect = undefined;
 
   var minZoom = 0.1;
   var camera = new THREE.CombinedCamera(w/2, h/2,50, 1, 1000, -500, 1000);
   var controls = new THREE.PointerLockControls( camera );
+
+  camera2 = new THREE.PerspectiveCamera( 60, w / h, 1, 1000 );
+  camera2.position.z = 500;
+
+  controls2 = new THREE.OrbitControls( camera2, renderer.domElement );
+  controls2.addEventListener( 'change', function() { renderer.render(scene, camera2); } ); 
 
   CAMERA_OBJ = controls.getObject();
   CAMERA_OBJ2 = controls.getObject2();
@@ -78,6 +82,14 @@ $(function() {
   CAMERA_OBJ.position.set(0,0,200);
   CAMERA_OBJ2.position.set(0,0,0);
   camera.position.set(0,0,0);
+  var clock;
+  control = new THREE.TransformControls( camera2, renderer.domElement );
+
+  //control.addEventListener( 'change', render );
+  control.setMode("translate");
+  scene.add(control);
+  var mx = 0;
+  var my = 0;
   var omx = 0;
   var omy = 0;
   var dmx = 0;
@@ -86,11 +98,12 @@ $(function() {
   var cc = 0;
   function render() {
     requestAnimationFrame(render)
+    control.update();
     var delta = clock.getDelta();
     if (leftmousedown_graph) {
         //camera.position.x -= dmx * 5;
         //camera.position.y += dmy * 5;
-    } else if (rightmousedown_graph) {
+    } else if (rightmousedown_graph && !_keys[SHIFT]) {
       controls.movementSpeed = 0.33;
       var x = dmx / 10;
       var y =  dmy / 10;
@@ -98,12 +111,11 @@ $(function() {
       x = Math.clamp(x, -limit, limit);
       y = Math.clamp(y, -limit, limit);
       controls.update( x, y );
-    }
-    var camera_speed = 5;
-    if (_keys[W]) {
-      camera.moveFwd(camera_speed);
-    } else if (_keys[S]) {
-      camera.moveBwd(camera_speed);
+        var camera_speed = 5;
+          if (_keys[W]) {
+            camera.moveFwd(camera_speed);
+          } else if (_keys[S]) {
+            camera.moveBwd(camera_speed);
     } if (_keys[A]) {
       camera.moveLeft(camera_speed);
     } else if (_keys[D]) {
@@ -112,6 +124,7 @@ camera.moveRight(camera_speed);
             camera.RollLeft(0.02);
     } else if (_keys[E]) {
             camera.RollRight(0.02);
+    }
     }
     dmx = dmy = 0;
 
@@ -154,13 +167,38 @@ camera.moveRight(camera_speed);
           slider.setValue(cl);
       }
 
-    renderer.render(scene, camera);
+    renderer.render(scene, camera2);
   }
   var saved_mousex = undefined;
   var saved_mousey = undefined;
   $('#glcontainer').on('mousedown', function(event) {
-    if(event.button == 0)
+    if(event.button == 0) {
         leftmousedown_graph = true;
+    var mouse = new THREE.Vector2();
+    mouse.x = ( mx / rect.width ) * 2 - 1;
+    mouse.y = - ( my / rect.height ) * 2 + 1;
+    var raycaster = new THREE.Raycaster();
+    camera2.updateProjectionMatrix();
+    raycaster.setFromCamera(mouse, camera2);
+    var intersects = raycaster.intersectObjects(scene.children, true);
+    control.detach();
+    picked_object = undefined;
+    for (var i = 0; i < intersects.length; ++i) {
+      console.log(intersects);
+      if (intersects[0].object.name === "pickable") {
+      control.detach();
+
+        picked_object = intersects[0].object;
+        
+        while(picked_object.parent !== undefined && picked_object.parent.type !== "Scene")
+          picked_object = picked_object.parent;
+
+        control.attach(picked_object);
+        break;
+      }
+    }
+
+    }
     else if (event.button == 2) {
       if (!rightmousedown_graph) 
         ;
@@ -169,46 +207,31 @@ camera.moveRight(camera_speed);
   }).bind('DOMMouseScroll mousewheel', function(event) {
     camera.moveBwd(event.originalEvent.wheelDeltaY);
   }).append(renderer.domElement);
-  var clock = new THREE.Clock();
+
+  clock = new THREE.Clock();
   render();
+
   $(document).on('contextmenu', function(event) {
     event.preventDefault();
-  }).on('mouseup', function() {
+  }).on('mouseup', function(event) {
     leftmousedown_graph = false;
     rightmousedown_graph = false;
   }).on('mousemove', function(event) {
 
-    var mx = 0;
-    var my = 0;
+    mx = 0;
+    my = 0;
     
     rect = event.target.getBoundingClientRect();
     mx = event.clientX - rect.left;
     my = event.clientY - rect.top;
     if (leftmousedown_graph) {
       if (picked_object !== undefined) {
-        picked_object.position.x -= dmx * 3;
-        picked_object.position.y += dmy * 3;
+        //picked_object.position.x -= dmx * 3;
+        //picked_object.position.y += dmy * 3;
       }
     }
     else if (displaying_graph) {
-    var mouse = new THREE.Vector2();
-    mouse.x = ( mx / rect.width ) * 2 - 1;
-    mouse.y = - ( my / rect.height ) * 2 + 1;
-    var raycaster = new THREE.Raycaster();
-    raycaster.setFromCamera(mouse, PERSP_CAMERA);
-    var intersects = raycaster.intersectObjects(scene.children);
-    if (intersects.length > 0) {
-      if (picked_object !== undefined)
-        picked_object.material.color.set( picked_object.userData );
-      if (intersects[0].object.name === "pickable") {
-        picked_object = intersects[0].object;
-        picked_object.material.color.set( 0xff0000 );
-      }
-    }
-    else if (picked_object !== undefined) {
-      picked_object.material.color.set( picked_object.userData );
-      picked_object = undefined;
-    }
+
     }
     dmx = omx - mx;
     dmy = omy - my;
@@ -228,6 +251,17 @@ camera.moveRight(camera_speed);
       camera.toOrthographic();
     }
     _keys[key] = true;
+
+    if (_keys[SHIFT]) {
+      if (_keys[W])
+        control.setMode("translate");
+      else if (_keys[E])
+        control.setMode("rotate");
+      else if (_keys[R])
+        control.setMode("scale");
+      else if (_keys[Q])
+        control.setSpace( control.space === "local" ? "world" : "local" );
+    }
   }).on('keyup', function(event) {
     var key = event.keyCode;
     _keys[key] = false; 
@@ -372,6 +406,18 @@ $('#animate-model').click(function(event) {
 
   $('#clear').click( function(e) {
     clearScene();
+    scene.add(control);
   });
+
+    function onWindowResize() {
+        camera.aspect = window.innerWidth / 600;
+        camera.width = window.innerWidth;
+        camera.updateProjectionMatrix();
+
+        renderer.setSize( window.innerWidth, 600 );
+
+        render();
+
+ }
 
 });
