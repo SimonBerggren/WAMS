@@ -204,6 +204,30 @@ camera.moveRight(camera_speed);
         ;
     rightmousedown_graph = true;
     }
+  }).on('touchstart', function(event) {
+        var mouse = new THREE.Vector2();
+    mouse.x = ( mx / rect.width ) * 2 - 1;
+    mouse.y = - ( my / rect.height ) * 2 + 1;
+    var raycaster = new THREE.Raycaster();
+    camera2.updateProjectionMatrix();
+    raycaster.setFromCamera(mouse, camera2);
+    var intersects = raycaster.intersectObjects(scene.children, true);
+    control.detach();
+    picked_object = undefined;
+    for (var i = 0; i < intersects.length; ++i) {
+      console.log(intersects);
+      if (intersects[0].object.name === "pickable") {
+      control.detach();
+
+        picked_object = intersects[0].object;
+        
+        while(picked_object.parent !== undefined && picked_object.parent.type !== "Scene")
+          picked_object = picked_object.parent;
+
+        control.attach(picked_object);
+        break;
+      }
+    }
   }).bind('DOMMouseScroll mousewheel', function(event) {
     camera.moveBwd(event.originalEvent.wheelDeltaY);
   }).append(renderer.domElement);
