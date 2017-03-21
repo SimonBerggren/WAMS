@@ -34,7 +34,7 @@ $('#animate-model').click(function(event) {
   var reader = new FileReader();
   reader.onload = function(readFile) {
       graph = reader.result;
-  };
+};
   reader.readAsBinaryString(file);
   });
 

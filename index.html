@@ -23,8 +23,8 @@
           <div class="col-xs-3 col-xs-offset-1">
             <button class="btn btn-default" onclick="document.getElementById('file').click();">Browse Graph...</button>
             <div class="row"></div>
-            <button id="calculate" class="btn btn-primary">Calculate Graph</button>
-            <button id="display" class="btn btn-primary">Display Graph</button>
+            <button id="calculate" class="btn btn-primary disabled">Calculate Graph</button>
+            <button id="display" class="btn btn-primary disabled">Display Graph</button>
           </div>
           <div class="col-xs-2">
           <button class="btn btn-danger" id="clear">Clear Scene</button>
@@ -42,20 +42,21 @@
                 <input type="checkbox" id="looping">Loop</input>
                 <input type="checkbox" id="bouncing">Bounce</input>
                 <div class="row"></div>
-            <button class="btn btn-primary animation-controls" id="play">Play</button>
-            <button class="btn btn-primary animation-controls" id="pause">Pause</button>
-            <button class="btn btn-primary animation-controls" id="stop">Stop</button>
+            <button class="btn btn-primary animation-controls disabled" id="play">Play</button>
+            <button class="btn btn-primary animation-controls disabled" id="pause">Pause</button>
+            <button class="btn btn-primary animation-controls disabled" id="stop">Stop</button>
             <div class="row"></div>
           </div>
           </div>
 
         <div id="glcontainer"></div>
         <script src="scripts/three.js"></script>
+        <script src="scripts/globals.js"></script>
+        <script src="scripts/input.js"></script>
+        <script src="scripts/utils.js"></script>
+        <script src="scripts/animator.js"></script>
         <script src="scripts/orbit-controls.js"></script>
-        <script src="scripts/GeometryUtils.js"></script>
-        <script src="scripts/earcut.js"></script>
         <script src="scripts/transform-controls.js"></script>
-        <script src="scripts/camera-controls.js"></script>
         <script src="scripts/camera.js"></script>
         <script src="scripts/graph-parser.js"></script>
         <script src="scripts/graphics.js"></script>

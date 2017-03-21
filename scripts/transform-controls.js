@@ -604,7 +604,7 @@
 	THREE.TransformGizmoScale.prototype = Object.create( THREE.TransformGizmo.prototype );
 	THREE.TransformGizmoScale.prototype.constructor = THREE.TransformGizmoScale;
 
-	THREE.TransformControls = function ( camera, domElement ) {
+	THREE.TransformControls = function ( camera, cameraControls, domElement ) {
 
 		// TODO: Make non-uniform scale and rotate play nice in hierarchies
 		// TODO: ADD RXYZ contol
@@ -612,7 +612,6 @@
 		THREE.Object3D.call( this );
 
 		domElement = ( domElement !== undefined ) ? domElement : document;
-
 		this.object = undefined;
 		this.visible = false;
 		this.translationSnap = null;
@@ -833,9 +832,13 @@
 
 			var axis = null;
 
+			cameraControls.enabled = true;
+
 			if ( intersect ) {
 
 				axis = intersect.object.name;
+
+				
 
 				event.preventDefault();
 
@@ -862,6 +865,8 @@
 				var intersect = intersectObjects( pointer, _gizmo[ _mode ].pickers.children );
 
 				if ( intersect ) {
+
+					cameraControls.enabled = false;
 
 					event.preventDefault();
 					event.stopPropagation();
