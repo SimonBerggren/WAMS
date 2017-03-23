@@ -1,59 +1,51 @@
-<svg width="256.364" height="260.0" viewBox="-28.182 -30.0 260.0 260.0" version="1.1" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-  <path d="M0.5,90.05 L70.15,90.05 L70.15,109.95 L0.5,109.95 Z" style="stroke:#404040; fill:url(#fb40404040c0c0c0);" />
-  <path d="M70.15,40.3 L90.05,40.3 L90.05,159.7 L70.15,159.7 Z" style="stroke:#404040; fill:url(#fb40404040ffffff);" />
-  <path d="M70.15,40.3 L90.05,40.3 L90.05,159.7 L70.15,159.7 Z" style="stroke:#404040; fill:none;" />
-  <path d="M109.95,40.3 L129.85,40.3 L129.85,159.7 L109.95,159.7 Z" style="stroke:#404040; fill:url(#fb40404040ffffff);" />
-  <path d="M109.95,40.3 L129.85,40.3 L129.85,159.7 L109.95,159.7 Z" style="stroke:#404040; fill:none;" />
-  <path d="M129.85,90.05 L199.5,90.05 L199.5,109.95 L129.85,109.95 Z" style="stroke:#404040; fill:url(#fb40404040c0c0c0);" />
-  <path d="M70.15,60.2 L40.3,50.25 L40.3,70.15 L70.15,60.2 Z" style="stroke:#00007f; fill:#00007f;" />
-  <path d="M129.85,60.2 L159.7,50.25 L159.7,70.15 L129.85,60.2 Z" style="stroke:#00007f; fill:#00007f;" />
-  <path d="M100.0,10.45 L189.55,30.35 L189.55,60.2 L129.85,60.2" style="stroke:#00007f; fill:none;" />
-  <path d="M100.0,10.45 L10.45,30.35 L10.45,60.2 L70.15,60.2" style="stroke:#00007f; fill:none;" />
-  <text x="100.0" y="189.55" dy=".33em" style="fill:#0000ff; text-anchor:middle; font-size:39.8px;"></text>
-  <g class="Port">
-    <metadata xmlns:vda="http://fat-ak30.eas.iis.fraunhofer.de/exchange/vda_meta">
-      <vda:meta name="Name">flange_a</vda:meta>
-      <vda:meta name="X">0.5</vda:meta>
-      <vda:meta name="Y">100.0</vda:meta>
-    </metadata>
-    <ellipse cx="0.5" cy="100.0" rx="9.95" ry="9.95" style="stroke:#000000; fill:#5f5f5f;" />
+<?xml version="1.0"?>
+<svg width="260" height="260" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+ <defs>
+  <linearGradient gradientTransform="rotate(90.0)" spreadMethod="reflect" y2="0%" x2="50%" y1="0%" x1="0%" id="fb40404040c0c0c0">
+   <stop stop-color="#404040" offset="0%"/>
+   <stop stop-color="#5c5c5c" offset="3%"/>
+   <stop stop-color="#787878" offset="10%"/>
+   <stop stop-color="#909090" offset="22%"/>
+   <stop stop-color="#a4a4a4" offset="38%"/>
+   <stop stop-color="#b3b3b3" offset="57%"/>
+   <stop stop-color="#bdbdbd" offset="78%"/>
+   <stop stop-color="#c0c0c0" offset="100%"/>
+  </linearGradient>
+  <linearGradient gradientTransform="rotate(90.0)" spreadMethod="reflect" y2="0%" x2="50%" y1="0%" x1="0%" id="fb40404040ffffff">
+   <stop stop-color="#404040" offset="0%"/>
+   <stop stop-color="#6b6b6b" offset="3%"/>
+   <stop stop-color="#939393" offset="10%"/>
+   <stop stop-color="#b7b7b7" offset="22%"/>
+   <stop stop-color="#d5d5d5" offset="38%"/>
+   <stop stop-color="#ececec" offset="57%"/>
+   <stop stop-color="#fafafa" offset="78%"/>
+   <stop stop-color="#ffffff" offset="100%"/>
+  </linearGradient>
+ </defs>
+ <g>
+  <title>Layer 1</title>
+  <path stroke-width="4" id="svg_1" stroke="#404040" fill="url(#fb40404040c0c0c0)" d="m0.5,90.05l69.65,0l0,19.9l-69.65,0l0,-19.9z"/>
+  <path stroke-width="4" id="svg_2" stroke="#404040" fill="url(#fb40404040ffffff)" d="m70.15,40.3l19.9,0l0,119.4l-19.9,0l0,-119.4z"/>
+  <path stroke-width="4" id="svg_3" stroke="#404040" fill="none" d="m70.15,40.3l19.9,0l0,119.4l-19.9,0l0,-119.4z"/>
+  <path stroke-width="4" id="svg_4" stroke="#404040" fill="url(#fb40404040ffffff)" d="m109.95,40.3l19.9,0l0,119.4l-19.9,0l0,-119.4z"/>
+  <path stroke-width="4" id="svg_5" stroke="#404040" fill="none" d="m109.95,40.3l19.9,0l0,119.4l-19.9,0l0,-119.4z"/>
+  <path stroke-width="4" id="svg_6" stroke="#404040" fill="url(#fb40404040c0c0c0)" d="m129.85,90.05l69.65,0l0,19.9l-69.65,0l0,-19.9z"/>
+  <path stroke-width="4" id="svg_7" stroke="#00007f" fill="#00007f" d="m70.15,60.2l-29.85,-9.95l0,19.9l29.85,-9.95z"/>
+  <path stroke-width="4" id="svg_8" stroke="#00007f" fill="#00007f" d="m129.85,60.2l29.85,-9.95l0,19.9l-29.85,-9.95z"/>
+  <path stroke-width="4" id="svg_9" stroke="#00007f" fill="none" d="m100,10.45l89.55,19.9l0,29.85l-59.7,0"/>
+  <path stroke-width="4" id="svg_10" stroke="#00007f" fill="none" d="m100,10.45l-89.55,19.9l0,29.85l59.7,0"/>
+  <text stroke-width="4" id="svg_11" fill="#0000ff" text-anchor="middle" font-size="39.8px" y="189.55" x="100"/>
+  <g id="svg_12" class="Port">
+   <metadata stroke-width="4">flange_a0.5100.0</metadata>
+   <ellipse stroke-width="4" id="svg_13" stroke="#000000" fill="#5f5f5f" ry="9.95" rx="9.95" cy="100" cx="0.5"/>
   </g>
-  <g class="Port">
-    <metadata xmlns:vda="http://fat-ak30.eas.iis.fraunhofer.de/exchange/vda_meta">
-      <vda:meta name="Name">flange_b</vda:meta>
-      <vda:meta name="X">199.5</vda:meta>
-      <vda:meta name="Y">100.0</vda:meta>
-    </metadata>
-    <ellipse cx="199.699" cy="100.0" rx="9.95" ry="9.95" style="stroke:#000000; fill:#ffffff;" />
+  <g id="svg_14" class="Port">
+   <metadata stroke-width="4">flange_b199.5100.0</metadata>
+   <ellipse stroke-width="4" id="svg_15" stroke="#000000" fill="#ffffff" ry="9.95" rx="9.95" cy="100" cx="199.699"/>
   </g>
-  <g class="Port">
-    <metadata xmlns:vda="http://fat-ak30.eas.iis.fraunhofer.de/exchange/vda_meta">
-      <vda:meta name="Name">f_normalized</vda:meta>
-      <vda:meta name="X">78.11</vda:meta>
-      <vda:meta name="Y">-9.45</vda:meta>
-    </metadata>
-    <path d="M80.1,-29.35 L100.0,10.45 L119.9,-29.35 L80.1,-29.35 Z" style="stroke:#00007f; fill:#00007f;" />
+  <g id="svg_16" class="Port">
+   <metadata stroke-width="4">f_normalized78.11-9.45</metadata>
+   <path stroke-width="4" id="svg_17" stroke="#00007f" fill="#00007f" d="m80.1,-29.35l19.9,39.8l19.9,-39.8l-39.8,0z"/>
   </g>
-  <defs>
-    <linearGradient id="fb40404040c0c0c0" x1="0%" y1="0%" x2="50%" y2="0%" spreadMethod="reflect" gradientTransform="rotate(90.0)">
-      <stop offset="0%" stop-color="#404040" stop-opacity="1" />
-      <stop offset="3%" stop-color="#5c5c5c" stop-opacity="1" />
-      <stop offset="10%" stop-color="#787878" stop-opacity="1" />
-      <stop offset="22%" stop-color="#909090" stop-opacity="1" />
-      <stop offset="38%" stop-color="#a4a4a4" stop-opacity="1" />
-      <stop offset="57%" stop-color="#b3b3b3" stop-opacity="1" />
-      <stop offset="78%" stop-color="#bdbdbd" stop-opacity="1" />
-      <stop offset="100%" stop-color="#c0c0c0" stop-opacity="1" />
-    </linearGradient>
-    <linearGradient id="fb40404040ffffff" x1="0%" y1="0%" x2="50%" y2="0%" spreadMethod="reflect" gradientTransform="rotate(90.0)">
-      <stop offset="0%" stop-color="#404040" stop-opacity="1" />
-      <stop offset="3%" stop-color="#6b6b6b" stop-opacity="1" />
-      <stop offset="10%" stop-color="#939393" stop-opacity="1" />
-      <stop offset="22%" stop-color="#b7b7b7" stop-opacity="1" />
-      <stop offset="38%" stop-color="#d5d5d5" stop-opacity="1" />
-      <stop offset="57%" stop-color="#ececec" stop-opacity="1" />
-      <stop offset="78%" stop-color="#fafafa" stop-opacity="1" />
-      <stop offset="100%" stop-color="#ffffff" stop-opacity="1" />
-    </linearGradient>
-  </defs>
+ </g>
 </svg>

@@ -1,18 +1,18 @@
-<svg width="240.0" height="240.0" viewBox="-20.0 -20.0 240.0 240.0" version="1.1" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-  <path d="M0.5,0.5 L199.5,0.5 L199.5,199.5 L0.5,199.5 Z" style="stroke:#00007f; fill:#ffffff;" />
-  <text x="100.0" y="-29.35" dy=".33em" style="fill:#0000ff; text-anchor:middle; font-size:39.8px;"></text>
-  <path d="M20.4,32.34 L20.4,179.6" style="stroke:#c0c0c0; fill:none;" />
-  <path d="M20.4,10.45 L12.44,32.34 L28.36,32.34 L20.4,10.45 Z" style="stroke:#c0c0c0; fill:#c0c0c0;" />
-  <path d="M10.45,100.0 L167.66,100.0" style="stroke:#c0c0c0; fill:none;" />
-  <path d="M189.55,100.0 L167.66,92.04 L167.66,107.96 L189.55,100.0 Z" style="stroke:#c0c0c0; fill:#c0c0c0;" />
-  <path d="M20.4,100.0 L26.022,82.986 Q31.644,65.971 35.226,56.568 Q38.808,47.166 41.992,40.549 Q45.176,33.932 48.011,29.853 Q50.847,25.773 53.633,23.534 Q56.419,21.296 59.205,20.947 Q61.991,20.599 64.777,22.191 Q67.563,23.783 70.399,27.216 Q73.235,30.649 76.021,35.773 Q78.807,40.897 81.991,48.509 Q85.175,56.121 89.189,67.513 Q93.204,78.906 101.627,104.776 Q110.05,130.646 113.632,140.298 Q117.214,149.949 120.398,156.914 Q123.582,163.879 126.368,168.307 Q129.154,172.735 131.989,175.371 Q134.825,178.008 137.611,178.804 Q140.397,179.6 143.183,178.406 Q145.969,177.212 148.805,174.177 Q151.641,171.142 154.427,166.367 Q157.213,161.591 160.397,154.277 Q163.581,146.964 167.61,135.82 Q171.64,124.676 175.62,112.338 L179.6,100.0" style="stroke:#000000; fill:none;" />
-  <text x="102.985" y="231.34" dy=".33em" style="fill:#000000; text-anchor:middle; font-size:39.8px;">freqHz=1</text>
-  <g class="Port">
-    <metadata xmlns:vda="http://fat-ak30.eas.iis.fraunhofer.de/exchange/vda_meta">
-      <vda:meta name="Name">y</vda:meta>
-      <vda:meta name="X">209.45</vda:meta>
-      <vda:meta name="Y">100.0</vda:meta>
-    </metadata>
-    <path d="M199.5,90.05 L219.4,100.0 L199.5,109.95 L199.5,90.05 Z" style="stroke:#00007f; fill:#ffffff;" />
+<?xml version="1.0"?>
+<svg width="240" height="240" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+ <g>
+  <title>Layer 1</title>
+  <path stroke-width="4" id="svg_1" stroke="#00007f" fill="#ffffff" d="m0.5,0.5l199,0l0,199l-199,0l0,-199z"/>
+  <text stroke-width="4" id="svg_2" fill="#0000ff" text-anchor="middle" font-size="39.8px" y="-29.35" x="100"/>
+  <path stroke-width="4" id="svg_3" stroke="#c0c0c0" fill="none" d="m20.4,32.34l0,147.26"/>
+  <path stroke-width="4" id="svg_4" stroke="#c0c0c0" fill="#c0c0c0" d="m20.4,10.45l-7.96,21.89l15.92,0l-7.96,-21.89z"/>
+  <path stroke-width="4" id="svg_5" stroke="#c0c0c0" fill="none" d="m10.45,100l157.21,0"/>
+  <path stroke-width="4" id="svg_6" stroke="#c0c0c0" fill="#c0c0c0" d="m189.55,100l-21.89,-7.96l0,15.92l21.89,-7.96z"/>
+  <path stroke-width="4" id="svg_7" stroke="#000000" fill="none" d="m20.4,100l5.622,-17.014q5.622,-17.015 9.204,-26.418q3.582,-9.402 6.766,-16.019q3.184,-6.617 6.019,-10.696q2.836,-4.08 5.622,-6.319q2.786,-2.238 5.572,-2.587q2.786,-0.348 5.572,1.244q2.786,1.592 5.622,5.025q2.836,3.433 5.622,8.557q2.786,5.124 5.97,12.736q3.184,7.612 7.198,19.004q4.015,11.393 12.438,37.263q8.423,25.87 12.005,35.522q3.582,9.651 6.766,16.616q3.184,6.965 5.97,11.393q2.786,4.428 5.621,7.064q2.836,2.637 5.622,3.433q2.786,0.796 5.572,-0.398q2.786,-1.194 5.622,-4.229q2.836,-3.035 5.622,-7.81q2.786,-4.776 5.97,-12.09q3.184,-7.313 7.213,-18.457q4.03,-11.144 8.01,-23.482l3.98,-12.338"/>
+  <text stroke-width="4" id="svg_8" fill="#000000" text-anchor="middle" font-size="39.8px" y="231.34" x="102.985">freqHz=1</text>
+  <g id="svg_9" class="Port">
+   <metadata stroke-width="4">y209.45100.0</metadata>
+   <path stroke-width="4" id="svg_10" stroke="#00007f" fill="#ffffff" d="m199.5,90.05l19.9,9.95l-19.9,9.95l0,-19.9z"/>
   </g>
+ </g>
 </svg>
