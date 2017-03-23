@@ -17,11 +17,11 @@
             <a class="navbar-brand" href="Index.html">WAMS</a>
         </header>
           <div class="row">
-          <input style="display:none;" type="file" id="file" name="files[]" />
+          <input style="display:none;" type="file" id="graph" name="files[]" />
           <input style="display:none;" type="file" id="model" name="files[]" />
             <input style="display:none;" type="file" id="animation" name="files[]" />
           <div class="col-xs-3 col-xs-offset-1">
-            <button class="btn btn-default" onclick="document.getElementById('file').click();">Browse Graph...</button>
+            <button class="btn btn-default" onclick="document.getElementById('graph').click();">Browse Graph...</button>
             <div class="row"></div>
             <button id="calculate" class="btn btn-primary disabled">Calculate Graph</button>
             <button id="display" class="btn btn-primary disabled">Display Graph</button>
@@ -63,8 +63,7 @@
 
         <div style="margin:10px;">
         <h4><strong>Camera controls:</strong></h4>
-        <strong>W/A/S/D</strong> Move around.
-        <!-- <br>
+        <strong>Right-Click</strong> Orbit around.
         <strong>Right-Click + mouse-move:</strong> Look around. -->
         <br>
         <strong>Left-Click + mouse-move:</strong> Click and drag around in x- and y-axis.
