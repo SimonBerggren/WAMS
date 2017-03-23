@@ -21,7 +21,7 @@ $(function() {
   directionalLight.name="important";
   scene.add(directionalLight);
   
-  var light = new THREE.AmbientLight( 0x2f4f4f ); // soft white light
+  var light = new THREE.AmbientLight( "white", 0.5 ); // soft white light
   light.name="important";
   scene.add(light);
 
@@ -37,6 +37,7 @@ $(function() {
   camera_controls = new THREE.OrbitControls(camera, renderer.domElement);
   camera_controls.addEventListener('change', function() { renderer.render(scene, camera); }); 
   object_controls = new THREE.TransformControls(camera, camera_controls, renderer.domElement);  
+  object_controls.name="important";
 
   var clock = new THREE.Clock();
   scene.add(object_controls);
@@ -52,6 +53,8 @@ $(function() {
   }
 
   $('#glcontainer').on('mousedown', function(event) {
+
+
     var raycaster = new THREE.Raycaster();
     camera.updateProjectionMatrix();
     raycaster.setFromCamera(input.getMouseCenterized(), camera);
@@ -84,6 +87,18 @@ $(function() {
     return graph === undefined;
   };
 
+  $('#graph').change( function(e) {
+  var file = e.target.files[0];
+  if (file !== undefined) {
+    fileReader.onload = function(readFile) {
+        graph = fileReader.result;
+    };
+    fileReader.readAsBinaryString(file);
+    $(document).find('#calculate').removeClass('disabled');
+    $(document).find('#display').removeClass('disabled');
+  }
+  });
+
 	$('#calculate').click(function() {
     if (hasGraph) { 
       displaying_graph = true;
@@ -102,38 +117,6 @@ $('#display').click(function(event) {
       alert("no graph chosen!");
   });
 
-var file_name;
-$('#animate-model').click(function(event) {
-    if(model === undefined || animation === undefined) {
-      alert("no model or animation chosen!");
-      return;
-    }
-    
-    playing_animation = true;
-  });
-
-  $('#file').change( function(e) {
-  var file = e.target.files[0];
-  if (file !== undefined) {
-    file_name = file.name.split(".")[0];
-    fileReader.onload = function(readFile) {
-        graph = fileReader.result;
-    };
-    fileReader.readAsBinaryString(file);
-    $(document).find('#calculate').removeClass('disabled');
-    $(document).find('#display').removeClass('disabled');
-  }
-  });
-
-  $('#animation').change( function(e) {
-    var file = e.target.files[0];
-    fileReader.onload = function(readFile) {
-      animation = JSON.parse(fileReader.result);
-      animator.addAnimation(model, animation);
-    };
-    fileReader.readAsBinaryString(file);
-  });
-
   $('#model').change( function(e) {
     var file = e.target.files[0];
     if (file !== undefined) {
@@ -149,8 +132,27 @@ $('#animate-model').click(function(event) {
     }
   });
 
+  $('#animation').change( function(e) {
+    var file = e.target.files[0];
+    if (file !== undefined) {
+      fileReader.onload = function(readFile) {
+        animation = JSON.parse(fileReader.result);
+        animator.addAnimation(model, animation);
+      };
+    fileReader.readAsBinaryString(file);
+    }
+  });
+
+$('#animate-model').click(function(event) {
+    if(model === undefined || animation === undefined) {
+      alert("no model or animation chosen!");
+      return;
+    }
+    
+    playing_animation = true;
+  });
+
   $('#clear').click( function(e) {
     clearScene();
-    scene.add(control);
   });
 });
