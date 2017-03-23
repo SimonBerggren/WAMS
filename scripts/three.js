@@ -7699,6 +7699,8 @@
 
 		this.min = ( min !== undefined ) ? min : new Vector3( + Infinity, + Infinity, + Infinity );
 		this.max = ( max !== undefined ) ? max : new Vector3( - Infinity, - Infinity, - Infinity );
+		this.userData = undefined;
+
 
 	}
 
@@ -7814,9 +7816,11 @@
 
 		}(),
 
-		setFromObject: function ( object ) {
+		setFromObject: function ( object, parent ) {
 
 			this.makeEmpty();
+
+			this.parent = parent;
 
 			return this.expandByObject( object );
 

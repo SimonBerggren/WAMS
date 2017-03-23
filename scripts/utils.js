@@ -31,7 +31,10 @@ function sphere(x, y) {
 
 
 function plane(x, y, w, h, c, z) {
-	var plane = new THREE.Mesh(new THREE.PlaneGeometry(w, h, 1, 1), new THREE.MeshPhongMaterial({color:c}));
+	var geometry = new THREE.PlaneGeometry(w, h, 1, 1);
+	var material = new THREE.MeshPhongMaterial({color:c});
+	var plane = new THREE.Mesh(geometry, material);
+	plane.material.side = THREE.DoubleSide;
 	plane.position.x = x;
 	plane.position.y = y;
 	plane.position.z = z;

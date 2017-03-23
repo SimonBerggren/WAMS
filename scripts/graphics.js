@@ -5,6 +5,8 @@ var slider = new Slider('#animation-slider', { min:0, max:1, });
 
 slider.disable();
 
+var integer = 0;
+
 $(function() {
   var picked_object = undefined;
   var displaying_graph = false;  
@@ -27,12 +29,12 @@ $(function() {
 
   var w = window.innerWidth;
   var h = 600;
-
+  
   var renderer = new THREE.WebGLRenderer({alpha: true});
-  renderer.setClearColor( "white", 1 );
+  renderer.setClearColor( "gray", 1 );
   renderer.setSize(w, h);
 
-  camera = new THREE.PerspectiveCamera( 60, w / h, 1, 1000 );
+  camera = new THREE.PerspectiveCamera( 50, w / h, 1, 1500 );
   camera.position.z = 500;
   camera_controls = new THREE.OrbitControls(camera, renderer.domElement);
   camera_controls.addEventListener('change', function() { renderer.render(scene, camera); }); 
@@ -49,11 +51,28 @@ $(function() {
 
     animator.update(delta);
 
+    if (picked_object !== undefined && picked_object.userData !== undefined) {
+      for (var i = 0; i < picked_object.userData.length; ++i) {
+        picked_object.userData[i].setFromObject(picked_object.children[i+1], picked_object);        
+    for (var j = 0; j < bounding_boxes.length; ++j)
+      if (picked_object.userData[i] !== bounding_boxes[j]) {
+          var obj1 = picked_object.userData[i].parent;
+          var obj2 = bounding_boxes[j].parent;
+        if (picked_object.userData[i].intersectsBox(bounding_boxes[j])) {
+          obj1.scale.set(2,2,2);
+          obj2.scale.set(2,2,2);
+        } else {
+          obj1.scale.set(1,1,1);
+          obj2.scale.set(1,1,1);
+        }
+      }
+    }
+      }
+
     renderer.render(scene, camera);
   }
 
   $('#glcontainer').on('mousedown', function(event) {
-
 
     var raycaster = new THREE.Raycaster();
     camera.updateProjectionMatrix();
@@ -67,6 +86,9 @@ $(function() {
           picked_object = picked_object.parent;
 
         object_controls.attach(picked_object);
+
+        console.log(picked_object.children);
+        
         break;
       }
     }
@@ -77,6 +99,9 @@ $(function() {
   }).on('touchmove', function(event) {
 
     // TODO: IMPLEMENT MOBILE DEVICE
+
+  }).on('mousemove', function(event) {
+    
 
   }).append(renderer.domElement);
 
@@ -153,6 +178,7 @@ $('#animate-model').click(function(event) {
   });
 
   $('#clear').click( function(e) {
+    object_controls.detach();
     clearScene();
   });
 });

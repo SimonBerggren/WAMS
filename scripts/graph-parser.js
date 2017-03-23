@@ -7,6 +7,7 @@ var components;
 var edges;
 var worker = new Worker('klayjs.js');
 var config = '{' + "spacing: 0,\nalgorithm: de.cau.cs.kieler.klay.layered,\nedgeRouting: ORTHOGONAL" + '}';
+var bounding_boxes = [];
 
 worker.addEventListener('message', function (e) {
 	_display_graph(e.data);
@@ -40,7 +41,7 @@ function addIcon(name) {
 			icons_json[name] = obj;
 			if (++loaded_icons == icons.length)
 				onLoadedIcons();
-		})
+		});
 	}, function() {	// JSON doesnt exist
 
 		var url = "static/icons/" + name + ".svg";
@@ -59,7 +60,7 @@ function addIcon(name) {
 					icons_svg[name] = mesh;
 					if (++loaded_icons == icons.length)
 						onLoadedIcons();
-				})
+				});
 			}, function() {	// SVG doesnt exist
 				
 				names[name] = "plane";
@@ -128,11 +129,10 @@ function get_icons(comps, parent) {
 }
 
 function get_comps(comps, edges, parent) {
-	var offsetX = (parent === undefined) ? 0 : parent.position.x;
-	var offsetY = (parent === undefined) ? 0 : parent.position.y;
+	var offsetX = (parent === undefined) ? 0 : 0;//parent.position.x;
+	var offsetY = (parent === undefined) ? 0 : 0;//parent.position.y;
 
 	for(var i = 0; i < comps.length; ++i) {
-
 
 		var c = comps[i];
 
@@ -143,7 +143,7 @@ function get_comps(comps, edges, parent) {
     	var x = c.x + w/2 + offsetX;
     	var y = c.y + h/2 + offsetY;
     	var obj;
-
+	
     	switch (names[cl]) {
     		case "svg":
     			obj = icons_svg[cl].clone();
@@ -166,36 +166,67 @@ function get_comps(comps, edges, parent) {
 	    			break;
 	    		};
 	    		if (obj.children !== undefined) {
-	    			for (var j = obj.children.length - 1; j >= 0; --j)
+	    			for (var j = obj.children.length - 1; j >= 0; --j) {
 	    				if (obj.children[j].type === "AmbientLight" || obj.children[j].type === "DirectionalLight")
 	    					obj.remove(obj.children[j]);
+	    			}
 	    		}
 	    		
     		break;
     		default:
-    			obj = plane(x, y, w, h, 0xff0000, 0);	
+    			obj = plane(x, y, w, h, 0xff0000, 0);
+
     		break;
     	}
 
-    	if (c.ports !== undefined) {
-    		var p = obj.clone();
-
-    		get_comps(c.ports, c.edges, p);
-    	}
-    	if (parent !== undefined) {
-    		// parent.add(obj);
-    	}
-
     	obj.position.set(x, y, 0);
+
+    	if (c.ports !== undefined && c.ports.length > 0) {
+    		var group = new THREE.Group();
+
+    		group.position.set(obj.position.x, obj.position.y, 0);
+    		obj.position.set(0,0,0);
+
+    		group.add(obj);
+    		group.userData = [];
+
+    		for (var j = 0; j < c.ports.length; ++j) {
+    			var p = c.ports[j];
+    			if (p.class === "Pin") {
+    				var pw = p.width;
+    				var ph = p.height;
+    				var px = p.x - w/2 + pw/2;
+    				var py = p.y - h/2 + ph/2;
+    				
+    				var pin = plane(px, py, pw, ph, 0xff0000, 0);
+    				pin.scale.set(2,2,2);
+    				group.add(pin);
+
+    			}
+    		}
+
+			scene.add(group);
+			scene.updateMatrixWorld();
+    		for(var j = 1; j < group.children.length; ++j) {
+    				var box = new THREE.Box3().setFromObject(group.children[j], group);
+    				group.userData.push(box);
+					bounding_boxes.push(box);
+    		}
+
+    	} else {
+    		scene.add(obj);
+    	}
     	
-		function setName(obj) {
-			obj.name = "pickable";
-			if (obj.children !== undefined)
-				for (var j = 0; j < obj.children.length; ++j)
-					setName(name, obj.children[j]);
+		function setName(o) {
+			o.name = "pickable";
+			if (o.children !== undefined)
+				for (var j = 0; j < o.children.length; ++j) {
+					setName(o.children[j]);
+				}
 		};	
-		setName(obj);
-    	scene.add(obj);
+		if (cl !== "Pin") {
+			setName(obj);
+		}
 	}
 	
 	if (edges !== undefined)
@@ -208,8 +239,19 @@ function get_comps(comps, edges, parent) {
 				var targetX = edge.targetPoint.x + offsetX;
 				var targetY = edge.targetPoint.y + offsetY;
 	
-				scene.add(plane(sourceX, sourceY, s, s, 0xffff1a, 0));
-				scene.add(plane(targetX, targetY, s, s, 0xffff1a, 0));
+				var source = plane(sourceX, sourceY, s, s, 0xffff1a, 0);
+				var target = plane(targetX, targetY, s, s, 0xffff1a, 0);
+
+				scene.add(source);
+				scene.add(target);
+
+				scene.updateMatrixWorld();
+
+				var box = new THREE.Box3().setFromObject(source, source);
+				bounding_boxes.push(box);
+				var box2 = new THREE.Box3().setFromObject(target, target);
+				bounding_boxes.push(box2);
+
 	
 				var bendPoints = edge.bendPoints;
 	
