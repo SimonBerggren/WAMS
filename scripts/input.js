@@ -74,7 +74,7 @@ var Input = function () {
 
 	// is key pressed?
 	var isKeyDown = function (key) {
-		return keys_down[String.fromCharCode(key)];
+		return keys_down[key.toUpperCase().charCodeAt(0)];
 	};
 
 	// call this at the end of each update
@@ -119,7 +119,7 @@ var Input = function () {
 
 	// updates key to be released
 	var keyUp = function (event) {
-		keys_down[event.keyCode] = true;
+		keys_down[event.keyCode] = false;
 	};
 
 	// hook up mouse events

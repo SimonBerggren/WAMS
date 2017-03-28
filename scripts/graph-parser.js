@@ -1,13 +1,31 @@
+var Component = function (component) {
+	var id = component.id;
+	var name = component.class;
+	var w = c.width;
+	var h = c.height;
+	var x = c.x + w/2;
+	var y = c.y + h/2;
+
+	var addPort = function(port) {
+
+	};
+
+	return {
+
+	};
+}
+
 var icons_json = [];
 var icons_svg = [];
 var names = [];
 var icons = [];
+var bounding_boxes = [];
 var loaded_icons = 0;
 var components;
 var edges;
+var all_components = [];
 var worker = new Worker('klayjs.js');
 var config = '{' + "spacing: 0,\nalgorithm: de.cau.cs.kieler.klay.layered,\nedgeRouting: ORTHOGONAL" + '}';
-var bounding_boxes = [];
 
 worker.addEventListener('message', function (e) {
 	_display_graph(e.data);
@@ -101,17 +119,14 @@ function _display_graph (graph) {
 
 	get_icons(components);
 
-	for (var i = 0; i < icons.length; ++i)
-		addIcon(icons[i]);
-
 	if (icons.length == 0)
 		get_comps(components, edges);
+	else
+		for (var i = 0; i < icons.length; ++i)
+			addIcon(icons[i]);
 }
 
 function get_icons(comps, parent) {
-
-	var offsetX = (parent === undefined) ? 0 : parent.position.x;
-	var offsetY = (parent === undefined) ? 0 : parent.position.y;
 
 	for(var i = 0; i < comps.length; ++i) {
 
@@ -128,9 +143,7 @@ function get_icons(comps, parent) {
 	}
 }
 
-function get_comps(comps, edges, parent) {
-	var offsetX = (parent === undefined) ? 0 : 0;//parent.position.x;
-	var offsetY = (parent === undefined) ? 0 : 0;//parent.position.y;
+function get_comps(comps, edges) {
 
 	for(var i = 0; i < comps.length; ++i) {
 
@@ -140,14 +153,14 @@ function get_comps(comps, edges, parent) {
     	var cl = c.class;
     	var w = c.width;
     	var h = c.height;
-    	var x = c.x + w/2 + offsetX;
-    	var y = c.y + h/2 + offsetY;
+    	var x = c.x + w/2;
+    	var y = c.y + h/2;
     	var obj;
 	
     	switch (names[cl]) {
     		case "svg":
     			obj = icons_svg[cl].clone();
-    			obj.userData = obj.material.color.clone();
+    			
     		break;
     		case "json":
 
@@ -192,6 +205,7 @@ function get_comps(comps, edges, parent) {
 
     		for (var j = 0; j < c.ports.length; ++j) {
     			var p = c.ports[j];
+
     			if (p.class === "Pin") {
     				var pw = p.width;
     				var ph = p.height;
@@ -201,32 +215,32 @@ function get_comps(comps, edges, parent) {
     				var pin = plane(px, py, pw, ph, 0xff0000, 0);
     				pin.scale.set(2,2,2);
     				group.add(pin);
-
     			}
     		}
-
+    		setName(group);
 			scene.add(group);
+			all_components.push(group);
 			scene.updateMatrixWorld();
     		for(var j = 1; j < group.children.length; ++j) {
-    				var box = new THREE.Box3().setFromObject(group.children[j], group);
-    				group.userData.push(box);
-					bounding_boxes.push(box);
+				var box = new THREE.Box3().setFromObject(group.children[j], group);
+				group.userData.push(box);
+				bounding_boxes.push(box);
+				box.userData={id:name}
     		}
 
     	} else {
+    		//console.log("lonely object added")
     		scene.add(obj);
     	}
     	
 		function setName(o) {
-			o.name = "pickable";
+			o.name = {name:"pickable", id:name, class:cl};
+
 			if (o.children !== undefined)
 				for (var j = 0; j < o.children.length; ++j) {
 					setName(o.children[j]);
 				}
-		};	
-		if (cl !== "Pin") {
-			setName(obj);
-		}
+		};
 	}
 	
 	if (edges !== undefined)
@@ -234,11 +248,11 @@ function get_comps(comps, edges, parent) {
 	
 				var s = 7;
 				var edge = edges[i];
-				var sourceX = edge.sourcePoint.x + offsetX;
-				var sourceY = edge.sourcePoint.y + offsetY;
-				var targetX = edge.targetPoint.x + offsetX;
-				var targetY = edge.targetPoint.y + offsetY;
-	
+				var sourceX = edge.sourcePoint.x;
+				var sourceY = edge.sourcePoint.y;
+				var targetX = edge.targetPoint.x;
+				var targetY = edge.targetPoint.y;
+
 				var source = plane(sourceX, sourceY, s, s, 0xffff1a, 0);
 				var target = plane(targetX, targetY, s, s, 0xffff1a, 0);
 
@@ -247,11 +261,33 @@ function get_comps(comps, edges, parent) {
 
 				scene.updateMatrixWorld();
 
-				var box = new THREE.Box3().setFromObject(source, source);
-				bounding_boxes.push(box);
-				var box2 = new THREE.Box3().setFromObject(target, target);
-				bounding_boxes.push(box2);
+				
 
+				for (var j = 0; j < bounding_boxes.length; ++j) {
+					if (bounding_boxes[j].userData.id === edge.source) {
+						bounding_boxes[j].userData = edge;
+						break;
+					}
+				}
+
+				for (var j = 0; j < bounding_boxes.length; ++j) {
+					if (bounding_boxes[j].userData.id === edge.target) {
+						bounding_boxes[j].userData = edge;
+						break;
+					}
+				}
+
+				//var box = new THREE.Box3().setFromObject(source, source);
+				//bounding_boxes.push(box);
+				//var box2 = new THREE.Box3().setFromObject(target, target);
+				//bounding_boxes.push(box2);
+
+				// var jpoints = edge.junctionPoints;
+				// for (var j = 0; j < jpoints.length; ++j) {
+				// 	scene.add(plane(jpoints[j].x, jpoints[j].y, 10, 10, 0x00ff00, 0));
+				// }
+
+				var connection = new THREE.Group();
 	
 				var bendPoints = edge.bendPoints;
 	
@@ -260,27 +296,36 @@ function get_comps(comps, edges, parent) {
 					var firstBend = bendPoints[0];
 					var lastBend = bendPoints[bendPoints.length - 1];
 	
-					scene.add(cylinder(new THREE.Vector3(sourceX, sourceY, 0), new THREE.Vector3(firstBend.x + offsetX, firstBend.y + offsetY,0)));
+					connection.add(cylinder(new THREE.Vector3(sourceX, sourceY, 0), new THREE.Vector3(firstBend.x, firstBend.y, 0)));
 					
 	  				for(var j = 0; j < bendPoints.length - 1; ++j) {
 	
 						var bend = bendPoints[j];
-						var bendX = bend.x + offsetX;
-						var bendY = bend.y + offsetY;
+						var bendX = bend.x;
+						var bendY = bend.y;
 						var bend2 = bendPoints[j + 1];
-						var bendX2 = bend2.x + offsetX;
-						var bendY2 = bend2.y + offsetY;
+						var bendX2 = bend2.x;
+						var bendY2 = bend2.y;
 	
-	  					scene.add(sphere(bendX,bendY));
+	  					connection.add(sphere(bendX,bendY));
 	
-						scene.add(cylinder(new THREE.Vector3(bendX, bendY, 0), new THREE.Vector3(bendX2, bendY2,0)));
+						connection.add(cylinder(new THREE.Vector3(bendX, bendY, 0), new THREE.Vector3(bendX2, bendY2,0)));
 					}
 	
-					scene.add(sphere(lastBend.x + offsetX,lastBend.y + offsetY));
-					scene.add(cylinder(new THREE.Vector3(lastBend.x + offsetX, lastBend.y + offsetY,0), new THREE.Vector3(targetX, targetY, 0)));
+					connection.add(sphere(lastBend.x ,lastBend.y));
+					connection.add(cylinder(new THREE.Vector3(lastBend.x, lastBend.y ,0), new THREE.Vector3(targetX, targetY, 0)));
 	
 			  	} else {
-			  		scene.add(cylinder(new THREE.Vector3(sourceX, sourceY, 0), new THREE.Vector3(targetX,targetY,0)));	
-			  	}			
+			  		connection.add(cylinder(new THREE.Vector3(sourceX, sourceY, 0), new THREE.Vector3(targetX,targetY,0)));	
+			  	}
+
+			  	connection.userData = {
+			  		sourceComp: edge.source,
+			  		targetComp: edge.target,
+			  		sourcePort: edge.sourcePort,
+			  		targetPort: edge.targetPort
+			  	};
+
+			  	scene.add(connection);
 	}
 };

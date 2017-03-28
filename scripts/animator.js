@@ -4,12 +4,12 @@ var Animator = function () {
 	var animation = animation;
 	var playing_animation = false;
 	var looping = false;
-  	var looping_bounce = false;
-  	var animation_backwards = false;
-  	var animated_objects = [];
-  	var animated_object_names = [];
-  	var frame = 0;
-  	var delta = 0;
+	var looping_bounce = false;
+	var animation_backwards = false;
+	var animated_objects = [];
+	var animated_object_names = [];
+	var frame = 0;
+	var delta = 0;
 
   	var addAnimation = function (m, a) {
   		model = m;
@@ -99,6 +99,7 @@ var Animator = function () {
 	var stop = function () {
 		playing_animation = false;
 		frame = delta = 0;
+    slider.setValue(cc = cl = 0);
 	};
 
   $('#looping').click( function(e) {
@@ -114,16 +115,15 @@ var Animator = function () {
   });
 
   $('#play').click( function(e) {
-    playing_animation = true;
+    play();
   });
 
   $('#pause').click( function(e) {
-    playing_animation = false;
+    pause();
   });
 
   $('#stop').click( function(e) {
-    playing_animation = false;
-    slider.setValue(cc = cl = 0);
+    stop();
   });
 
 	return {

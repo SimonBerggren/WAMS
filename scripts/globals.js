@@ -20,7 +20,7 @@ $(function() {
 
 var clearScene = function() {
 	for( var i = scene.children.length - 1; i >= 0; i--) { 
-		if (scene.children[i].name !== "important")
+		if (scene.children[i].name.name !== "important")
 		scene.remove(scene.children[i]);
 	}
 };

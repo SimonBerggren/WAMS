@@ -14,7 +14,7 @@ function cylinder(pointX, pointY) {
 		(pointY.x + pointX.x) / 2,
 		(pointY.y + pointX.y) / 2,
 		(pointY.z + pointX.z) / 2);
-	edge.name="pickable"
+	edge.name="static"
 	edge.userData = edge.material.color.clone();
 	return edge;
 }
@@ -26,9 +26,9 @@ function sphere(x, y) {
 	sphere.position.x = x;
 	sphere.position.y = y;
 	sphere.position.z = 0;
+	sphere.name="static"
 	return sphere;
 }
-
 
 function plane(x, y, w, h, c, z) {
 	var geometry = new THREE.PlaneGeometry(w, h, 1, 1);
@@ -38,7 +38,7 @@ function plane(x, y, w, h, c, z) {
 	plane.position.x = x;
 	plane.position.y = y;
 	plane.position.z = z;
-	plane.name="plane";
+	plane.name="static";
 	return plane;    
 }
 
@@ -127,7 +127,7 @@ function text(text, x, y) {
 	textMesh1.rotation.x = 0;
 	textMesh1.rotation.y = Math.PI * 2;
 
-	//textMesh1.name="pickable";
+	textMesh1.name="static";
 
 	return textMesh1;
 };
