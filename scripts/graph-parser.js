@@ -34,17 +34,27 @@ worker.addEventListener('message', function (e) {
 function urlExists(url, onTrue, onFalse)
 {
 	$.get(url)
-    .done(function() { 
+    .success(function() { 
         onTrue();
-    }).fail(function() { 
+    }).error(function() { 
         onFalse();
     })
+}
+
+function setModelName(model) {
+	model.name = {name:"pickable", id:model.name};
+
+	if (model.children !== undefined)
+		for (var j = 0; j < model.children.length; ++j) {
+			setModelName(model.children[j]);
+		}
 }
 
 function addModel(model) {
 	var scale = 100;
 	var obj = objloader.parse(model);
 	obj.scale.x = obj.scale.y = obj.scale.z = scale;
+	setModelName(obj);
 	scene.add(obj);
 }
 
@@ -207,12 +217,15 @@ function get_comps(comps, edges) {
     			var p = c.ports[j];
 
     			if (p.class === "Pin") {
+    				
     				var pw = p.width;
     				var ph = p.height;
     				var px = p.x - w/2 + pw/2;
     				var py = p.y - h/2 + ph/2;
     				
     				var pin = plane(px, py, pw, ph, 0xff0000, 0);
+    				pin.userData = p;
+    				pin.userData.source = name;
     				pin.scale.set(2,2,2);
     				group.add(pin);
     			}
@@ -225,8 +238,9 @@ function get_comps(comps, edges) {
 				var box = new THREE.Box3().setFromObject(group.children[j], group);
 				group.userData.push(box);
 				bounding_boxes.push(box);
-				box.userData={id:name}
+				box.userData=group.children[j].userData;
     		}
+    		group.add(text(name, 0,0))
 
     	} else {
     		//console.log("lonely object added")
@@ -261,21 +275,19 @@ function get_comps(comps, edges) {
 
 				scene.updateMatrixWorld();
 
-				
+				// for (var j = 0; j < bounding_boxes.length; ++j) {
+				// 	if (bounding_boxes[j].userData.id === edge.source) {
+				// 		bounding_boxes[j].userData.id = edge;
+				// 		break;
+				// 	}
+				// }
 
-				for (var j = 0; j < bounding_boxes.length; ++j) {
-					if (bounding_boxes[j].userData.id === edge.source) {
-						bounding_boxes[j].userData = edge;
-						break;
-					}
-				}
-
-				for (var j = 0; j < bounding_boxes.length; ++j) {
-					if (bounding_boxes[j].userData.id === edge.target) {
-						bounding_boxes[j].userData = edge;
-						break;
-					}
-				}
+				// for (var j = 0; j < bounding_boxes.length; ++j) {
+				// 	if (bounding_boxes[j].userData.id === edge.target) {
+				// 		bounding_boxes[j].userData.id = edge;
+				// 		break;
+				// 	}
+				// }
 
 				//var box = new THREE.Box3().setFromObject(source, source);
 				//bounding_boxes.push(box);
@@ -325,7 +337,7 @@ function get_comps(comps, edges) {
 			  		sourcePort: edge.sourcePort,
 			  		targetPort: edge.targetPort
 			  	};
-
+			  	//connection.name="pickable";
 			  	scene.add(connection);
 	}
 };

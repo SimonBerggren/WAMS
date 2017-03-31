@@ -905,10 +905,17 @@
 			_dragging = true;
 
 		}
+		var onMove = undefined;
+		this.setOnMove = function (onmove) {
+			onMove = onmove;
+		}
 
 		function onPointerMove( event ) {
 
 			if ( scope.object === undefined || scope.axis === null || _dragging === false || ( event.button !== undefined && event.button !== 0 ) ) return;
+
+			if (onMove !== undefined)
+				onMove();
 
 			var pointer = event.changedTouches ? event.changedTouches[ 0 ] : event;
 
@@ -918,6 +925,7 @@
 
 			event.preventDefault();
 			event.stopPropagation();
+
 
 			point.copy( planeIntersect.point );
 

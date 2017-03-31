@@ -17,35 +17,40 @@
             <a class="navbar-brand" href="Index.html">WAMS</a>
         </header>
             <div class="row">
-          <input style="display:none;" type="file" id="graph" name="files[]" />
-          <input style="display:none;" type="file" id="model" name="files[]" />
-            <input style="display:none;" type="file" id="animation" name="files[]" />
-          <div class="col-xs-3 col-xs-offset-1">
-            <button class="btn btn-default" onclick="document.getElementById('graph').click();">Browse Graph...</button>
-            <div class="row"></div>
-            <button id="calculate" class="btn btn-primary disabled">Calculate Graph</button>
-            <button id="display" class="btn btn-primary disabled">Display Graph</button>
+          <input style="display:none;" type="file" id="file" name="files[]" />
+          <div class="col-md-1">
+            <button class="btn btn-default" onclick="document.getElementById('file').click();">Browse...</button>
           </div>
-          <div class="col-xs-2">
-          <button class="btn btn-danger" id="clear">Clear Scene</button>
-          </div>
-          <div class="col-xs-2">
-            <button class="btn btn-default" onclick="document.getElementById('model').click();" id="browse-model">Browse Model...</button>
-            <div class="row"></div>
-            <button class="btn btn-default" onclick="document.getElementById('animation').click();" id="browse-animation">Browse Animation...</button>
-          </div>
-            <div class="col-xs-3">
+            <div style="text-align: center;" class="col-md-3">
                 <strong>Animation controls</strong>
                 <div class="row"></div>
                 <input class="animation-controls" id="animation-slider" data-slider-id='animation-slider-id' type="text" data-slider-min="0" data-slider-max="20" data-slider-step="0.1" data-slider-value="0"/>
                 <div class="row"></div>
-                <input type="checkbox" id="looping">Loop</input>
-                <input type="checkbox" id="bouncing">Bounce</input>
                 <div class="row"></div>
-            <button class="btn btn-primary animation-controls disabled" id="play">Play</button>
-            <button class="btn btn-primary animation-controls disabled" id="pause">Pause</button>
-            <button class="btn btn-primary animation-controls disabled" id="stop">Stop</button>
-            <div class="row"></div>
+            <button class="btn btn-primary disabled" id="play">Play</button>
+            <button class="btn btn-primary disabled" id="pause">Pause</button>
+            <button class="btn btn-primary disabled" id="stop">Stop</button>
+          </div>
+          <div style="text-align: center;" class="col-md-2">
+                <strong >Selected Object</strong>
+                <div class="row"></div>
+                <button class="btn btn-primary disabled" id="clone">Clone</button>
+                <div class="row"></div>
+                <button class="btn btn-danger disabled" id="delete">Delete</button>
+                <div class="row"></div>
+                <button class="btn btn-primary disabled" id="rotate90">Rotate</button>
+          </div>
+          <div style="text-align: center;" class="col-md-2">
+                <strong >Object Control Mode
+                    <input style="width:16px;height:16px;" type="checkbox" id="2d-control-mode"/> 2D
+                </strong>
+
+                <div class="row"></div>
+                <button class="btn btn-primary" id="translation">Translation</button>
+                <div class="row"></div>
+                <button class="btn" id="rotation">Rotation</button>
+                <div class="row"></div>
+                <button class="btn" id="scaling">Scaling</button>
           </div>
           </div>
 
@@ -54,6 +59,7 @@
         <script src="scripts/globals.js"></script>
         <script src="scripts/input.js"></script>
         <script src="scripts/utils.js"></script>
+        <script src="scripts/hooks.js"></script>
         <script src="scripts/animator.js"></script>
         <script src="scripts/orbit-controls.js"></script>
         <script src="scripts/transform-controls.js"></script>

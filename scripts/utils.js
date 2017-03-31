@@ -14,7 +14,7 @@ function cylinder(pointX, pointY) {
 		(pointY.x + pointX.x) / 2,
 		(pointY.y + pointX.y) / 2,
 		(pointY.z + pointX.z) / 2);
-	edge.name="static"
+	edge.name="pickable"
 	edge.userData = edge.material.color.clone();
 	return edge;
 }

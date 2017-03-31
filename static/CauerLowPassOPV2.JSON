@@ -1,5 +1,6 @@
 {
 "id": "CauerLowPassOPV2",
+"type": "Diagram",
 "class": "CauerLowPassOPV2",
 "parameters": {
   "l1" : 1.304,
@@ -312,7 +313,7 @@
     "id": "Gp",
     "class": "Pin",
     "labels": [{"text": "p"}],
-    "properties": {"de.cau.cs.kieler.portSide": "NORTH"},
+    "properties": {"de.cau.cs.kieler.portSide": "SOUTH"},
     "width": 3,
     "height": 3
     }
@@ -879,7 +880,7 @@
     "id": "G2p",
     "class": "Pin",
     "labels": [{"text": "p"}],
-    "properties": {"de.cau.cs.kieler.portSide": "NORTH"},
+    "properties": {"de.cau.cs.kieler.portSide": "SOUTH"},
     "width": 3,
     "height": 3
     }
