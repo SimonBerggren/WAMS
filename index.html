@@ -16,17 +16,16 @@
         <header class="navbar navbar-fixed-top">
             <a class="navbar-brand" href="Index.html">WAMS</a>
         </header>
-            <div class="row"></div>
           <input style="display:none;" type="file" id="file" name="files[]" />
           <div class="col-md-2 col-xs-6">
+                <strong >Selected Object</strong>
+                <div class="row"></div>
             <button class="btn btn-default" onclick="document.getElementById('file').click();">Browse...</button>
           </div>
             <div class="col-md-3 col-xs-6">
                 <strong>Animation controls</strong>
                 <div class="row"></div>
-                <input class="animation-controls" id="animation-slider" data-slider-id='animation-slider-id' type="text" data-slider-min="0" data-slider-max="20" data-slider-step="0.1" data-slider-value="0"/>
-                <div class="row"></div>
-                <div class="row"></div>
+               <!--  <input class="animation-controls" id="animation-slider" data-slider-id='animation-slider-id' type="text" data-slider-min="0" data-slider-max="20" data-slider-step="0.1" data-slider-value="0"/> -->
             <button class="btn btn-primary disabled" id="play">Play</button>
             <button class="btn btn-primary disabled" id="pause">Pause</button>
             <button class="btn btn-primary disabled" id="stop">Stop</button>
@@ -35,9 +34,7 @@
                 <strong >Selected Object</strong>
                 <div class="row"></div>
                 <button class="btn btn-primary disabled" id="clone">Clone</button>
-                <div class="row"></div>
                 <button class="btn btn-danger disabled" id="delete">Delete</button>
-                <div class="row"></div>
                 <button class="btn btn-primary disabled" id="rotate90">Rotate</button>
           </div>
           <div class="col-md-3 col-xs-6">
@@ -47,9 +44,7 @@
 
                 <div class="row"></div>
                 <button class="btn btn-primary" id="translation">Translation</button>
-                <div class="row"></div>
                 <button class="btn" id="rotation">Rotation</button>
-                <div class="row"></div>
                 <button class="btn" id="scaling">Scaling</button>
           </div>
           <div class="row"></div>

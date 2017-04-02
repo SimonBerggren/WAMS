@@ -9,16 +9,13 @@ var playButton = document.getElementById("play");
 var pauseButton = document.getElementById("pause");
 var stopButton = document.getElementById("stop");
 
-var slider = new Slider('#animation-slider', { min:0, max:1, });
-
+//var slider = new Slider('#animation-slider', { min:0, max:1, });
 resetScene = function() {
     graph = undefined;
     parsed_graph = undefined;
     model = undefined;
     animation = undefined;
 };
-
-slider.disable();
 
 var newId = 100;
 var newEdgeId = 100;
@@ -28,7 +25,7 @@ var collidedPort2a;
 var collidedPort1b;
 var collidedPort2b;
 var o1,o2;
-var collisionTime = 1.5;
+var collisionTime = 2.0;
 var currCollisionTime = 0.0;
 var countCollision = false;
 
@@ -53,6 +50,7 @@ $(function() {
   var collSphere = sphere(0,0);
   collSphere.visible = false;
   collSphere.name={name:"important"};
+  collSphere.material.color.set(0x00ff00);
   scene.add(collSphere);
 
   var directionalLight = new THREE.DirectionalLight( 0xffffff, 0.7 );
@@ -65,7 +63,7 @@ $(function() {
   scene.add(light);
 
   var w = window.innerWidth;
-  var h = 600;
+  var h = window.innerHeight * 0.8;
   
   var renderer = new THREE.WebGLRenderer({alpha: true});
   renderer.setClearColor( "gray", 1 );
@@ -126,10 +124,12 @@ $(function() {
         countCollision = collided;
 
         if (countCollision) {
+            object_controls.visible = false;
             currCollisionTime += delta;
+
             collSphere.position.set(picked_object.position.x + o1.x, picked_object.position.y + o1.y,0);
             collSphere.visible = true;
-            var scl = 3 + currCollisionTime / collisionTime;
+            var scl = 3 + (6 * (currCollisionTime / collisionTime));
             collSphere.scale.set(scl, scl, scl);
 
             if (currCollisionTime >= collisionTime) {
@@ -149,6 +149,7 @@ $(function() {
         } else {
             countCollision = 0.0;
             collSphere.visible = false;
+            object_controls.visible = true;
         } 
     }
 
