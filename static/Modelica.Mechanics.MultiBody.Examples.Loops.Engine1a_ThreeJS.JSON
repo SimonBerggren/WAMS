@@ -133,12 +133,4 @@
   "shininess": 70
 }]
 
-},
-"children": [
-{
-"uuid": "B32BD43B-FCCC-474F-97A2-F68822B61219",
-"type": "Group",
-"name": "Engine1a",
-"matrix": [1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1]
-,
-  "children": [
+}
