@@ -1,0 +1,25 @@
+<svg width="220.0" height="220.0" viewBox="-10.0 -10.0 220.0 220.0" version="1.1" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <path d="M10.45,100.0 L90.05,100.0" style="stroke:#0000ff; fill:none;" />
+  <path d="M90.05,40.3 L90.05,159.7" style="stroke:#0000ff; fill:none;" />
+  <path d="M100.0,70.15 L100.0,129.85" style="stroke:#0000ff; fill:none;" />
+  <path d="M100.0,100.0 L189.55,100.0" style="stroke:#0000ff; fill:none;" />
+  <text x="100.0" y="191.54" dy=".33em" style="fill:#0000ff; text-anchor:middle; font-size:39.8px;">=1</text>
+  <text x="30.35" y="75.125" dy=".33em" style="fill:#0000ff; text-anchor:middle; font-size:49.75px;">+</text>
+  <text x="169.65" y="75.125" dy=".33em" style="fill:#0000ff; text-anchor:middle; font-size:49.75px;">-</text>
+  <g class="Port">
+    <metadata xmlns:vda="http://fat-ak30.eas.iis.fraunhofer.de/exchange/vda_meta">
+      <vda:meta name="Name">p</vda:meta>
+      <vda:meta name="X">0.5</vda:meta>
+      <vda:meta name="Y">100.0</vda:meta>
+    </metadata>
+    <path d="M-9.45,90.05 L10.45,90.05 L10.45,109.95 L-9.45,109.95 Z" style="stroke:#0000ff; fill:#0000ff;" />
+  </g>
+  <g class="Port">
+    <metadata xmlns:vda="http://fat-ak30.eas.iis.fraunhofer.de/exchange/vda_meta">
+      <vda:meta name="Name">n</vda:meta>
+      <vda:meta name="X">199.5</vda:meta>
+      <vda:meta name="Y">100.0</vda:meta>
+    </metadata>
+    <path d="M209.45,90.05 L189.55,90.05 L189.55,109.95 L209.45,109.95 Z" style="stroke:#0000ff; fill:#ffffff;" />
+  </g>
+</svg>

@@ -1,0 +1,27 @@
+<svg width="220.0" height="220.0" viewBox="-10.0 -10.0 220.0 220.0" version="1.1" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <ellipse cx="55.225" cy="100.0" rx="14.925" ry="14.925" style="stroke:#0000ff; fill:none;" />
+  <ellipse cx="85.075" cy="100.0" rx="14.925" ry="14.925" style="stroke:#0000ff; fill:none;" />
+  <ellipse cx="114.925" cy="100.0" rx="14.925" ry="14.925" style="stroke:#0000ff; fill:none;" />
+  <ellipse cx="144.775" cy="100.0" rx="14.925" ry="14.925" style="stroke:#0000ff; fill:none;" />
+  <path d="M40.3,100.0 L159.7,100.0 L159.7,129.85 L40.3,129.85 Z" style="stroke:#ffffff; fill:#ffffff;" />
+  <path d="M159.7,100.0 L189.55,100.0" style="stroke:#0000ff; fill:none;" />
+  <path d="M10.45,100.0 L40.3,100.0" style="stroke:#0000ff; fill:none;" />
+  <text x="102.985" y="176.615" dy=".33em" style="fill:#000000; text-anchor:middle; font-size:33.83px;">L=1</text>
+  <text x="98.01" y="41.295" dy=".33em" style="fill:#0000ff; text-anchor:middle; font-size:39.8px;"></text>
+  <g class="Port">
+    <metadata xmlns:vda="http://fat-ak30.eas.iis.fraunhofer.de/exchange/vda_meta">
+      <vda:meta name="Name">p</vda:meta>
+      <vda:meta name="X">0.5</vda:meta>
+      <vda:meta name="Y">100.0</vda:meta>
+    </metadata>
+    <path d="M-9.45,90.05 L10.45,90.05 L10.45,109.95 L-9.45,109.95 Z" style="stroke:#0000ff; fill:#0000ff;" />
+  </g>
+  <g class="Port">
+    <metadata xmlns:vda="http://fat-ak30.eas.iis.fraunhofer.de/exchange/vda_meta">
+      <vda:meta name="Name">n</vda:meta>
+      <vda:meta name="X">199.5</vda:meta>
+      <vda:meta name="Y">100.0</vda:meta>
+    </metadata>
+    <path d="M209.45,90.05 L189.55,90.05 L189.55,109.95 L209.45,109.95 Z" style="stroke:#0000ff; fill:#ffffff;" />
+  </g>
+</svg>
