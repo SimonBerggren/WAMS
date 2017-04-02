@@ -1,7 +1,7 @@
 var Animator = function () {
 
-	var model = model;
-	var animation = animation;
+	var model = undefined;
+	var animation = undefined;
 	var playing_animation = false;
 	var looping = true;
 	var looping_bounce = false;
@@ -47,8 +47,10 @@ var Animator = function () {
   	};
 
 	var update = function (deltaTime) {
+    if (animation === undefined || model === undefined)
+      return;
+    
 		if (playing_animation) {
-                
       if (frame < animation.time.length) {
         for (var i = 0; i < animated_objects.length; ++i) {
           var obj = animated_objects[i];

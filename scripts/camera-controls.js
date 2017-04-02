@@ -21,7 +21,6 @@ THREE.PointerLockControls = function ( camera, scene ) {
 	var PI_2 = Math.PI / 2;
 
 	this.update = function ( x, y ) {
-
 		yawObject.rotation.y += x / 20;
 		pitchObject.rotation.x += y / 20;
 		pitchObject.rotation.x = Math.max( - PI_2, Math.min( PI_2, pitchObject.rotation.x ) );
@@ -46,5 +45,5 @@ THREE.PointerLockControls = function ( camera, scene ) {
 		var rotation = new THREE.Euler( pitchObject.rotation.x, yawObject.rotation.y, 0, "YXZ" );
 		direction.applyEuler( rotation );
 		return direction;
-	}
+	};
 };

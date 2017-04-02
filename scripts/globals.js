@@ -2,6 +2,8 @@ var camera = undefined;
 var scene = undefined;
 var input = undefined;
 var animator = undefined;
+var camera_controls = undefined;
+var object_controls = undefined;
 
 var jsonloader = new THREE.ObjectLoader();
 var svgloader = new THREE.TextureLoader();
@@ -18,9 +20,12 @@ $(function() {
 	});
 });
 
+var resetScene;
+
 var clearScene = function() {
 	for( var i = scene.children.length - 1; i >= 0; i--) { 
 		if (scene.children[i].name.name !== "important")
 		scene.remove(scene.children[i]);
 	}
+	resetScene();
 };

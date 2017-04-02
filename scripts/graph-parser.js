@@ -99,10 +99,14 @@ function addIcon(name) {
 }
 
 function onLoadedIcons() {
+
+	bounding_boxes = [];
 	
 	get_comps(components, edges);
-	
-}
+
+	camera_controls.reset();
+
+};
 
 function calculate_graph(graph) {
 	icons = [];
@@ -134,7 +138,7 @@ function _display_graph (graph) {
 	else
 		for (var i = 0; i < icons.length; ++i)
 			addIcon(icons[i]);
-}
+};
 
 function get_icons(comps, parent) {
 
@@ -151,7 +155,7 @@ function get_icons(comps, parent) {
 			get_icons(c.ports, c.edges, c);
 		}
 	}
-}
+};
 
 function get_comps(comps, edges) {
 
@@ -228,6 +232,11 @@ function get_comps(comps, edges) {
     				pin.userData.source = name;
     				pin.scale.set(2,2,2);
     				group.add(pin);
+    				group.updateMatrixWorld();
+    				pin.updateMatrixWorld();
+    				var worldPos = new THREE.Vector3().applyMatrix4(pin.matrixWorld);
+    				//pin.userData.x = worldPos.x;
+    				//pin.userData.y = worldPos.y;
     			}
     		}
     		setName(group);

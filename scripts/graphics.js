@@ -11,6 +11,13 @@ var stopButton = document.getElementById("stop");
 
 var slider = new Slider('#animation-slider', { min:0, max:1, });
 
+resetScene = function() {
+    graph = undefined;
+    parsed_graph = undefined;
+    model = undefined;
+    animation = undefined;
+};
+
 slider.disable();
 
 var newId = 100;
@@ -25,13 +32,15 @@ var collisionTime = 1.5;
 var currCollisionTime = 0.0;
 var countCollision = false;
 
+var connection_a_made = false;
+var connection_b_made = false;
+
 var mouseMoved = false;
 var mouseDown = false;
 
 var recalc = false;
 
 $(function() {
-  var displaying_graph = false;  
   var picked_object = undefined;
   var graph = undefined;
   var parsed_graph = undefined;
@@ -40,6 +49,11 @@ $(function() {
   input = new Input();
   scene = new THREE.Scene();
   animator = new Animator();
+
+  var collSphere = sphere(0,0);
+  collSphere.visible = false;
+  collSphere.name={name:"important"};
+  scene.add(collSphere);
 
   var directionalLight = new THREE.DirectionalLight( 0xffffff, 0.7 );
   directionalLight.position.set(0,0,10);
@@ -80,6 +94,8 @@ $(function() {
 
     if (picked_object !== undefined && picked_object.userData !== undefined) {
         var collided = false;
+        connection_a_made = false;
+        connection_b_made = false;
         for (var i = 0; i < picked_object.userData.length; ++i) {
             picked_object.userData[i].setFromObject(picked_object.children[i+1], picked_object);
             for (var j = 0; j < bounding_boxes.length; ++j) {
@@ -93,6 +109,12 @@ $(function() {
                         o1 = obj1;
                         o2 = obj2;
 
+                        if (collidedPort1a === o1)
+                            connection_a_made = true;
+                        
+                        if (collidedPort1b === o2) 
+                            connection_b_made = true;
+
                     } else {
 
                         //obj1.scale.set(1,1,1);
@@ -105,21 +127,29 @@ $(function() {
 
         if (countCollision) {
             currCollisionTime += delta;
+            collSphere.position.set(picked_object.position.x + o1.x, picked_object.position.y + o1.y,0);
+            collSphere.visible = true;
+            var scl = 3 + currCollisionTime / collisionTime;
+            collSphere.scale.set(scl, scl, scl);
+
             if (currCollisionTime >= collisionTime) {
-                // connect ports
                 currCollisionTime = 0.0;
-                console.error("CONNECTED PORTS");
                 recalc = true;
 
-                if (collidedPort1a === undefined) {
+                if (collidedPort1a === undefined && !connection_a_made) {
+                    console.error("CONNECTED 1/2 PORTS");
                     collidedPort1a = o1;
                     collidedPort2a = o2;
-                } else if (collidedPort1b === undefined) {
+                } else if (collidedPort1b === undefined && !connection_a_made && !connection_b_made) {
+                    console.error("CONNECTED 2/2 PORTS");
                     collidedPort1b = o1;
                     collidedPort2b = o2;
                 }
             }
-        }
+        } else {
+            countCollision = 0.0;
+            collSphere.visible = false;
+        } 
     }
 
     renderer.render(scene, camera);
@@ -158,7 +188,6 @@ $(function() {
                 picked_object = picked_object.parent;
 
         attach(picked_object);
-        console.log(picked_object);
 
         raycastHit = true;
         
@@ -221,6 +250,7 @@ $(function() {
     parsed_graph.children.push(obj);
     detach();    
     clearScene();
+    camera_controls.reset();
     calculate_graph(JSON.stringify(parsed_graph));
     }
   }).append(renderer.domElement);
@@ -236,6 +266,8 @@ $(function() {
         rotation.click();
     else if (event.keyCode == 82) // R
         scalingButton.click();
+    else if (event.keyCode == 27) // ESC
+        camera_controls.reset();
   })
 
   $('#file').change( function(e) {
@@ -252,7 +284,7 @@ $(function() {
             var parsed_result = JSON.parse(result);
             success = true;
         } catch(err) {
-            alert("WAMS: This file format does not yet support viewing!")
+            alert("WAMS: This file format does not yet support viewing!");
         }
         if (!success)
             return;
@@ -269,7 +301,6 @@ $(function() {
                 clearScene();
                 graph = result;
                 parsed_graph = parsed_result;
-                console.log(parsed_graph);
                 calculate_graph(graph);
                 console.log("Graph loaded");
             }
@@ -281,13 +312,20 @@ $(function() {
                 console.log("Ready graph loaded");
             }
             else {
-               animation = JSON.parse(fileReader.result);
-               animator.addAnimation(model, animation);
+                if (model === undefined) {
+                    alert("Please load a model first!");
+                    return;
+                }
+
+                animation = JSON.parse(fileReader.result);
+                animator.addAnimation(model, animation);
                 console.log("Animation loaded");
-    playButton.classList.remove("disabled");
-    pauseButton.classList.remove("disabled");
-    stopButton.classList.remove("disabled");                
+                playButton.classList.remove("disabled");
+                pauseButton.classList.remove("disabled");
+                stopButton.classList.remove("disabled");                
             }
+
+            camera_controls.reset();
 
           // parsed_graph = parsed_graph
           
@@ -369,6 +407,7 @@ Array.prototype.removeValue = function(name, value){
     detach();
     clearScene();
     calculate_graph(JSON.stringify(parsed_graph));
+    
   };
 
   rotateButton.onclick = function() {
