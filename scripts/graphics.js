@@ -63,7 +63,7 @@ $(function() {
   scene.add(light);
 
   var w = window.innerWidth;
-  var h = window.innerHeight * 0.8;
+  var h = window.innerHeight * 0.85;
   
   var renderer = new THREE.WebGLRenderer({alpha: true});
   renderer.setClearColor( "gray", 1 );
