@@ -17,10 +17,15 @@
             <a class="navbar-brand" href="Index.html">WAMS</a>
         </header>
           <input style="display:none;" type="file" id="file" name="files[]" />
-          <div class="col-md-2 col-xs-6">
-                <strong >Selected Object</strong>
+          <div class="col-md-1 col-xs-6">
+                <strong >Input</strong>
                 <div class="row"></div>
             <button class="btn btn-default" onclick="document.getElementById('file').click();">Browse...</button>
+          </div>
+          <div class="col-md-2 col-xs-6">
+                <strong >Camera</strong>
+                <div class="row"></div>
+            <button class="btn btn-danger" id="resetCamera">Reset Camera</button>
           </div>
             <div class="col-md-3 col-xs-6">
                 <strong>Animation controls</strong>
@@ -64,9 +69,9 @@
 
         <div style="margin:10px;">
         <h4><strong>Camera controls:</strong></h4>
-        <strong>Left-Click</strong> Orbit around.
+        <strong>Left-Click + Mouse-Move</strong> Orbit around.
         <br>
-        <strong>Right-Click + mouse-move:</strong> Click and drag around in x- and y-axis.
+        <strong>Right-Click + Mouse-Move:</strong> Move in x- and y-axis.
         <br>
         <strong>Scroll:</strong> Move forward / backward.
         <br>

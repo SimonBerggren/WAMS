@@ -11,6 +11,8 @@ var playButton = document.getElementById("play");
 var pauseButton = document.getElementById("pause");
 var stopButton = document.getElementById("stop");
 
+var resetCameraButton = document.getElementById("resetCamera");
+
 //var slider = new Slider('#animation-slider', { min:0, max:1, });
 resetScene = function() {
     graph = undefined;
@@ -480,4 +482,18 @@ Array.prototype.removeValue = function(name, value){
   stopButton.onclick = function() {
     animator.stop();
   };
+
+    window.addEventListener('resize', function() {
+
+        w = window.innerWidth;
+        h = window.innerHeight * 0.85;
+        camera.aspect = w / h;
+        camera.updateProjectionMatrix();
+        renderer.setSize( w, h );
+
+    }, false);
+
+    resetCameraButton.onclick = function() {
+        camera_controls.reset();
+    };
 });

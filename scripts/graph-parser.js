@@ -128,6 +128,7 @@ function display_graph(graph) {
 };
 
 function _display_graph (graph) {
+	camera_controls.setResetPosition(graph.width / 2, graph.height / 2);
 	components = graph.children;
 	edges = graph.edges;
 

@@ -15,6 +15,15 @@
 
 THREE.OrbitControls = function ( object, domElement ) {
 
+	this.setResetPosition = function(x, y) {
+		this.target0.x = x;
+		this.target0.y = y;
+		this.target0.z = 0;
+		this.position0.x = x;
+		this.position0.y = y;
+		this.position0.z = 800;
+	};
+
 	this.object = object;
 
 	this.domElement = ( domElement !== undefined ) ? domElement : document;
