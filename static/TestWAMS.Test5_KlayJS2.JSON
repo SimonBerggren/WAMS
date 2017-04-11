@@ -1,0 +1,682 @@
+{
+  "children": [
+    {
+      "children": [
+        {
+          "children": [
+            {
+              "class": "Inertia",
+              "height": "200",
+              "id": "test4_1.test3_1.inertia",
+              "labels": [
+                {
+                  "text": "inertia"
+                }
+              ],
+              "parameters": {
+                "J": "1",
+                "stateSelect": "StateSelect.default"
+              },
+              "ports": [
+                {
+                  "class": "Flange_a",
+                  "height": 20,
+                  "id": "test4_1.test3_1.inertia.flange_a",
+                  "labels": [
+                    {
+                      "text": "flange_a"
+                    }
+                  ],
+                  "properties": {
+                    "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+                  },
+                  "width": 20,
+                  "x": -10,
+                  "y": 90
+                },
+                {
+                  "class": "Flange_b",
+                  "height": 20,
+                  "id": "test4_1.test3_1.inertia.flange_b",
+                  "labels": [
+                    {
+                      "text": "flange_b"
+                    }
+                  ],
+                  "properties": {
+                    "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+                  },
+                  "width": 20,
+                  "x": 190,
+                  "y": 90
+                }
+              ],
+              "properties": {
+                "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+              },
+              "width": "200"
+            },
+            {
+              "class": "Inertia",
+              "height": "200",
+              "id": "test4_1.test3_1.inertia1",
+              "labels": [
+                {
+                  "text": "inertia1"
+                }
+              ],
+              "parameters": {
+                "J": "1",
+                "stateSelect": "StateSelect.default"
+              },
+              "ports": [
+                {
+                  "class": "Flange_a",
+                  "height": 20,
+                  "id": "test4_1.test3_1.inertia1.flange_a",
+                  "labels": [
+                    {
+                      "text": "flange_a"
+                    }
+                  ],
+                  "properties": {
+                    "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+                  },
+                  "width": 20,
+                  "x": -10,
+                  "y": 90
+                },
+                {
+                  "class": "Flange_b",
+                  "height": 20,
+                  "id": "test4_1.test3_1.inertia1.flange_b",
+                  "labels": [
+                    {
+                      "text": "flange_b"
+                    }
+                  ],
+                  "properties": {
+                    "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+                  },
+                  "width": 20,
+                  "x": 190,
+                  "y": 90
+                }
+              ],
+              "properties": {
+                "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+              },
+              "width": "200"
+            }
+          ],
+          "class": "Test3",
+          "edges": [
+            {
+              "id": 1,
+              "source": "test4_1.test3_1.inertia",
+              "sourcePort": "test4_1.test3_1.inertia.flange_b",
+              "target": "test4_1.test3_1.inertia1",
+              "targetPort": "test4_1.test3_1.inertia1.flange_a"
+            },
+            {
+              "id": 2,
+              "source": "test4_1.test3_1.inertia1",
+              "sourcePort": "test4_1.test3_1.inertia1.flange_b",
+              "target": "test4_1.test3_1",
+              "targetPort": "test4_1.test3_1.flange_b1"
+            }
+          ],
+          "height": "200",
+          "id": "test4_1.test3_1",
+          "labels": [
+            {
+              "text": "test3_1"
+            }
+          ],
+          "ports": [
+            {
+              "class": "Flange_b",
+              "height": 20,
+              "id": "test4_1.test3_1.flange_b1",
+              "labels": [
+                {
+                  "text": "flange_b1"
+                }
+              ],
+              "properties": {
+                "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+              },
+              "width": 20,
+              "x": 190,
+              "y": 90
+            }
+          ],
+          "properties": {
+            "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+          },
+          "width": "200"
+        },
+        {
+          "children": [
+            {
+              "class": "Inertia",
+              "height": "200",
+              "id": "test4_1.test3_2.inertia",
+              "labels": [
+                {
+                  "text": "inertia"
+                }
+              ],
+              "parameters": {
+                "J": "1",
+                "stateSelect": "StateSelect.default"
+              },
+              "ports": [
+                {
+                  "class": "Flange_a",
+                  "height": 20,
+                  "id": "test4_1.test3_2.inertia.flange_a",
+                  "labels": [
+                    {
+                      "text": "flange_a"
+                    }
+                  ],
+                  "properties": {
+                    "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+                  },
+                  "width": 20,
+                  "x": -10,
+                  "y": 90
+                },
+                {
+                  "class": "Flange_b",
+                  "height": 20,
+                  "id": "test4_1.test3_2.inertia.flange_b",
+                  "labels": [
+                    {
+                      "text": "flange_b"
+                    }
+                  ],
+                  "properties": {
+                    "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+                  },
+                  "width": 20,
+                  "x": 190,
+                  "y": 90
+                }
+              ],
+              "properties": {
+                "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+              },
+              "width": "200"
+            },
+            {
+              "class": "Inertia",
+              "height": "200",
+              "id": "test4_1.test3_2.inertia1",
+              "labels": [
+                {
+                  "text": "inertia1"
+                }
+              ],
+              "parameters": {
+                "J": "1",
+                "stateSelect": "StateSelect.default"
+              },
+              "ports": [
+                {
+                  "class": "Flange_a",
+                  "height": 20,
+                  "id": "test4_1.test3_2.inertia1.flange_a",
+                  "labels": [
+                    {
+                      "text": "flange_a"
+                    }
+                  ],
+                  "properties": {
+                    "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+                  },
+                  "width": 20,
+                  "x": -10,
+                  "y": 90
+                },
+                {
+                  "class": "Flange_b",
+                  "height": 20,
+                  "id": "test4_1.test3_2.inertia1.flange_b",
+                  "labels": [
+                    {
+                      "text": "flange_b"
+                    }
+                  ],
+                  "properties": {
+                    "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+                  },
+                  "width": 20,
+                  "x": 190,
+                  "y": 90
+                }
+              ],
+              "properties": {
+                "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+              },
+              "width": "200"
+            }
+          ],
+          "class": "Test3",
+          "edges": [
+            {
+              "id": 3,
+              "source": "test4_1.test3_2.inertia",
+              "sourcePort": "test4_1.test3_2.inertia.flange_b",
+              "target": "test4_1.test3_2.inertia1",
+              "targetPort": "test4_1.test3_2.inertia1.flange_a"
+            },
+            {
+              "id": 4,
+              "source": "test4_1.test3_2.inertia1",
+              "sourcePort": "test4_1.test3_2.inertia1.flange_b",
+              "target": "test4_1.test3_2",
+              "targetPort": "test4_1.test3_2.flange_b1"
+            }
+          ],
+          "height": "200",
+          "id": "test4_1.test3_2",
+          "labels": [
+            {
+              "text": "test3_2"
+            }
+          ],
+          "ports": [
+            {
+              "class": "Flange_b",
+              "height": 20,
+              "id": "test4_1.test3_2.flange_b1",
+              "labels": [
+                {
+                  "text": "flange_b1"
+                }
+              ],
+              "properties": {
+                "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+              },
+              "width": 20,
+              "x": 190,
+              "y": 90
+            }
+          ],
+          "properties": {
+            "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+          },
+          "width": "200"
+        }
+      ],
+      "class": "Test4",
+      "edges": [
+        {
+          "id": 5,
+          "source": "test4_1.test3_2",
+          "sourcePort": "test4_1.test3_2.flange_b1",
+          "target": "test4_1.test3_1",
+          "targetPort": "test4_1.test3_1.flange_b1"
+        }
+      ],
+      "height": "200",
+      "id": "test4_1",
+      "labels": [
+        {
+          "text": "test4_1"
+        }
+      ],
+      "properties": {
+        "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+      },
+      "width": "200"
+    },
+    {
+      "children": [
+        {
+          "children": [
+            {
+              "class": "Inertia",
+              "height": "200",
+              "id": "test4_2.test3_1.inertia",
+              "labels": [
+                {
+                  "text": "inertia"
+                }
+              ],
+              "parameters": {
+                "J": "1",
+                "stateSelect": "StateSelect.default"
+              },
+              "ports": [
+                {
+                  "class": "Flange_a",
+                  "height": 20,
+                  "id": "test4_2.test3_1.inertia.flange_a",
+                  "labels": [
+                    {
+                      "text": "flange_a"
+                    }
+                  ],
+                  "properties": {
+                    "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+                  },
+                  "width": 20,
+                  "x": -10,
+                  "y": 90
+                },
+                {
+                  "class": "Flange_b",
+                  "height": 20,
+                  "id": "test4_2.test3_1.inertia.flange_b",
+                  "labels": [
+                    {
+                      "text": "flange_b"
+                    }
+                  ],
+                  "properties": {
+                    "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+                  },
+                  "width": 20,
+                  "x": 190,
+                  "y": 90
+                }
+              ],
+              "properties": {
+                "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+              },
+              "width": "200"
+            },
+            {
+              "class": "Inertia",
+              "height": "200",
+              "id": "test4_2.test3_1.inertia1",
+              "labels": [
+                {
+                  "text": "inertia1"
+                }
+              ],
+              "parameters": {
+                "J": "1",
+                "stateSelect": "StateSelect.default"
+              },
+              "ports": [
+                {
+                  "class": "Flange_a",
+                  "height": 20,
+                  "id": "test4_2.test3_1.inertia1.flange_a",
+                  "labels": [
+                    {
+                      "text": "flange_a"
+                    }
+                  ],
+                  "properties": {
+                    "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+                  },
+                  "width": 20,
+                  "x": -10,
+                  "y": 90
+                },
+                {
+                  "class": "Flange_b",
+                  "height": 20,
+                  "id": "test4_2.test3_1.inertia1.flange_b",
+                  "labels": [
+                    {
+                      "text": "flange_b"
+                    }
+                  ],
+                  "properties": {
+                    "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+                  },
+                  "width": 20,
+                  "x": 190,
+                  "y": 90
+                }
+              ],
+              "properties": {
+                "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+              },
+              "width": "200"
+            }
+          ],
+          "class": "Test3",
+          "edges": [
+            {
+              "id": 6,
+              "source": "test4_2.test3_1.inertia",
+              "sourcePort": "test4_2.test3_1.inertia.flange_b",
+              "target": "test4_2.test3_1.inertia1",
+              "targetPort": "test4_2.test3_1.inertia1.flange_a"
+            },
+            {
+              "id": 7,
+              "source": "test4_2.test3_1.inertia1",
+              "sourcePort": "test4_2.test3_1.inertia1.flange_b",
+              "target": "test4_2.test3_1",
+              "targetPort": "test4_2.test3_1.flange_b1"
+            }
+          ],
+          "height": "200",
+          "id": "test4_2.test3_1",
+          "labels": [
+            {
+              "text": "test3_1"
+            }
+          ],
+          "ports": [
+            {
+              "class": "Flange_b",
+              "height": 20,
+              "id": "test4_2.test3_1.flange_b1",
+              "labels": [
+                {
+                  "text": "flange_b1"
+                }
+              ],
+              "properties": {
+                "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+              },
+              "width": 20,
+              "x": 190,
+              "y": 90
+            }
+          ],
+          "properties": {
+            "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+          },
+          "width": "200"
+        },
+        {
+          "children": [
+            {
+              "class": "Inertia",
+              "height": "200",
+              "id": "test4_2.test3_2.inertia",
+              "labels": [
+                {
+                  "text": "inertia"
+                }
+              ],
+              "parameters": {
+                "J": "1",
+                "stateSelect": "StateSelect.default"
+              },
+              "ports": [
+                {
+                  "class": "Flange_a",
+                  "height": 20,
+                  "id": "test4_2.test3_2.inertia.flange_a",
+                  "labels": [
+                    {
+                      "text": "flange_a"
+                    }
+                  ],
+                  "properties": {
+                    "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+                  },
+                  "width": 20,
+                  "x": -10,
+                  "y": 90
+                },
+                {
+                  "class": "Flange_b",
+                  "height": 20,
+                  "id": "test4_2.test3_2.inertia.flange_b",
+                  "labels": [
+                    {
+                      "text": "flange_b"
+                    }
+                  ],
+                  "properties": {
+                    "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+                  },
+                  "width": 20,
+                  "x": 190,
+                  "y": 90
+                }
+              ],
+              "properties": {
+                "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+              },
+              "width": "200"
+            },
+            {
+              "class": "Inertia",
+              "height": "200",
+              "id": "test4_2.test3_2.inertia1",
+              "labels": [
+                {
+                  "text": "inertia1"
+                }
+              ],
+              "parameters": {
+                "J": "1",
+                "stateSelect": "StateSelect.default"
+              },
+              "ports": [
+                {
+                  "class": "Flange_a",
+                  "height": 20,
+                  "id": "test4_2.test3_2.inertia1.flange_a",
+                  "labels": [
+                    {
+                      "text": "flange_a"
+                    }
+                  ],
+                  "properties": {
+                    "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+                  },
+                  "width": 20,
+                  "x": -10,
+                  "y": 90
+                },
+                {
+                  "class": "Flange_b",
+                  "height": 20,
+                  "id": "test4_2.test3_2.inertia1.flange_b",
+                  "labels": [
+                    {
+                      "text": "flange_b"
+                    }
+                  ],
+                  "properties": {
+                    "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+                  },
+                  "width": 20,
+                  "x": 190,
+                  "y": 90
+                }
+              ],
+              "properties": {
+                "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+              },
+              "width": "200"
+            }
+          ],
+          "class": "Test3",
+          "edges": [
+            {
+              "id": 8,
+              "source": "test4_2.test3_2.inertia",
+              "sourcePort": "test4_2.test3_2.inertia.flange_b",
+              "target": "test4_2.test3_2.inertia1",
+              "targetPort": "test4_2.test3_2.inertia1.flange_a"
+            },
+            {
+              "id": 9,
+              "source": "test4_2.test3_2.inertia1",
+              "sourcePort": "test4_2.test3_2.inertia1.flange_b",
+              "target": "test4_2.test3_2",
+              "targetPort": "test4_2.test3_2.flange_b1"
+            }
+          ],
+          "height": "200",
+          "id": "test4_2.test3_2",
+          "labels": [
+            {
+              "text": "test3_2"
+            }
+          ],
+          "ports": [
+            {
+              "class": "Flange_b",
+              "height": 20,
+              "id": "test4_2.test3_2.flange_b1",
+              "labels": [
+                {
+                  "text": "flange_b1"
+                }
+              ],
+              "properties": {
+                "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+              },
+              "width": 20,
+              "x": 190,
+              "y": 90
+            }
+          ],
+          "properties": {
+            "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+          },
+          "width": "200"
+        }
+      ],
+      "class": "Test4",
+      "edges": [
+        {
+          "id": 10,
+          "source": "test4_2.test3_2",
+          "sourcePort": "test4_2.test3_2.flange_b1",
+          "target": "test4_2.test3_1",
+          "targetPort": "test4_2.test3_1.flange_b1"
+        }
+      ],
+      "height": "200",
+      "id": "test4_2",
+      "labels": [
+        {
+          "text": "test4_2"
+        }
+      ],
+      "properties": {
+        "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+      },
+      "width": "200"
+    }
+  ],
+  "class": "Test5",
+  "height": "200",
+  "id": "TestWAMS.Test5",
+  "labels": [
+    {
+      "text": "Test5"
+    }
+  ],
+  "properties": {
+    "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+  },
+  "width": "200"
+}
