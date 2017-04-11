@@ -1,6 +1,8 @@
 (function(){Math.clamp=function(a,b,c){return Math.max(b,Math.min(c,a));}})();
 (function(){keyCode=function(a){return Math.max(b,Math.min(c,a));}})();
 
+THREE.Group.prototype.Please = {};
+
 var cloneButton = document.getElementById("clone");
 var deleteButton = document.getElementById("delete");
 var rotateButton = document.getElementById("rotate90");
@@ -28,6 +30,7 @@ var o1,o2;
 var collisionTime = 2.0;
 var currCollisionTime = 0.0;
 var countCollision = false;
+var initTouch;
 
 var connection_a_made = false;
 var connection_b_made = false;
@@ -161,13 +164,50 @@ $(function() {
     mouseDown = true;
 
 
-  }).on('touchstart', function(event) {
-    
-    // TODO: IMPLEMENT MOBILE DEVICE
+  }).on('touchstart', function(e) {
+    var event = e.originalEvent;
+    if(event.changedTouches.length == 1)  {
+      initTouch = new THREE.Vector2(event.changedTouches[0].clientX, event.changedTouches[0].clientY);
+    }
       
-  }).on('touchmove', function(event) {
+  }).on('touchmove', function(e) {
 
     // TODO: IMPLEMENT MOBILE DEVICE
+
+    console.log(event);
+
+  }).on('touchend', function(e) {
+    var event = e.originalEvent;
+    if (event.changedTouches.length == 1) {
+      var pos = new THREE.Vector2(event.changedTouches[0].clientX, event.changedTouches[0].clientY);
+      if (initTouch !== undefined && initTouch.x == pos.x && initTouch.y == pos.y) {
+
+            var raycaster = new THREE.Raycaster();
+    camera.updateProjectionMatrix();
+    raycaster.setFromCamera(input.getTouchCenterized(), camera);
+    var intersects = raycaster.intersectObjects(scene.children, true);
+    var raycastHit = false;
+    for (var i = 0; i < intersects.length; ++i) {
+      if (intersects[i].object.name.name === "pickable") {
+        picked_object = intersects[i].object;
+        
+        if (display_graph)
+            while(picked_object.parent !== undefined && picked_object.parent.type !== "Scene")
+                picked_object = picked_object.parent;
+
+        attach(picked_object);
+
+        raycastHit = true;
+
+        break;
+      }
+    } 
+    if (!raycastHit)
+        detach();
+
+      }
+      initTouch = undefined;
+    }
 
   }).on('mousemove', function(event) {
     if (mouseDown)
@@ -284,8 +324,9 @@ $(function() {
         try {
             var parsed_result = JSON.parse(result);
             success = true;
+            console.log(parsed_result);
         } catch(err) {
-            alert("WAMS: This file format does not yet support viewing!");
+            alert("WAMS: " + err);
         }
         if (!success)
             return;

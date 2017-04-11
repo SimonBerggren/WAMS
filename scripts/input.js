@@ -1,5 +1,14 @@
 var Input = function () {
 
+	// touch
+
+	var tx = 0;					// current touch x
+	var ty = 0;					// current touch y
+	var dtx = 0;				// delta touch x
+	var dty = 0;				// delta touch y
+	var otx = 0;				// old touch x (from previous update)
+	var oty = 0;				// old touch y (from previous update)
+
 	// mouse
 
 	var mx = 0;					// current mouse x
@@ -10,7 +19,8 @@ var Input = function () {
 	var omy = 0;				// old mouse y (from previous update)
 	var right_mouse = false;	// right mouse button
 	var left_mouse = false;		// left mouse button
-	var mouse_rect = undefined;	// area where mouse moves
+	
+	var rect = undefined;	// area where input moves
 
 	// keyboard
 
@@ -22,6 +32,45 @@ var Input = function () {
 	// init all keys to false (not pressed)
 	for (var i = 0; i < NUM_KEYS; ++i)
     	keys_down[i] = keys_clicked[i] = false;
+
+    var setTouch = function(x, y) {
+
+		tx = x;
+		ty = y;
+
+		dtx = otx - tx;
+		dty = oty - ty;
+
+		otx = tx;
+		oty = ty;
+
+    };
+
+    var getTouch = function() {
+    	return new THREE.Vector2(tx, ty);
+    };
+
+    var getTouchDelta = function() {
+    	return new THREE.Vector2(dtx, dty);
+    };
+
+	// get mouse x position
+	var getTouchX = function () { 
+		return tx; 
+	};
+
+	// get mouse y position
+	var getTouchY = function () { 
+		return ty; 
+	};
+
+	// transform mouse position so that 0,0 is in center
+	var getTouchCenterized = function () {
+		console.log(tx);	
+		return new THREE.Vector2(
+			( tx / rect.width ) * 2 - 1, 
+		  -	( ty / rect.height ) * 2 + 1);
+	};
 
     // update mouse position and mouse delta position
 	var setMouse = function (x, y) {
@@ -52,14 +101,14 @@ var Input = function () {
 
 	// get mouse y position
 	var getMouseY = function () { 
-		return mx; 
+		return my; 
 	};
 
 	// transform mouse position so that 0,0 is in center
 	var getMouseCenterized = function () {
 		return new THREE.Vector2(
-			( mx / mouse_rect.width ) * 2 - 1, 
-		  -	( my / mouse_rect.height ) * 2 + 1);
+			( mx / rect.width ) * 2 - 1, 
+		  -	( my / rect.height ) * 2 + 1);
 	};
 
 	// is left mouse button down?
@@ -88,10 +137,19 @@ var Input = function () {
 
 	// called when mouse moves over canvas
 	var mouseMove = function (event) {
-    	mouse_rect = event.target.getBoundingClientRect();
-    	var x = event.clientX - mouse_rect.left;
-    	var y = event.clientY - mouse_rect.top;
+    	rect = event.target.getBoundingClientRect();
+    	var x = event.clientX - rect.left;
+    	var y = event.clientY - rect.top;
     	setMouse(x, y);
+	};
+
+	var touchDown = function (event) {
+		if (event.originalEvent.changedTouches.length == 1) {
+    		rect = event.target.getBoundingClientRect();
+    		var x = event.originalEvent.changedTouches[0].clientX - rect.left;
+    		var y = event.originalEvent.changedTouches[0].clientY - rect.top;
+    		setTouch(x, y);
+    	}
 	};
 
 	// called when a mouse button is pressed
@@ -125,6 +183,7 @@ var Input = function () {
 	// hook up mouse events
 
 	$('#glcontainer').on('mousedown', mouseDown);
+	$('#glcontainer').on('touchstart', touchDown);
 	$(document).on('mouseup', mouseUp);
 	$(document).on('mousemove', mouseMove);
 
@@ -140,6 +199,7 @@ var Input = function () {
 		getMouseX, getMouseX,
 		getMouseY, getMouseY,
 		getMouseCenterized: getMouseCenterized,
+		getTouchCenterized: getTouchCenterized,
 		isKeyDown: isKeyDown,
 		reset: reset
 	};
