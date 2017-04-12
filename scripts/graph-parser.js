@@ -132,6 +132,8 @@ function _display_graph (graph) {
 	components = graph.children;
 	edges = graph.edges;
 
+	console.log(graph);
+
 	get_icons(components);
 
 	if (icons.length == 0)
