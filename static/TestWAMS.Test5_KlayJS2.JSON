@@ -112,14 +112,14 @@
           "class": "Test3",
           "edges": [
             {
-              "id": 1,
+              "id": "1",
               "source": "test4_1.test3_1.inertia",
               "sourcePort": "test4_1.test3_1.inertia.flange_b",
               "target": "test4_1.test3_1.inertia1",
               "targetPort": "test4_1.test3_1.inertia1.flange_a"
             },
             {
-              "id": 2,
+              "id": "2",
               "source": "test4_1.test3_1.inertia1",
               "sourcePort": "test4_1.test3_1.inertia1.flange_b",
               "target": "test4_1.test3_1",
@@ -266,14 +266,14 @@
           "class": "Test3",
           "edges": [
             {
-              "id": 3,
+              "id": "3",
               "source": "test4_1.test3_2.inertia",
               "sourcePort": "test4_1.test3_2.inertia.flange_b",
               "target": "test4_1.test3_2.inertia1",
               "targetPort": "test4_1.test3_2.inertia1.flange_a"
             },
             {
-              "id": 4,
+              "id": "4",
               "source": "test4_1.test3_2.inertia1",
               "sourcePort": "test4_1.test3_2.inertia1.flange_b",
               "target": "test4_1.test3_2",
@@ -314,7 +314,7 @@
       "class": "Test4",
       "edges": [
         {
-          "id": 5,
+          "id": "5",
           "source": "test4_1.test3_2",
           "sourcePort": "test4_1.test3_2.flange_b1",
           "target": "test4_1.test3_1",
@@ -445,14 +445,14 @@
           "class": "Test3",
           "edges": [
             {
-              "id": 6,
+              "id": "6",
               "source": "test4_2.test3_1.inertia",
               "sourcePort": "test4_2.test3_1.inertia.flange_b",
               "target": "test4_2.test3_1.inertia1",
               "targetPort": "test4_2.test3_1.inertia1.flange_a"
             },
             {
-              "id": 7,
+              "id": "7",
               "source": "test4_2.test3_1.inertia1",
               "sourcePort": "test4_2.test3_1.inertia1.flange_b",
               "target": "test4_2.test3_1",
@@ -599,14 +599,14 @@
           "class": "Test3",
           "edges": [
             {
-              "id": 8,
+              "id": "8",
               "source": "test4_2.test3_2.inertia",
               "sourcePort": "test4_2.test3_2.inertia.flange_b",
               "target": "test4_2.test3_2.inertia1",
               "targetPort": "test4_2.test3_2.inertia1.flange_a"
             },
             {
-              "id": 9,
+              "id": "9",
               "source": "test4_2.test3_2.inertia1",
               "sourcePort": "test4_2.test3_2.inertia1.flange_b",
               "target": "test4_2.test3_2",
@@ -647,7 +647,7 @@
       "class": "Test4",
       "edges": [
         {
-          "id": 10,
+          "id": "10",
           "source": "test4_2.test3_2",
           "sourcePort": "test4_2.test3_2.flange_b1",
           "target": "test4_2.test3_1",
