@@ -34,12 +34,16 @@ function plane(x, y, w, h, c, z) {
 	var geometry = new THREE.PlaneGeometry(w, h, 1, 1);
 	var material = new THREE.MeshPhongMaterial({color:c});
 	var plane = new THREE.Mesh(geometry, material);
+	var geo = new THREE.EdgesGeometry( geometry ); // or WireframeGeometry( geometry )
+
+var mat = new THREE.LineBasicMaterial( { color: "black", linewidth: 2 } );
+	var wireframe = new THREE.LineSegments( geo, mat );
 	plane.material.side = THREE.DoubleSide;
 	plane.position.x = x;
 	plane.position.y = y;
 	plane.position.z = z;
 	plane.name="static";
-	return plane;    
+	return wireframe;    
 }
 
 function text(text, x, y) {

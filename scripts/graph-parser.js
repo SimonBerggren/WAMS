@@ -25,7 +25,7 @@ var components;
 var edges;
 var all_components = [];
 var worker = new Worker('klayjs.js');
-var config = '{' + "spacing: 0,\nalgorithm: de.cau.cs.kieler.klay.layered,\nedgeRouting: ORTHOGONAL" + '}';
+var config = '{' + "spacing: 0,algorithm: de.cau.cs.kieler.klay.layered,edgeRouting: ORTHOGONAL" + '}';
 
 worker.addEventListener('message', function (e) {
 	_display_graph(e.data);
@@ -114,7 +114,9 @@ function calculate_graph(graph) {
 
     worker.postMessage({
 		graph: JSON.parse(graph),
-		options: config
+		options: config,
+		iFormat: "org.json",
+		oFormat: "org.json"
 	});
 };
 

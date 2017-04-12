@@ -16,7 +16,6 @@ var font;
 $(function() {
 	fontLoader.load( 'static/fonts/helvetiker_regular.typeface.json', function ( response ) {
 		font = response;
-
 	});
 });
 
