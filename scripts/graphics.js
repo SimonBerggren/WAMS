@@ -334,8 +334,11 @@ $(function() {
             return;
 
             if (parsed_result.hasOwnProperty("metadata")) {
-                object_controls.detach();
-                clearScene();    
+              if (parsed_result.metadata.generator === "OCT3D") {
+                  object_controls.detach();
+                  clearScene();
+              }
+                
                 model = JSON.parse(fileReader.result);
                 addModel(model);
                 console.log("Model loaded");
