@@ -6,7 +6,7 @@
           "children": [
             {
               "class": "Inertia",
-              "height": "200",
+              "height": 200,
               "id": "test4_1.test3_1.inertia",
               "labels": [
                 {
@@ -54,11 +54,11 @@
               "properties": {
                 "de.cau.cs.kieler.portConstraints": "FIXED_POS"
               },
-              "width": "200"
+              "width": 200
             },
             {
               "class": "Inertia",
-              "height": "200",
+              "height": 200,
               "id": "test4_1.test3_1.inertia1",
               "labels": [
                 {
@@ -106,7 +106,7 @@
               "properties": {
                 "de.cau.cs.kieler.portConstraints": "FIXED_POS"
               },
-              "width": "200"
+              "width": 200
             }
           ],
           "class": "Test3",
@@ -126,7 +126,7 @@
               "targetPort": "test4_1.test3_1.flange_b1"
             }
           ],
-          "height": "200",
+          "height": 200,
           "id": "test4_1.test3_1",
           "labels": [
             {
@@ -154,13 +154,13 @@
           "properties": {
             "de.cau.cs.kieler.portConstraints": "FIXED_POS"
           },
-          "width": "200"
+          "width": 200
         },
         {
           "children": [
             {
               "class": "Inertia",
-              "height": "200",
+              "height": 200,
               "id": "test4_1.test3_2.inertia",
               "labels": [
                 {
@@ -208,11 +208,11 @@
               "properties": {
                 "de.cau.cs.kieler.portConstraints": "FIXED_POS"
               },
-              "width": "200"
+              "width": 200
             },
             {
               "class": "Inertia",
-              "height": "200",
+              "height": 200,
               "id": "test4_1.test3_2.inertia1",
               "labels": [
                 {
@@ -260,7 +260,7 @@
               "properties": {
                 "de.cau.cs.kieler.portConstraints": "FIXED_POS"
               },
-              "width": "200"
+              "width": 200
             }
           ],
           "class": "Test3",
@@ -280,7 +280,7 @@
               "targetPort": "test4_1.test3_2.flange_b1"
             }
           ],
-          "height": "200",
+          "height": 200,
           "id": "test4_1.test3_2",
           "labels": [
             {
@@ -308,7 +308,7 @@
           "properties": {
             "de.cau.cs.kieler.portConstraints": "FIXED_POS"
           },
-          "width": "200"
+          "width": 200
         }
       ],
       "class": "Test4",
@@ -321,7 +321,7 @@
           "targetPort": "test4_1.test3_1.flange_b1"
         }
       ],
-      "height": "200",
+      "height": 200,
       "id": "test4_1",
       "labels": [
         {
@@ -331,7 +331,7 @@
       "properties": {
         "de.cau.cs.kieler.portConstraints": "FIXED_POS"
       },
-      "width": "200"
+      "width": 200
     },
     {
       "children": [
@@ -339,7 +339,7 @@
           "children": [
             {
               "class": "Inertia",
-              "height": "200",
+              "height": 200,
               "id": "test4_2.test3_1.inertia",
               "labels": [
                 {
@@ -387,11 +387,11 @@
               "properties": {
                 "de.cau.cs.kieler.portConstraints": "FIXED_POS"
               },
-              "width": "200"
+              "width": 200
             },
             {
               "class": "Inertia",
-              "height": "200",
+              "height": 200,
               "id": "test4_2.test3_1.inertia1",
               "labels": [
                 {
@@ -439,7 +439,7 @@
               "properties": {
                 "de.cau.cs.kieler.portConstraints": "FIXED_POS"
               },
-              "width": "200"
+              "width": 200
             }
           ],
           "class": "Test3",
@@ -459,7 +459,7 @@
               "targetPort": "test4_2.test3_1.flange_b1"
             }
           ],
-          "height": "200",
+          "height": 200,
           "id": "test4_2.test3_1",
           "labels": [
             {
@@ -487,13 +487,13 @@
           "properties": {
             "de.cau.cs.kieler.portConstraints": "FIXED_POS"
           },
-          "width": "200"
+          "width": 200
         },
         {
           "children": [
             {
               "class": "Inertia",
-              "height": "200",
+              "height": 200,
               "id": "test4_2.test3_2.inertia",
               "labels": [
                 {
@@ -541,11 +541,11 @@
               "properties": {
                 "de.cau.cs.kieler.portConstraints": "FIXED_POS"
               },
-              "width": "200"
+              "width": 200
             },
             {
               "class": "Inertia",
-              "height": "200",
+              "height": 200,
               "id": "test4_2.test3_2.inertia1",
               "labels": [
                 {
@@ -593,7 +593,7 @@
               "properties": {
                 "de.cau.cs.kieler.portConstraints": "FIXED_POS"
               },
-              "width": "200"
+              "width": 200
             }
           ],
           "class": "Test3",
@@ -613,7 +613,7 @@
               "targetPort": "test4_2.test3_2.flange_b1"
             }
           ],
-          "height": "200",
+          "height": 200,
           "id": "test4_2.test3_2",
           "labels": [
             {
@@ -641,7 +641,7 @@
           "properties": {
             "de.cau.cs.kieler.portConstraints": "FIXED_POS"
           },
-          "width": "200"
+          "width": 200
         }
       ],
       "class": "Test4",
@@ -654,7 +654,7 @@
           "targetPort": "test4_2.test3_1.flange_b1"
         }
       ],
-      "height": "200",
+      "height": 200,
       "id": "test4_2",
       "labels": [
         {
@@ -664,11 +664,11 @@
       "properties": {
         "de.cau.cs.kieler.portConstraints": "FIXED_POS"
       },
-      "width": "200"
+      "width": 200
     }
   ],
   "class": "Test5",
-  "height": "200",
+  "height": 200,
   "id": "TestWAMS.Test5",
   "labels": [
     {
@@ -678,5 +678,5 @@
   "properties": {
     "de.cau.cs.kieler.portConstraints": "FIXED_POS"
   },
-  "width": "200"
+  "width": 200
 }
