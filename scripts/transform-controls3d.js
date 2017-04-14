@@ -604,7 +604,7 @@
 	THREE.TransformGizmoScale.prototype = Object.create( THREE.TransformGizmo.prototype );
 	THREE.TransformGizmoScale.prototype.constructor = THREE.TransformGizmoScale;
 
-	THREE.TransformControls = function ( camera, cameraControls, domElement ) {
+	THREE.TransformControls3D = function ( camera, cameraControls, domElement ) {
 
 		// TODO: Make non-uniform scale and rotate play nice in hierarchies
 		// TODO: ADD RXYZ contol
@@ -1166,7 +1166,7 @@
 
 	};
 
-	THREE.TransformControls.prototype = Object.create( THREE.Object3D.prototype );
-	THREE.TransformControls.prototype.constructor = THREE.TransformControls;
+	THREE.TransformControls3D.prototype = Object.create( THREE.Object3D.prototype );
+	THREE.TransformControls3D.prototype.constructor = THREE.TransformControls3D;
 
 }() );

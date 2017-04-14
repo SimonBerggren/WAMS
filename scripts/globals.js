@@ -2,6 +2,8 @@ var camera = undefined;
 var scene = undefined;
 var input = undefined;
 var animator = undefined;
+var camera_controls_2d = undefined;
+var camera_controls_3d = undefined;
 var camera_controls = undefined;
 var object_controls = undefined;
 

@@ -30,23 +30,21 @@ function sphere(x, y) {
 	return sphere;
 }
 
+function wireframe(x, y, w, h, c, z) {
+	var geometry = new THREE.EdgesGeometry( new THREE.PlaneGeometry(w, h, 1, 1) ); // or WireframeGeometry( geometry )
+	var material = new THREE.LineBasicMaterial( { color: "black", linewidth: 2 } );
+	var wireframe = new THREE.LineSegments( geometry, material );
+	wireframe.position.set(x,y,z);
+	return wireframe;    
+}
+
 function plane(x, y, w, h, c, z) {
 	var geometry = new THREE.PlaneGeometry(w, h, 1, 1);
 	var material = new THREE.MeshPhongMaterial({color:c});
 	var plane = new THREE.Mesh(geometry, material);
-	var geo = new THREE.EdgesGeometry( geometry ); // or WireframeGeometry( geometry )
-
-	var mat = new THREE.LineBasicMaterial( { color: "black", linewidth: 2 } );
-	var wireframe = new THREE.LineSegments( geo, mat );
-	wireframe.position.x = x;
-	wireframe.position.y = y;
-	wireframe.position.z = z;	
 	plane.material.side = THREE.DoubleSide;
-	plane.position.x = x;
-	plane.position.y = y;
-	plane.position.z = z;
-	plane.name="static";
-	return wireframe;    
+	plane.position.set(x,y,z);
+	return plane;    
 }
 
 function text(text, x, y) {
@@ -84,44 +82,6 @@ function text(text, x, y) {
 
 	textGeo.computeBoundingBox();
 	textGeo.computeVertexNormals();
-
-	if ( false ) {
-
-		var triangleAreaHeuristics = 0.1 * ( height * size );
-
-		for ( var i = 0; i < textGeo.faces.length; i ++ ) {
-
-			var face = textGeo.faces[ i ];
-
-			if ( face.materialIndex == 1 ) {
-
-				for ( var j = 0; j < face.vertexNormals.length; j ++ ) {
-
-					face.vertexNormals[ j ].z = 0;
-					face.vertexNormals[ j ].normalize();
-				}
-
-				var va = textGeo.vertices[ face.a ];
-				var vb = textGeo.vertices[ face.b ];
-				var vc = textGeo.vertices[ face.c ];
-
-				var s = THREE.GeometryUtils.triangleArea( va, vb, vc );
-
-				if ( s > triangleAreaHeuristics ) {
-
-					for ( var j = 0; j < face.vertexNormals.length; j ++ ) {
-
-						face.vertexNormals[ j ].copy( face.normal );
-
-					}
-
-				}
-
-			}
-
-		}
-
-	}
 
 	var centerOffset = (-0.5 * ( textGeo.boundingBox.max.x - textGeo.boundingBox.min.x ));
 
