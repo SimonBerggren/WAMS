@@ -1,0 +1,810 @@
+{
+  "children": [
+    {
+      "class": "Inertia",
+      "height": 200,
+      "id": "J1",
+      "labels": [
+        {
+          "text": "J1"
+        }
+      ],
+      "parameters": {
+        "J": "1",
+        "stateSelect": "StateSelect.default"
+      },
+      "ports": [
+        {
+          "class": "Flange_a",
+          "height": 20,
+          "id": "J1.flange_a",
+          "labels": [
+            {
+              "text": "flange_a"
+            }
+          ],
+          "properties": {
+            "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+          },
+          "width": 20,
+          "x": -10,
+          "y": 90
+        },
+        {
+          "class": "Flange_b",
+          "height": 20,
+          "id": "J1.flange_b",
+          "labels": [
+            {
+              "text": "flange_b"
+            }
+          ],
+          "properties": {
+            "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+          },
+          "width": 20,
+          "x": 190,
+          "y": 90
+        }
+      ],
+      "properties": {
+        "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+      },
+      "width": 200
+    },
+    {
+      "class": "Torque",
+      "height": 200,
+      "id": "torque",
+      "labels": [
+        {
+          "text": "torque"
+        }
+      ],
+      "ports": [
+        {
+          "class": "RealInput",
+          "height": 40,
+          "id": "torque.tau",
+          "labels": [
+            {
+              "text": "tau"
+            }
+          ],
+          "width": 40,
+          "x": -40,
+          "y": 80
+        },
+        {
+          "class": "Flange_b",
+          "height": 20,
+          "id": "torque.flange",
+          "labels": [
+            {
+              "text": "flange"
+            }
+          ],
+          "properties": {
+            "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+          },
+          "width": 20,
+          "x": 190,
+          "y": 90
+        },
+        {
+          "class": "Support",
+          "height": 20,
+          "id": "torque.support",
+          "labels": [
+            {
+              "text": "support"
+            }
+          ],
+          "properties": {
+            "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+          },
+          "width": 20,
+          "x": 90,
+          "y": 190
+        }
+      ],
+      "width": 200
+    },
+    {
+      "class": "Clutch",
+      "height": 200,
+      "id": "clutch1",
+      "labels": [
+        {
+          "text": "clutch1"
+        }
+      ],
+      "parameters": {
+        "cgeo": "1",
+        "fn_max": "20",
+        "mue_pos": "[0, 0.5]",
+        "peak": "1.1"
+      },
+      "ports": [
+        {
+          "class": "RealInput",
+          "height": 40,
+          "id": "clutch1.f_normalized",
+          "labels": [
+            {
+              "text": "f_normalized"
+            }
+          ],
+          "width": 40,
+          "x": 80,
+          "y": -30
+        },
+        {
+          "class": "Flange_a",
+          "height": 20,
+          "id": "clutch1.flange_a",
+          "labels": [
+            {
+              "text": "flange_a"
+            }
+          ],
+          "properties": {
+            "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+          },
+          "width": 20,
+          "x": -10,
+          "y": 90
+        },
+        {
+          "class": "Flange_b",
+          "height": 20,
+          "id": "clutch1.flange_b",
+          "labels": [
+            {
+              "text": "flange_b"
+            }
+          ],
+          "properties": {
+            "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+          },
+          "width": 20,
+          "x": 190,
+          "y": 90
+        },
+        {
+          "class": "HeatPort_a",
+          "height": 20,
+          "id": "clutch1.heatPort",
+          "labels": [
+            {
+              "text": "heatPort"
+            }
+          ],
+          "width": 20,
+          "x": -10,
+          "y": 190
+        }
+      ],
+      "properties": {
+        "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+      },
+      "width": 200
+    },
+    {
+      "class": "Sine",
+      "height": 200,
+      "id": "sin1",
+      "labels": [
+        {
+          "text": "sin1"
+        }
+      ],
+      "parameters": {
+        "amplitude": "10",
+        "freqHz": "5",
+        "offset": "0",
+        "phase": "0",
+        "startTime": "0"
+      },
+      "ports": [
+        {
+          "class": "RealOutput",
+          "height": 20,
+          "id": "sin1.y",
+          "labels": [
+            {
+              "text": "y"
+            }
+          ],
+          "width": 20,
+          "x": 200,
+          "y": 90
+        }
+      ],
+      "properties": {
+        "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+      },
+      "width": 200
+    },
+    {
+      "class": "Step",
+      "height": 200,
+      "id": "step1",
+      "labels": [
+        {
+          "text": "step1"
+        }
+      ],
+      "parameters": {
+        "height": "1"
+      },
+      "ports": [
+        {
+          "class": "RealOutput",
+          "height": 20,
+          "id": "step1.y",
+          "labels": [
+            {
+              "text": "y"
+            }
+          ],
+          "width": 20,
+          "x": 200,
+          "y": 90
+        },
+        {
+          "class": "RealOutput",
+          "height": 20,
+          "id": "step1.y",
+          "labels": [
+            {
+              "text": "y"
+            }
+          ],
+          "width": 20,
+          "x": 200,
+          "y": 90
+        }
+      ],
+      "properties": {
+        "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+      },
+      "width": 200
+    },
+    {
+      "class": "Inertia",
+      "height": 200,
+      "id": "J2",
+      "labels": [
+        {
+          "text": "J2"
+        }
+      ],
+      "parameters": {
+        "J": "1",
+        "stateSelect": "StateSelect.default"
+      },
+      "ports": [
+        {
+          "class": "Flange_a",
+          "height": 20,
+          "id": "J2.flange_a",
+          "labels": [
+            {
+              "text": "flange_a"
+            }
+          ],
+          "properties": {
+            "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+          },
+          "width": 20,
+          "x": -10,
+          "y": 90
+        },
+        {
+          "class": "Flange_b",
+          "height": 20,
+          "id": "J2.flange_b",
+          "labels": [
+            {
+              "text": "flange_b"
+            }
+          ],
+          "properties": {
+            "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+          },
+          "width": 20,
+          "x": 190,
+          "y": 90
+        }
+      ],
+      "properties": {
+        "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+      },
+      "width": 200
+    },
+    {
+      "class": "Clutch",
+      "height": 200,
+      "id": "clutch2",
+      "labels": [
+        {
+          "text": "clutch2"
+        }
+      ],
+      "parameters": {
+        "cgeo": "1",
+        "fn_max": "20",
+        "mue_pos": "[0, 0.5]",
+        "peak": "1.1"
+      },
+      "ports": [
+        {
+          "class": "RealInput",
+          "height": 40,
+          "id": "clutch2.f_normalized",
+          "labels": [
+            {
+              "text": "f_normalized"
+            }
+          ],
+          "width": 40,
+          "x": 80,
+          "y": -30
+        },
+        {
+          "class": "Flange_a",
+          "height": 20,
+          "id": "clutch2.flange_a",
+          "labels": [
+            {
+              "text": "flange_a"
+            }
+          ],
+          "properties": {
+            "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+          },
+          "width": 20,
+          "x": -10,
+          "y": 90
+        },
+        {
+          "class": "Flange_b",
+          "height": 20,
+          "id": "clutch2.flange_b",
+          "labels": [
+            {
+              "text": "flange_b"
+            }
+          ],
+          "properties": {
+            "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+          },
+          "width": 20,
+          "x": 190,
+          "y": 90
+        },
+        {
+          "class": "HeatPort_a",
+          "height": 20,
+          "id": "clutch2.heatPort",
+          "labels": [
+            {
+              "text": "heatPort"
+            }
+          ],
+          "width": 20,
+          "x": -10,
+          "y": 190
+        }
+      ],
+      "properties": {
+        "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+      },
+      "width": 200
+    },
+    {
+      "class": "Inertia",
+      "height": 200,
+      "id": "J3",
+      "labels": [
+        {
+          "text": "J3"
+        }
+      ],
+      "parameters": {
+        "J": "1",
+        "stateSelect": "StateSelect.default"
+      },
+      "ports": [
+        {
+          "class": "Flange_a",
+          "height": 20,
+          "id": "J3.flange_a",
+          "labels": [
+            {
+              "text": "flange_a"
+            }
+          ],
+          "properties": {
+            "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+          },
+          "width": 20,
+          "x": -10,
+          "y": 90
+        },
+        {
+          "class": "Flange_b",
+          "height": 20,
+          "id": "J3.flange_b",
+          "labels": [
+            {
+              "text": "flange_b"
+            }
+          ],
+          "properties": {
+            "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+          },
+          "width": 20,
+          "x": 190,
+          "y": 90
+        }
+      ],
+      "properties": {
+        "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+      },
+      "width": 200
+    },
+    {
+      "class": "Clutch",
+      "height": 200,
+      "id": "clutch3",
+      "labels": [
+        {
+          "text": "clutch3"
+        }
+      ],
+      "parameters": {
+        "cgeo": "1",
+        "fn_max": "20",
+        "mue_pos": "[0, 0.5]",
+        "peak": "1.1"
+      },
+      "ports": [
+        {
+          "class": "RealInput",
+          "height": 40,
+          "id": "clutch3.f_normalized",
+          "labels": [
+            {
+              "text": "f_normalized"
+            }
+          ],
+          "width": 40,
+          "x": 80,
+          "y": -30
+        },
+        {
+          "class": "Flange_a",
+          "height": 20,
+          "id": "clutch3.flange_a",
+          "labels": [
+            {
+              "text": "flange_a"
+            }
+          ],
+          "properties": {
+            "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+          },
+          "width": 20,
+          "x": -10,
+          "y": 90
+        },
+        {
+          "class": "Flange_b",
+          "height": 20,
+          "id": "clutch3.flange_b",
+          "labels": [
+            {
+              "text": "flange_b"
+            }
+          ],
+          "properties": {
+            "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+          },
+          "width": 20,
+          "x": 190,
+          "y": 90
+        },
+        {
+          "class": "HeatPort_a",
+          "height": 20,
+          "id": "clutch3.heatPort",
+          "labels": [
+            {
+              "text": "heatPort"
+            }
+          ],
+          "width": 20,
+          "x": -10,
+          "y": 190
+        }
+      ],
+      "properties": {
+        "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+      },
+      "width": 200
+    },
+    {
+      "class": "Inertia",
+      "height": 200,
+      "id": "J4",
+      "labels": [
+        {
+          "text": "J4"
+        }
+      ],
+      "parameters": {
+        "J": "1",
+        "stateSelect": "StateSelect.default"
+      },
+      "ports": [
+        {
+          "class": "Flange_a",
+          "height": 20,
+          "id": "J4.flange_a",
+          "labels": [
+            {
+              "text": "flange_a"
+            }
+          ],
+          "properties": {
+            "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+          },
+          "width": 20,
+          "x": -10,
+          "y": 90
+        },
+        {
+          "class": "Flange_b",
+          "height": 20,
+          "id": "J4.flange_b",
+          "labels": [
+            {
+              "text": "flange_b"
+            }
+          ],
+          "properties": {
+            "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+          },
+          "width": 20,
+          "x": 190,
+          "y": 90
+        }
+      ],
+      "properties": {
+        "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+      },
+      "width": 200
+    },
+    {
+      "class": "Sine",
+      "height": 200,
+      "id": "sin2",
+      "labels": [
+        {
+          "text": "sin2"
+        }
+      ],
+      "parameters": {
+        "amplitude": "1",
+        "freqHz": "freqHz",
+        "offset": "0",
+        "phase": "1.57",
+        "startTime": "0"
+      },
+      "ports": [
+        {
+          "class": "RealOutput",
+          "height": 20,
+          "id": "sin2.y",
+          "labels": [
+            {
+              "text": "y"
+            }
+          ],
+          "width": 20,
+          "x": 200,
+          "y": 90
+        }
+      ],
+      "properties": {
+        "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+      },
+      "width": 200
+    },
+    {
+      "class": "Step",
+      "height": 200,
+      "id": "step2",
+      "labels": [
+        {
+          "text": "step2"
+        }
+      ],
+      "parameters": {
+        "height": "1"
+      },
+      "ports": [
+        {
+          "class": "RealOutput",
+          "height": 20,
+          "id": "step2.y",
+          "labels": [
+            {
+              "text": "y"
+            }
+          ],
+          "width": 20,
+          "x": 200,
+          "y": 90
+        },
+        {
+          "class": "RealOutput",
+          "height": 20,
+          "id": "step2.y",
+          "labels": [
+            {
+              "text": "y"
+            }
+          ],
+          "width": 20,
+          "x": 200,
+          "y": 90
+        }
+      ],
+      "properties": {
+        "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+      },
+      "width": 200
+    },
+    {
+      "class": "Fixed",
+      "height": 200,
+      "id": "fixed",
+      "labels": [
+        {
+          "text": "fixed"
+        }
+      ],
+      "parameters": {
+        "phi0": "0"
+      },
+      "ports": [
+        {
+          "class": "Flange_b",
+          "height": 20,
+          "id": "fixed.flange",
+          "labels": [
+            {
+              "text": "flange"
+            }
+          ],
+          "properties": {
+            "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+          },
+          "width": 20,
+          "x": 90,
+          "y": 90
+        }
+      ],
+      "properties": {
+        "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+      },
+      "width": 200
+    }
+  ],
+  "class": "CoupledClutches",
+  "edges": [
+    {
+      "id": "1",
+      "source": "torque",
+      "sourcePort": "torque.flange",
+      "target": "J1",
+      "targetPort": "J1.flange_a"
+    },
+    {
+      "id": "2",
+      "source": "J1",
+      "sourcePort": "J1.flange_b",
+      "target": "clutch1",
+      "targetPort": "clutch1.flange_a"
+    },
+    {
+      "id": "3",
+      "source": "clutch1",
+      "sourcePort": "clutch1.flange_b",
+      "target": "J2",
+      "targetPort": "J2.flange_a"
+    },
+    {
+      "id": "4",
+      "source": "J2",
+      "sourcePort": "J2.flange_b",
+      "target": "clutch2",
+      "targetPort": "clutch2.flange_a"
+    },
+    {
+      "id": "5",
+      "source": "clutch2",
+      "sourcePort": "clutch2.flange_b",
+      "target": "J3",
+      "targetPort": "J3.flange_a"
+    },
+    {
+      "id": "6",
+      "source": "J3",
+      "sourcePort": "J3.flange_b",
+      "target": "clutch3",
+      "targetPort": "clutch3.flange_a"
+    },
+    {
+      "id": "7",
+      "source": "clutch3",
+      "sourcePort": "clutch3.flange_b",
+      "target": "J4",
+      "targetPort": "J4.flange_a"
+    },
+    {
+      "id": "8",
+      "source": "sin1",
+      "sourcePort": "sin1.y",
+      "target": "torque",
+      "targetPort": "torque.tau"
+    },
+    {
+      "id": "9",
+      "source": "sin2",
+      "sourcePort": "sin2.y",
+      "target": "clutch1",
+      "targetPort": "clutch1.f_normalized"
+    },
+    {
+      "id": "10",
+      "source": "step1",
+      "sourcePort": "step1.y",
+      "target": "clutch2",
+      "targetPort": "clutch2.f_normalized"
+    },
+    {
+      "id": "11",
+      "source": "step2",
+      "sourcePort": "step2.y",
+      "target": "clutch3",
+      "targetPort": "clutch3.f_normalized"
+    },
+    {
+      "id": "12",
+      "source": "fixed",
+      "sourcePort": "fixed.flange",
+      "target": "torque",
+      "targetPort": "torque.support"
+    }
+  ],
+  "height": 200,
+  "id": "Modelica.Mechanics.Rotational.Examples.CoupledClutches",
+  "labels": [
+    {
+      "text": "CoupledClutches"
+    }
+  ],
+  "parameters": {
+    "T2": "0.4",
+    "T3": "0.9",
+    "freqHz": "0.2"
+  },
+  "properties": {
+    "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+  },
+  "width": 200
+}

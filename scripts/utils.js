@@ -36,8 +36,11 @@ function plane(x, y, w, h, c, z) {
 	var plane = new THREE.Mesh(geometry, material);
 	var geo = new THREE.EdgesGeometry( geometry ); // or WireframeGeometry( geometry )
 
-var mat = new THREE.LineBasicMaterial( { color: "black", linewidth: 2 } );
+	var mat = new THREE.LineBasicMaterial( { color: "black", linewidth: 2 } );
 	var wireframe = new THREE.LineSegments( geo, mat );
+	wireframe.position.x = x;
+	wireframe.position.y = y;
+	wireframe.position.z = z;	
 	plane.material.side = THREE.DoubleSide;
 	plane.position.x = x;
 	plane.position.y = y;

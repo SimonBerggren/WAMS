@@ -27,6 +27,8 @@ var all_components = [];
 var worker = new Worker('klayjs.js');
 var config = '{' + "spacing: 0,algorithm: de.cau.cs.kieler.klay.layered,edgeRouting: ORTHOGONAL" + '}';
 
+
+
 worker.addEventListener('message', function (e) {
 	_display_graph(e.data);
 });
@@ -82,7 +84,7 @@ function addIcon(name) {
 					var s = svg.image;
 					s.width = Math.pow( 2, Math.round( Math.log( s.width ) / Math.LN2 ) );
 					s.height = Math.pow( 2, Math.round( Math.log( s.height ) / Math.LN2 ) );
-					var material = new THREE.MeshBasicMaterial({map:svg});
+					var material = new THREE.MeshLambertMaterial({map:svg, transparent:true});
 					var geometry = new THREE.BoxGeometry( 50, 50, 1 );
 					var mesh = new THREE.Mesh(geometry,material);
 					icons_svg[name] = mesh;
@@ -101,6 +103,8 @@ function addIcon(name) {
 function onLoadedIcons() {
 
 	bounding_boxes = [];
+
+	console.log(components);
 	
 	get_comps(components, edges);
 
@@ -145,7 +149,7 @@ function _display_graph (graph) {
 			addIcon(icons[i]);
 };
 
-function get_icons(comps, parent) {
+function get_icons(comps) {
 
 	for(var i = 0; i < comps.length; ++i) {
 
@@ -157,16 +161,28 @@ function get_icons(comps, parent) {
 		}
 			
 		if (c.ports !== undefined) {
-			get_icons(c.ports, c.edges, c);
+			get_icons(c.ports);
+		}
+
+		if (c.children !== undefined) {
+			get_icons(c.children);
 		}
 	}
 };
 
-function get_comps(comps, edges) {
+function get_comps(comps, edges, parent) {
+
+	var offsetX = parent === undefined ? 0 : parent.x;
+	var offsetY = parent === undefined ? 0 : parent.y;
 
 	for(var i = 0; i < comps.length; ++i) {
 
 		var c = comps[i];
+		c.x += offsetX;
+		c.y += offsetY;
+
+		if (c.children !== undefined)
+			get_comps(c.children, c.edges, c);
 
 		var name = c.id;
     	var cl = c.class;
@@ -175,7 +191,7 @@ function get_comps(comps, edges) {
     	var x = c.x + w/2;
     	var y = c.y + h/2;
     	var obj;
-	
+
     	switch (names[cl]) {
     		case "svg":
     			obj = icons_svg[cl].clone();
@@ -258,6 +274,7 @@ function get_comps(comps, edges) {
 
     	} else {
     		//console.log("lonely object added")
+    		setName(obj);
     		scene.add(obj);
     	}
     	
@@ -276,10 +293,10 @@ function get_comps(comps, edges) {
 	
 				var s = 7;
 				var edge = edges[i];
-				var sourceX = edge.sourcePoint.x;
-				var sourceY = edge.sourcePoint.y;
-				var targetX = edge.targetPoint.x;
-				var targetY = edge.targetPoint.y;
+				var sourceX = edge.sourcePoint.x + offsetX;
+				var sourceY = edge.sourcePoint.y + offsetY;
+				var targetX = edge.targetPoint.x + offsetX;
+				var targetY = edge.targetPoint.y + offsetY;
 
 				var source = plane(sourceX, sourceY, s, s, 0xffff1a, 0);
 				var target = plane(targetX, targetY, s, s, 0xffff1a, 0);
@@ -289,30 +306,6 @@ function get_comps(comps, edges) {
 
 				scene.updateMatrixWorld();
 
-				// for (var j = 0; j < bounding_boxes.length; ++j) {
-				// 	if (bounding_boxes[j].userData.id === edge.source) {
-				// 		bounding_boxes[j].userData.id = edge;
-				// 		break;
-				// 	}
-				// }
-
-				// for (var j = 0; j < bounding_boxes.length; ++j) {
-				// 	if (bounding_boxes[j].userData.id === edge.target) {
-				// 		bounding_boxes[j].userData.id = edge;
-				// 		break;
-				// 	}
-				// }
-
-				//var box = new THREE.Box3().setFromObject(source, source);
-				//bounding_boxes.push(box);
-				//var box2 = new THREE.Box3().setFromObject(target, target);
-				//bounding_boxes.push(box2);
-
-				// var jpoints = edge.junctionPoints;
-				// for (var j = 0; j < jpoints.length; ++j) {
-				// 	scene.add(plane(jpoints[j].x, jpoints[j].y, 10, 10, 0x00ff00, 0));
-				// }
-
 				var connection = new THREE.Group();
 	
 				var bendPoints = edge.bendPoints;
@@ -320,26 +313,30 @@ function get_comps(comps, edges) {
 				if (bendPoints !== undefined && bendPoints.length > 0) {
 	
 					var firstBend = bendPoints[0];
+					var firstBendX = firstBend.x + offsetX;
+					var firstBendY = firstBend.y + offsetY;
 					var lastBend = bendPoints[bendPoints.length - 1];
+					var lastBendX = lastBend.x + offsetX;
+					var lastBendY = lastBend.y + offsetY;
 	
-					connection.add(cylinder(new THREE.Vector3(sourceX, sourceY, 0), new THREE.Vector3(firstBend.x, firstBend.y, 0)));
+					connection.add(cylinder(new THREE.Vector3(sourceX, sourceY, 0), new THREE.Vector3(firstBendX, firstBendY, 0)));
 					
 	  				for(var j = 0; j < bendPoints.length - 1; ++j) {
 	
 						var bend = bendPoints[j];
-						var bendX = bend.x;
-						var bendY = bend.y;
+						var bendX = bend.x + offsetX;
+						var bendY = bend.y + offsetY;
 						var bend2 = bendPoints[j + 1];
-						var bendX2 = bend2.x;
-						var bendY2 = bend2.y;
+						var bendX2 = bend2.x + offsetX;
+						var bendY2 = bend2.y + offsetY;
 	
 	  					connection.add(sphere(bendX,bendY));
 	
 						connection.add(cylinder(new THREE.Vector3(bendX, bendY, 0), new THREE.Vector3(bendX2, bendY2,0)));
 					}
 	
-					connection.add(sphere(lastBend.x ,lastBend.y));
-					connection.add(cylinder(new THREE.Vector3(lastBend.x, lastBend.y ,0), new THREE.Vector3(targetX, targetY, 0)));
+					connection.add(sphere(lastBendX ,lastBendY));
+					connection.add(cylinder(new THREE.Vector3(lastBendX, lastBendY ,0), new THREE.Vector3(targetX, targetY, 0)));
 	
 			  	} else {
 			  		connection.add(cylinder(new THREE.Vector3(sourceX, sourceY, 0), new THREE.Vector3(targetX,targetY,0)));	

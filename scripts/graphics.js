@@ -13,7 +13,6 @@ var stopButton = document.getElementById("stop");
 
 var resetCameraButton = document.getElementById("resetCamera");
 
-//var slider = new Slider('#animation-slider', { min:0, max:1, });
 resetScene = function() {
     graph = undefined;
     parsed_graph = undefined;
@@ -74,7 +73,7 @@ $(function() {
   renderer.setClearColor( "gray", 1 );
   renderer.setSize(w, h);
 
-  camera = new THREE.PerspectiveCamera( 50, w / h, 1, 1500 );
+  camera = new THREE.PerspectiveCamera( 50, w / h, 1, 3000 );
   camera.position.z = 500;
 
   camera_controls = new THREE.OrbitControls(camera, renderer.domElement);
@@ -89,6 +88,7 @@ $(function() {
   render();
 
   function render() {
+    camera.position.z = Math.clamp(camera.position.z, -2500, 2500);
     requestAnimationFrame(render)
     object_controls.update();
     var delta = clock.getDelta();
@@ -192,12 +192,15 @@ $(function() {
     for (var i = 0; i < intersects.length; ++i) {
       if (intersects[i].object.name.name === "pickable") {
         picked_object = intersects[i].object;
-        
+
         if (display_graph)
             while(picked_object.parent !== undefined && picked_object.parent.type !== "Scene")
                 picked_object = picked_object.parent;
 
         attach(picked_object);
+
+        picked_object.children[0].material.opacity = 0.5;
+        console.log(picked_object);
 
         raycastHit = true;
 
@@ -231,6 +234,8 @@ $(function() {
                 picked_object = picked_object.parent;
 
         attach(picked_object);
+
+        console.log(picked_object);
 
         raycastHit = true;
         
@@ -434,8 +439,8 @@ Array.prototype.removeValue = function(name, value){
    var array = $.map(this, function(v,i){
       return v[name] === value ? null : v;
    });
-   this.length = 0; //clear original array
-   this.push.apply(this, array); //push all elements except the one we want to delete
+   this.length = 0;
+   this.push.apply(this, array);
 }
 
   deleteButton.onclick = function() {
