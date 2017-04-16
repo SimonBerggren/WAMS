@@ -24,6 +24,7 @@
             }
           ],
           "properties": {
+            "algorithm": "de.cau.cs.kieler.fixed",
             "de.cau.cs.kieler.portConstraints": "FIXED_POS"
           },
           "width": 20,
@@ -40,6 +41,7 @@
             }
           ],
           "properties": {
+            "algorithm": "de.cau.cs.kieler.fixed",
             "de.cau.cs.kieler.portConstraints": "FIXED_POS"
           },
           "width": 20,
@@ -48,9 +50,12 @@
         }
       ],
       "properties": {
+        "algorithm": "de.cau.cs.kieler.fixed",
         "de.cau.cs.kieler.portConstraints": "FIXED_POS"
       },
-      "width": 200
+      "width": 200,
+      "x": 300,
+      "y": 900
     },
     {
       "class": "Torque",
@@ -85,6 +90,7 @@
             }
           ],
           "properties": {
+            "algorithm": "de.cau.cs.kieler.fixed",
             "de.cau.cs.kieler.portConstraints": "FIXED_POS"
           },
           "width": 20,
@@ -101,6 +107,7 @@
             }
           ],
           "properties": {
+            "algorithm": "de.cau.cs.kieler.fixed",
             "de.cau.cs.kieler.portConstraints": "FIXED_POS"
           },
           "width": 20,
@@ -108,7 +115,9 @@
           "y": 190
         }
       ],
-      "width": 200
+      "width": 200,
+      "x": 0,
+      "y": 900
     },
     {
       "class": "Clutch",
@@ -154,6 +163,7 @@
             }
           ],
           "properties": {
+            "algorithm": "de.cau.cs.kieler.fixed",
             "de.cau.cs.kieler.portConstraints": "FIXED_POS"
           },
           "width": 20,
@@ -170,6 +180,7 @@
             }
           ],
           "properties": {
+            "algorithm": "de.cau.cs.kieler.fixed",
             "de.cau.cs.kieler.portConstraints": "FIXED_POS"
           },
           "width": 20,
@@ -191,9 +202,12 @@
         }
       ],
       "properties": {
+        "algorithm": "de.cau.cs.kieler.fixed",
         "de.cau.cs.kieler.portConstraints": "FIXED_POS"
       },
-      "width": 200
+      "width": 200,
+      "x": 600,
+      "y": 900
     },
     {
       "class": "Sine",
@@ -227,9 +241,12 @@
         }
       ],
       "properties": {
+        "algorithm": "de.cau.cs.kieler.fixed",
         "de.cau.cs.kieler.portConstraints": "FIXED_POS"
       },
-      "width": 200
+      "width": 200,
+      "x": -300,
+      "y": 900
     },
     {
       "class": "Step",
@@ -239,6 +256,10 @@
         {
           "text": "step1"
         }
+      ],
+      "origin": [
+        250,
+        350
       ],
       "parameters": {
         "height": "1"
@@ -272,9 +293,13 @@
         }
       ],
       "properties": {
+        "algorithm": "de.cau.cs.kieler.fixed",
         "de.cau.cs.kieler.portConstraints": "FIXED_POS"
       },
-      "width": 200
+      "rotation": 270,
+      "width": 200,
+      "x": 1200,
+      "y": 500
     },
     {
       "class": "Inertia",
@@ -300,6 +325,7 @@
             }
           ],
           "properties": {
+            "algorithm": "de.cau.cs.kieler.fixed",
             "de.cau.cs.kieler.portConstraints": "FIXED_POS"
           },
           "width": 20,
@@ -316,6 +342,7 @@
             }
           ],
           "properties": {
+            "algorithm": "de.cau.cs.kieler.fixed",
             "de.cau.cs.kieler.portConstraints": "FIXED_POS"
           },
           "width": 20,
@@ -324,9 +351,12 @@
         }
       ],
       "properties": {
+        "algorithm": "de.cau.cs.kieler.fixed",
         "de.cau.cs.kieler.portConstraints": "FIXED_POS"
       },
-      "width": 200
+      "width": 200,
+      "x": 900,
+      "y": 900
     },
     {
       "class": "Clutch",
@@ -372,6 +402,7 @@
             }
           ],
           "properties": {
+            "algorithm": "de.cau.cs.kieler.fixed",
             "de.cau.cs.kieler.portConstraints": "FIXED_POS"
           },
           "width": 20,
@@ -388,6 +419,7 @@
             }
           ],
           "properties": {
+            "algorithm": "de.cau.cs.kieler.fixed",
             "de.cau.cs.kieler.portConstraints": "FIXED_POS"
           },
           "width": 20,
@@ -409,9 +441,12 @@
         }
       ],
       "properties": {
+        "algorithm": "de.cau.cs.kieler.fixed",
         "de.cau.cs.kieler.portConstraints": "FIXED_POS"
       },
-      "width": 200
+      "width": 200,
+      "x": 1200,
+      "y": 900
     },
     {
       "class": "Inertia",
@@ -437,6 +472,7 @@
             }
           ],
           "properties": {
+            "algorithm": "de.cau.cs.kieler.fixed",
             "de.cau.cs.kieler.portConstraints": "FIXED_POS"
           },
           "width": 20,
@@ -453,6 +489,7 @@
             }
           ],
           "properties": {
+            "algorithm": "de.cau.cs.kieler.fixed",
             "de.cau.cs.kieler.portConstraints": "FIXED_POS"
           },
           "width": 20,
@@ -461,9 +498,12 @@
         }
       ],
       "properties": {
+        "algorithm": "de.cau.cs.kieler.fixed",
         "de.cau.cs.kieler.portConstraints": "FIXED_POS"
       },
-      "width": 200
+      "width": 200,
+      "x": 1500,
+      "y": 900
     },
     {
       "class": "Clutch",
@@ -509,6 +549,7 @@
             }
           ],
           "properties": {
+            "algorithm": "de.cau.cs.kieler.fixed",
             "de.cau.cs.kieler.portConstraints": "FIXED_POS"
           },
           "width": 20,
@@ -525,6 +566,7 @@
             }
           ],
           "properties": {
+            "algorithm": "de.cau.cs.kieler.fixed",
             "de.cau.cs.kieler.portConstraints": "FIXED_POS"
           },
           "width": 20,
@@ -546,9 +588,12 @@
         }
       ],
       "properties": {
+        "algorithm": "de.cau.cs.kieler.fixed",
         "de.cau.cs.kieler.portConstraints": "FIXED_POS"
       },
-      "width": 200
+      "width": 200,
+      "x": 1800,
+      "y": 900
     },
     {
       "class": "Inertia",
@@ -574,6 +619,7 @@
             }
           ],
           "properties": {
+            "algorithm": "de.cau.cs.kieler.fixed",
             "de.cau.cs.kieler.portConstraints": "FIXED_POS"
           },
           "width": 20,
@@ -590,6 +636,7 @@
             }
           ],
           "properties": {
+            "algorithm": "de.cau.cs.kieler.fixed",
             "de.cau.cs.kieler.portConstraints": "FIXED_POS"
           },
           "width": 20,
@@ -598,9 +645,12 @@
         }
       ],
       "properties": {
+        "algorithm": "de.cau.cs.kieler.fixed",
         "de.cau.cs.kieler.portConstraints": "FIXED_POS"
       },
-      "width": 200
+      "width": 200,
+      "x": 2100,
+      "y": 900
     },
     {
       "class": "Sine",
@@ -610,6 +660,10 @@
         {
           "text": "sin2"
         }
+      ],
+      "origin": [
+        -350,
+        350
       ],
       "parameters": {
         "amplitude": "1",
@@ -634,9 +688,13 @@
         }
       ],
       "properties": {
+        "algorithm": "de.cau.cs.kieler.fixed",
         "de.cau.cs.kieler.portConstraints": "FIXED_POS"
       },
-      "width": 200
+      "rotation": 270,
+      "width": 200,
+      "x": 600,
+      "y": 500
     },
     {
       "class": "Step",
@@ -646,6 +704,10 @@
         {
           "text": "step2"
         }
+      ],
+      "origin": [
+        850,
+        350
       ],
       "parameters": {
         "height": "1"
@@ -679,9 +741,13 @@
         }
       ],
       "properties": {
+        "algorithm": "de.cau.cs.kieler.fixed",
         "de.cau.cs.kieler.portConstraints": "FIXED_POS"
       },
-      "width": 200
+      "rotation": 270,
+      "width": 200,
+      "x": 1800,
+      "y": 500
     },
     {
       "class": "Fixed",
@@ -706,6 +772,7 @@
             }
           ],
           "properties": {
+            "algorithm": "de.cau.cs.kieler.fixed",
             "de.cau.cs.kieler.portConstraints": "FIXED_POS"
           },
           "width": 20,
@@ -714,95 +781,235 @@
         }
       ],
       "properties": {
+        "algorithm": "de.cau.cs.kieler.fixed",
         "de.cau.cs.kieler.portConstraints": "FIXED_POS"
       },
-      "width": 200
+      "width": 200,
+      "x": 0,
+      "y": 1100
     }
   ],
   "class": "CoupledClutches",
   "edges": [
     {
+      "bendPoints": [],
       "id": "1",
       "source": "torque",
+      "sourcePoint": {
+        "x": 200,
+        "y": 1000
+      },
       "sourcePort": "torque.flange",
       "target": "J1",
+      "targetPoint": {
+        "x": 300,
+        "y": 1000
+      },
       "targetPort": "J1.flange_a"
     },
     {
+      "bendPoints": [],
       "id": "2",
       "source": "J1",
+      "sourcePoint": {
+        "x": 500,
+        "y": 1000
+      },
       "sourcePort": "J1.flange_b",
       "target": "clutch1",
+      "targetPoint": {
+        "x": 600,
+        "y": 1000
+      },
       "targetPort": "clutch1.flange_a"
     },
     {
+      "bendPoints": [],
       "id": "3",
       "source": "clutch1",
+      "sourcePoint": {
+        "x": 800,
+        "y": 1000
+      },
       "sourcePort": "clutch1.flange_b",
       "target": "J2",
+      "targetPoint": {
+        "x": 900,
+        "y": 1000
+      },
       "targetPort": "J2.flange_a"
     },
     {
+      "bendPoints": [
+        {
+          "x": 1100,
+          "y": 1000
+        }
+      ],
       "id": "4",
       "source": "J2",
+      "sourcePoint": {
+        "x": 1100,
+        "y": 1000
+      },
       "sourcePort": "J2.flange_b",
       "target": "clutch2",
+      "targetPoint": {
+        "x": 1200,
+        "y": 1000
+      },
       "targetPort": "clutch2.flange_a"
     },
     {
+      "bendPoints": [],
       "id": "5",
       "source": "clutch2",
+      "sourcePoint": {
+        "x": 1400,
+        "y": 1000
+      },
       "sourcePort": "clutch2.flange_b",
       "target": "J3",
+      "targetPoint": {
+        "x": 1500,
+        "y": 1000
+      },
       "targetPort": "J3.flange_a"
     },
     {
+      "bendPoints": [],
       "id": "6",
       "source": "J3",
+      "sourcePoint": {
+        "x": 1700,
+        "y": 1000
+      },
       "sourcePort": "J3.flange_b",
       "target": "clutch3",
+      "targetPoint": {
+        "x": 1800,
+        "y": 1000
+      },
       "targetPort": "clutch3.flange_a"
     },
     {
+      "bendPoints": [],
       "id": "7",
       "source": "clutch3",
+      "sourcePoint": {
+        "x": 2000,
+        "y": 1000
+      },
       "sourcePort": "clutch3.flange_b",
       "target": "J4",
+      "targetPoint": {
+        "x": 2100,
+        "y": 1000
+      },
       "targetPort": "J4.flange_a"
     },
     {
+      "bendPoints": [],
       "id": "8",
       "source": "sin1",
+      "sourcePoint": {
+        "x": -90,
+        "y": 1000
+      },
       "sourcePort": "sin1.y",
       "target": "torque",
+      "targetPoint": {
+        "x": -20,
+        "y": 1000
+      },
       "targetPort": "torque.tau"
     },
     {
+      "bendPoints": [
+        {
+          "x": 700,
+          "y": 810
+        }
+      ],
       "id": "9",
       "source": "sin2",
+      "sourcePoint": {
+        "x": 700,
+        "y": 810
+      },
       "sourcePort": "sin2.y",
       "target": "clutch1",
+      "targetPoint": {
+        "x": 700,
+        "y": 890
+      },
       "targetPort": "clutch1.f_normalized"
     },
     {
+      "bendPoints": [
+        {
+          "x": 1300,
+          "y": 810
+        },
+        {
+          "x": 1300,
+          "y": 900
+        }
+      ],
       "id": "10",
       "source": "step1",
+      "sourcePoint": {
+        "x": 1300,
+        "y": 810
+      },
       "sourcePort": "step1.y",
       "target": "clutch2",
+      "targetPoint": {
+        "x": 1300,
+        "y": 890
+      },
       "targetPort": "clutch2.f_normalized"
     },
     {
+      "bendPoints": [
+        {
+          "x": 1900,
+          "y": 810
+        }
+      ],
       "id": "11",
       "source": "step2",
+      "sourcePoint": {
+        "x": 1900,
+        "y": 810
+      },
       "sourcePort": "step2.y",
       "target": "clutch3",
+      "targetPoint": {
+        "x": 1900,
+        "y": 890
+      },
       "targetPort": "clutch3.f_normalized"
     },
     {
+      "bendPoints": [
+        {
+          "x": 100,
+          "y": 1110
+        }
+      ],
       "id": "12",
       "source": "fixed",
+      "sourcePoint": {
+        "x": 100,
+        "y": 1200
+      },
       "sourcePort": "fixed.flange",
       "target": "torque",
+      "targetPoint": {
+        "x": 100,
+        "y": 1100
+      },
       "targetPort": "torque.support"
     }
   ],
@@ -819,6 +1026,7 @@
     "freqHz": "0.2"
   },
   "properties": {
+    "algorithm": "de.cau.cs.kieler.fixed",
     "de.cau.cs.kieler.portConstraints": "FIXED_POS"
   },
   "width": 200
