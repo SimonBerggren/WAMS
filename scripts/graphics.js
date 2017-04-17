@@ -352,6 +352,14 @@ else if (event.keyCode == 27) // ESC
                     addModel(model);
                     console.log("Model loaded");
                 }
+                
+                else if (parsed_result.length !== undefined || parsed_result.hasOwnProperty("children") && parsed_result.children[0].x !== undefined) {
+                    object_controls.detach();
+                    clearScene();
+                    graph = parsed_graph = result;
+                    display_graph(graph);
+                    console.log("Ready graph loaded");
+                }
                 else if (parsed_result.hasOwnProperty("id")) {
                     object_controls.detach();
                     clearScene();
@@ -359,13 +367,6 @@ else if (event.keyCode == 27) // ESC
                     parsed_graph = parsed_result;
                     calculate_graph(graph);
                     console.log("Graph loaded");
-                }
-                else if (parsed_result.length > 0 || parsed_result.hasOwnProperty("children")) {
-                    object_controls.detach();
-                    clearScene();
-                    graph = parsed_graph = result;
-                    display_graph(graph);
-                    console.log("Ready graph loaded");
                 }
                 else {
                     if (model === undefined) {
@@ -386,6 +387,7 @@ else if (event.keyCode == 27) // ESC
 // parsed_graph = parsed_graph
 
 };
+detach();
 fileReader.readAsBinaryString(file);
 }
 });
@@ -532,6 +534,7 @@ fileReader.readAsBinaryString(file);
             var data = picked_object.children[i].userData;
             data.properties["de.cau.cs.kieler.portSide"] = rotatePortside(data.properties["de.cau.cs.kieler.portSide"]);
         }
+        picked_object.children[picked_object.children.length - 1].rotation.z = -picked_object.rotation.z;
     };
 
     var rotatePortside = function(portSide) {
