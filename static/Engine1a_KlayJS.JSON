@@ -1,0 +1,2230 @@
+{
+  "children": [
+    {
+      "children": [
+        {
+          "class": "Body",
+          "height": 200,
+          "id": "Piston.body",
+          "labels": [
+            {
+              "text": "body"
+            }
+          ],
+          "parameters": {
+            "I": "[I_11, I_21, I_31; I_21, I_22, I_32; I_31, I_32, I_33]",
+            "I_11": "I[1,1]",
+            "I_21": "I[2,1]",
+            "I_22": "I[2,2]",
+            "I_31": "I[3,1]",
+            "I_32": "I[3,2]",
+            "I_33": "I[3,3]",
+            "Q_start": "Frames.to_Q(R_start, Modelica.Mechanics.MultiBody.Frames.Quaternions.nullRotation())",
+            "R_start": "Modelica.Mechanics.MultiBody.Frames.axesRotations(sequence_start, angles_start, zeros(3))",
+            "angles_fixed": "angles_fixed",
+            "angles_start": "angles_start",
+            "animation": "false",
+            "cylinderDiameter": "sphereDiameter \\/ Types.Defaults.BodyCylinderDiameterFraction",
+            "enforceStates": "false",
+            "m": "m",
+            "phi_start": "if sequence_start[1] == sequence_angleStates[1] and sequence_start[2] == sequence_angleStates[2] and sequence_start[3] == sequence_angleStates[3] then angles_start else Frames.axesRotationsAngles(R_start, sequence_angleStates, 0)",
+            "r_CM": "r_CM",
+            "sequence_angleStates": "sequence_angleStates",
+            "sequence_start": "sequence_start",
+            "sphereDiameter": "world.defaultBodyDiameter",
+            "useQuaternions": "useQuaternions",
+            "w_0_fixed": "w_0_fixed",
+            "w_0_start": "w_0_start",
+            "z_0_fixed": "z_0_fixed",
+            "z_0_start": "z_0_start",
+            "z_a_start": "Frames.resolve2(R_start, z_0_start)"
+          },
+          "ports": [
+            {
+              "class": "Frame_a",
+              "height": 32,
+              "id": "Piston.body.frame_a",
+              "labels": [
+                {
+                  "text": "frame_a"
+                }
+              ],
+              "width": 32,
+              "x": -16,
+              "y": 84
+            }
+          ],
+          "properties": {
+            "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+          },
+          "width": 200
+        },
+        {
+          "class": "FixedTranslation",
+          "height": 200,
+          "id": "Piston.frameTranslation",
+          "labels": [
+            {
+              "text": "frameTranslation"
+            }
+          ],
+          "parameters": {
+            "animation": "animation",
+            "extra": "innerDiameter \\/ diameter",
+            "height": "diameter",
+            "length": "length",
+            "lengthDirection": "lengthDirection",
+            "r": "r",
+            "r_shape": "r_shape",
+            "shapeType": "pipecylinder",
+            "width": "diameter",
+            "widthDirection": "{0, 1, 0}"
+          },
+          "ports": [
+            {
+              "class": "Frame_a",
+              "height": 32,
+              "id": "Piston.frameTranslation.frame_a",
+              "labels": [
+                {
+                  "text": "frame_a"
+                }
+              ],
+              "width": 32,
+              "x": -16,
+              "y": 84
+            },
+            {
+              "class": "Frame_b",
+              "height": 32,
+              "id": "Piston.frameTranslation.frame_b",
+              "labels": [
+                {
+                  "text": "frame_b"
+                }
+              ],
+              "width": 32,
+              "x": 184,
+              "y": 84
+            }
+          ],
+          "properties": {
+            "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+          },
+          "width": 200
+        }
+      ],
+      "class": "BodyCylinder",
+      "height": 200,
+      "id": "Piston",
+      "labels": [
+        {
+          "text": "Piston"
+        }
+      ],
+      "parameters": {
+        "I": "Frames.resolveDyade1(R, diagonal({(mo * radius * radius - mi * innerRadius * innerRadius) \\/ 2, I22, I22}))",
+        "I22": "(mo * (length * length + 3 * radius * radius) - mi * (length * length + 3 * innerRadius * innerRadius)) \\/ 12",
+        "R": "Frames.from_nxy(r, {0, 1, 0})",
+        "angles_fixed": "false",
+        "angles_start": "{0, 0, 0}",
+        "animation": "true",
+        "density": "7700",
+        "diameter": "0.1",
+        "enforceStates": "false",
+        "innerDiameter": "0",
+        "innerRadius": "innerDiameter \\/ 2",
+        "length": "Modelica.Math.Vectors.length(r - r_shape)",
+        "lengthDirection": "to_unit1(r - r_shape)",
+        "m": "mo - mi",
+        "mi": "density * pi * length * innerRadius * innerRadius",
+        "mo": "density * pi * length * radius * radius",
+        "r": "{0, -0.1, 0}",
+        "r_CM": "r_shape + normalizeWithAssert(lengthDirection) * length \\/ 2",
+        "r_shape": "{0, 0, 0}",
+        "radius": "diameter \\/ 2",
+        "sequence_angleStates": "{1, 2, 3}",
+        "sequence_start": "{1, 2, 3}",
+        "useQuaternions": "true",
+        "w_0_fixed": "false",
+        "w_0_start": "{0, 0, 0}",
+        "z_0_fixed": "false",
+        "z_0_start": "{0, 0, 0}"
+      },
+      "ports": [
+        {
+          "class": "Frame_a",
+          "height": 32,
+          "id": "Piston.frame_a",
+          "labels": [
+            {
+              "text": "frame_a"
+            }
+          ],
+          "width": 32,
+          "x": -16,
+          "y": 84
+        },
+        {
+          "class": "Frame_b",
+          "height": 32,
+          "id": "Piston.frame_b",
+          "labels": [
+            {
+              "text": "frame_b"
+            }
+          ],
+          "width": 32,
+          "x": 184,
+          "y": 84
+        }
+      ],
+      "properties": {
+        "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+      },
+      "width": 200
+    },
+    {
+      "children": [
+        {
+          "class": "Body",
+          "height": 200,
+          "id": "Rod.body",
+          "labels": [
+            {
+              "text": "body"
+            }
+          ],
+          "parameters": {
+            "I": "[I_11, I_21, I_31; I_21, I_22, I_32; I_31, I_32, I_33]",
+            "I_11": "I[1,1]",
+            "I_21": "I[2,1]",
+            "I_22": "I[2,2]",
+            "I_31": "I[3,1]",
+            "I_32": "I[3,2]",
+            "I_33": "I[3,3]",
+            "Q_start": "Frames.to_Q(R_start, Modelica.Mechanics.MultiBody.Frames.Quaternions.nullRotation())",
+            "R_start": "Modelica.Mechanics.MultiBody.Frames.axesRotations(sequence_start, angles_start, zeros(3))",
+            "angles_fixed": "angles_fixed",
+            "angles_start": "angles_start",
+            "animation": "false",
+            "cylinderDiameter": "sphereDiameter \\/ Types.Defaults.BodyCylinderDiameterFraction",
+            "enforceStates": "false",
+            "m": "m",
+            "phi_start": "if sequence_start[1] == sequence_angleStates[1] and sequence_start[2] == sequence_angleStates[2] and sequence_start[3] == sequence_angleStates[3] then angles_start else Frames.axesRotationsAngles(R_start, sequence_angleStates, 0)",
+            "r_CM": "r_CM",
+            "sequence_angleStates": "sequence_angleStates",
+            "sequence_start": "sequence_start",
+            "sphereDiameter": "world.defaultBodyDiameter",
+            "useQuaternions": "useQuaternions",
+            "w_0_fixed": "w_0_fixed",
+            "w_0_start": "w_0_start",
+            "z_0_fixed": "z_0_fixed",
+            "z_0_start": "z_0_start",
+            "z_a_start": "Frames.resolve2(R_start, z_0_start)"
+          },
+          "ports": [
+            {
+              "class": "Frame_a",
+              "height": 32,
+              "id": "Rod.body.frame_a",
+              "labels": [
+                {
+                  "text": "frame_a"
+                }
+              ],
+              "width": 32,
+              "x": -16,
+              "y": 84
+            }
+          ],
+          "properties": {
+            "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+          },
+          "width": 200
+        },
+        {
+          "class": "FixedTranslation",
+          "height": 200,
+          "id": "Rod.frameTranslation",
+          "labels": [
+            {
+              "text": "frameTranslation"
+            }
+          ],
+          "parameters": {
+            "animation": "animation",
+            "extra": "0.0",
+            "height": "height",
+            "length": "length",
+            "lengthDirection": "lengthDirection",
+            "r": "r",
+            "r_shape": "r_shape",
+            "shapeType": "box",
+            "width": "width",
+            "widthDirection": "widthDirection"
+          },
+          "ports": [
+            {
+              "class": "Frame_a",
+              "height": 32,
+              "id": "Rod.frameTranslation.frame_a",
+              "labels": [
+                {
+                  "text": "frame_a"
+                }
+              ],
+              "width": 32,
+              "x": -16,
+              "y": 84
+            },
+            {
+              "class": "Frame_b",
+              "height": 32,
+              "id": "Rod.frameTranslation.frame_b",
+              "labels": [
+                {
+                  "text": "frame_b"
+                }
+              ],
+              "width": 32,
+              "x": 184,
+              "y": 84
+            }
+          ],
+          "properties": {
+            "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+          },
+          "width": 200
+        }
+      ],
+      "class": "BodyBox",
+      "height": 200,
+      "id": "Rod",
+      "labels": [
+        {
+          "text": "Rod"
+        }
+      ],
+      "parameters": {
+        "I": "Frames.resolveDyade1(R, diagonal({mo * (width * width + height * height) - mi * (innerWidth * innerWidth + innerHeight * innerHeight), mo * (length * length + height * height) - mi * (length * length + innerHeight * innerHeight), mo * (length * length + width * width) - mi * (length * length + innerWidth * innerWidth)} \\/ 12))",
+        "R": "Frames.from_nxy(r, widthDirection)",
+        "angles_fixed": "false",
+        "angles_start": "{0, 0, 0}",
+        "animation": "true",
+        "density": "7700",
+        "enforceStates": "false",
+        "height": "0.06",
+        "innerHeight": "innerWidth",
+        "innerWidth": "0",
+        "length": "Modelica.Math.Vectors.length(r - r_shape)",
+        "lengthDirection": "to_unit1(r - r_shape)",
+        "m": "mo - mi",
+        "mi": "density * length * innerWidth * innerHeight",
+        "mo": "density * length * width * height",
+        "r": "{0, -0.2, 0}",
+        "r_CM": "r_shape + normalizeWithAssert(lengthDirection) * length \\/ 2",
+        "r_shape": "{0, 0, 0}",
+        "sequence_angleStates": "{1, 2, 3}",
+        "sequence_start": "{1, 2, 3}",
+        "useQuaternions": "true",
+        "w_0_fixed": "false",
+        "w_0_start": "{0, 0, 0}",
+        "width": "0.02",
+        "widthDirection": "{1, 0, 0}",
+        "z_0_fixed": "false",
+        "z_0_start": "{0, 0, 0}"
+      },
+      "ports": [
+        {
+          "class": "Frame_a",
+          "height": 32,
+          "id": "Rod.frame_a",
+          "labels": [
+            {
+              "text": "frame_a"
+            }
+          ],
+          "width": 32,
+          "x": -16,
+          "y": 84
+        },
+        {
+          "class": "Frame_b",
+          "height": 32,
+          "id": "Rod.frame_b",
+          "labels": [
+            {
+              "text": "frame_b"
+            }
+          ],
+          "width": 32,
+          "x": 184,
+          "y": 84
+        }
+      ],
+      "properties": {
+        "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+      },
+      "width": 200
+    },
+    {
+      "children": [
+        {
+          "class": "Fixed",
+          "height": 200,
+          "id": "B2.fixed",
+          "labels": [
+            {
+              "text": "fixed"
+            }
+          ],
+          "parameters": {
+            "phi0": "0"
+          },
+          "ports": [
+            {
+              "class": "Flange_b",
+              "height": 20,
+              "id": "B2.fixed.flange",
+              "labels": [
+                {
+                  "text": "flange"
+                }
+              ],
+              "properties": {
+                "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+              },
+              "width": 20,
+              "x": 90,
+              "y": 90
+            }
+          ],
+          "properties": {
+            "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+          },
+          "width": 200
+        },
+        {
+          "class": "InternalSupport",
+          "height": 200,
+          "id": "B2.internalAxis",
+          "labels": [
+            {
+              "text": "internalAxis"
+            }
+          ],
+          "ports": [
+            {
+              "class": "Flange_a",
+              "height": 20,
+              "id": "B2.internalAxis.flange",
+              "labels": [
+                {
+                  "text": "flange"
+                }
+              ],
+              "properties": {
+                "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+              },
+              "width": 20,
+              "x": 90,
+              "y": 90
+            }
+          ],
+          "properties": {
+            "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+          },
+          "width": 200
+        },
+        {
+          "class": "ConstantTorque",
+          "height": 200,
+          "id": "B2.constantTorque",
+          "labels": [
+            {
+              "text": "constantTorque"
+            }
+          ],
+          "parameters": {
+            "tau_constant": "0"
+          },
+          "ports": [
+            {
+              "class": "Flange_b",
+              "height": 20,
+              "id": "B2.constantTorque.flange",
+              "labels": [
+                {
+                  "text": "flange"
+                }
+              ],
+              "properties": {
+                "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+              },
+              "width": 20,
+              "x": 190,
+              "y": 90
+            },
+            {
+              "class": "Support",
+              "height": 20,
+              "id": "B2.constantTorque.support",
+              "labels": [
+                {
+                  "text": "support"
+                }
+              ],
+              "properties": {
+                "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+              },
+              "width": 20,
+              "x": 90,
+              "y": 190
+            },
+            {
+              "class": "Flange_b",
+              "height": 20,
+              "id": "B2.constantTorque.flange",
+              "labels": [
+                {
+                  "text": "flange"
+                }
+              ],
+              "properties": {
+                "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+              },
+              "width": 20,
+              "x": 190,
+              "y": 90
+            },
+            {
+              "class": "Support",
+              "height": 20,
+              "id": "B2.constantTorque.support",
+              "labels": [
+                {
+                  "text": "support"
+                }
+              ],
+              "properties": {
+                "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+              },
+              "width": 20,
+              "x": 90,
+              "y": 190
+            }
+          ],
+          "properties": {
+            "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+          },
+          "width": 200
+        }
+      ],
+      "class": "Revolute",
+      "edges": [
+        {
+          "id": "7",
+          "source": "B2.constantTorque",
+          "sourcePort": "B2.constantTorque.flange",
+          "target": "B2.internalAxis",
+          "targetPort": "B2.internalAxis.flange"
+        }
+      ],
+      "height": 200,
+      "id": "B2",
+      "labels": [
+        {
+          "text": "B2"
+        }
+      ],
+      "parameters": {
+        "animation": "true",
+        "cylinderDiameter": "0.05",
+        "cylinderLength": "0.02",
+        "e": "Modelica.Math.Vectors.normalizeWithAssert(n)",
+        "n": "{1, 0, 0}",
+        "stateSelect": "StateSelect.prefer",
+        "useAxisFlange": "false"
+      },
+      "ports": [
+        {
+          "class": "Flange_a",
+          "height": 20,
+          "id": "B2.axis",
+          "labels": [
+            {
+              "text": "axis"
+            }
+          ],
+          "properties": {
+            "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+          },
+          "width": 20,
+          "x": 90,
+          "y": -10
+        },
+        {
+          "class": "Flange_b",
+          "height": 20,
+          "id": "B2.support",
+          "labels": [
+            {
+              "text": "support"
+            }
+          ],
+          "properties": {
+            "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+          },
+          "width": 20,
+          "x": 30,
+          "y": -10
+        },
+        {
+          "class": "Frame_a",
+          "height": 32,
+          "id": "B2.frame_a",
+          "labels": [
+            {
+              "text": "frame_a"
+            }
+          ],
+          "width": 32,
+          "x": -16,
+          "y": 84
+        },
+        {
+          "class": "Frame_b",
+          "height": 32,
+          "id": "B2.frame_b",
+          "labels": [
+            {
+              "text": "frame_b"
+            }
+          ],
+          "width": 32,
+          "x": 184,
+          "y": 84
+        }
+      ],
+      "properties": {
+        "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+      },
+      "width": 200
+    },
+    {
+      "children": [
+        {
+          "class": "Fixed",
+          "height": 200,
+          "id": "Bearing.fixed",
+          "labels": [
+            {
+              "text": "fixed"
+            }
+          ],
+          "parameters": {
+            "phi0": "0"
+          },
+          "ports": [
+            {
+              "class": "Flange_b",
+              "height": 20,
+              "id": "Bearing.fixed.flange",
+              "labels": [
+                {
+                  "text": "flange"
+                }
+              ],
+              "properties": {
+                "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+              },
+              "width": 20,
+              "x": 90,
+              "y": 90
+            }
+          ],
+          "properties": {
+            "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+          },
+          "width": 200
+        },
+        {
+          "class": "InternalSupport",
+          "height": 200,
+          "id": "Bearing.internalAxis",
+          "labels": [
+            {
+              "text": "internalAxis"
+            }
+          ],
+          "ports": [
+            {
+              "class": "Flange_a",
+              "height": 20,
+              "id": "Bearing.internalAxis.flange",
+              "labels": [
+                {
+                  "text": "flange"
+                }
+              ],
+              "properties": {
+                "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+              },
+              "width": 20,
+              "x": 90,
+              "y": 90
+            }
+          ],
+          "properties": {
+            "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+          },
+          "width": 200
+        },
+        {
+          "class": "ConstantTorque",
+          "height": 200,
+          "id": "Bearing.constantTorque",
+          "labels": [
+            {
+              "text": "constantTorque"
+            }
+          ],
+          "parameters": {
+            "tau_constant": "0"
+          },
+          "ports": [
+            {
+              "class": "Flange_b",
+              "height": 20,
+              "id": "Bearing.constantTorque.flange",
+              "labels": [
+                {
+                  "text": "flange"
+                }
+              ],
+              "properties": {
+                "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+              },
+              "width": 20,
+              "x": 190,
+              "y": 90
+            },
+            {
+              "class": "Support",
+              "height": 20,
+              "id": "Bearing.constantTorque.support",
+              "labels": [
+                {
+                  "text": "support"
+                }
+              ],
+              "properties": {
+                "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+              },
+              "width": 20,
+              "x": 90,
+              "y": 190
+            },
+            {
+              "class": "Flange_b",
+              "height": 20,
+              "id": "Bearing.constantTorque.flange",
+              "labels": [
+                {
+                  "text": "flange"
+                }
+              ],
+              "properties": {
+                "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+              },
+              "width": 20,
+              "x": 190,
+              "y": 90
+            },
+            {
+              "class": "Support",
+              "height": 20,
+              "id": "Bearing.constantTorque.support",
+              "labels": [
+                {
+                  "text": "support"
+                }
+              ],
+              "properties": {
+                "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+              },
+              "width": 20,
+              "x": 90,
+              "y": 190
+            }
+          ],
+          "properties": {
+            "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+          },
+          "width": 200
+        }
+      ],
+      "class": "Revolute",
+      "height": 200,
+      "id": "Bearing",
+      "labels": [
+        {
+          "text": "Bearing"
+        }
+      ],
+      "parameters": {
+        "animation": "true",
+        "cylinderDiameter": "0.05",
+        "cylinderLength": "0.02",
+        "e": "Modelica.Math.Vectors.normalizeWithAssert(n)",
+        "n": "{1, 0, 0}",
+        "stateSelect": "StateSelect.prefer",
+        "useAxisFlange": "true"
+      },
+      "ports": [
+        {
+          "class": "Flange_a",
+          "height": 20,
+          "id": "Bearing.axis",
+          "labels": [
+            {
+              "text": "axis"
+            }
+          ],
+          "properties": {
+            "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+          },
+          "width": 20,
+          "x": 90,
+          "y": -10
+        },
+        {
+          "class": "Flange_b",
+          "height": 20,
+          "id": "Bearing.support",
+          "labels": [
+            {
+              "text": "support"
+            }
+          ],
+          "properties": {
+            "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+          },
+          "width": 20,
+          "x": 30,
+          "y": -10
+        },
+        {
+          "class": "Frame_a",
+          "height": 32,
+          "id": "Bearing.frame_a",
+          "labels": [
+            {
+              "text": "frame_a"
+            }
+          ],
+          "width": 32,
+          "x": -16,
+          "y": 84
+        },
+        {
+          "class": "Frame_b",
+          "height": 32,
+          "id": "Bearing.frame_b",
+          "labels": [
+            {
+              "text": "frame_b"
+            }
+          ],
+          "width": 32,
+          "x": 184,
+          "y": 84
+        }
+      ],
+      "properties": {
+        "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+      },
+      "width": 200
+    },
+    {
+      "class": "World",
+      "height": 200,
+      "id": "world",
+      "labels": [
+        {
+          "text": "world"
+        }
+      ],
+      "parameters": {
+        "animateGravity": "true",
+        "animateWorld": "true",
+        "axisDiameter": "axisLength \\/ defaultFrameDiameterFraction",
+        "axisLength": "nominalLength \\/ 2",
+        "axisShowLabels": "true",
+        "defaultArrowDiameter": "nominalLength \\/ 40",
+        "defaultAxisLength": "nominalLength \\/ 5",
+        "defaultBodyDiameter": "nominalLength \\/ 9",
+        "defaultForceLength": "nominalLength \\/ 10",
+        "defaultForceWidth": "nominalLength \\/ 20",
+        "defaultFrameDiameterFraction": "40",
+        "defaultJointLength": "nominalLength \\/ 10",
+        "defaultJointWidth": "nominalLength \\/ 20",
+        "defaultN_to_m": "1000",
+        "defaultNm_to_m": "1000",
+        "defaultSpecularCoefficient": "0.7",
+        "defaultWidthFraction": "20",
+        "driveTrainMechanics3D": "true",
+        "enableAnimation": "true",
+        "g": "9.81",
+        "gravityArrowDiameter": "gravityArrowLength \\/ defaultWidthFraction",
+        "gravityArrowLength": "axisLength \\/ 2",
+        "gravityArrowTail": "{0, 0, 0}",
+        "gravityHeadLength": "min(gravityArrowLength, gravityArrowDiameter * Types.Defaults.ArrowHeadLengthFraction)",
+        "gravityHeadWidth": "gravityArrowDiameter * Types.Defaults.ArrowHeadWidthFraction",
+        "gravityLineLength": "max(0, gravityArrowLength - gravityHeadLength)",
+        "gravitySphereDiameter": "12742000",
+        "gravityType": "GravityTypes.UniformGravity",
+        "headLength": "min(axisLength, axisDiameter * Types.Defaults.FrameHeadLengthFraction)",
+        "headWidth": "axisDiameter * Types.Defaults.FrameHeadWidthFraction",
+        "label1": "x",
+        "label2": "y",
+        "labelStart": "1.05 * axisLength",
+        "lineLength": "max(0, axisLength - headLength)",
+        "lineWidth": "axisDiameter",
+        "mue": "3.986E14",
+        "n": "{0, -1, 0}",
+        "ndim": "if enableAnimation and animateWorld then 1 else 0",
+        "ndim2": "if enableAnimation and animateWorld and axisShowLabels then 1 else 0",
+        "ndim_pointGravity": "if enableAnimation and animateGravity and gravityType == GravityTypes.UniformGravity then 1 else 0",
+        "nominalLength": "1",
+        "scaledLabel": "Modelica.Mechanics.MultiBody.Types.Defaults.FrameLabelHeightFraction * axisDiameter"
+      },
+      "ports": [
+        {
+          "class": "Frame_b",
+          "height": 32,
+          "id": "world.frame_b",
+          "labels": [
+            {
+              "text": "frame_b"
+            }
+          ],
+          "width": 32,
+          "x": 184,
+          "y": 84
+        }
+      ],
+      "properties": {
+        "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+      },
+      "width": 200
+    },
+    {
+      "class": "Inertia",
+      "height": 200,
+      "id": "Inertia",
+      "labels": [
+        {
+          "text": "Inertia"
+        }
+      ],
+      "parameters": {
+        "J": "1",
+        "stateSelect": "StateSelect.always"
+      },
+      "ports": [
+        {
+          "class": "Flange_a",
+          "height": 20,
+          "id": "Inertia.flange_a",
+          "labels": [
+            {
+              "text": "flange_a"
+            }
+          ],
+          "properties": {
+            "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+          },
+          "width": 20,
+          "x": -10,
+          "y": 90
+        },
+        {
+          "class": "Flange_b",
+          "height": 20,
+          "id": "Inertia.flange_b",
+          "labels": [
+            {
+              "text": "flange_b"
+            }
+          ],
+          "properties": {
+            "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+          },
+          "width": 20,
+          "x": 190,
+          "y": 90
+        }
+      ],
+      "properties": {
+        "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+      },
+      "width": 200
+    },
+    {
+      "children": [
+        {
+          "class": "Body",
+          "height": 200,
+          "id": "Crank4.body",
+          "labels": [
+            {
+              "text": "body"
+            }
+          ],
+          "parameters": {
+            "I": "[I_11, I_21, I_31; I_21, I_22, I_32; I_31, I_32, I_33]",
+            "I_11": "I[1,1]",
+            "I_21": "I[2,1]",
+            "I_22": "I[2,2]",
+            "I_31": "I[3,1]",
+            "I_32": "I[3,2]",
+            "I_33": "I[3,3]",
+            "Q_start": "Frames.to_Q(R_start, Modelica.Mechanics.MultiBody.Frames.Quaternions.nullRotation())",
+            "R_start": "Modelica.Mechanics.MultiBody.Frames.axesRotations(sequence_start, angles_start, zeros(3))",
+            "angles_fixed": "angles_fixed",
+            "angles_start": "angles_start",
+            "animation": "false",
+            "cylinderDiameter": "sphereDiameter \\/ Types.Defaults.BodyCylinderDiameterFraction",
+            "enforceStates": "false",
+            "m": "m",
+            "phi_start": "if sequence_start[1] == sequence_angleStates[1] and sequence_start[2] == sequence_angleStates[2] and sequence_start[3] == sequence_angleStates[3] then angles_start else Frames.axesRotationsAngles(R_start, sequence_angleStates, 0)",
+            "r_CM": "r_CM",
+            "sequence_angleStates": "sequence_angleStates",
+            "sequence_start": "sequence_start",
+            "sphereDiameter": "world.defaultBodyDiameter",
+            "useQuaternions": "useQuaternions",
+            "w_0_fixed": "w_0_fixed",
+            "w_0_start": "w_0_start",
+            "z_0_fixed": "z_0_fixed",
+            "z_0_start": "z_0_start",
+            "z_a_start": "Frames.resolve2(R_start, z_0_start)"
+          },
+          "ports": [
+            {
+              "class": "Frame_a",
+              "height": 32,
+              "id": "Crank4.body.frame_a",
+              "labels": [
+                {
+                  "text": "frame_a"
+                }
+              ],
+              "width": 32,
+              "x": -16,
+              "y": 84
+            }
+          ],
+          "properties": {
+            "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+          },
+          "width": 200
+        },
+        {
+          "class": "FixedTranslation",
+          "height": 200,
+          "id": "Crank4.frameTranslation",
+          "labels": [
+            {
+              "text": "frameTranslation"
+            }
+          ],
+          "parameters": {
+            "animation": "animation",
+            "extra": "0.0",
+            "height": "height",
+            "length": "length",
+            "lengthDirection": "lengthDirection",
+            "r": "r",
+            "r_shape": "r_shape",
+            "shapeType": "box",
+            "width": "width",
+            "widthDirection": "widthDirection"
+          },
+          "ports": [
+            {
+              "class": "Frame_a",
+              "height": 32,
+              "id": "Crank4.frameTranslation.frame_a",
+              "labels": [
+                {
+                  "text": "frame_a"
+                }
+              ],
+              "width": 32,
+              "x": -16,
+              "y": 84
+            },
+            {
+              "class": "Frame_b",
+              "height": 32,
+              "id": "Crank4.frameTranslation.frame_b",
+              "labels": [
+                {
+                  "text": "frame_b"
+                }
+              ],
+              "width": 32,
+              "x": 184,
+              "y": 84
+            }
+          ],
+          "properties": {
+            "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+          },
+          "width": 200
+        }
+      ],
+      "class": "BodyBox",
+      "height": 200,
+      "id": "Crank4",
+      "labels": [
+        {
+          "text": "Crank4"
+        }
+      ],
+      "parameters": {
+        "I": "Frames.resolveDyade1(R, diagonal({mo * (width * width + height * height) - mi * (innerWidth * innerWidth + innerHeight * innerHeight), mo * (length * length + height * height) - mi * (length * length + innerHeight * innerHeight), mo * (length * length + width * width) - mi * (length * length + innerWidth * innerWidth)} \\/ 12))",
+        "R": "Frames.from_nxy(r, widthDirection)",
+        "angles_fixed": "false",
+        "angles_start": "{0, 0, 0}",
+        "animation": "true",
+        "density": "7700",
+        "enforceStates": "false",
+        "height": "0.05",
+        "innerHeight": "innerWidth",
+        "innerWidth": "0",
+        "length": "Modelica.Math.Vectors.length(r - r_shape)",
+        "lengthDirection": "to_unit1(r - r_shape)",
+        "m": "mo - mi",
+        "mi": "density * length * innerWidth * innerHeight",
+        "mo": "density * length * width * height",
+        "r": "{0, -0.1, 0}",
+        "r_CM": "r_shape + normalizeWithAssert(lengthDirection) * length \\/ 2",
+        "r_shape": "{0, 0, 0}",
+        "sequence_angleStates": "{1, 2, 3}",
+        "sequence_start": "{1, 2, 3}",
+        "useQuaternions": "true",
+        "w_0_fixed": "false",
+        "w_0_start": "{0, 0, 0}",
+        "width": "0.02",
+        "widthDirection": "{1, 0, 0}",
+        "z_0_fixed": "false",
+        "z_0_start": "{0, 0, 0}"
+      },
+      "ports": [
+        {
+          "class": "Frame_a",
+          "height": 32,
+          "id": "Crank4.frame_a",
+          "labels": [
+            {
+              "text": "frame_a"
+            }
+          ],
+          "width": 32,
+          "x": -16,
+          "y": 84
+        },
+        {
+          "class": "Frame_b",
+          "height": 32,
+          "id": "Crank4.frame_b",
+          "labels": [
+            {
+              "text": "frame_b"
+            }
+          ],
+          "width": 32,
+          "x": 184,
+          "y": 84
+        }
+      ],
+      "properties": {
+        "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+      },
+      "width": 200
+    },
+    {
+      "children": [
+        {
+          "class": "Body",
+          "height": 200,
+          "id": "Crank3.body",
+          "labels": [
+            {
+              "text": "body"
+            }
+          ],
+          "parameters": {
+            "I": "[I_11, I_21, I_31; I_21, I_22, I_32; I_31, I_32, I_33]",
+            "I_11": "I[1,1]",
+            "I_21": "I[2,1]",
+            "I_22": "I[2,2]",
+            "I_31": "I[3,1]",
+            "I_32": "I[3,2]",
+            "I_33": "I[3,3]",
+            "Q_start": "Frames.to_Q(R_start, Modelica.Mechanics.MultiBody.Frames.Quaternions.nullRotation())",
+            "R_start": "Modelica.Mechanics.MultiBody.Frames.axesRotations(sequence_start, angles_start, zeros(3))",
+            "angles_fixed": "angles_fixed",
+            "angles_start": "angles_start",
+            "animation": "false",
+            "cylinderDiameter": "sphereDiameter \\/ Types.Defaults.BodyCylinderDiameterFraction",
+            "enforceStates": "false",
+            "m": "m",
+            "phi_start": "if sequence_start[1] == sequence_angleStates[1] and sequence_start[2] == sequence_angleStates[2] and sequence_start[3] == sequence_angleStates[3] then angles_start else Frames.axesRotationsAngles(R_start, sequence_angleStates, 0)",
+            "r_CM": "r_CM",
+            "sequence_angleStates": "sequence_angleStates",
+            "sequence_start": "sequence_start",
+            "sphereDiameter": "world.defaultBodyDiameter",
+            "useQuaternions": "useQuaternions",
+            "w_0_fixed": "w_0_fixed",
+            "w_0_start": "w_0_start",
+            "z_0_fixed": "z_0_fixed",
+            "z_0_start": "z_0_start",
+            "z_a_start": "Frames.resolve2(R_start, z_0_start)"
+          },
+          "ports": [
+            {
+              "class": "Frame_a",
+              "height": 32,
+              "id": "Crank3.body.frame_a",
+              "labels": [
+                {
+                  "text": "frame_a"
+                }
+              ],
+              "width": 32,
+              "x": -16,
+              "y": 84
+            }
+          ],
+          "properties": {
+            "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+          },
+          "width": 200
+        },
+        {
+          "class": "FixedTranslation",
+          "height": 200,
+          "id": "Crank3.frameTranslation",
+          "labels": [
+            {
+              "text": "frameTranslation"
+            }
+          ],
+          "parameters": {
+            "animation": "animation",
+            "extra": "innerDiameter \\/ diameter",
+            "height": "diameter",
+            "length": "length",
+            "lengthDirection": "lengthDirection",
+            "r": "r",
+            "r_shape": "r_shape",
+            "shapeType": "pipecylinder",
+            "width": "diameter",
+            "widthDirection": "{0, 1, 0}"
+          },
+          "ports": [
+            {
+              "class": "Frame_a",
+              "height": 32,
+              "id": "Crank3.frameTranslation.frame_a",
+              "labels": [
+                {
+                  "text": "frame_a"
+                }
+              ],
+              "width": 32,
+              "x": -16,
+              "y": 84
+            },
+            {
+              "class": "Frame_b",
+              "height": 32,
+              "id": "Crank3.frameTranslation.frame_b",
+              "labels": [
+                {
+                  "text": "frame_b"
+                }
+              ],
+              "width": 32,
+              "x": 184,
+              "y": 84
+            }
+          ],
+          "properties": {
+            "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+          },
+          "width": 200
+        }
+      ],
+      "class": "BodyCylinder",
+      "height": 200,
+      "id": "Crank3",
+      "labels": [
+        {
+          "text": "Crank3"
+        }
+      ],
+      "parameters": {
+        "I": "Frames.resolveDyade1(R, diagonal({(mo * radius * radius - mi * innerRadius * innerRadius) \\/ 2, I22, I22}))",
+        "I22": "(mo * (length * length + 3 * radius * radius) - mi * (length * length + 3 * innerRadius * innerRadius)) \\/ 12",
+        "R": "Frames.from_nxy(r, {0, 1, 0})",
+        "angles_fixed": "false",
+        "angles_start": "{0, 0, 0}",
+        "animation": "true",
+        "density": "7700",
+        "diameter": "0.03",
+        "enforceStates": "false",
+        "innerDiameter": "0",
+        "innerRadius": "innerDiameter \\/ 2",
+        "length": "Modelica.Math.Vectors.length(r - r_shape)",
+        "lengthDirection": "to_unit1(r - r_shape)",
+        "m": "mo - mi",
+        "mi": "density * pi * length * innerRadius * innerRadius",
+        "mo": "density * pi * length * radius * radius",
+        "r": "{0.1, 0, 0}",
+        "r_CM": "r_shape + normalizeWithAssert(lengthDirection) * length \\/ 2",
+        "r_shape": "{0, 0, 0}",
+        "radius": "diameter \\/ 2",
+        "sequence_angleStates": "{1, 2, 3}",
+        "sequence_start": "{1, 2, 3}",
+        "useQuaternions": "true",
+        "w_0_fixed": "false",
+        "w_0_start": "{0, 0, 0}",
+        "z_0_fixed": "false",
+        "z_0_start": "{0, 0, 0}"
+      },
+      "ports": [
+        {
+          "class": "Frame_a",
+          "height": 32,
+          "id": "Crank3.frame_a",
+          "labels": [
+            {
+              "text": "frame_a"
+            }
+          ],
+          "width": 32,
+          "x": -16,
+          "y": 84
+        },
+        {
+          "class": "Frame_b",
+          "height": 32,
+          "id": "Crank3.frame_b",
+          "labels": [
+            {
+              "text": "frame_b"
+            }
+          ],
+          "width": 32,
+          "x": 184,
+          "y": 84
+        }
+      ],
+      "properties": {
+        "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+      },
+      "width": 200
+    },
+    {
+      "children": [
+        {
+          "class": "Body",
+          "height": 200,
+          "id": "Crank1.body",
+          "labels": [
+            {
+              "text": "body"
+            }
+          ],
+          "parameters": {
+            "I": "[I_11, I_21, I_31; I_21, I_22, I_32; I_31, I_32, I_33]",
+            "I_11": "I[1,1]",
+            "I_21": "I[2,1]",
+            "I_22": "I[2,2]",
+            "I_31": "I[3,1]",
+            "I_32": "I[3,2]",
+            "I_33": "I[3,3]",
+            "Q_start": "Frames.to_Q(R_start, Modelica.Mechanics.MultiBody.Frames.Quaternions.nullRotation())",
+            "R_start": "Modelica.Mechanics.MultiBody.Frames.axesRotations(sequence_start, angles_start, zeros(3))",
+            "angles_fixed": "angles_fixed",
+            "angles_start": "angles_start",
+            "animation": "false",
+            "cylinderDiameter": "sphereDiameter \\/ Types.Defaults.BodyCylinderDiameterFraction",
+            "enforceStates": "false",
+            "m": "m",
+            "phi_start": "if sequence_start[1] == sequence_angleStates[1] and sequence_start[2] == sequence_angleStates[2] and sequence_start[3] == sequence_angleStates[3] then angles_start else Frames.axesRotationsAngles(R_start, sequence_angleStates, 0)",
+            "r_CM": "r_CM",
+            "sequence_angleStates": "sequence_angleStates",
+            "sequence_start": "sequence_start",
+            "sphereDiameter": "world.defaultBodyDiameter",
+            "useQuaternions": "useQuaternions",
+            "w_0_fixed": "w_0_fixed",
+            "w_0_start": "w_0_start",
+            "z_0_fixed": "z_0_fixed",
+            "z_0_start": "z_0_start",
+            "z_a_start": "Frames.resolve2(R_start, z_0_start)"
+          },
+          "ports": [
+            {
+              "class": "Frame_a",
+              "height": 32,
+              "id": "Crank1.body.frame_a",
+              "labels": [
+                {
+                  "text": "frame_a"
+                }
+              ],
+              "width": 32,
+              "x": -16,
+              "y": 84
+            }
+          ],
+          "properties": {
+            "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+          },
+          "width": 200
+        },
+        {
+          "class": "FixedTranslation",
+          "height": 200,
+          "id": "Crank1.frameTranslation",
+          "labels": [
+            {
+              "text": "frameTranslation"
+            }
+          ],
+          "parameters": {
+            "animation": "animation",
+            "extra": "innerDiameter \\/ diameter",
+            "height": "diameter",
+            "length": "length",
+            "lengthDirection": "lengthDirection",
+            "r": "r",
+            "r_shape": "r_shape",
+            "shapeType": "pipecylinder",
+            "width": "diameter",
+            "widthDirection": "{0, 1, 0}"
+          },
+          "ports": [
+            {
+              "class": "Frame_a",
+              "height": 32,
+              "id": "Crank1.frameTranslation.frame_a",
+              "labels": [
+                {
+                  "text": "frame_a"
+                }
+              ],
+              "width": 32,
+              "x": -16,
+              "y": 84
+            },
+            {
+              "class": "Frame_b",
+              "height": 32,
+              "id": "Crank1.frameTranslation.frame_b",
+              "labels": [
+                {
+                  "text": "frame_b"
+                }
+              ],
+              "width": 32,
+              "x": 184,
+              "y": 84
+            }
+          ],
+          "properties": {
+            "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+          },
+          "width": 200
+        }
+      ],
+      "class": "BodyCylinder",
+      "height": 200,
+      "id": "Crank1",
+      "labels": [
+        {
+          "text": "Crank1"
+        }
+      ],
+      "parameters": {
+        "I": "Frames.resolveDyade1(R, diagonal({(mo * radius * radius - mi * innerRadius * innerRadius) \\/ 2, I22, I22}))",
+        "I22": "(mo * (length * length + 3 * radius * radius) - mi * (length * length + 3 * innerRadius * innerRadius)) \\/ 12",
+        "R": "Frames.from_nxy(r, {0, 1, 0})",
+        "angles_fixed": "false",
+        "angles_start": "{0, 0, 0}",
+        "animation": "true",
+        "density": "7700",
+        "diameter": "0.05",
+        "enforceStates": "false",
+        "innerDiameter": "0",
+        "innerRadius": "innerDiameter \\/ 2",
+        "length": "Modelica.Math.Vectors.length(r - r_shape)",
+        "lengthDirection": "to_unit1(r - r_shape)",
+        "m": "mo - mi",
+        "mi": "density * pi * length * innerRadius * innerRadius",
+        "mo": "density * pi * length * radius * radius",
+        "r": "{0.1, 0, 0}",
+        "r_CM": "r_shape + normalizeWithAssert(lengthDirection) * length \\/ 2",
+        "r_shape": "{0, 0, 0}",
+        "radius": "diameter \\/ 2",
+        "sequence_angleStates": "{1, 2, 3}",
+        "sequence_start": "{1, 2, 3}",
+        "useQuaternions": "true",
+        "w_0_fixed": "false",
+        "w_0_start": "{0, 0, 0}",
+        "z_0_fixed": "false",
+        "z_0_start": "{0, 0, 0}"
+      },
+      "ports": [
+        {
+          "class": "Frame_a",
+          "height": 32,
+          "id": "Crank1.frame_a",
+          "labels": [
+            {
+              "text": "frame_a"
+            }
+          ],
+          "width": 32,
+          "x": -16,
+          "y": 84
+        },
+        {
+          "class": "Frame_b",
+          "height": 32,
+          "id": "Crank1.frame_b",
+          "labels": [
+            {
+              "text": "frame_b"
+            }
+          ],
+          "width": 32,
+          "x": 184,
+          "y": 84
+        }
+      ],
+      "properties": {
+        "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+      },
+      "width": 200
+    },
+    {
+      "children": [
+        {
+          "class": "Body",
+          "height": 200,
+          "id": "Crank2.body",
+          "labels": [
+            {
+              "text": "body"
+            }
+          ],
+          "parameters": {
+            "I": "[I_11, I_21, I_31; I_21, I_22, I_32; I_31, I_32, I_33]",
+            "I_11": "I[1,1]",
+            "I_21": "I[2,1]",
+            "I_22": "I[2,2]",
+            "I_31": "I[3,1]",
+            "I_32": "I[3,2]",
+            "I_33": "I[3,3]",
+            "Q_start": "Frames.to_Q(R_start, Modelica.Mechanics.MultiBody.Frames.Quaternions.nullRotation())",
+            "R_start": "Modelica.Mechanics.MultiBody.Frames.axesRotations(sequence_start, angles_start, zeros(3))",
+            "angles_fixed": "angles_fixed",
+            "angles_start": "angles_start",
+            "animation": "false",
+            "cylinderDiameter": "sphereDiameter \\/ Types.Defaults.BodyCylinderDiameterFraction",
+            "enforceStates": "false",
+            "m": "m",
+            "phi_start": "if sequence_start[1] == sequence_angleStates[1] and sequence_start[2] == sequence_angleStates[2] and sequence_start[3] == sequence_angleStates[3] then angles_start else Frames.axesRotationsAngles(R_start, sequence_angleStates, 0)",
+            "r_CM": "r_CM",
+            "sequence_angleStates": "sequence_angleStates",
+            "sequence_start": "sequence_start",
+            "sphereDiameter": "world.defaultBodyDiameter",
+            "useQuaternions": "useQuaternions",
+            "w_0_fixed": "w_0_fixed",
+            "w_0_start": "w_0_start",
+            "z_0_fixed": "z_0_fixed",
+            "z_0_start": "z_0_start",
+            "z_a_start": "Frames.resolve2(R_start, z_0_start)"
+          },
+          "ports": [
+            {
+              "class": "Frame_a",
+              "height": 32,
+              "id": "Crank2.body.frame_a",
+              "labels": [
+                {
+                  "text": "frame_a"
+                }
+              ],
+              "width": 32,
+              "x": -16,
+              "y": 84
+            }
+          ],
+          "properties": {
+            "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+          },
+          "width": 200
+        },
+        {
+          "class": "FixedTranslation",
+          "height": 200,
+          "id": "Crank2.frameTranslation",
+          "labels": [
+            {
+              "text": "frameTranslation"
+            }
+          ],
+          "parameters": {
+            "animation": "animation",
+            "extra": "0.0",
+            "height": "height",
+            "length": "length",
+            "lengthDirection": "lengthDirection",
+            "r": "r",
+            "r_shape": "r_shape",
+            "shapeType": "box",
+            "width": "width",
+            "widthDirection": "widthDirection"
+          },
+          "ports": [
+            {
+              "class": "Frame_a",
+              "height": 32,
+              "id": "Crank2.frameTranslation.frame_a",
+              "labels": [
+                {
+                  "text": "frame_a"
+                }
+              ],
+              "width": 32,
+              "x": -16,
+              "y": 84
+            },
+            {
+              "class": "Frame_b",
+              "height": 32,
+              "id": "Crank2.frameTranslation.frame_b",
+              "labels": [
+                {
+                  "text": "frame_b"
+                }
+              ],
+              "width": 32,
+              "x": 184,
+              "y": 84
+            }
+          ],
+          "properties": {
+            "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+          },
+          "width": 200
+        }
+      ],
+      "class": "BodyBox",
+      "height": 200,
+      "id": "Crank2",
+      "labels": [
+        {
+          "text": "Crank2"
+        }
+      ],
+      "parameters": {
+        "I": "Frames.resolveDyade1(R, diagonal({mo * (width * width + height * height) - mi * (innerWidth * innerWidth + innerHeight * innerHeight), mo * (length * length + height * height) - mi * (length * length + innerHeight * innerHeight), mo * (length * length + width * width) - mi * (length * length + innerWidth * innerWidth)} \\/ 12))",
+        "R": "Frames.from_nxy(r, widthDirection)",
+        "angles_fixed": "false",
+        "angles_start": "{0, 0, 0}",
+        "animation": "true",
+        "density": "7700",
+        "enforceStates": "false",
+        "height": "0.05",
+        "innerHeight": "innerWidth",
+        "innerWidth": "0",
+        "length": "Modelica.Math.Vectors.length(r - r_shape)",
+        "lengthDirection": "to_unit1(r - r_shape)",
+        "m": "mo - mi",
+        "mi": "density * length * innerWidth * innerHeight",
+        "mo": "density * length * width * height",
+        "r": "{0, 0.1, 0}",
+        "r_CM": "r_shape + normalizeWithAssert(lengthDirection) * length \\/ 2",
+        "r_shape": "{0, 0, 0}",
+        "sequence_angleStates": "{1, 2, 3}",
+        "sequence_start": "{1, 2, 3}",
+        "useQuaternions": "true",
+        "w_0_fixed": "false",
+        "w_0_start": "{0, 0, 0}",
+        "width": "0.02",
+        "widthDirection": "{1, 0, 0}",
+        "z_0_fixed": "false",
+        "z_0_start": "{0, 0, 0}"
+      },
+      "ports": [
+        {
+          "class": "Frame_a",
+          "height": 32,
+          "id": "Crank2.frame_a",
+          "labels": [
+            {
+              "text": "frame_a"
+            }
+          ],
+          "width": 32,
+          "x": -16,
+          "y": 84
+        },
+        {
+          "class": "Frame_b",
+          "height": 32,
+          "id": "Crank2.frame_b",
+          "labels": [
+            {
+              "text": "frame_b"
+            }
+          ],
+          "width": 32,
+          "x": 184,
+          "y": 84
+        }
+      ],
+      "properties": {
+        "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+      },
+      "width": 200
+    },
+    {
+      "class": "RevolutePlanarLoopConstraint",
+      "height": 200,
+      "id": "B1",
+      "labels": [
+        {
+          "text": "B1"
+        }
+      ],
+      "parameters": {
+        "animation": "true",
+        "cylinderDiameter": "0.05",
+        "cylinderLength": "0.02",
+        "e": "Modelica.Math.Vectors.normalizeWithAssert(n)",
+        "ex_a": "cross(ey_a, e)",
+        "ey_a": "Modelica.Math.Vectors.normalizeWithAssert(cross(e, nnx_a))",
+        "n": "{1, 0, 0}",
+        "nnx_a": "if abs(e[1]) > 0.1 then {0, 1, 0} elseif abs(e[2]) > 0.1 then {0, 0, 1} else {1, 0, 0}"
+      },
+      "ports": [
+        {
+          "class": "Frame_a",
+          "height": 32,
+          "id": "B1.frame_a",
+          "labels": [
+            {
+              "text": "frame_a"
+            }
+          ],
+          "width": 32,
+          "x": -16,
+          "y": 84
+        },
+        {
+          "class": "Frame_b",
+          "height": 32,
+          "id": "B1.frame_b",
+          "labels": [
+            {
+              "text": "frame_b"
+            }
+          ],
+          "width": 32,
+          "x": 184,
+          "y": 84
+        }
+      ],
+      "properties": {
+        "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+      },
+      "width": 200
+    },
+    {
+      "class": "FixedTranslation",
+      "height": 200,
+      "id": "Mid",
+      "labels": [
+        {
+          "text": "Mid"
+        }
+      ],
+      "parameters": {
+        "animation": "true",
+        "extra": "0.0",
+        "height": "width",
+        "length": "Modelica.Math.Vectors.length(r - r_shape)",
+        "lengthDirection": "to_unit1(r - r_shape)",
+        "r": "{0.05, 0, 0}",
+        "r_shape": "{0, 0, 0}",
+        "shapeType": "cylinder",
+        "width": "length \\/ world.defaultWidthFraction",
+        "widthDirection": "{0, 1, 0}"
+      },
+      "ports": [
+        {
+          "class": "Frame_a",
+          "height": 32,
+          "id": "Mid.frame_a",
+          "labels": [
+            {
+              "text": "frame_a"
+            }
+          ],
+          "width": 32,
+          "x": -16,
+          "y": 84
+        },
+        {
+          "class": "Frame_b",
+          "height": 32,
+          "id": "Mid.frame_b",
+          "labels": [
+            {
+              "text": "frame_b"
+            }
+          ],
+          "width": 32,
+          "x": 184,
+          "y": 84
+        }
+      ],
+      "properties": {
+        "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+      },
+      "width": 200
+    },
+    {
+      "children": [
+        {
+          "class": "Fixed",
+          "height": 200,
+          "id": "Cylinder.fixed",
+          "labels": [
+            {
+              "text": "fixed"
+            }
+          ],
+          "parameters": {
+            "s0": "0"
+          },
+          "ports": [
+            {
+              "class": "Flange_b",
+              "height": 20,
+              "id": "Cylinder.fixed.flange",
+              "labels": [
+                {
+                  "text": "flange"
+                }
+              ],
+              "properties": {
+                "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+              },
+              "rotation": 180,
+              "width": 20,
+              "x": 90,
+              "y": 90
+            }
+          ],
+          "properties": {
+            "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+          },
+          "width": 200
+        },
+        {
+          "class": "InternalSupport",
+          "height": 200,
+          "id": "Cylinder.internalAxis",
+          "labels": [
+            {
+              "text": "internalAxis"
+            }
+          ],
+          "ports": [
+            {
+              "class": "Flange_a",
+              "height": 20,
+              "id": "Cylinder.internalAxis.flange",
+              "labels": [
+                {
+                  "text": "flange"
+                }
+              ],
+              "properties": {
+                "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+              },
+              "width": 20,
+              "x": 90,
+              "y": 90
+            }
+          ],
+          "properties": {
+            "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+          },
+          "width": 200
+        },
+        {
+          "class": "ConstantForce",
+          "height": 200,
+          "id": "Cylinder.constantForce",
+          "labels": [
+            {
+              "text": "constantForce"
+            }
+          ],
+          "parameters": {
+            "f_constant": "0"
+          },
+          "ports": [
+            {
+              "class": "Flange_b",
+              "height": 20,
+              "id": "Cylinder.constantForce.flange",
+              "labels": [
+                {
+                  "text": "flange"
+                }
+              ],
+              "properties": {
+                "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+              },
+              "width": 20,
+              "x": 190,
+              "y": 90
+            },
+            {
+              "class": "Support",
+              "height": 20,
+              "id": "Cylinder.constantForce.support",
+              "labels": [
+                {
+                  "text": "support"
+                }
+              ],
+              "properties": {
+                "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+              },
+              "width": 20,
+              "x": 90,
+              "y": 190
+            },
+            {
+              "class": "Flange_b",
+              "height": 20,
+              "id": "Cylinder.constantForce.flange",
+              "labels": [
+                {
+                  "text": "flange"
+                }
+              ],
+              "properties": {
+                "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+              },
+              "width": 20,
+              "x": 190,
+              "y": 90
+            },
+            {
+              "class": "Support",
+              "height": 20,
+              "id": "Cylinder.constantForce.support",
+              "labels": [
+                {
+                  "text": "support"
+                }
+              ],
+              "properties": {
+                "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+              },
+              "width": 20,
+              "x": 90,
+              "y": 190
+            }
+          ],
+          "properties": {
+            "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+          },
+          "width": 200
+        }
+      ],
+      "class": "Prismatic",
+      "edges": [
+        {
+          "id": "22",
+          "source": "Cylinder.constantForce",
+          "sourcePort": "Cylinder.constantForce.flange",
+          "target": "Cylinder.internalAxis",
+          "targetPort": "Cylinder.internalAxis.flange"
+        }
+      ],
+      "height": 200,
+      "id": "Cylinder",
+      "labels": [
+        {
+          "text": "Cylinder"
+        }
+      ],
+      "parameters": {
+        "animation": "true",
+        "boxHeight": "boxWidth",
+        "boxWidth": "0.02",
+        "boxWidthDirection": "{0, 1, 0}",
+        "e": "Modelica.Math.Vectors.normalizeWithAssert(n)",
+        "n": "{0, -1, 0}",
+        "stateSelect": "StateSelect.prefer",
+        "useAxisFlange": "false"
+      },
+      "ports": [
+        {
+          "class": "Flange_a",
+          "height": 20,
+          "id": "Cylinder.axis",
+          "labels": [
+            {
+              "text": "axis"
+            }
+          ],
+          "properties": {
+            "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+          },
+          "width": 20,
+          "x": 170,
+          "y": 30
+        },
+        {
+          "class": "Flange_b",
+          "height": 20,
+          "id": "Cylinder.support",
+          "labels": [
+            {
+              "text": "support"
+            }
+          ],
+          "properties": {
+            "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+          },
+          "width": 20,
+          "x": 50,
+          "y": 30
+        },
+        {
+          "class": "Frame_a",
+          "height": 32,
+          "id": "Cylinder.frame_a",
+          "labels": [
+            {
+              "text": "frame_a"
+            }
+          ],
+          "width": 32,
+          "x": -16,
+          "y": 84
+        },
+        {
+          "class": "Frame_b",
+          "height": 32,
+          "id": "Cylinder.frame_b",
+          "labels": [
+            {
+              "text": "frame_b"
+            }
+          ],
+          "width": 32,
+          "x": 184,
+          "y": 84
+        }
+      ],
+      "properties": {
+        "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+      },
+      "width": 200
+    },
+    {
+      "class": "FixedTranslation",
+      "height": 200,
+      "id": "cylPosition",
+      "labels": [
+        {
+          "text": "cylPosition"
+        }
+      ],
+      "parameters": {
+        "animation": "false",
+        "extra": "0.0",
+        "height": "width",
+        "length": "Modelica.Math.Vectors.length(r - r_shape)",
+        "lengthDirection": "to_unit1(r - r_shape)",
+        "r": "{0.15, 0.45, 0}",
+        "r_shape": "{0, 0, 0}",
+        "shapeType": "cylinder",
+        "width": "length \\/ world.defaultWidthFraction",
+        "widthDirection": "{0, 1, 0}"
+      },
+      "ports": [
+        {
+          "class": "Frame_a",
+          "height": 32,
+          "id": "cylPosition.frame_a",
+          "labels": [
+            {
+              "text": "frame_a"
+            }
+          ],
+          "width": 32,
+          "x": -16,
+          "y": 84
+        },
+        {
+          "class": "Frame_b",
+          "height": 32,
+          "id": "cylPosition.frame_b",
+          "labels": [
+            {
+              "text": "frame_b"
+            }
+          ],
+          "width": 32,
+          "x": 184,
+          "y": 84
+        }
+      ],
+      "properties": {
+        "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+      },
+      "width": 200
+    }
+  ],
+  "class": "Engine1a",
+  "edges": [
+    {
+      "id": "23",
+      "source": "world",
+      "sourcePort": "world.frame_b",
+      "target": "Bearing",
+      "targetPort": "Bearing.frame_a"
+    },
+    {
+      "id": "24",
+      "source": "Crank2",
+      "sourcePort": "Crank2.frame_a",
+      "target": "Crank1",
+      "targetPort": "Crank1.frame_b"
+    },
+    {
+      "id": "25",
+      "source": "Crank2",
+      "sourcePort": "Crank2.frame_b",
+      "target": "Crank3",
+      "targetPort": "Crank3.frame_a"
+    },
+    {
+      "id": "26",
+      "source": "Bearing",
+      "sourcePort": "Bearing.frame_b",
+      "target": "Crank1",
+      "targetPort": "Crank1.frame_a"
+    },
+    {
+      "id": "27",
+      "source": "cylPosition",
+      "sourcePort": "cylPosition.frame_b",
+      "target": "Cylinder",
+      "targetPort": "Cylinder.frame_a"
+    },
+    {
+      "id": "28",
+      "source": "world",
+      "sourcePort": "world.frame_b",
+      "target": "cylPosition",
+      "targetPort": "cylPosition.frame_a"
+    },
+    {
+      "id": "29",
+      "source": "Crank3",
+      "sourcePort": "Crank3.frame_b",
+      "target": "Crank4",
+      "targetPort": "Crank4.frame_a"
+    },
+    {
+      "id": "30",
+      "source": "B1",
+      "sourcePort": "B1.frame_a",
+      "target": "Mid",
+      "targetPort": "Mid.frame_b"
+    },
+    {
+      "id": "31",
+      "source": "B1",
+      "sourcePort": "B1.frame_b",
+      "target": "Rod",
+      "targetPort": "Rod.frame_b"
+    },
+    {
+      "id": "32",
+      "source": "Rod",
+      "sourcePort": "Rod.frame_a",
+      "target": "B2",
+      "targetPort": "B2.frame_b"
+    },
+    {
+      "id": "33",
+      "source": "B2",
+      "sourcePort": "B2.frame_a",
+      "target": "Piston",
+      "targetPort": "Piston.frame_b"
+    },
+    {
+      "id": "34",
+      "source": "Inertia",
+      "sourcePort": "Inertia.flange_b",
+      "target": "Bearing",
+      "targetPort": "Bearing.axis"
+    },
+    {
+      "id": "35",
+      "source": "Mid",
+      "sourcePort": "Mid.frame_a",
+      "target": "Crank2",
+      "targetPort": "Crank2.frame_b"
+    },
+    {
+      "id": "36",
+      "source": "Cylinder",
+      "sourcePort": "Cylinder.frame_b",
+      "target": "Piston",
+      "targetPort": "Piston.frame_a"
+    }
+  ],
+  "height": 200,
+  "id": "Modelica.Mechanics.MultiBody.Examples.Loops.Engine1a",
+  "labels": [
+    {
+      "text": "Engine1a"
+    }
+  ],
+  "properties": {
+    "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+  },
+  "width": 200
+}
