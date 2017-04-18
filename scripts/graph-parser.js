@@ -389,7 +389,7 @@ if (c.ports !== undefined && c.ports.length > 0) {
 			var px = p.x - w/2 + pw/2;
 			var py = -p.y + ( h/2 - ph/2 );
 
-			var pin = plane(px, py, pw, ph, 0x0000ff, 0, 0.3);
+			var pin = plane(px, py, pw, ph, 0x0000ff, 0.01, 0.3);
 			pin.userData = p;
 			pin.userData.source = name;
 			pin.visible = true;
