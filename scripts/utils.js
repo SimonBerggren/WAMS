@@ -49,7 +49,7 @@ function plane(x, y, w, h, c, z) {
 
 function text(text, x, y) {
 
-	var size = 5;
+	var size = 10;
 	var hover = 30;
 	var height = 1;
 	var bevelSize = 0;

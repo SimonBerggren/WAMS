@@ -158,10 +158,13 @@ if (++loaded_icons == icons.length)
 	var minX, maxX, minY, maxY;
 
 	function _display_graph (graph) {
-		file_name = file_name.replace(/\.[^/.]+$/, "_Icons");
-		var url = "static/" + file_name + ".json";
+		//file_name = file_name.replace(/\.[^/.]+$/, "_Icons");
+		var n = file_name.indexOf("_KlayJS");
+		var icons_name = file_name.slice(0, n) + "_Icons";
+
+		var url = "static/" + icons_name + ".json";
 		var iconsDict = false;
-				minX = maxX = minY = maxY = 0;
+		minX = maxX = minY = maxY = 0;
 		components = graph.children;
 		edges = graph.edges;
 
@@ -173,12 +176,13 @@ if (++loaded_icons == icons.length)
 
 				var cont = true;
 
+				var numIcons = Object.keys(jsonIcons).length;
+				var currIcon = 0;
+
 				for (var key in jsonIcons) {
 
 						fix(key);
 
-					// while (!cont)
-					// 	;
 				}
 
 				function fix(key) {
@@ -194,8 +198,6 @@ if (++loaded_icons == icons.length)
 		  			var img = document.createElement("img");
 					img.setAttribute("src", "data:image/svg+xml;base64," + window.btoa(unescape(encodeURIComponent(item))) );
 
-		  			//var s = new Blob([svg], {type: 'image/svg+xml'});
-		  			//var u = URL.createObjectURL(s);
 		  			var tex;
 		  			cont = false;
 
@@ -210,7 +212,7 @@ if (++loaded_icons == icons.length)
 						icons_svg[key] = tex;
 						names[key] = "svg";
 
-					if (key === "Torque") {
+					if (++currIcon === numIcons) {
 							onLoadedIcons();
 					}
 						
@@ -275,9 +277,14 @@ if (++loaded_icons == icons.length)
 				c.x += offsetX;
 				c.y += offsetY;
 				
+				var bottom = false;
 
-				if (c.children !== undefined)
+				if (c.children !== undefined) {
 					get_comps(c.children, c.edges, c);
+				}
+				else {
+					bottom = true;
+				}
 
 				var name = c.id;
 				var cl = c.class;
@@ -293,10 +300,17 @@ if (++loaded_icons == icons.length)
 
 				switch (names[cl]) {
 					case "svg":
-					var material = new THREE.MeshLambertMaterial({map:icons_svg[cl], transparent:false});
-					var geometry = new THREE.BoxGeometry( w, h, 0.01 );
-					var mesh = new THREE.Mesh(geometry,material);
-					obj = mesh;
+					var material;
+
+					if (!bottom)
+						obj = wireframe(0, 0, w, h, 0x000000, 0);
+					else {
+						var material = new THREE.MeshLambertMaterial({map:icons_svg[cl], transparent:false});
+						var geometry = new THREE.BoxGeometry( w, h, 0.01 );
+						var mesh = new THREE.Mesh(geometry,material);
+						obj = mesh;
+					}
+					
 break;
 case "json":
 
@@ -340,14 +354,27 @@ if (obj.children !== undefined) {
 
 break;
 default:
-obj = wireframe(x, y, w, h, 0x000000, 0);
+obj = wireframe(0, 0, w, h, 0x000000, 0);
 
 break;
 }
 var group = new THREE.Group();
-group.position.set(x, y, 0);
+// if (c.origin !== undefined) {
+// 	var o = new THREE.Group();
+// 	o.position.set(c.origin[0], c.origin[1], 0);
+// 	o.rotation.z = c.rotation === undefined ? 0 : c.rotation * (Math.PI / 180.0);
+// 	o.updateMatrixWorld();
+// 	group.matrix.set(o.matrix);
+// 	group.updateMatrixWorld();
+// } else {
+
 group.rotation.z = c.rotation === undefined ? 0 : c.rotation * (Math.PI / 180.0);
+group.position.set(x, y, 0);
+// }
 group.add(obj);
+if (c.origin !== undefined) {
+	group.add(plane(c.origin[0], c.origin[1], 3,3, 0x00ffff, 0.1));
+}
 
 if (c.ports !== undefined && c.ports.length > 0) {
 
