@@ -305,7 +305,7 @@ if (++loaded_icons == icons.length)
 					if (!bottom)
 						obj = wireframe(0, 0, w, h, 0x000000, 0);
 					else {
-						var material = new THREE.MeshLambertMaterial({map:icons_svg[cl], transparent:false});
+						var material = new THREE.MeshLambertMaterial({map:icons_svg[cl], transparent:true});
 						var geometry = new THREE.BoxGeometry( w, h, 0.01 );
 						var mesh = new THREE.Mesh(geometry,material);
 						obj = mesh;
@@ -359,22 +359,22 @@ obj = wireframe(0, 0, w, h, 0x000000, 0);
 break;
 }
 var group = new THREE.Group();
-// if (c.origin !== undefined) {
-// 	var o = new THREE.Group();
-// 	o.position.set(c.origin[0], c.origin[1], 0);
-// 	o.rotation.z = c.rotation === undefined ? 0 : c.rotation * (Math.PI / 180.0);
-// 	o.updateMatrixWorld();
-// 	group.matrix.set(o.matrix);
-// 	group.updateMatrixWorld();
-// } else {
-
-group.rotation.z = c.rotation === undefined ? 0 : c.rotation * (Math.PI / 180.0);
-group.position.set(x, y, 0);
-// }
 group.add(obj);
-if (c.origin !== undefined) {
-	group.add(plane(c.origin[0], c.origin[1], 3,3, 0x00ffff, 0.1));
-}
+//var o = new THREE.Group();
+//group.add(obj);
+//o.add(group);
+//
+//if (c.origin !== undefined) {
+//	o.position.set(x + c.origin[0], y - c.origin[1] ,0);
+//	o.rotation.z = c.rotation === undefined ? 0 : c.rotation * (Math.PI / 180.0);
+//	group.position.x = group.position.x - c.origin[0];
+//	group.position.y = group.position.y - c.origin[1];
+//	o.updateMatrixWorld();
+//	group.updateMatrixWorld();
+//}
+//else
+group.translateOnAxis(new THREE.Vector3(x, y, 0), 1);
+
 
 if (c.ports !== undefined && c.ports.length > 0) {
 
@@ -389,7 +389,7 @@ if (c.ports !== undefined && c.ports.length > 0) {
 			var px = p.x - w/2 + pw/2;
 			var py = -p.y + ( h/2 - ph/2 );
 
-			var pin = plane(px, py, pw, ph, 0x0000ff, 0.1);
+			var pin = plane(px, py, pw, ph, 0x0000ff, 0, 0.3);
 			pin.userData = p;
 			pin.userData.source = name;
 			pin.visible = true;

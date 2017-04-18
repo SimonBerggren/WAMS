@@ -75,7 +75,7 @@ var renderer = new THREE.WebGLRenderer({alpha: true});
 renderer.setClearColor( "gray", 1 );
 renderer.setSize(w, h);
 
-camera = new THREE.PerspectiveCamera( 50, w / h, 1, 3000 );
+camera = new THREE.PerspectiveCamera( 50, w / h, 1, 10000 );
 camera.position.z = 500;
 
 camera_controls = new THREE.OrbitControls(camera, renderer.domElement);
@@ -96,7 +96,7 @@ var clock = new THREE.Clock();
 render();
 
 function render() {
-    camera.position.z = Math.clamp(camera.position.z, -2500, 2500);
+    camera.position.z = Math.clamp(camera.position.z, -8000, 8000);
     requestAnimationFrame(render)
     object_controls.update();
     var delta = clock.getDelta();

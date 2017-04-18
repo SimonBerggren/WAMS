@@ -38,11 +38,13 @@ function wireframe(x, y, w, h, c, z) {
 	return wireframe;    
 }
 
-function plane(x, y, w, h, c, z) {
+function plane(x, y, w, h, c, z, opacity) {
+	opacity = opacity === undefined ? 1 : opacity;
 	var geometry = new THREE.PlaneGeometry(w, h, 1, 1);
-	var material = new THREE.MeshPhongMaterial({color:c});
+	var material = new THREE.MeshLambertMaterial({color:c, transparent:true});
 	var plane = new THREE.Mesh(geometry, material);
-	plane.material.side = THREE.DoubleSide;
+	material.opacity = opacity;
+	material.needsUpdate = true;
 	plane.position.set(x,y,z);
 	return plane;    
 }
