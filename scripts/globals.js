@@ -6,6 +6,7 @@ var camera_controls_2d = undefined;
 var camera_controls_3d = undefined;
 var camera_controls = undefined;
 var object_controls = undefined;
+var file_name = undefined;
 
 var jsonloader = new THREE.ObjectLoader();
 var svgloader = new THREE.TextureLoader();

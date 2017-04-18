@@ -103,7 +103,7 @@ function render() {
 
     animator.update(delta);
 
-    if (picked_object !== undefined && picked_object.userData !== undefined) {
+    if (picked_object !== undefined && picked_object.userData !== undefined && false) {
         var collided = false;
         connection_a_made = false;
         connection_b_made = false;
@@ -325,6 +325,7 @@ else if (event.keyCode == 27) // ESC
     $('#file').change( function(e) {
         var file = e.target.files[0];
         if (file !== undefined) {
+            file_name = file.name;
             fileReader.onload = function(readFile) {
                 playButton.classList.add("disabled");
                 pauseButton.classList.add("disabled");

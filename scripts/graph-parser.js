@@ -25,9 +25,7 @@ var components;
 var edges;
 var all_components = [];
 var worker = new Worker('klayjs.js');
-var config = '{' + "spacing: 100,algorithm: de.cau.cs.kieler.klay.layered,edgeRouting: ORTHOGONAL" + '}';
-
-
+var config = '{' + "spacing:0,algorithm: de.cau.cs.kieler.klay.layered,edgeRouting: ORTHOGONAL" + '}';
 
 worker.addEventListener('message', function (e) {
 	_display_graph(e.data);
@@ -61,6 +59,8 @@ function addModel(model) {
 };
 
 	function addIcon(name) {
+
+		console.log("adding icons");
 
 		var url = "static/icons/" + name + ".json";
 
@@ -114,12 +114,32 @@ if (++loaded_icons == icons.length)
 		icons = [];
 		loaded_icons = 0;
 
-		worker.postMessage({
-			graph: JSON.parse(graph),
-			config: config,
-			iFormat: "org.json",
-			oFormat: "org.json"
-		});
+	    $klay.layout({
+
+      		"graph": JSON.parse(graph),
+
+      		"options": {algorithm: "de.cau.cs.kieler.klay.layered", layoutHierarchy: true},
+
+  			success: function(graph) {
+
+    			_display_graph(graph);
+
+    		},
+
+    		error: function(error) { 
+
+      			console.log(error); 
+
+      		}
+
+    	});
+
+		// worker.postMessage({
+		// 	graph: JSON.parse(graph),
+		// 	config: config,
+		// 	iFormat: "org.json",
+		// 	oFormat: "org.json"
+		// });
 	};
 
 	function display_graph(graph) {
@@ -137,20 +157,71 @@ if (++loaded_icons == icons.length)
 	var minX, maxX, minY, maxY;
 
 	function _display_graph (graph) {
-
-		minX = maxX = minY = maxY = 0;
-		
+		file_name = file_name.replace(/\.[^/.]+$/, "_Icons");
+		var url = "static/" + file_name + ".json";
+		var iconsDict = false;
+				minX = maxX = minY = maxY = 0;
 		components = graph.children;
 		edges = graph.edges;
 
-		get_icons(components);
+			$.get(url)
+			.success(function(obj) { 
 
-		if (icons.length == 0)
-			get_comps(components, edges);
-		else
-			for (var i = 0; i < icons.length; ++i)
-				addIcon(icons[i]);
-		};
+				var jsonIcons = JSON.parse(obj).icons;
+				var parser = new DOMParser();
+
+				var cont = true;
+
+				for (var key in jsonIcons) {
+
+						fix(key);
+
+					// while (!cont)
+					// 	;
+				}
+
+				function fix(key) {
+
+					var canvas = document.createElement('canvas');
+					
+    				var ctx = canvas.getContext('2d');
+		  			var item = jsonIcons[key];
+	  				var doc = parser.parseFromString( item, 'image/svg+xml' );
+		  			var svg = doc.documentElement;
+					canvas.width = Math.pow( 2, Math.round( Math.log( svg.getAttribute("width") ) / Math.LN2 ) );
+					canvas.height = Math.pow( 2, Math.round( Math.log( svg.getAttribute("height") ) / Math.LN2 ) );
+		  			var img = document.createElement("img");
+					img.setAttribute("src", "data:image/svg+xml;base64," + window.btoa(unescape(encodeURIComponent(item))) );
+
+		  			//var s = new Blob([svg], {type: 'image/svg+xml'});
+		  			//var u = URL.createObjectURL(s);
+		  			var tex;
+		  			cont = false;
+
+					img.onload = function() {
+					    ctx.drawImage(img, 0, 0);
+
+		  				tex = new THREE.Texture(canvas);
+		  				tex.needsUpdate = true;
+					
+						iconsDict = true;
+
+						icons_svg[key] = tex;
+						names[key] = "svg";
+
+					if (key === "Torque") {
+							onLoadedIcons();
+					}
+						
+					};
+
+
+				}
+
+
+	}).error(function() { 
+
+		get_icons(components);
 
 		function get_icons(comps) {
 
@@ -171,6 +242,17 @@ if (++loaded_icons == icons.length)
 					get_icons(c.children);
 				}
 			}
+		};
+
+		if (icons.length == 0)
+			onLoadedIcons();
+		else if (!iconsDict)
+			for (var i = 0; i < icons.length; ++i)
+				addIcon(icons[i]);
+			
+	});
+
+
 		};
 
 		/*
@@ -214,10 +296,6 @@ if (++loaded_icons == icons.length)
 					var geometry = new THREE.BoxGeometry( w, h, 0.01 );
 					var mesh = new THREE.Mesh(geometry,material);
 					obj = mesh;
-					//obj = icons_svg[cl].clone();
-					//obj.material = new THREE.MeshLambertMaterial({map:icons_svg[cl].material.map, transparent:true});
-//obj.material.map = icons_svg[cl].map.clone();
-
 break;
 case "json":
 
@@ -229,7 +307,7 @@ function loop(o) {
 
 							if (c.material !== undefined) {
 								var m = c.material.clone();
-								c.material = m;//new THREE.MeshLambertMaterial({transparent:true});
+								c.material = m;
 								c.material.transparent = true;
 							}
 
@@ -277,20 +355,18 @@ if (c.ports !== undefined && c.ports.length > 0) {
 	for (var j = 0; j < c.ports.length; ++j) {
 		var p = c.ports[j];
 
-		if (p.class === "Pin") {
 
 			var pw = p.width;
 			var ph = p.height;
 			var px = p.x - w/2 + pw/2;
-			var py = window.innerHeight * 0.85 - ( p.y - h/2 + ph/2 );
+			var py = ( p.y - h/2 + ph/2 );
 
-			var pin = plane(px, py, pw, ph, 0xff0000, 1);
+			var pin = plane(px, py, pw, ph, 0xffff00, 1);
 			pin.userData = p;
 			pin.userData.source = name;
 			//pin.scale.set(2,2,2);
-			pin.visible = false;
+			pin.visible = true;
 			group.add(pin);
-		}
 	}
 
 
@@ -327,8 +403,8 @@ if (edges !== undefined)
 		var targetX = edge.targetPoint.x + offsetX;
 		var targetY = window.innerHeight * 0.85 - ( edge.targetPoint.y + offsetY );
 
-		var source = plane(sourceX, sourceY, s, s, 0xffff1a, 0);
-		var target = plane(targetX, targetY, s, s, 0xffff1a, 0);
+		var source = plane(sourceX, sourceY, s, s, 0xff0000, 0);
+		var target = plane(targetX, targetY, s, s, 0xff0000, 0);
 
 		scene.add(source);
 		scene.add(target);
@@ -348,7 +424,7 @@ if (edges !== undefined)
 			var lastBendX =lastBend.x + offsetX;
 			var lastBendY = window.innerHeight * 0.85 - ( lastBend.y + offsetY );
 
-			connection.add(cylinder(new THREE.Vector3(sourceX, sourceY, 0), new THREE.Vector3(firstBendX, firstBendY, 0)));
+			//connection.add(cylinder(new THREE.Vector3(sourceX, sourceY, 0), new THREE.Vector3(firstBendX, firstBendY, 0)));
 
 			for(var j = 0; j < bendPoints.length - 1; ++j) {
 
@@ -359,16 +435,16 @@ if (edges !== undefined)
 				var bendX2 = bend2.x + offsetX;
 				var bendY2 = window.innerHeight * 0.85 - ( bend2.y + offsetY );
 
-				connection.add(sphere(bendX,bendY));
+				//connection.add(sphere(bendX,bendY));
 
-				connection.add(cylinder(new THREE.Vector3(bendX, bendY, 0), new THREE.Vector3(bendX2, bendY2,0)));
+				//connection.add(cylinder(new THREE.Vector3(bendX, bendY, 0), new THREE.Vector3(bendX2, bendY2,0)));
 			}
 
-			connection.add(sphere(lastBendX ,lastBendY));
-			connection.add(cylinder(new THREE.Vector3(lastBendX, lastBendY ,0), new THREE.Vector3(targetX, targetY, 0)));
+			//connection.add(sphere(lastBendX ,lastBendY));
+			//connection.add(cylinder(new THREE.Vector3(lastBendX, lastBendY ,0), new THREE.Vector3(targetX, targetY, 0)));
 
 		} else {
-			connection.add(cylinder(new THREE.Vector3(sourceX, sourceY, 0), new THREE.Vector3(targetX,targetY,0)));	
+			//connection.add(cylinder(new THREE.Vector3(sourceX, sourceY, 0), new THREE.Vector3(targetX,targetY,0)));	
 		}
 
 		connection.userData = {
