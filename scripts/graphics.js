@@ -457,9 +457,6 @@ fileReader.readAsBinaryString(file);
             else
                 loop(obj);
 
-        for(var i = 1; i < picked_object.children.length - 1; ++i) {
-            picked_object.children[i].visible = false;
-        }
             
 
 

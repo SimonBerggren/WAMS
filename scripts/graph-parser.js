@@ -360,19 +360,13 @@ if (c.ports !== undefined && c.ports.length > 0) {
 			var pw = p.width;
 			var ph = p.height;
 			var px = p.x - w/2 + pw/2;
-			var py = ( p.y - h/2 + ph/2 );
+			var py = -p.y + ( h/2 - ph/2 );
 
-			var pin = plane(px, py, pw, ph, 0xffff00, 1);
+			var pin = plane(px, py, pw, ph, 0x0000ff, 0.1);
 			pin.userData = p;
 			pin.userData.source = name;
-			//pin.scale.set(2,2,2);
 			pin.visible = true;
 			group.add(pin);
-			pin.updateMatrixWorld();
-			group.updateMatrixWorld();
-			var vector = new THREE.Vector3();
-			vector.setFromMatrixPosition( pin.matrixWorld );
-			ports[p.id] = {x: vector.x, y: vector.y};
 	}
 
 
@@ -405,10 +399,10 @@ if (edges !== undefined)
 		var s = 7;
 		var edge = edges[i];
 
-		var sourceX = ports[edge.sourcePort].x;
-		var sourceY = ports[edge.sourcePort].y;
-		var targetX = ports[edge.targetPort].x;
-		var targetY = ports[edge.targetPort].y;
+		var sourceX = edge.sourcePoint.x + offsetX;//ports[edge.sourcePort].x;
+		var sourceY = window.innerHeight * 0.85 - ( edge.sourcePoint.y + offsetY );//ports[edge.sourcePort].y;
+		var targetX = edge.targetPoint.x + offsetX;//ports[edge.targetPort].x;
+		var targetY = window.innerHeight * 0.85 - ( edge.targetPoint.y + offsetY );//ports[edge.targetPort].y;
 
 		var source = plane(sourceX, sourceY, s, s, 0xff0000, 0);
 		var target = plane(targetX, targetY, s, s, 0xff0000, 0);
