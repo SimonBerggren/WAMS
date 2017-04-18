@@ -23,6 +23,7 @@ var bounding_boxes = [];
 var loaded_icons = 0;
 var components;
 var edges;
+var ports = [];
 var all_components = [];
 var worker = new Worker('klayjs.js');
 var config = '{' + "spacing:0,algorithm: de.cau.cs.kieler.klay.layered,edgeRouting: ORTHOGONAL" + '}';
@@ -367,6 +368,11 @@ if (c.ports !== undefined && c.ports.length > 0) {
 			//pin.scale.set(2,2,2);
 			pin.visible = true;
 			group.add(pin);
+			pin.updateMatrixWorld();
+			group.updateMatrixWorld();
+			var vector = new THREE.Vector3();
+			vector.setFromMatrixPosition( pin.matrixWorld );
+			ports[p.id] = {x: vector.x, y: vector.y};
 	}
 
 
@@ -398,16 +404,17 @@ if (edges !== undefined)
 
 		var s = 7;
 		var edge = edges[i];
-		var sourceX = edge.sourcePoint.x + offsetX;
-		var sourceY = window.innerHeight * 0.85 - ( edge.sourcePoint.y + offsetY );
-		var targetX = edge.targetPoint.x + offsetX;
-		var targetY = window.innerHeight * 0.85 - ( edge.targetPoint.y + offsetY );
+
+		var sourceX = ports[edge.sourcePort].x;
+		var sourceY = ports[edge.sourcePort].y;
+		var targetX = ports[edge.targetPort].x;
+		var targetY = ports[edge.targetPort].y;
 
 		var source = plane(sourceX, sourceY, s, s, 0xff0000, 0);
 		var target = plane(targetX, targetY, s, s, 0xff0000, 0);
 
-		scene.add(source);
-		scene.add(target);
+		//scene.add(source);
+		//scene.add(target);
 
 		scene.updateMatrixWorld();
 
@@ -424,7 +431,7 @@ if (edges !== undefined)
 			var lastBendX =lastBend.x + offsetX;
 			var lastBendY = window.innerHeight * 0.85 - ( lastBend.y + offsetY );
 
-			//connection.add(cylinder(new THREE.Vector3(sourceX, sourceY, 0), new THREE.Vector3(firstBendX, firstBendY, 0)));
+			connection.add(cylinder(new THREE.Vector3(sourceX, sourceY, 0), new THREE.Vector3(firstBendX, firstBendY, 0)));
 
 			for(var j = 0; j < bendPoints.length - 1; ++j) {
 
@@ -435,16 +442,16 @@ if (edges !== undefined)
 				var bendX2 = bend2.x + offsetX;
 				var bendY2 = window.innerHeight * 0.85 - ( bend2.y + offsetY );
 
-				//connection.add(sphere(bendX,bendY));
+				connection.add(sphere(bendX,bendY));
 
-				//connection.add(cylinder(new THREE.Vector3(bendX, bendY, 0), new THREE.Vector3(bendX2, bendY2,0)));
+				connection.add(cylinder(new THREE.Vector3(bendX, bendY, 0), new THREE.Vector3(bendX2, bendY2,0)));
 			}
 
-			//connection.add(sphere(lastBendX ,lastBendY));
-			//connection.add(cylinder(new THREE.Vector3(lastBendX, lastBendY ,0), new THREE.Vector3(targetX, targetY, 0)));
+			connection.add(sphere(lastBendX ,lastBendY));
+			connection.add(cylinder(new THREE.Vector3(lastBendX, lastBendY ,0), new THREE.Vector3(targetX, targetY, 0)));
 
 		} else {
-			//connection.add(cylinder(new THREE.Vector3(sourceX, sourceY, 0), new THREE.Vector3(targetX,targetY,0)));	
+			connection.add(cylinder(new THREE.Vector3(sourceX, sourceY, 0), new THREE.Vector3(targetX,targetY,0)));	
 		}
 
 		connection.userData = {
