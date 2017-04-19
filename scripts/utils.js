@@ -7,7 +7,7 @@ function cylinder(pointX, pointY) {
 	    0, 0, 1, 0,
 	    0, -1, 0, 0,
 	    0, 0, 0, 1));
-	var edgeGeometry = new THREE.CylinderGeometry(2, 2, direction.length(), 8, 1);
+	var edgeGeometry = new THREE.CylinderGeometry(10, 10, direction.length(), 8, 1);
 	var edge = new THREE.Mesh(edgeGeometry, new THREE.MeshPhongMaterial( { color: "gray"  } ) );
 	edge.applyMatrix(orientation);
 	edge.position.set(
