@@ -14,7 +14,7 @@ var Component = function (component) {
 
 	};
 }
-
+var connection_size = 4; 
 var icons_json = [];
 var icons_svg = [];
 var names = [];
@@ -173,6 +173,7 @@ if (++loaded_icons == icons.length)
 
 				var jsonIcons = JSON.parse(obj).icons;
 				var parser = new DOMParser();
+				var serializer = new XMLSerializer();
 
 				var cont = true;
 
@@ -193,10 +194,17 @@ if (++loaded_icons == icons.length)
 		  			var item = jsonIcons[key];
 	  				var doc = parser.parseFromString( item, 'image/svg+xml' );
 		  			var svg = doc.documentElement;
-					canvas.width = Math.pow( 2, Math.round( Math.log( svg.getAttribute("width") ) / Math.LN2 ) );
-					canvas.height = Math.pow( 2, Math.round( Math.log( svg.getAttribute("height") ) / Math.LN2 ) );
+		  			var viewBox = svg.getAttribute("viewBox");
+		  			var res = viewBox.split(" ");
+		  			var newViewBox = 0 + " " + 0 + " " + 200 + " " + 200;
+					svg.setAttribute("width", 200);
+					svg.setAttribute("height", 200);
+		  			svg.setAttribute("viewBox", newViewBox);
+					canvas.height = 200;//Math.pow( 2, Math.round( Math.log( svg.getAttribute("height") ) / Math.LN2 ) );
+					canvas.width = 200;//Math.pow( 2, Math.round( Math.log( svg.getAttribute("width") ) / Math.LN2 ) );
+
 		  			var img = document.createElement("img");
-					img.setAttribute("src", "data:image/svg+xml;base64," + window.btoa(unescape(encodeURIComponent(item))) );
+					img.setAttribute("src", "data:image/svg+xml;base64," + window.btoa(unescape(encodeURIComponent(serializer.serializeToString(svg)))));
 
 		  			var tex;
 		  			cont = false;
@@ -358,21 +366,20 @@ obj = wireframe(0, 0, w, h, 0x000000, 0);
 
 break;
 }
-var group = new THREE.Group();
+var group = new THREE.Mesh();
 group.add(obj);
-//var o = new THREE.Group();
-//group.add(obj);
-//o.add(group);
-//
-//if (c.origin !== undefined) {
+if (c.origin !== undefined) {
+//group.add(plane(c.origin[0], c.origin[1], 100, 100, 0x0000ff, 1, 1))
+//group.translateOnAxis(new THREE.Vector3(c.origin[0], window.innerHeight * 0.85 - c.origin[1], 0), 1);
 //	o.position.set(x + c.origin[0], y - c.origin[1] ,0);
-//	o.rotation.z = c.rotation === undefined ? 0 : c.rotation * (Math.PI / 180.0);
+//o.rotation.z = c.rotation === undefined ? 0 : c.rotation * (Math.PI / 180.0);
 //	group.position.x = group.position.x - c.origin[0];
 //	group.position.y = group.position.y - c.origin[1];
 //	o.updateMatrixWorld();
 //	group.updateMatrixWorld();
-//}
-//else
+//group.translateOnAxis(new THREE.Vector3(c.origin[0], y-c.origin[1], 0), 1);
+}
+
 group.translateOnAxis(new THREE.Vector3(x, y, 0), 1);
 
 
@@ -389,10 +396,10 @@ if (c.ports !== undefined && c.ports.length > 0) {
 			var px = p.x - w/2 + pw/2;
 			var py = -p.y + ( h/2 - ph/2 );
 
-			var pin = plane(px, py, pw, ph, 0x0000ff, 0.01, 0.3);
+			var pin = plane(px, py, pw, ph, 0x0000ff, 0.01, 1);
 			pin.userData = p;
 			pin.userData.source = name;
-			pin.visible = true;
+			pin.visible = false;
 			group.add(pin);
 	}
 
@@ -423,7 +430,6 @@ function setName(o) {
 if (edges !== undefined)
 	for(var i = 0; i < edges.length; ++i) {
 
-		var s = 7;
 		var edge = edges[i];
 
 		var sourceX = edge.sourcePoint.x + offsetX;//ports[edge.sourcePort].x;
@@ -431,9 +437,9 @@ if (edges !== undefined)
 		var targetX = edge.targetPoint.x + offsetX;//ports[edge.targetPort].x;
 		var targetY = window.innerHeight * 0.85 - ( edge.targetPoint.y + offsetY );//ports[edge.targetPort].y;
 
-		var source = plane(sourceX, sourceY, s, s, 0xff0000, 0);
-		var target = plane(targetX, targetY, s, s, 0xff0000, 0);
-
+		//var s = 7;
+		//var source = plane(sourceX, sourceY, s, s, 0xff0000, 0);
+		//var target = plane(targetX, targetY, s, s, 0xff0000, 0);
 		//scene.add(source);
 		//scene.add(target);
 

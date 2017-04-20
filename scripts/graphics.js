@@ -421,8 +421,6 @@ fileReader.readAsBinaryString(file);
             else
                 loop(obj);
 
-            console.log(obj.material);
-
         for(var i = 1; i < picked_object.children.length - 1; ++i) {
             picked_object.children[i].visible = true;
         }
@@ -458,7 +456,9 @@ fileReader.readAsBinaryString(file);
                 loop(obj);
 
             
-
+            for(var i = 1; i < picked_object.children.length - 1; ++i) {
+                picked_object.children[i].visible = false;
+            }
 
 
             picked_object = undefined;

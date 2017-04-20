@@ -1,4 +1,5 @@
-function cylinder(pointX, pointY) {
+function cylinder(pointX, pointY, size) {
+	size = 10;
 	var direction = new THREE.Vector3().subVectors(pointY, pointX);
 	var orientation = new THREE.Matrix4();
 	orientation.lookAt(pointX, pointY, new THREE.Object3D().up);
@@ -7,7 +8,7 @@ function cylinder(pointX, pointY) {
 	    0, 0, 1, 0,
 	    0, -1, 0, 0,
 	    0, 0, 0, 1));
-	var edgeGeometry = new THREE.CylinderGeometry(10, 10, direction.length(), 8, 1);
+	var edgeGeometry = new THREE.CylinderGeometry(size, size, direction.length(), 8, 1);
 	var edge = new THREE.Mesh(edgeGeometry, new THREE.MeshPhongMaterial( { color: "gray"  } ) );
 	edge.applyMatrix(orientation);
 	edge.position.set(
@@ -19,8 +20,9 @@ function cylinder(pointX, pointY) {
 	return edge;
 }
 
-function sphere(x, y) {
-	var geometry = new THREE.SphereGeometry( 2, 5, 5);
+function sphere(x, y, size) {
+	size = 10;
+	var geometry = new THREE.SphereGeometry( size, 8, 8);
 	var material = new THREE.MeshPhongMaterial( {color: "gray"} );
 	var sphere = new THREE.Mesh( geometry, material );
 	sphere.position.x = x;
