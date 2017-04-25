@@ -4,6 +4,9 @@ var clearColor = "oldlace";
 var subsystemColor = "blue";
 var connectionColor = "gray";
 
+var cameraFrontClip = 1;
+var cameraBackClip = 20000;
+
 var camera = undefined;
 var scene = undefined;
 var input = undefined;

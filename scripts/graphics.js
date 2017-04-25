@@ -1,8 +1,3 @@
-(function(){Math.clamp=function(a,b,c){return Math.max(b,Math.min(c,a));}})();
-(function(){keyCode=function(a){return Math.max(b,Math.min(c,a));}})();
-
-THREE.Group.prototype.Please = {};
-
 var cloneButton = document.getElementById("clone");
 var deleteButton = document.getElementById("delete");
 var rotateButton = document.getElementById("rotate90");
@@ -78,7 +73,7 @@ var renderer = new THREE.WebGLRenderer({alpha: true});
 renderer.setClearColor( clearColor, 1 );
 renderer.setSize(w, h);
 
-camera = new THREE.PerspectiveCamera( 50, w / h, 1, 10000 );
+camera = new THREE.PerspectiveCamera( 50, w / h, cameraFrontClip, cameraBackClip );
 camera.position.z = 500;
 
 camera_controls = new THREE.OrbitControls(camera, renderer.domElement);
@@ -127,65 +122,6 @@ function render() {
                 matched_port = undefined;
                 port_found = false;
             }
-    }
-
-    if (picked_object !== undefined && picked_object.userData !== undefined && false) {
-        var collided = false;
-        connection_a_made = false;
-        connection_b_made = false;
-        for (var i = 0; i < picked_object.userData.length; ++i) {
-            picked_object.userData[i].setFromObject(picked_object.children[i+1], picked_object);
-            for (var j = 0; j < bounding_boxes.length; ++j) {
-                if (picked_object.userData[i] !== bounding_boxes[j]) {
-                    var obj1 = picked_object.userData[i].userData;
-                    var obj2 = bounding_boxes[j].userData;
-                    if (picked_object.userData[i].intersectsBox(bounding_boxes[j])) {
-
-                        collided = true;
-
-                        o1 = obj1;
-                        o2 = obj2;
-
-                        if (collidedPort1a === o1)
-                            connection_a_made = true;
-
-                        if (collidedPort1b === o2) 
-                            connection_b_made = true;
-
-                    }
-                }
-            }
-        }
-        countCollision = collided;
-
-        if (countCollision) {
-            object_controls.visible = false;
-            currCollisionTime += delta;
-
-            collSphere.position.set(picked_object.position.x + o1.x, picked_object.position.y + o1.y,0);
-            collSphere.visible = true;
-            var scl = 3 + (6 * (currCollisionTime / collisionTime));
-            collSphere.scale.set(scl, scl, scl);
-
-            if (currCollisionTime >= collisionTime) {
-                currCollisionTime = 0.0;
-                recalc = true;
-
-                if (collidedPort1a === undefined && !connection_a_made) {
-                    console.error("CONNECTED 1/2 PORTS");
-                    collidedPort1a = o1;
-                    collidedPort2a = o2;
-                } else if (collidedPort1b === undefined && !connection_a_made && !connection_b_made) {
-                    console.error("CONNECTED 2/2 PORTS");
-                    collidedPort1b = o1;
-                    collidedPort2b = o2;
-                }
-            }
-        } else {
-            countCollision = 0.0;
-            collSphere.visible = false;
-            object_controls.visible = true;
-        } 
     }
 
     renderer.render(scene, camera);
@@ -275,7 +211,6 @@ $('#glcontainer').on('mousedown', function(event) {
 
 var obj = picked_object.userData;
 
-
 detach();    
 clearScene();
 camera_controls.reset();
@@ -344,59 +279,6 @@ calculate_graph(JSON.stringify(parsed_graph));
             mouseDown = false;
             mouseMoved = false;
 
-            if (recalc) {
-
-                recalc = false;
-//parsed_graph.children = [];
-//de.cau.cs.kieler.portSide
-if (collidedPort1a !== undefined && collidedPort2a !== undefined) {
-
-    parsed_graph.edges.push({
-        id:"id" + newId++,
-        source:collidedPort1a.source,
-        sourcePort:collidedPort1a.id,
-        target:collidedPort2a.source,
-        targetPort:collidedPort2a.id
-    });
-
-}
-if (collidedPort1b !== undefined && collidedPort2b !== undefined) {
-
-    parsed_graph.edges.push({
-        id:"id" + newId++,
-        source:collidedPort1b.source,
-        sourcePort:collidedPort1b.id,
-        target:collidedPort2b.source,
-        targetPort:collidedPort2b.id
-    });
-
-}
-
-var obj = {
-    class:picked_object.name.class,
-    height:30,
-    properties: {"de.cau.cs.kieler.portConstraints": "FIXED_SIDE"},
-    id:picked_object.name.id,
-    ports:[],
-    width:30
-};
-
-for(var i = 1; i < picked_object.children.length - 1; ++i) {
-    obj.ports.push({
-        class:picked_object.children[i].userData.class,
-        height:3,
-        id:picked_object.children[i].userData.id,
-        properties:picked_object.children[i].userData.properties,
-        with: 3
-    })
-}
-
-parsed_graph.children.push(obj);
-detach();    
-clearScene();
-camera_controls.reset();
-calculate_graph(JSON.stringify(parsed_graph));
-}
 }).append(renderer.domElement);
 
     $(document).on('keydown', function(event) {
@@ -477,8 +359,6 @@ else if (event.keyCode == 27) // ESC
                 }
 
                 camera_controls.reset();
-
-// parsed_graph = parsed_graph
 
 };
 detach();
