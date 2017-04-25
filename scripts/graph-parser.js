@@ -141,7 +141,7 @@ if (++loaded_icons == icons.length)
 
     		error: function(error) { 
 
-      			console.log(error); 
+      			alert(error.text);
 
       		}
 
