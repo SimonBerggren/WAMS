@@ -1,4 +1,4 @@
-var connectionSize = 1;
+var connectionSize = 2;
 var graphSpacing = 50;
 var clearColor = "oldlace";
 var subsystemColor = "blue";
@@ -6,6 +6,11 @@ var connectionColor = "gray";
 
 var cameraFrontClip = 1;
 var cameraBackClip = 20000;
+
+var textEnabled = true;
+var textOffsetX = 0;
+var textOffsetY = -110;
+var textSize = 20;
 
 var camera = undefined;
 var scene = undefined;

@@ -132,8 +132,6 @@ if (++loaded_icons == icons.length)
       		"options": {spacing:graphSpacing, algorithm: "de.cau.cs.kieler.klay.layered", layoutHierarchy: true},
 
   			success: function(graph) {
-  				console.log("display graph");
-  				console.log(graph);
 
     			_display_graph(graph);
 
@@ -418,7 +416,7 @@ if (c.ports !== undefined && c.ports.length > 0) {
 		var px = p.x - w/2 + pw/2;
 		var py = -p.y + ( h/2 - ph/2 );
 
-		var pin = plane(px, py, pw, ph, 0x0000ff, 0.01, 1);
+		var pin = plane(px, py, pw, ph, 0x0000ff, 0.5, 1);
 		pin.userData = p;
 		pin.userData.source = name;
 		pin.visible = false;
@@ -435,7 +433,7 @@ if (c.ports !== undefined && c.ports.length > 0) {
 	// }
 }
 
-//group.add(text(name, 0,0))
+group.add(text(name))
 group.children[group.children.length - 1].rotation.z = -group.rotation.z;
 setName(group);
 scene.add(group);
@@ -449,7 +447,6 @@ function setName(o) {
 		}
 	};
 }
-console.log(edges);
 if (edges !== undefined)
 	for(var i = 0; i < edges.length; ++i) {
 

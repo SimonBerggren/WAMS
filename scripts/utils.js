@@ -52,9 +52,12 @@ function plane(x, y, w, h, c, z, opacity) {
 	return plane;    
 }
 
-function text(text, x, y) {
+function text(text) {
 
-	var size = 10;
+	if (!textEnabled)
+		return new THREE.Mesh();
+
+	var size = textSize;
 	var hover = 30;
 	var height = 1;
 	var bevelSize = 0;
@@ -92,8 +95,8 @@ function text(text, x, y) {
 
 	textMesh1 = new THREE.Mesh( textGeo, material );
 
-	textMesh1.position.x = x + centerOffset;
-	textMesh1.position.y = y - (height / 2);
+	textMesh1.position.x = centerOffset + textOffsetX;
+	textMesh1.position.y = -(height / 2) + textOffsetY;
 	textMesh1.position.z = 15;
 
 	textMesh1.rotation.x = 0;

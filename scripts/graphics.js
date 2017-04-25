@@ -46,6 +46,11 @@ var picked_port = undefined;
 var port_found = false;
 var matched_port = undefined;
 
+var stats = new Stats();
+stats.showPanel( 0 );
+var showingStats = true;
+document.body.append(stats.dom);
+
 $(function() {
     var picked_object = undefined;
     var graph = undefined;
@@ -99,8 +104,8 @@ var clock = new THREE.Clock();
 render();
 
 function render() {
-    camera.position.z = Math.clamp(camera.position.z, -8000, 8000);
-    requestAnimationFrame(render)
+    stats.begin();
+    
     object_controls.update();
     var delta = clock.getDelta();
 
@@ -130,6 +135,8 @@ function render() {
     }
 
     renderer.render(scene, camera);
+    stats.end();
+    requestAnimationFrame(render);
 }
 
 $('#glcontainer').on('mousedown', function(event) {
@@ -286,6 +293,8 @@ calculate_graph(JSON.stringify(parsed_graph));
 
 }).append(renderer.domElement);
 
+
+
     $(document).on('keydown', function(event) {
 if (event.keyCode == 86) // V
     cloneButton.click();
@@ -299,6 +308,15 @@ else if (event.keyCode == 82) // R
     scalingButton.click();
 else if (event.keyCode == 27) // ESC
     camera_controls.reset();
+else if (event.keyCode == 9) { // TAB 
+    event.preventDefault();
+    if (showingStats)
+        document.body.removeChild(stats.dom);
+    else
+        document.body.append(stats.dom);
+
+    showingStats = !showingStats;
+}
 })
 
     $('#file').change( function(e) {
@@ -315,7 +333,6 @@ else if (event.keyCode == 27) // ESC
                 try {
                     var parsed_result = JSON.parse(result);
                     success = true;
-                    console.log(parsed_result);
                 } catch(err) {
                     alert("WAMS: " + err);
                 }
@@ -493,7 +510,6 @@ fileReader.readAsBinaryString(file);
                 port.source = newId.toString();
                 c.userData.ports[i - 1].id = newPortId;
                 c.userData.ports[i - 1].source = newId;
-                console.log(port);
             }          
 
             c.remove(c.children[c.children.length - 1]);
