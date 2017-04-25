@@ -23,8 +23,8 @@ var bounding_boxes = [];
 var loaded_icons = 0;
 var components;
 var edges;
+var IDs = [];
 var ports = [];
-var all_components = [];
 var worker = new Worker('klayjs.js');
 var config = '{' + "spacing:0,algorithm: de.cau.cs.kieler.klay.layered,edgeRouting: ORTHOGONAL" + '}';
 
@@ -61,7 +61,10 @@ function addModel(model) {
 
 	function addIcon(name) {
 
-		console.log("adding icons");
+		//names[name] = "plane";
+		//if (++loaded_icons == icons.length)
+		//	onLoadedIcons();
+		//return;
 
 		var url = "static/icons/" + name + ".json";
 
@@ -100,6 +103,8 @@ if (++loaded_icons == icons.length)
 });
 	}
 
+	var GRAPH;
+
 	function onLoadedIcons() {
 
 		bounding_boxes = [];
@@ -109,19 +114,26 @@ if (++loaded_icons == icons.length)
 		camera_controls.setResetPosition((maxX - minX) / 2,   window.innerHeight * 0.85 - ( (maxY - minY) / 2) );
 		camera_controls.reset();
 
+		
+
 	};
 
 	function calculate_graph(graph) {
+		
 		icons = [];
 		loaded_icons = 0;
+		IDs = [];
+		ports = [];
 
 	    $klay.layout({
 
       		"graph": JSON.parse(graph),
 
-      		"options": {algorithm: "de.cau.cs.kieler.klay.layered", layoutHierarchy: true},
+      		"options": {spacing:graphSpacing, algorithm: "de.cau.cs.kieler.klay.layered", layoutHierarchy: true},
 
   			success: function(graph) {
+  				console.log("display graph");
+  				console.log(graph);
 
     			_display_graph(graph);
 
@@ -144,6 +156,7 @@ if (++loaded_icons == icons.length)
 	};
 
 	function display_graph(graph) {
+		GRAPH =  JSON.parse(graph);
 		icons = [];
 		loaded_icons = 0;
 
@@ -158,11 +171,11 @@ if (++loaded_icons == icons.length)
 	var minX, maxX, minY, maxY;
 
 	function _display_graph (graph) {
-		//file_name = file_name.replace(/\.[^/.]+$/, "_Icons");
+		file_name = file_name.replace(/\.[^/.]+$/, "_Icons");
 		var n = file_name.indexOf("_KlayJS");
-		var icons_name = file_name.slice(0, n) + "_Icons";
+		var icons_name = file_name + "_Icons";
 
-		var url = "static/" + icons_name + ".json";
+		var url = "static/" + file_name + ".json";
 		var iconsDict = false;
 		minX = maxX = minY = maxY = 0;
 		components = graph.children;
@@ -192,20 +205,20 @@ if (++loaded_icons == icons.length)
 					
     				var ctx = canvas.getContext('2d');
 		  			var item = jsonIcons[key];
-	  				var doc = parser.parseFromString( item, 'image/svg+xml' );
+
+	  				var doc = parser.parseFromString( item, 'text/xml' );
+	  				
 		  			var svg = doc.documentElement;
 		  			var viewBox = svg.getAttribute("viewBox");
 		  			var res = viewBox.split(" ");
-		  			var newViewBox = 0 + " " + 0 + " " + 200 + " " + 200;
-					svg.setAttribute("width", 200);
-					svg.setAttribute("height", 200);
-		  			svg.setAttribute("viewBox", newViewBox);
-					canvas.height = 200;//Math.pow( 2, Math.round( Math.log( svg.getAttribute("height") ) / Math.LN2 ) );
-					canvas.width = 200;//Math.pow( 2, Math.round( Math.log( svg.getAttribute("width") ) / Math.LN2 ) );
-
+		  			var w = parseInt(svg.getAttribute("width"));
+		  			var h = parseInt(svg.getAttribute("height"));
+		  			var nw = parseInt(res[2]);
+		  			var nh = parseInt(res[3]);
+					canvas.width = nw; //Math.pow( 2, Math.round( Math.log( nw ) / Math.LN2 ) );
+					canvas.height = nh;//Math.pow( 2, Math.round( Math.log( nh ) / Math.LN2 ) );
 		  			var img = document.createElement("img");
 					img.setAttribute("src", "data:image/svg+xml;base64," + window.btoa(unescape(encodeURIComponent(serializer.serializeToString(svg)))));
-
 		  			var tex;
 		  			cont = false;
 
@@ -213,6 +226,8 @@ if (++loaded_icons == icons.length)
 					    ctx.drawImage(img, 0, 0);
 
 		  				tex = new THREE.Texture(canvas);
+		  				//tex.offset.x = parseInt(res[0]) / parseInt(res[2]);
+		  				//tex.offset.y = parseInt(res[1]) / parseInt(res[3]);
 		  				tex.needsUpdate = true;
 					
 						iconsDict = true;
@@ -303,18 +318,29 @@ if (++loaded_icons == icons.length)
 				if (x < minX) minX = x;
 				if (x > maxX) maxX = x;
 				if (y < minY) minY = y;
-				if (y > maxY) maxY = y;				
-				var obj;
+				if (y > maxY) maxY = y;
 
+
+            	var r = /\d+/g;
+            	var matches = name.match(r);
+            	var id = name.replace(/\d+/g, '');
+            	var num = 0;
+            	IDs[id] = 0;
+            	if (matches !== null) {
+            	    num = parseInt(matches[matches.length - 1]) + 1;
+            	}
+            	if (IDs[id] < num)
+            		IDs[id] = num;            	
+
+				var obj;
 				switch (names[cl]) {
 					case "svg":
-					var material;
 
 					if (!bottom)
 						obj = wireframe(0, 0, w, h, 0x000000, 0);
 					else {
 						var material = new THREE.MeshLambertMaterial({map:icons_svg[cl], transparent:true});
-						var geometry = new THREE.BoxGeometry( w, h, 0.01 );
+						var geometry = new THREE.BoxGeometry( icons_svg[cl].image.width, icons_svg[cl].image.height, 0.01 );
 						var mesh = new THREE.Mesh(geometry,material);
 						obj = mesh;
 					}
@@ -366,53 +392,50 @@ obj = wireframe(0, 0, w, h, 0x000000, 0);
 
 break;
 }
-var group = new THREE.Mesh();
+
+var group = new THREE.Group();
 group.add(obj);
 if (c.origin !== undefined) {
-//group.add(plane(c.origin[0], c.origin[1], 100, 100, 0x0000ff, 1, 1))
-//group.translateOnAxis(new THREE.Vector3(c.origin[0], window.innerHeight * 0.85 - c.origin[1], 0), 1);
-//	o.position.set(x + c.origin[0], y - c.origin[1] ,0);
-//o.rotation.z = c.rotation === undefined ? 0 : c.rotation * (Math.PI / 180.0);
-//	group.position.x = group.position.x - c.origin[0];
-//	group.position.y = group.position.y - c.origin[1];
-//	o.updateMatrixWorld();
-//	group.updateMatrixWorld();
-//group.translateOnAxis(new THREE.Vector3(c.origin[0], y-c.origin[1], 0), 1);
+  group.applyMatrix( new THREE.Matrix4().makeTranslation(-(c.x-c.origin[0]), -(c.y-c.origin[1]) ,0) );
+  group.applyMatrix( new THREE.Matrix4().makeRotationZ(c.rotation  *  Math.PI/180.0 ) );
+  group.applyMatrix( new THREE.Matrix4().makeTranslation(c.x+c.x-c.origin[0], c.y-c.height/2+c.y-c.origin[1], 0) );
 }
+else
+	group.translateOnAxis(new THREE.Vector3(x, y, 0), 1);
 
-group.translateOnAxis(new THREE.Vector3(x, y, 0), 1);
 
 
 if (c.ports !== undefined && c.ports.length > 0) {
 
-	group.userData = [];
+	group.userData = c;
 
 	for (var j = 0; j < c.ports.length; ++j) {
+
 		var p = c.ports[j];
 
+		var pw = p.width;
+		var ph = p.height;
+		var px = p.x - w/2 + pw/2;
+		var py = -p.y + ( h/2 - ph/2 );
 
-			var pw = p.width;
-			var ph = p.height;
-			var px = p.x - w/2 + pw/2;
-			var py = -p.y + ( h/2 - ph/2 );
-
-			var pin = plane(px, py, pw, ph, 0x0000ff, 0.01, 1);
-			pin.userData = p;
-			pin.userData.source = name;
-			pin.visible = false;
-			group.add(pin);
+		var pin = plane(px, py, pw, ph, 0x0000ff, 0.01, 1);
+		pin.userData = p;
+		pin.userData.source = name;
+		pin.visible = false;
+		ports.push(pin);
+		group.add(pin);
 	}
 
 
-	for(var j = 1; j < group.children.length; ++j) {
-		var box = new THREE.Box3().setFromObject(group.children[j], group);
-		group.userData.push(box);
-		bounding_boxes.push(box);
-		box.userData=group.children[j].userData;
-	}
+	// for(var j = 1; j < group.children.length; ++j) {
+	// 	var box = new THREE.Box3().setFromObject(group.children[j], group);
+	// 	group.userData.push(box);
+	// 	bounding_boxes.push(box);
+	// 	box.userData=group.children[j].userData;
+	// }
 }
 
-group.add(text(name, 0,0))
+//group.add(text(name, 0,0))
 group.children[group.children.length - 1].rotation.z = -group.rotation.z;
 setName(group);
 scene.add(group);
@@ -426,7 +449,7 @@ function setName(o) {
 		}
 	};
 }
-
+console.log(edges);
 if (edges !== undefined)
 	for(var i = 0; i < edges.length; ++i) {
 

@@ -66,7 +66,6 @@ var Input = function () {
 
 	// transform mouse position so that 0,0 is in center
 	var getTouchCenterized = function () {
-		console.log(tx);	
 		return new THREE.Vector2(
 			( tx / rect.width ) * 2 - 1, 
 		  -	( ty / rect.height ) * 2 + 1);

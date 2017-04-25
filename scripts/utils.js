@@ -1,5 +1,7 @@
+
+
 function cylinder(pointX, pointY, size) {
-	size = 10;
+	
 	var direction = new THREE.Vector3().subVectors(pointY, pointX);
 	var orientation = new THREE.Matrix4();
 	orientation.lookAt(pointX, pointY, new THREE.Object3D().up);
@@ -8,8 +10,8 @@ function cylinder(pointX, pointY, size) {
 	    0, 0, 1, 0,
 	    0, -1, 0, 0,
 	    0, 0, 0, 1));
-	var edgeGeometry = new THREE.CylinderGeometry(size, size, direction.length(), 8, 1);
-	var edge = new THREE.Mesh(edgeGeometry, new THREE.MeshPhongMaterial( { color: "gray"  } ) );
+	var edgeGeometry = new THREE.CylinderGeometry(connectionSize, connectionSize, direction.length(), 8, 1);
+	var edge = new THREE.Mesh(edgeGeometry, new THREE.MeshPhongMaterial( { color: connectionColor } ) );
 	edge.applyMatrix(orientation);
 	edge.position.set(
 		(pointY.x + pointX.x) / 2,
@@ -21,9 +23,8 @@ function cylinder(pointX, pointY, size) {
 }
 
 function sphere(x, y, size) {
-	size = 10;
-	var geometry = new THREE.SphereGeometry( size, 8, 8);
-	var material = new THREE.MeshPhongMaterial( {color: "gray"} );
+	var geometry = new THREE.SphereGeometry( connectionSize, 8, 8);
+	var material = new THREE.MeshPhongMaterial( {color: connectionColor} );
 	var sphere = new THREE.Mesh( geometry, material );
 	sphere.position.x = x;
 	sphere.position.y = y;
@@ -34,7 +35,7 @@ function sphere(x, y, size) {
 
 function wireframe(x, y, w, h, c, z) {
 	var geometry = new THREE.EdgesGeometry( new THREE.PlaneGeometry(w, h, 1, 1) ); // or WireframeGeometry( geometry )
-	var material = new THREE.LineBasicMaterial( { color: "black", linewidth: 2 } );
+	var material = new THREE.LineBasicMaterial( { color: subsystemColor, linewidth: 2 } );
 	var wireframe = new THREE.LineSegments( geometry, material );
 	wireframe.position.set(x,y,z);
 	return wireframe;    
