@@ -1,3 +1,8 @@
+(function(){Math.clamp=function(a,b,c){return Math.max(b,Math.min(c,a));}})();
+(function(){keyCode=function(a){return Math.max(b,Math.min(c,a));}})();
+
+THREE.Group.prototype.Please = {};
+
 var cloneButton = document.getElementById("clone");
 var deleteButton = document.getElementById("delete");
 var rotateButton = document.getElementById("rotate90");
