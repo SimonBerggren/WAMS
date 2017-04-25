@@ -1,7 +1,4 @@
-(function(){Math.clamp=function(a,b,c){return Math.max(b,Math.min(c,a));}})();
-(function(){keyCode=function(a){return Math.max(b,Math.min(c,a));}})();
 
-THREE.Group.prototype.Please = {};
 
 var cloneButton = document.getElementById("clone");
 var deleteButton = document.getElementById("delete");
@@ -12,7 +9,6 @@ var pauseButton = document.getElementById("pause");
 var stopButton = document.getElementById("stop");
 
 var controlMode = document.getElementById("2d-control-mode");
-
 var resetCameraButton = document.getElementById("resetCamera");
 
 resetScene = function() {
@@ -21,70 +17,46 @@ resetScene = function() {
     model = undefined;
     animation = undefined;
 };
-
-var newEdgeId = 100;
-var newPortId = 100;
-var collidedPort1a;
-var collidedPort2a;
-var collidedPort1b;
-var collidedPort2b;
-var o1,o2;
-var collisionTime = 2.0;
-var currCollisionTime = 0.0;
-var countCollision = false;
 var initTouch;
-
-var connection_a_made = false;
-var connection_b_made = false;
 
 var mouseMoved = false;
 var mouseDown = false;
 
-var recalc = false;
 var timeDownUp = null;
 var picked_port = undefined;
 var port_found = false;
 var matched_port = undefined;
+var picked_object = undefined;
+var graph = undefined;
+var parsed_graph = undefined;
+var model = undefined;
 
 var stats = new Stats();
 stats.showPanel( 0 );
-var showingStats = true;
-document.body.append(stats.dom);
+
+if (showingStats)
+    document.body.append(stats.dom);
 
 $(function() {
-    var picked_object = undefined;
-    var graph = undefined;
-    var parsed_graph = undefined;
-    var model = undefined;
 
     input = new Input();
     scene = new THREE.Scene();
     animator = new Animator();
 
-    var collSphere = sphere(0,0);
-    collSphere.visible = false;
-    collSphere.name={name:"important"};
-    collSphere.material.color.set(0x00ff00);
-    scene.add(collSphere);
-
-    var directionalLight = new THREE.DirectionalLight( 0xffffff, 0.7 );
-    directionalLight.position.set(0,0,10);
+    var directionalLight = new THREE.DirectionalLight( directionalLightColor, directionalLightIntensity );
+    directionalLight.position.set(directionalLightPosition.x, directionalLightPosition.y, directionalLightPosition.z);
     directionalLight.name={name:"important"};
     scene.add(directionalLight);
 
-var light = new THREE.AmbientLight( "white", 0.5 ); // soft white light
+var light = new THREE.AmbientLight( ambientLightColor, ambientLightIntensity );
 light.name={name:"important"};
 scene.add(light);
 
-var w = window.innerWidth;
-var h = window.innerHeight * 0.85;
-
 var renderer = new THREE.WebGLRenderer({alpha: true});
 renderer.setClearColor( clearColor, 1 );
-renderer.setSize(w, h);
+renderer.setSize(windowWidth, windowHeight);
 
-camera = new THREE.PerspectiveCamera( 50, w / h, cameraFrontClip, cameraBackClip );
-camera.position.z = 500;
+camera = new THREE.PerspectiveCamera( camerFieldOfView, windowWidth / windowHeight, cameraFrontClip, cameraBackClip );
 
 camera_controls = new THREE.OrbitControls(camera, renderer.domElement);
 camera_controls.addEventListener('change', function() { renderer.render(scene, camera); }); 
@@ -93,6 +65,7 @@ object_controls_2d = new THREE.TransformControls2D(camera, camera_controls, rend
 object_controls_2d.name={name:"important"};
 object_controls_2d.setOnMove(function(){mouseMoved = true;});
 scene.add(object_controls_2d);
+
 object_controls_3d = new THREE.TransformControls3D(camera, camera_controls, renderer.domElement);
 object_controls_3d.name={name:"important"};
 object_controls_3d.setOnMove(function(){mouseMoved = true;});
@@ -135,7 +108,9 @@ function render() {
     }
 
     renderer.render(scene, camera);
+
     stats.end();
+
     requestAnimationFrame(render);
 }
 
@@ -157,36 +132,8 @@ $('#glcontainer').on('mousedown', function(event) {
     var event = e.originalEvent;
     if (event.changedTouches.length == 1) {
         var pos = new THREE.Vector2(event.changedTouches[0].clientX, event.changedTouches[0].clientY);
-        if (initTouch !== undefined && initTouch.x == pos.x && initTouch.y == pos.y) {
-
-            var raycaster = new THREE.Raycaster();
-            camera.updateProjectionMatrix();
-            raycaster.setFromCamera(input.getTouchCenterized(), camera);
-            var intersects = raycaster.intersectObjects(scene.children, true);
-            var raycastHit = false;
-            for (var i = 0; i < intersects.length; ++i) {
-                if (intersects[i].object.name.name === "pickable") {
-                    picked_object = intersects[i].object;
-
-                    if (display_graph)
-                        while(picked_object.parent !== undefined && picked_object.parent.type !== "Scene")
-                            picked_object = picked_object.parent;
-
-                        attach(picked_object);
-
-
-
-                        raycastHit = true;
-
-                        break;
-                    }
-                } 
-                if (!raycastHit)
-                    detach();
-
-            }
             initTouch = undefined;
-        }
+    }
 
     }).on('mousedown', function(event) {
         timeDownUp = new Date().getTime();
@@ -204,8 +151,15 @@ $('#glcontainer').on('mousedown', function(event) {
         }
 
     }).on('mouseup', function(event) {
+
         timeDownUp = new Date().getTime();
-        if (!mouseMoved) {
+
+        if (mouseMoved) {
+            mouseDown = false;
+            mouseMoved = false;
+            return;
+        }
+
             if (port_found) {
                 port_found = false;
 
@@ -220,14 +174,12 @@ $('#glcontainer').on('mousedown', function(event) {
         targetPort:matched_edge.id
     });
 
+    detach();    
+    clearScene();
+    camera_controls.reset();
+    calculate_graph(JSON.stringify(parsed_graph));
+    return;
 
-var obj = picked_object.userData;
-
-detach();    
-clearScene();
-camera_controls.reset();
-calculate_graph(JSON.stringify(parsed_graph));
-                return;
             }
             var raycaster = new THREE.Raycaster();
             camera.updateProjectionMatrix();
@@ -236,7 +188,7 @@ calculate_graph(JSON.stringify(parsed_graph));
             var raycastHit = false;
 
             for (var i = 0; i < intersects.length; ++i) {
-                if (intersects[i].object.name.name === "pickable") {
+                if (intersects[i].object.userData.pickable) {
                     if (picked_object !== undefined) {
                         if (picked_port !== undefined) {
                             picked_port.material.opacity = 1.0;
@@ -258,8 +210,10 @@ calculate_graph(JSON.stringify(parsed_graph));
                                 }
                             }
                         }
+
                         if (picking_port)
                             break;
+                        
                         else {
                         if (picked_port !== undefined) {
                             picked_port.material.opacity = 1.0;
@@ -287,9 +241,8 @@ calculate_graph(JSON.stringify(parsed_graph));
                 } 
                 if (!raycastHit)
                     detach();
-            }
-            mouseDown = false;
-            mouseMoved = false;
+            
+
 
 }).append(renderer.domElement);
 
@@ -496,7 +449,6 @@ fileReader.readAsBinaryString(file);
             var num = IDs[newId]++;
             newId = newId + num;
 
-            c.name.id = newId;
             c.userData.id = newId;
 
             var portIDs = [];
@@ -521,31 +473,22 @@ fileReader.readAsBinaryString(file);
         }
     };
 
-    Array.prototype.removeValue = function(name, value){
-        var array = $.map(this, function(v,i){
-            return v[name] === value ? null : v;
-        });
-        this.length = 0;
-        this.push.apply(this, array);
-    }
-
     deleteButton.onclick = function() {
         var edgesToDelete = [];
         for (var i = 0; i < parsed_graph.edges.length; ++i) {
-            if (parsed_graph.edges[i].source === picked_object.name.id ||
-                parsed_graph.edges[i].target === picked_object.name.id)
+            if (parsed_graph.edges[i].source === picked_object.userData.id ||
+                parsed_graph.edges[i].target === picked_object.userData.id)
                 edgesToDelete.push(parsed_graph.edges[i]);
         }
         for (var i = 0; i < edgesToDelete.length; ++i)
             parsed_graph.edges.removeValue("id",edgesToDelete[i].id);
 
-        parsed_graph.children.removeValue("id", picked_object.name.id);
+        parsed_graph.children.removeValue("id", picked_object.userData.id);
 
         scene.remove(picked_object);
         detach();
         clearScene();
         calculate_graph(JSON.stringify(parsed_graph));
-
     };
 
     rotateButton.onclick = function() {
@@ -595,8 +538,8 @@ fileReader.readAsBinaryString(file);
 
     window.addEventListener('resize', function() {
 
-        w = window.innerWidth;
-        h = window.innerHeight * 0.85;
+        windowWidth = window.innerWidth;
+        windowHeight = window.innerHeight * windowHeightPercentage;
         camera.aspect = w / h;
         camera.updateProjectionMatrix();
         renderer.setSize( w, h );
