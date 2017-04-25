@@ -1,0 +1,673 @@
+{
+  "children": [
+    {
+      "class": "IdealDiode",
+      "height": 200,
+      "id": "Ideal",
+      "labels": [
+        {
+          "text": "Ideal"
+        }
+      ],
+      "ports": [
+        {
+          "class": "PositivePin",
+          "height": 20,
+          "id": "Ideal.p",
+          "labels": [
+            {
+              "text": "p"
+            }
+          ],
+          "properties": {
+            "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+          },
+          "width": 20,
+          "x": -10,
+          "y": 90
+        },
+        {
+          "class": "NegativePin",
+          "height": 20,
+          "id": "Ideal.n",
+          "labels": [
+            {
+              "text": "n"
+            }
+          ],
+          "properties": {
+            "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+          },
+          "width": 20,
+          "x": 190,
+          "y": 90
+        }
+      ],
+      "properties": {
+        "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+      },
+      "width": 200
+    },
+    {
+      "class": "IdealDiode",
+      "height": 200,
+      "id": "With_Ron_Goff",
+      "labels": [
+        {
+          "text": "With_Ron_Goff"
+        }
+      ],
+      "ports": [
+        {
+          "class": "PositivePin",
+          "height": 20,
+          "id": "With_Ron_Goff.p",
+          "labels": [
+            {
+              "text": "p"
+            }
+          ],
+          "properties": {
+            "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+          },
+          "width": 20,
+          "x": -10,
+          "y": 90
+        },
+        {
+          "class": "NegativePin",
+          "height": 20,
+          "id": "With_Ron_Goff.n",
+          "labels": [
+            {
+              "text": "n"
+            }
+          ],
+          "properties": {
+            "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+          },
+          "width": 20,
+          "x": 190,
+          "y": 90
+        }
+      ],
+      "properties": {
+        "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+      },
+      "width": 200
+    },
+    {
+      "class": "IdealDiode",
+      "height": 200,
+      "id": "With_Ron_Goff_Vknee",
+      "labels": [
+        {
+          "text": "With_Ron_Goff_Vknee"
+        }
+      ],
+      "ports": [
+        {
+          "class": "PositivePin",
+          "height": 20,
+          "id": "With_Ron_Goff_Vknee.p",
+          "labels": [
+            {
+              "text": "p"
+            }
+          ],
+          "properties": {
+            "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+          },
+          "width": 20,
+          "x": -10,
+          "y": 90
+        },
+        {
+          "class": "NegativePin",
+          "height": 20,
+          "id": "With_Ron_Goff_Vknee.n",
+          "labels": [
+            {
+              "text": "n"
+            }
+          ],
+          "properties": {
+            "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+          },
+          "width": 20,
+          "x": 190,
+          "y": 90
+        }
+      ],
+      "properties": {
+        "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+      },
+      "width": 200
+    },
+    {
+      "children": [
+        {
+          "class": "Sine",
+          "height": 200,
+          "id": "SineVoltage1.signalSource",
+          "labels": [
+            {
+              "text": "signalSource"
+            }
+          ],
+          "ports": [
+            {
+              "class": "RealOutput",
+              "height": 20,
+              "id": "SineVoltage1.signalSource.y",
+              "labels": [
+                {
+                  "text": "y"
+                }
+              ],
+              "properties": {
+                "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+              },
+              "width": 20,
+              "x": 200,
+              "y": 90
+            }
+          ],
+          "properties": {
+            "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+          },
+          "width": 200
+        }
+      ],
+      "class": "SineVoltage",
+      "height": 200,
+      "id": "SineVoltage1",
+      "labels": [
+        {
+          "text": "SineVoltage1"
+        }
+      ],
+      "ports": [
+        {
+          "class": "PositivePin",
+          "height": 20,
+          "id": "SineVoltage1.p",
+          "labels": [
+            {
+              "text": "p"
+            }
+          ],
+          "properties": {
+            "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+          },
+          "width": 20,
+          "x": -10,
+          "y": 90
+        },
+        {
+          "class": "NegativePin",
+          "height": 20,
+          "id": "SineVoltage1.n",
+          "labels": [
+            {
+              "text": "n"
+            }
+          ],
+          "properties": {
+            "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+          },
+          "width": 20,
+          "x": 190,
+          "y": 90
+        }
+      ],
+      "properties": {
+        "de.cau.cs.kieler.portConstraints": "FREE"
+      },
+      "width": 200
+    },
+    {
+      "class": "Ground",
+      "height": 200,
+      "id": "Ground1",
+      "labels": [
+        {
+          "text": "Ground1"
+        }
+      ],
+      "ports": [
+        {
+          "class": "Pin",
+          "height": 20,
+          "id": "Ground1.p",
+          "labels": [
+            {
+              "text": "p"
+            }
+          ],
+          "origin": [
+            100,
+            0
+          ],
+          "properties": {
+            "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+          },
+          "rotation": 270,
+          "width": 20,
+          "x": 90,
+          "y": -10
+        }
+      ],
+      "properties": {
+        "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+      },
+      "width": 200
+    },
+    {
+      "class": "Resistor",
+      "height": 200,
+      "id": "R1",
+      "labels": [
+        {
+          "text": "R1"
+        }
+      ],
+      "ports": [
+        {
+          "class": "PositivePin",
+          "height": 20,
+          "id": "R1.p",
+          "labels": [
+            {
+              "text": "p"
+            }
+          ],
+          "properties": {
+            "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+          },
+          "width": 20,
+          "x": -10,
+          "y": 90
+        },
+        {
+          "class": "NegativePin",
+          "height": 20,
+          "id": "R1.n",
+          "labels": [
+            {
+              "text": "n"
+            }
+          ],
+          "properties": {
+            "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+          },
+          "width": 20,
+          "x": 190,
+          "y": 90
+        }
+      ],
+      "properties": {
+        "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+      },
+      "width": 200
+    },
+    {
+      "class": "Resistor",
+      "height": 200,
+      "id": "R2",
+      "labels": [
+        {
+          "text": "R2"
+        }
+      ],
+      "ports": [
+        {
+          "class": "PositivePin",
+          "height": 20,
+          "id": "R2.p",
+          "labels": [
+            {
+              "text": "p"
+            }
+          ],
+          "properties": {
+            "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+          },
+          "width": 20,
+          "x": -10,
+          "y": 90
+        },
+        {
+          "class": "NegativePin",
+          "height": 20,
+          "id": "R2.n",
+          "labels": [
+            {
+              "text": "n"
+            }
+          ],
+          "properties": {
+            "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+          },
+          "width": 20,
+          "x": 190,
+          "y": 90
+        }
+      ],
+      "properties": {
+        "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+      },
+      "width": 200
+    },
+    {
+      "class": "Resistor",
+      "height": 200,
+      "id": "R3",
+      "labels": [
+        {
+          "text": "R3"
+        }
+      ],
+      "ports": [
+        {
+          "class": "PositivePin",
+          "height": 20,
+          "id": "R3.p",
+          "labels": [
+            {
+              "text": "p"
+            }
+          ],
+          "properties": {
+            "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+          },
+          "width": 20,
+          "x": -10,
+          "y": 90
+        },
+        {
+          "class": "NegativePin",
+          "height": 20,
+          "id": "R3.n",
+          "labels": [
+            {
+              "text": "n"
+            }
+          ],
+          "properties": {
+            "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+          },
+          "width": 20,
+          "x": 190,
+          "y": 90
+        }
+      ],
+      "properties": {
+        "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+      },
+      "width": 200
+    },
+    {
+      "children": [
+        {
+          "class": "Sine",
+          "height": 200,
+          "id": "SineVoltage2.signalSource",
+          "labels": [
+            {
+              "text": "signalSource"
+            }
+          ],
+          "ports": [
+            {
+              "class": "RealOutput",
+              "height": 20,
+              "id": "SineVoltage2.signalSource.y",
+              "labels": [
+                {
+                  "text": "y"
+                }
+              ],
+              "properties": {
+                "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+              },
+              "width": 20,
+              "x": 200,
+              "y": 90
+            }
+          ],
+          "properties": {
+            "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+          },
+          "width": 200
+        }
+      ],
+      "class": "SineVoltage",
+      "height": 200,
+      "id": "SineVoltage2",
+      "labels": [
+        {
+          "text": "SineVoltage2"
+        }
+      ],
+      "ports": [
+        {
+          "class": "PositivePin",
+          "height": 20,
+          "id": "SineVoltage2.p",
+          "labels": [
+            {
+              "text": "p"
+            }
+          ],
+          "properties": {
+            "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+          },
+          "width": 20,
+          "x": -10,
+          "y": 90
+        },
+        {
+          "class": "NegativePin",
+          "height": 20,
+          "id": "SineVoltage2.n",
+          "labels": [
+            {
+              "text": "n"
+            }
+          ],
+          "properties": {
+            "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+          },
+          "width": 20,
+          "x": 190,
+          "y": 90
+        }
+      ],
+      "properties": {
+        "de.cau.cs.kieler.portConstraints": "FREE"
+      },
+      "width": 200
+    },
+    {
+      "children": [
+        {
+          "class": "Sine",
+          "height": 200,
+          "id": "SineVoltage3.signalSource",
+          "labels": [
+            {
+              "text": "signalSource"
+            }
+          ],
+          "ports": [
+            {
+              "class": "RealOutput",
+              "height": 20,
+              "id": "SineVoltage3.signalSource.y",
+              "labels": [
+                {
+                  "text": "y"
+                }
+              ],
+              "properties": {
+                "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+              },
+              "width": 20,
+              "x": 200,
+              "y": 90
+            }
+          ],
+          "properties": {
+            "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+          },
+          "width": 200
+        }
+      ],
+      "class": "SineVoltage",
+      "height": 200,
+      "id": "SineVoltage3",
+      "labels": [
+        {
+          "text": "SineVoltage3"
+        }
+      ],
+      "ports": [
+        {
+          "class": "PositivePin",
+          "height": 20,
+          "id": "SineVoltage3.p",
+          "labels": [
+            {
+              "text": "p"
+            }
+          ],
+          "properties": {
+            "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+          },
+          "width": 20,
+          "x": -10,
+          "y": 90
+        },
+        {
+          "class": "NegativePin",
+          "height": 20,
+          "id": "SineVoltage3.n",
+          "labels": [
+            {
+              "text": "n"
+            }
+          ],
+          "properties": {
+            "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+          },
+          "width": 20,
+          "x": 190,
+          "y": 90
+        }
+      ],
+      "properties": {
+        "de.cau.cs.kieler.portConstraints": "FREE"
+      },
+      "width": 200
+    }
+  ],
+  "class": "CharacteristicIdealDiodes",
+  "edges": [
+    {
+      "id": "1",
+      "source": "Ground1",
+      "sourcePort": "Ground1.p",
+      "target": "SineVoltage1",
+      "targetPort": "SineVoltage1.n"
+    },
+    {
+      "id": "2",
+      "source": "Ideal",
+      "sourcePort": "Ideal.n",
+      "target": "R1",
+      "targetPort": "R1.p"
+    },
+    {
+      "id": "3",
+      "source": "With_Ron_Goff",
+      "sourcePort": "With_Ron_Goff.n",
+      "target": "R2",
+      "targetPort": "R2.p"
+    },
+    {
+      "id": "4",
+      "source": "With_Ron_Goff_Vknee",
+      "sourcePort": "With_Ron_Goff_Vknee.n",
+      "target": "R3",
+      "targetPort": "R3.p"
+    },
+    {
+      "id": "5",
+      "source": "R1",
+      "sourcePort": "R1.n",
+      "target": "R2",
+      "targetPort": "R2.n"
+    },
+    {
+      "id": "6",
+      "source": "R2",
+      "sourcePort": "R2.n",
+      "target": "R3",
+      "targetPort": "R3.n"
+    },
+    {
+      "id": "7",
+      "source": "R3",
+      "sourcePort": "R3.n",
+      "target": "Ground1",
+      "targetPort": "Ground1.p"
+    },
+    {
+      "id": "8",
+      "source": "SineVoltage2",
+      "sourcePort": "SineVoltage2.p",
+      "target": "Ideal",
+      "targetPort": "Ideal.p"
+    },
+    {
+      "id": "9",
+      "source": "SineVoltage2",
+      "sourcePort": "SineVoltage2.n",
+      "target": "Ground1",
+      "targetPort": "Ground1.p"
+    },
+    {
+      "id": "10",
+      "source": "SineVoltage1",
+      "sourcePort": "SineVoltage1.p",
+      "target": "With_Ron_Goff",
+      "targetPort": "With_Ron_Goff.p"
+    },
+    {
+      "id": "11",
+      "source": "With_Ron_Goff_Vknee",
+      "sourcePort": "With_Ron_Goff_Vknee.p",
+      "target": "SineVoltage3",
+      "targetPort": "SineVoltage3.p"
+    },
+    {
+      "id": "12",
+      "source": "SineVoltage3",
+      "sourcePort": "SineVoltage3.n",
+      "target": "Ground1",
+      "targetPort": "Ground1.p"
+    }
+  ],
+  "height": 200,
+  "id": "Modelica.Electrical.Analog.Examples.CharacteristicIdealDiodes",
+  "labels": [
+    {
+      "text": "CharacteristicIdealDiodes"
+    }
+  ],
+  "properties": {
+    "de.cau.cs.kieler.portConstraints": "FREE"
+  },
+  "width": 200
+}

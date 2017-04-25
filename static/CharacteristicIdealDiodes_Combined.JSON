@@ -1,0 +1,2042 @@
+{
+  "KlayJS": {
+    "children": [
+      {
+        "class": "IdealDiode",
+        "height": 200,
+        "id": "Ideal",
+        "labels": [
+          {
+            "text": "Ideal"
+          }
+        ],
+        "ports": [
+          {
+            "class": "PositivePin",
+            "height": 20,
+            "id": "Ideal.p",
+            "labels": [
+              {
+                "text": "p"
+              }
+            ],
+            "properties": {
+              "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+            },
+            "width": 20,
+            "x": -10,
+            "y": 90
+          },
+          {
+            "class": "NegativePin",
+            "height": 20,
+            "id": "Ideal.n",
+            "labels": [
+              {
+                "text": "n"
+              }
+            ],
+            "properties": {
+              "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+            },
+            "width": 20,
+            "x": 190,
+            "y": 90
+          }
+        ],
+        "properties": {
+          "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+        },
+        "width": 200
+      },
+      {
+        "class": "IdealDiode",
+        "height": 200,
+        "id": "With_Ron_Goff",
+        "labels": [
+          {
+            "text": "With_Ron_Goff"
+          }
+        ],
+        "ports": [
+          {
+            "class": "PositivePin",
+            "height": 20,
+            "id": "With_Ron_Goff.p",
+            "labels": [
+              {
+                "text": "p"
+              }
+            ],
+            "properties": {
+              "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+            },
+            "width": 20,
+            "x": -10,
+            "y": 90
+          },
+          {
+            "class": "NegativePin",
+            "height": 20,
+            "id": "With_Ron_Goff.n",
+            "labels": [
+              {
+                "text": "n"
+              }
+            ],
+            "properties": {
+              "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+            },
+            "width": 20,
+            "x": 190,
+            "y": 90
+          }
+        ],
+        "properties": {
+          "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+        },
+        "width": 200
+      },
+      {
+        "class": "IdealDiode",
+        "height": 200,
+        "id": "With_Ron_Goff_Vknee",
+        "labels": [
+          {
+            "text": "With_Ron_Goff_Vknee"
+          }
+        ],
+        "ports": [
+          {
+            "class": "PositivePin",
+            "height": 20,
+            "id": "With_Ron_Goff_Vknee.p",
+            "labels": [
+              {
+                "text": "p"
+              }
+            ],
+            "properties": {
+              "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+            },
+            "width": 20,
+            "x": -10,
+            "y": 90
+          },
+          {
+            "class": "NegativePin",
+            "height": 20,
+            "id": "With_Ron_Goff_Vknee.n",
+            "labels": [
+              {
+                "text": "n"
+              }
+            ],
+            "properties": {
+              "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+            },
+            "width": 20,
+            "x": 190,
+            "y": 90
+          }
+        ],
+        "properties": {
+          "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+        },
+        "width": 200
+      },
+      {
+        "class": "SineVoltage",
+        "height": 200,
+        "id": "SineVoltage1",
+        "labels": [
+          {
+            "text": "SineVoltage1"
+          }
+        ],
+        "ports": [
+          {
+            "class": "PositivePin",
+            "height": 20,
+            "id": "SineVoltage1.p",
+            "labels": [
+              {
+                "text": "p"
+              }
+            ],
+            "properties": {
+              "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+            },
+            "width": 20,
+            "x": -10,
+            "y": 90
+          },
+          {
+            "class": "NegativePin",
+            "height": 20,
+            "id": "SineVoltage1.n",
+            "labels": [
+              {
+                "text": "n"
+              }
+            ],
+            "properties": {
+              "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+            },
+            "width": 20,
+            "x": 190,
+            "y": 90
+          }
+        ],
+        "properties": {
+          "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+        },
+        "width": 200
+      },
+      {
+        "class": "Ground",
+        "height": 200,
+        "id": "Ground1",
+        "labels": [
+          {
+            "text": "Ground1"
+          }
+        ],
+        "ports": [
+          {
+            "class": "Pin",
+            "height": 20,
+            "id": "Ground1.p",
+            "labels": [
+              {
+                "text": "p"
+              }
+            ],
+            "origin": [
+              100,
+              0
+            ],
+            "properties": {
+              "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+            },
+            "rotation": 270,
+            "width": 20,
+            "x": 90,
+            "y": -10
+          }
+        ],
+        "properties": {
+          "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+        },
+        "width": 200
+      },
+      {
+        "class": "Resistor",
+        "height": 200,
+        "id": "R1",
+        "labels": [
+          {
+            "text": "R1"
+          }
+        ],
+        "ports": [
+          {
+            "class": "PositivePin",
+            "height": 20,
+            "id": "R1.p",
+            "labels": [
+              {
+                "text": "p"
+              }
+            ],
+            "properties": {
+              "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+            },
+            "width": 20,
+            "x": -10,
+            "y": 90
+          },
+          {
+            "class": "NegativePin",
+            "height": 20,
+            "id": "R1.n",
+            "labels": [
+              {
+                "text": "n"
+              }
+            ],
+            "properties": {
+              "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+            },
+            "width": 20,
+            "x": 190,
+            "y": 90
+          }
+        ],
+        "properties": {
+          "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+        },
+        "width": 200
+      },
+      {
+        "class": "Resistor",
+        "height": 200,
+        "id": "R2",
+        "labels": [
+          {
+            "text": "R2"
+          }
+        ],
+        "ports": [
+          {
+            "class": "PositivePin",
+            "height": 20,
+            "id": "R2.p",
+            "labels": [
+              {
+                "text": "p"
+              }
+            ],
+            "properties": {
+              "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+            },
+            "width": 20,
+            "x": -10,
+            "y": 90
+          },
+          {
+            "class": "NegativePin",
+            "height": 20,
+            "id": "R2.n",
+            "labels": [
+              {
+                "text": "n"
+              }
+            ],
+            "properties": {
+              "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+            },
+            "width": 20,
+            "x": 190,
+            "y": 90
+          }
+        ],
+        "properties": {
+          "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+        },
+        "width": 200
+      },
+      {
+        "class": "Resistor",
+        "height": 200,
+        "id": "R3",
+        "labels": [
+          {
+            "text": "R3"
+          }
+        ],
+        "ports": [
+          {
+            "class": "PositivePin",
+            "height": 20,
+            "id": "R3.p",
+            "labels": [
+              {
+                "text": "p"
+              }
+            ],
+            "properties": {
+              "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+            },
+            "width": 20,
+            "x": -10,
+            "y": 90
+          },
+          {
+            "class": "NegativePin",
+            "height": 20,
+            "id": "R3.n",
+            "labels": [
+              {
+                "text": "n"
+              }
+            ],
+            "properties": {
+              "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+            },
+            "width": 20,
+            "x": 190,
+            "y": 90
+          }
+        ],
+        "properties": {
+          "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+        },
+        "width": 200
+      },
+      {
+        "class": "SineVoltage",
+        "height": 200,
+        "id": "SineVoltage2",
+        "labels": [
+          {
+            "text": "SineVoltage2"
+          }
+        ],
+        "ports": [
+          {
+            "class": "PositivePin",
+            "height": 20,
+            "id": "SineVoltage2.p",
+            "labels": [
+              {
+                "text": "p"
+              }
+            ],
+            "properties": {
+              "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+            },
+            "width": 20,
+            "x": -10,
+            "y": 90
+          },
+          {
+            "class": "NegativePin",
+            "height": 20,
+            "id": "SineVoltage2.n",
+            "labels": [
+              {
+                "text": "n"
+              }
+            ],
+            "properties": {
+              "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+            },
+            "width": 20,
+            "x": 190,
+            "y": 90
+          }
+        ],
+        "properties": {
+          "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+        },
+        "width": 200
+      },
+      {
+        "class": "SineVoltage",
+        "height": 200,
+        "id": "SineVoltage3",
+        "labels": [
+          {
+            "text": "SineVoltage3"
+          }
+        ],
+        "ports": [
+          {
+            "class": "PositivePin",
+            "height": 20,
+            "id": "SineVoltage3.p",
+            "labels": [
+              {
+                "text": "p"
+              }
+            ],
+            "properties": {
+              "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+            },
+            "width": 20,
+            "x": -10,
+            "y": 90
+          },
+          {
+            "class": "NegativePin",
+            "height": 20,
+            "id": "SineVoltage3.n",
+            "labels": [
+              {
+                "text": "n"
+              }
+            ],
+            "properties": {
+              "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+            },
+            "width": 20,
+            "x": 190,
+            "y": 90
+          }
+        ],
+        "properties": {
+          "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+        },
+        "width": 200
+      }
+    ],
+    "class": "CharacteristicIdealDiodes",
+    "edges": [
+      {
+        "id": "1",
+        "source": "Ground1",
+        "sourcePort": "Ground1.p",
+        "target": "SineVoltage1",
+        "targetPort": "SineVoltage1.n"
+      },
+      {
+        "id": "2",
+        "source": "Ideal",
+        "sourcePort": "Ideal.n",
+        "target": "R1",
+        "targetPort": "R1.p"
+      },
+      {
+        "id": "3",
+        "source": "With_Ron_Goff",
+        "sourcePort": "With_Ron_Goff.n",
+        "target": "R2",
+        "targetPort": "R2.p"
+      },
+      {
+        "id": "4",
+        "source": "With_Ron_Goff_Vknee",
+        "sourcePort": "With_Ron_Goff_Vknee.n",
+        "target": "R3",
+        "targetPort": "R3.p"
+      },
+      {
+        "id": "5",
+        "source": "R1",
+        "sourcePort": "R1.n",
+        "target": "R2",
+        "targetPort": "R2.n"
+      },
+      {
+        "id": "6",
+        "source": "R2",
+        "sourcePort": "R2.n",
+        "target": "R3",
+        "targetPort": "R3.n"
+      },
+      {
+        "id": "7",
+        "source": "R3",
+        "sourcePort": "R3.n",
+        "target": "Ground1",
+        "targetPort": "Ground1.p"
+      },
+      {
+        "id": "8",
+        "source": "SineVoltage2",
+        "sourcePort": "SineVoltage2.p",
+        "target": "Ideal",
+        "targetPort": "Ideal.p"
+      },
+      {
+        "id": "9",
+        "source": "SineVoltage2",
+        "sourcePort": "SineVoltage2.n",
+        "target": "Ground1",
+        "targetPort": "Ground1.p"
+      },
+      {
+        "id": "10",
+        "source": "SineVoltage1",
+        "sourcePort": "SineVoltage1.p",
+        "target": "With_Ron_Goff",
+        "targetPort": "With_Ron_Goff.p"
+      },
+      {
+        "id": "11",
+        "source": "With_Ron_Goff_Vknee",
+        "sourcePort": "With_Ron_Goff_Vknee.p",
+        "target": "SineVoltage3",
+        "targetPort": "SineVoltage3.p"
+      },
+      {
+        "id": "12",
+        "source": "SineVoltage3",
+        "sourcePort": "SineVoltage3.n",
+        "target": "Ground1",
+        "targetPort": "Ground1.p"
+      }
+    ],
+    "height": 200,
+    "id": "Modelica.Electrical.Analog.Examples.CharacteristicIdealDiodes",
+    "labels": [
+      {
+        "text": "CharacteristicIdealDiodes"
+      }
+    ],
+    "properties": {
+      "de.cau.cs.kieler.portConstraints": "FREE"
+    },
+    "width": 200
+  },
+  "KlayJS_Fixed": {
+    "children": [
+      {
+        "class": "IdealDiode",
+        "height": 200,
+        "id": "Ideal",
+        "labels": [
+          {
+            "text": "Ideal"
+          }
+        ],
+        "ports": [
+          {
+            "class": "PositivePin",
+            "height": 20,
+            "id": "Ideal.p",
+            "labels": [
+              {
+                "text": "p"
+              }
+            ],
+            "properties": {
+              "algorithm": "de.cau.cs.kieler.fixed",
+              "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+            },
+            "width": 20,
+            "x": -10,
+            "y": 90
+          },
+          {
+            "class": "NegativePin",
+            "height": 20,
+            "id": "Ideal.n",
+            "labels": [
+              {
+                "text": "n"
+              }
+            ],
+            "properties": {
+              "algorithm": "de.cau.cs.kieler.fixed",
+              "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+            },
+            "width": 20,
+            "x": 190,
+            "y": 90
+          }
+        ],
+        "properties": {
+          "algorithm": "de.cau.cs.kieler.fixed",
+          "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+        },
+        "width": 200,
+        "x": 1000,
+        "y": 400
+      },
+      {
+        "class": "IdealDiode",
+        "height": 200,
+        "id": "With_Ron_Goff",
+        "labels": [
+          {
+            "text": "With_Ron_Goff"
+          }
+        ],
+        "ports": [
+          {
+            "class": "PositivePin",
+            "height": 20,
+            "id": "With_Ron_Goff.p",
+            "labels": [
+              {
+                "text": "p"
+              }
+            ],
+            "properties": {
+              "algorithm": "de.cau.cs.kieler.fixed",
+              "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+            },
+            "width": 20,
+            "x": -10,
+            "y": 90
+          },
+          {
+            "class": "NegativePin",
+            "height": 20,
+            "id": "With_Ron_Goff.n",
+            "labels": [
+              {
+                "text": "n"
+              }
+            ],
+            "properties": {
+              "algorithm": "de.cau.cs.kieler.fixed",
+              "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+            },
+            "width": 20,
+            "x": 190,
+            "y": 90
+          }
+        ],
+        "properties": {
+          "algorithm": "de.cau.cs.kieler.fixed",
+          "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+        },
+        "width": 200,
+        "x": 1000,
+        "y": 800
+      },
+      {
+        "class": "IdealDiode",
+        "height": 200,
+        "id": "With_Ron_Goff_Vknee",
+        "labels": [
+          {
+            "text": "With_Ron_Goff_Vknee"
+          }
+        ],
+        "ports": [
+          {
+            "class": "PositivePin",
+            "height": 20,
+            "id": "With_Ron_Goff_Vknee.p",
+            "labels": [
+              {
+                "text": "p"
+              }
+            ],
+            "properties": {
+              "algorithm": "de.cau.cs.kieler.fixed",
+              "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+            },
+            "width": 20,
+            "x": -10,
+            "y": 90
+          },
+          {
+            "class": "NegativePin",
+            "height": 20,
+            "id": "With_Ron_Goff_Vknee.n",
+            "labels": [
+              {
+                "text": "n"
+              }
+            ],
+            "properties": {
+              "algorithm": "de.cau.cs.kieler.fixed",
+              "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+            },
+            "width": 20,
+            "x": 190,
+            "y": 90
+          }
+        ],
+        "properties": {
+          "algorithm": "de.cau.cs.kieler.fixed",
+          "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+        },
+        "width": 200,
+        "x": 1000,
+        "y": 1200
+      },
+      {
+        "class": "SineVoltage",
+        "height": 200,
+        "id": "SineVoltage1",
+        "labels": [
+          {
+            "text": "SineVoltage1"
+          }
+        ],
+        "origin": [
+          600,
+          1000
+        ],
+        "ports": [
+          {
+            "class": "PositivePin",
+            "height": 20,
+            "id": "SineVoltage1.p",
+            "labels": [
+              {
+                "text": "p"
+              }
+            ],
+            "properties": {
+              "algorithm": "de.cau.cs.kieler.fixed",
+              "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+            },
+            "width": 20,
+            "x": -10,
+            "y": 90
+          },
+          {
+            "class": "NegativePin",
+            "height": 20,
+            "id": "SineVoltage1.n",
+            "labels": [
+              {
+                "text": "n"
+              }
+            ],
+            "properties": {
+              "algorithm": "de.cau.cs.kieler.fixed",
+              "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+            },
+            "width": 20,
+            "x": 190,
+            "y": 90
+          }
+        ],
+        "properties": {
+          "algorithm": "de.cau.cs.kieler.fixed",
+          "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+        },
+        "rotation": 270,
+        "width": 200,
+        "x": 500,
+        "y": 900
+      },
+      {
+        "class": "Ground",
+        "height": 200,
+        "id": "Ground1",
+        "labels": [
+          {
+            "text": "Ground1"
+          }
+        ],
+        "ports": [
+          {
+            "class": "Pin",
+            "height": 20,
+            "id": "Ground1.p",
+            "labels": [
+              {
+                "text": "p"
+              }
+            ],
+            "origin": [
+              100,
+              0
+            ],
+            "properties": {
+              "algorithm": "de.cau.cs.kieler.fixed",
+              "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+            },
+            "rotation": 270,
+            "width": 20,
+            "x": 90,
+            "y": -10
+          }
+        ],
+        "properties": {
+          "algorithm": "de.cau.cs.kieler.fixed",
+          "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+        },
+        "width": 200,
+        "x": 500,
+        "y": 1600
+      },
+      {
+        "class": "Resistor",
+        "height": 200,
+        "id": "R1",
+        "labels": [
+          {
+            "text": "R1"
+          }
+        ],
+        "ports": [
+          {
+            "class": "PositivePin",
+            "height": 20,
+            "id": "R1.p",
+            "labels": [
+              {
+                "text": "p"
+              }
+            ],
+            "properties": {
+              "algorithm": "de.cau.cs.kieler.fixed",
+              "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+            },
+            "width": 20,
+            "x": -10,
+            "y": 90
+          },
+          {
+            "class": "NegativePin",
+            "height": 20,
+            "id": "R1.n",
+            "labels": [
+              {
+                "text": "n"
+              }
+            ],
+            "properties": {
+              "algorithm": "de.cau.cs.kieler.fixed",
+              "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+            },
+            "width": 20,
+            "x": 190,
+            "y": 90
+          }
+        ],
+        "properties": {
+          "algorithm": "de.cau.cs.kieler.fixed",
+          "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+        },
+        "width": 200,
+        "x": 1600,
+        "y": 400
+      },
+      {
+        "class": "Resistor",
+        "height": 200,
+        "id": "R2",
+        "labels": [
+          {
+            "text": "R2"
+          }
+        ],
+        "ports": [
+          {
+            "class": "PositivePin",
+            "height": 20,
+            "id": "R2.p",
+            "labels": [
+              {
+                "text": "p"
+              }
+            ],
+            "properties": {
+              "algorithm": "de.cau.cs.kieler.fixed",
+              "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+            },
+            "width": 20,
+            "x": -10,
+            "y": 90
+          },
+          {
+            "class": "NegativePin",
+            "height": 20,
+            "id": "R2.n",
+            "labels": [
+              {
+                "text": "n"
+              }
+            ],
+            "properties": {
+              "algorithm": "de.cau.cs.kieler.fixed",
+              "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+            },
+            "width": 20,
+            "x": 190,
+            "y": 90
+          }
+        ],
+        "properties": {
+          "algorithm": "de.cau.cs.kieler.fixed",
+          "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+        },
+        "width": 200,
+        "x": 1600,
+        "y": 800
+      },
+      {
+        "class": "Resistor",
+        "height": 200,
+        "id": "R3",
+        "labels": [
+          {
+            "text": "R3"
+          }
+        ],
+        "ports": [
+          {
+            "class": "PositivePin",
+            "height": 20,
+            "id": "R3.p",
+            "labels": [
+              {
+                "text": "p"
+              }
+            ],
+            "properties": {
+              "algorithm": "de.cau.cs.kieler.fixed",
+              "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+            },
+            "width": 20,
+            "x": -10,
+            "y": 90
+          },
+          {
+            "class": "NegativePin",
+            "height": 20,
+            "id": "R3.n",
+            "labels": [
+              {
+                "text": "n"
+              }
+            ],
+            "properties": {
+              "algorithm": "de.cau.cs.kieler.fixed",
+              "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+            },
+            "width": 20,
+            "x": 190,
+            "y": 90
+          }
+        ],
+        "properties": {
+          "algorithm": "de.cau.cs.kieler.fixed",
+          "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+        },
+        "width": 200,
+        "x": 1600,
+        "y": 1200
+      },
+      {
+        "class": "SineVoltage",
+        "height": 200,
+        "id": "SineVoltage2",
+        "labels": [
+          {
+            "text": "SineVoltage2"
+          }
+        ],
+        "origin": [
+          400,
+          600
+        ],
+        "ports": [
+          {
+            "class": "PositivePin",
+            "height": 20,
+            "id": "SineVoltage2.p",
+            "labels": [
+              {
+                "text": "p"
+              }
+            ],
+            "properties": {
+              "algorithm": "de.cau.cs.kieler.fixed",
+              "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+            },
+            "width": 20,
+            "x": -10,
+            "y": 90
+          },
+          {
+            "class": "NegativePin",
+            "height": 20,
+            "id": "SineVoltage2.n",
+            "labels": [
+              {
+                "text": "n"
+              }
+            ],
+            "properties": {
+              "algorithm": "de.cau.cs.kieler.fixed",
+              "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+            },
+            "width": 20,
+            "x": 190,
+            "y": 90
+          }
+        ],
+        "properties": {
+          "algorithm": "de.cau.cs.kieler.fixed",
+          "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+        },
+        "rotation": 270,
+        "width": 200,
+        "x": 300,
+        "y": 500
+      },
+      {
+        "class": "SineVoltage",
+        "height": 200,
+        "id": "SineVoltage3",
+        "labels": [
+          {
+            "text": "SineVoltage3"
+          }
+        ],
+        "origin": [
+          800,
+          1400
+        ],
+        "ports": [
+          {
+            "class": "PositivePin",
+            "height": 20,
+            "id": "SineVoltage3.p",
+            "labels": [
+              {
+                "text": "p"
+              }
+            ],
+            "properties": {
+              "algorithm": "de.cau.cs.kieler.fixed",
+              "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+            },
+            "width": 20,
+            "x": -10,
+            "y": 90
+          },
+          {
+            "class": "NegativePin",
+            "height": 20,
+            "id": "SineVoltage3.n",
+            "labels": [
+              {
+                "text": "n"
+              }
+            ],
+            "properties": {
+              "algorithm": "de.cau.cs.kieler.fixed",
+              "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+            },
+            "width": 20,
+            "x": 190,
+            "y": 90
+          }
+        ],
+        "properties": {
+          "algorithm": "de.cau.cs.kieler.fixed",
+          "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+        },
+        "rotation": 270,
+        "width": 200,
+        "x": 700,
+        "y": 1300
+      }
+    ],
+    "class": "CharacteristicIdealDiodes",
+    "edges": [
+      {
+        "bendPoints": [],
+        "id": "1",
+        "source": "Ground1",
+        "sourcePoint": {
+          "x": 600,
+          "y": 1600
+        },
+        "sourcePort": "Ground1.p",
+        "target": "SineVoltage1",
+        "targetPoint": {
+          "x": 600,
+          "y": 1100
+        },
+        "targetPort": "SineVoltage1.n"
+      },
+      {
+        "bendPoints": [],
+        "id": "2",
+        "source": "Ideal",
+        "sourcePoint": {
+          "x": 1200,
+          "y": 500
+        },
+        "sourcePort": "Ideal.n",
+        "target": "R1",
+        "targetPoint": {
+          "x": 1600,
+          "y": 500
+        },
+        "targetPort": "R1.p"
+      },
+      {
+        "bendPoints": [],
+        "id": "3",
+        "source": "With_Ron_Goff",
+        "sourcePoint": {
+          "x": 1200,
+          "y": 900
+        },
+        "sourcePort": "With_Ron_Goff.n",
+        "target": "R2",
+        "targetPoint": {
+          "x": 1600,
+          "y": 900
+        },
+        "targetPort": "R2.p"
+      },
+      {
+        "bendPoints": [],
+        "id": "4",
+        "source": "With_Ron_Goff_Vknee",
+        "sourcePoint": {
+          "x": 1200,
+          "y": 1300
+        },
+        "sourcePort": "With_Ron_Goff_Vknee.n",
+        "target": "R3",
+        "targetPoint": {
+          "x": 1600,
+          "y": 1300
+        },
+        "targetPort": "R3.p"
+      },
+      {
+        "bendPoints": [],
+        "id": "5",
+        "source": "R1",
+        "sourcePoint": {
+          "x": 1800,
+          "y": 500
+        },
+        "sourcePort": "R1.n",
+        "target": "R2",
+        "targetPoint": {
+          "x": 1800,
+          "y": 900
+        },
+        "targetPort": "R2.n"
+      },
+      {
+        "bendPoints": [],
+        "id": "6",
+        "source": "R2",
+        "sourcePoint": {
+          "x": 1800,
+          "y": 900
+        },
+        "sourcePort": "R2.n",
+        "target": "R3",
+        "targetPoint": {
+          "x": 1800,
+          "y": 1300
+        },
+        "targetPort": "R3.n"
+      },
+      {
+        "bendPoints": [
+          {
+            "x": 1800,
+            "y": 1600
+          }
+        ],
+        "id": "7",
+        "source": "R3",
+        "sourcePoint": {
+          "x": 1800,
+          "y": 1300
+        },
+        "sourcePort": "R3.n",
+        "target": "Ground1",
+        "targetPoint": {
+          "x": 600,
+          "y": 1600
+        },
+        "targetPort": "Ground1.p"
+      },
+      {
+        "bendPoints": [],
+        "id": "8",
+        "source": "SineVoltage2",
+        "sourcePoint": {
+          "x": 400,
+          "y": 500
+        },
+        "sourcePort": "SineVoltage2.p",
+        "target": "Ideal",
+        "targetPoint": {
+          "x": 1000,
+          "y": 500
+        },
+        "targetPort": "Ideal.p"
+      },
+      {
+        "bendPoints": [
+          {
+            "x": 400,
+            "y": 1600
+          }
+        ],
+        "id": "9",
+        "source": "SineVoltage2",
+        "sourcePoint": {
+          "x": 400,
+          "y": 700
+        },
+        "sourcePort": "SineVoltage2.n",
+        "target": "Ground1",
+        "targetPoint": {
+          "x": 600,
+          "y": 1600
+        },
+        "targetPort": "Ground1.p"
+      },
+      {
+        "bendPoints": [],
+        "id": "10",
+        "source": "SineVoltage1",
+        "sourcePoint": {
+          "x": 600,
+          "y": 900
+        },
+        "sourcePort": "SineVoltage1.p",
+        "target": "With_Ron_Goff",
+        "targetPoint": {
+          "x": 1000,
+          "y": 900
+        },
+        "targetPort": "With_Ron_Goff.p"
+      },
+      {
+        "bendPoints": [],
+        "id": "11",
+        "source": "With_Ron_Goff_Vknee",
+        "sourcePoint": {
+          "x": 1000,
+          "y": 1300
+        },
+        "sourcePort": "With_Ron_Goff_Vknee.p",
+        "target": "SineVoltage3",
+        "targetPoint": {
+          "x": 800,
+          "y": 1300
+        },
+        "targetPort": "SineVoltage3.p"
+      },
+      {
+        "bendPoints": [
+          {
+            "x": 800,
+            "y": 1600
+          }
+        ],
+        "id": "12",
+        "source": "SineVoltage3",
+        "sourcePoint": {
+          "x": 800,
+          "y": 1500
+        },
+        "sourcePort": "SineVoltage3.n",
+        "target": "Ground1",
+        "targetPoint": {
+          "x": 600,
+          "y": 1600
+        },
+        "targetPort": "Ground1.p"
+      }
+    ],
+    "height": 200,
+    "id": "Modelica.Electrical.Analog.Examples.CharacteristicIdealDiodes",
+    "labels": [
+      {
+        "text": "CharacteristicIdealDiodes"
+      }
+    ],
+    "properties": {
+      "algorithm": "de.cau.cs.kieler.fixed",
+      "de.cau.cs.kieler.portConstraints": "FREE"
+    },
+    "width": 200
+  },
+  "KlayJS_Fixed_Icons": {
+    "CharacteristicIdealDiodes": "<svg width=\"200.0\" height=\"200.0\" viewBox=\"-0.0 -0.0 200.0 200.0\" version=\"1.1\" preserveAspectRatio=\"none\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\">\n  <ellipse cx=\"100.0\" cy=\"100.0\" rx=\"99.5\" ry=\"99.5\" style=\"stroke:#4b8a49; fill:#ffffff;\" />\n  <path d=\"M64.18,40.3 L163.68,100.0 L64.18,159.7 L64.18,40.3 Z\" style=\"stroke:none; fill:#4b8a49;\" />\n</svg>\n",
+    "Ground": "<svg width=\"220.0\" height=\"220.0\" viewBox=\"-10.0 -10.0 220.0 220.0\" version=\"1.1\" preserveAspectRatio=\"none\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\">\n  <path d=\"M40.3,50.25 L159.7,50.25\" style=\"stroke:#0000ff; fill:none;\" />\n  <path d=\"M60.2,70.15 L139.8,70.15\" style=\"stroke:#0000ff; fill:none;\" />\n  <path d=\"M80.1,90.05 L119.9,90.05\" style=\"stroke:#0000ff; fill:none;\" />\n  <path d=\"M100.0,10.45 L100.0,50.25\" style=\"stroke:#0000ff; fill:none;\" />\n  <text x=\"105.97\" y=\"138.805\" style=\"fill:#0000ff; text-anchor:middle; dominant-baseline:middle; font-size:39.8px;\"></text>\n  <g class=\"Port\">\n    <metadata xmlns:vda=\"http://fat-ak30.eas.iis.fraunhofer.de/exchange/vda_meta\">\n      <vda:meta name=\"Name\">p</vda:meta>\n      <vda:meta name=\"X\">109.95</vda:meta>\n      <vda:meta name=\"Y\">0.5</vda:meta>\n    </metadata>\n    <path d=\"M109.95,10.45 L109.95,-9.45 L90.05,-9.45 L90.05,10.45 Z\" style=\"stroke:#0000ff; fill:#0000ff;\" />\n  </g>\n</svg>\n",
+    "IdealDiode": "<svg width=\"220.0\" height=\"220.0\" viewBox=\"-10.0 -10.0 220.0 220.0\" version=\"1.1\" preserveAspectRatio=\"none\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\">\n  <path d=\"M129.85,100.0 L70.15,60.2 L70.15,139.8 L129.85,100.0 Z\" style=\"stroke:#000000; fill:#ffffff;\" />\n  <path d=\"M10.45,100.0 L139.8,100.0\" style=\"stroke:#0000ff; fill:none;\" />\n  <path d=\"M139.8,100.0 L189.55,100.0\" style=\"stroke:#0000ff; fill:none;\" />\n  <path d=\"M129.85,60.2 L129.85,139.8\" style=\"stroke:#0000ff; fill:none;\" />\n  <text x=\"100.0\" y=\"159.7\" style=\"fill:#0000ff; text-anchor:middle; dominant-baseline:middle; font-size:39.8px;\"></text>\n  <g class=\"Port\">\n    <metadata xmlns:vda=\"http://fat-ak30.eas.iis.fraunhofer.de/exchange/vda_meta\">\n      <vda:meta name=\"Name\">p</vda:meta>\n      <vda:meta name=\"X\">0.5</vda:meta>\n      <vda:meta name=\"Y\">100.0</vda:meta>\n    </metadata>\n    <path d=\"M-9.45,90.05 L10.45,90.05 L10.45,109.95 L-9.45,109.95 Z\" style=\"stroke:#0000ff; fill:#0000ff;\" />\n  </g>\n  <g class=\"Port\">\n    <metadata xmlns:vda=\"http://fat-ak30.eas.iis.fraunhofer.de/exchange/vda_meta\">\n      <vda:meta name=\"Name\">n</vda:meta>\n      <vda:meta name=\"X\">199.5</vda:meta>\n      <vda:meta name=\"Y\">100.0</vda:meta>\n    </metadata>\n    <path d=\"M209.45,90.05 L189.55,90.05 L189.55,109.95 L209.45,109.95 Z\" style=\"stroke:#0000ff; fill:#ffffff;\" />\n  </g>\n</svg>\n",
+    "NegativePin": "<svg width=\"200.0\" height=\"200.0\" viewBox=\"-0.0 -0.0 200.0 200.0\" version=\"1.1\" preserveAspectRatio=\"none\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\">\n  <path d=\"M0.5,0.5 L199.5,0.5 L199.5,199.5 L0.5,199.5 Z\" style=\"stroke:#0000ff; fill:#ffffff;\" />\n</svg>\n",
+    "Pin": "<svg width=\"200.0\" height=\"200.0\" viewBox=\"-0.0 -0.0 200.0 200.0\" version=\"1.1\" preserveAspectRatio=\"none\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\">\n  <path d=\"M0.5,0.5 L199.5,0.5 L199.5,199.5 L0.5,199.5 Z\" style=\"stroke:#0000ff; fill:#0000ff;\" />\n</svg>\n",
+    "PositivePin": "<svg width=\"200.0\" height=\"200.0\" viewBox=\"-0.0 -0.0 200.0 200.0\" version=\"1.1\" preserveAspectRatio=\"none\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\">\n  <path d=\"M0.5,0.5 L199.5,0.5 L199.5,199.5 L0.5,199.5 Z\" style=\"stroke:#0000ff; fill:#0000ff;\" />\n</svg>\n",
+    "Resistor": "<svg width=\"220.0\" height=\"220.0\" viewBox=\"-10.0 -10.0 220.0 220.0\" version=\"1.1\" preserveAspectRatio=\"none\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\">\n  <path d=\"M30.35,70.15 L169.65,70.15 L169.65,129.85 L30.35,129.85 Z\" style=\"stroke:#0000ff; fill:#ffffff;\" />\n  <path d=\"M10.45,100.0 L30.35,100.0\" style=\"stroke:#0000ff; fill:none;\" />\n  <path d=\"M169.65,100.0 L189.55,100.0\" style=\"stroke:#0000ff; fill:none;\" />\n  <text x=\"99.005\" y=\"155.72\" style=\"fill:#000000; text-anchor:middle; dominant-baseline:middle; font-size:31.84px;\">R=1</text>\n  <text x=\"98.01\" y=\"33.335\" style=\"fill:#0000ff; text-anchor:middle; dominant-baseline:middle; font-size:39.8px;\"></text>\n  <g class=\"Port\">\n    <metadata xmlns:vda=\"http://fat-ak30.eas.iis.fraunhofer.de/exchange/vda_meta\">\n      <vda:meta name=\"Name\">p</vda:meta>\n      <vda:meta name=\"X\">0.5</vda:meta>\n      <vda:meta name=\"Y\">100.0</vda:meta>\n    </metadata>\n    <path d=\"M-9.45,90.05 L10.45,90.05 L10.45,109.95 L-9.45,109.95 Z\" style=\"stroke:#0000ff; fill:#0000ff;\" />\n  </g>\n  <g class=\"Port\">\n    <metadata xmlns:vda=\"http://fat-ak30.eas.iis.fraunhofer.de/exchange/vda_meta\">\n      <vda:meta name=\"Name\">n</vda:meta>\n      <vda:meta name=\"X\">199.5</vda:meta>\n      <vda:meta name=\"Y\">100.0</vda:meta>\n    </metadata>\n    <path d=\"M209.45,90.05 L189.55,90.05 L189.55,109.95 L209.45,109.95 Z\" style=\"stroke:#0000ff; fill:#ffffff;\" />\n  </g>\n</svg>\n",
+    "SineVoltage": "<svg width=\"239.709\" height=\"240.0\" viewBox=\"-19.854 -20.0 240.0 240.0\" version=\"1.1\" preserveAspectRatio=\"none\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\">\n  <ellipse cx=\"100.0\" cy=\"100.0\" rx=\"49.75\" ry=\"49.75\" style=\"stroke:#0000ff; fill:#ffffff;\" />\n  <text x=\"100.0\" y=\"0.5\" style=\"fill:#0000ff; text-anchor:middle; dominant-baseline:middle; font-size:39.8px;\"></text>\n  <path d=\"M10.45,100.0 L189.55,100.0\" style=\"stroke:#0000ff; fill:none;\" />\n  <text x=\"30.35\" y=\"75.125\" style=\"fill:#0000ff; text-anchor:middle; dominant-baseline:middle; font-size:49.75px;\">+</text>\n  <text x=\"169.65\" y=\"75.125\" style=\"fill:#0000ff; text-anchor:middle; dominant-baseline:middle; font-size:49.75px;\">-</text>\n  <path d=\"M34.33,100.0 L44.081,70.25 L50.449,53.733 L56.021,42.191 L60.897,35.126 L65.872,31.146 L70.747,30.549 L75.623,33.335 L80.498,39.305 L85.473,48.26 L91.045,61.593 L98.03,81.493 L112.726,126.766 L119.005,143.78 L124.676,155.919 L129.552,163.68 L134.427,168.257 L139.303,169.65 L144.278,167.561 L149.153,162.188 L154.029,153.83 L159.601,141.094 L166.665,121.592 L173.63,100.0\" style=\"stroke:#c0c0c0; fill:none;\" />\n  <g class=\"Port\">\n    <metadata xmlns:vda=\"http://fat-ak30.eas.iis.fraunhofer.de/exchange/vda_meta\">\n      <vda:meta name=\"Name\">p</vda:meta>\n      <vda:meta name=\"X\">0.5</vda:meta>\n      <vda:meta name=\"Y\">100.0</vda:meta>\n    </metadata>\n    <path d=\"M-9.45,90.05 L10.45,90.05 L10.45,109.95 L-9.45,109.95 Z\" style=\"stroke:#0000ff; fill:#0000ff;\" />\n  </g>\n  <g class=\"Port\">\n    <metadata xmlns:vda=\"http://fat-ak30.eas.iis.fraunhofer.de/exchange/vda_meta\">\n      <vda:meta name=\"Name\">n</vda:meta>\n      <vda:meta name=\"X\">199.5</vda:meta>\n      <vda:meta name=\"Y\">100.0</vda:meta>\n    </metadata>\n    <path d=\"M209.45,90.05 L189.55,90.05 L189.55,109.95 L209.45,109.95 Z\" style=\"stroke:#0000ff; fill:#ffffff;\" />\n  </g>\n</svg>\n"
+  },
+  "KlayJS_Icons": {
+    "CharacteristicIdealDiodes": "<svg width=\"200.0\" height=\"200.0\" viewBox=\"-0.0 -0.0 200.0 200.0\" version=\"1.1\" preserveAspectRatio=\"none\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\">\n  <ellipse cx=\"100.0\" cy=\"100.0\" rx=\"99.5\" ry=\"99.5\" style=\"stroke:#4b8a49; fill:#ffffff;\" />\n  <path d=\"M64.18,40.3 L163.68,100.0 L64.18,159.7 L64.18,40.3 Z\" style=\"stroke:none; fill:#4b8a49;\" />\n</svg>\n",
+    "Ground": "<svg width=\"220.0\" height=\"220.0\" viewBox=\"-10.0 -10.0 220.0 220.0\" version=\"1.1\" preserveAspectRatio=\"none\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\">\n  <path d=\"M40.3,50.25 L159.7,50.25\" style=\"stroke:#0000ff; fill:none;\" />\n  <path d=\"M60.2,70.15 L139.8,70.15\" style=\"stroke:#0000ff; fill:none;\" />\n  <path d=\"M80.1,90.05 L119.9,90.05\" style=\"stroke:#0000ff; fill:none;\" />\n  <path d=\"M100.0,10.45 L100.0,50.25\" style=\"stroke:#0000ff; fill:none;\" />\n  <text x=\"105.97\" y=\"138.805\" style=\"fill:#0000ff; text-anchor:middle; dominant-baseline:middle; font-size:39.8px;\"></text>\n  <g class=\"Port\">\n    <metadata xmlns:vda=\"http://fat-ak30.eas.iis.fraunhofer.de/exchange/vda_meta\">\n      <vda:meta name=\"Name\">p</vda:meta>\n      <vda:meta name=\"X\">109.95</vda:meta>\n      <vda:meta name=\"Y\">0.5</vda:meta>\n    </metadata>\n    <path d=\"M109.95,10.45 L109.95,-9.45 L90.05,-9.45 L90.05,10.45 Z\" style=\"stroke:#0000ff; fill:#0000ff;\" />\n  </g>\n</svg>\n",
+    "IdealDiode": "<svg width=\"220.0\" height=\"220.0\" viewBox=\"-10.0 -10.0 220.0 220.0\" version=\"1.1\" preserveAspectRatio=\"none\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\">\n  <path d=\"M129.85,100.0 L70.15,60.2 L70.15,139.8 L129.85,100.0 Z\" style=\"stroke:#000000; fill:#ffffff;\" />\n  <path d=\"M10.45,100.0 L139.8,100.0\" style=\"stroke:#0000ff; fill:none;\" />\n  <path d=\"M139.8,100.0 L189.55,100.0\" style=\"stroke:#0000ff; fill:none;\" />\n  <path d=\"M129.85,60.2 L129.85,139.8\" style=\"stroke:#0000ff; fill:none;\" />\n  <text x=\"100.0\" y=\"159.7\" style=\"fill:#0000ff; text-anchor:middle; dominant-baseline:middle; font-size:39.8px;\"></text>\n  <g class=\"Port\">\n    <metadata xmlns:vda=\"http://fat-ak30.eas.iis.fraunhofer.de/exchange/vda_meta\">\n      <vda:meta name=\"Name\">p</vda:meta>\n      <vda:meta name=\"X\">0.5</vda:meta>\n      <vda:meta name=\"Y\">100.0</vda:meta>\n    </metadata>\n    <path d=\"M-9.45,90.05 L10.45,90.05 L10.45,109.95 L-9.45,109.95 Z\" style=\"stroke:#0000ff; fill:#0000ff;\" />\n  </g>\n  <g class=\"Port\">\n    <metadata xmlns:vda=\"http://fat-ak30.eas.iis.fraunhofer.de/exchange/vda_meta\">\n      <vda:meta name=\"Name\">n</vda:meta>\n      <vda:meta name=\"X\">199.5</vda:meta>\n      <vda:meta name=\"Y\">100.0</vda:meta>\n    </metadata>\n    <path d=\"M209.45,90.05 L189.55,90.05 L189.55,109.95 L209.45,109.95 Z\" style=\"stroke:#0000ff; fill:#ffffff;\" />\n  </g>\n</svg>\n",
+    "NegativePin": "<svg width=\"200.0\" height=\"200.0\" viewBox=\"-0.0 -0.0 200.0 200.0\" version=\"1.1\" preserveAspectRatio=\"none\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\">\n  <path d=\"M0.5,0.5 L199.5,0.5 L199.5,199.5 L0.5,199.5 Z\" style=\"stroke:#0000ff; fill:#ffffff;\" />\n</svg>\n",
+    "Pin": "<svg width=\"200.0\" height=\"200.0\" viewBox=\"-0.0 -0.0 200.0 200.0\" version=\"1.1\" preserveAspectRatio=\"none\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\">\n  <path d=\"M0.5,0.5 L199.5,0.5 L199.5,199.5 L0.5,199.5 Z\" style=\"stroke:#0000ff; fill:#0000ff;\" />\n</svg>\n",
+    "PositivePin": "<svg width=\"200.0\" height=\"200.0\" viewBox=\"-0.0 -0.0 200.0 200.0\" version=\"1.1\" preserveAspectRatio=\"none\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\">\n  <path d=\"M0.5,0.5 L199.5,0.5 L199.5,199.5 L0.5,199.5 Z\" style=\"stroke:#0000ff; fill:#0000ff;\" />\n</svg>\n",
+    "Resistor": "<svg width=\"220.0\" height=\"220.0\" viewBox=\"-10.0 -10.0 220.0 220.0\" version=\"1.1\" preserveAspectRatio=\"none\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\">\n  <path d=\"M30.35,70.15 L169.65,70.15 L169.65,129.85 L30.35,129.85 Z\" style=\"stroke:#0000ff; fill:#ffffff;\" />\n  <path d=\"M10.45,100.0 L30.35,100.0\" style=\"stroke:#0000ff; fill:none;\" />\n  <path d=\"M169.65,100.0 L189.55,100.0\" style=\"stroke:#0000ff; fill:none;\" />\n  <text x=\"99.005\" y=\"155.72\" style=\"fill:#000000; text-anchor:middle; dominant-baseline:middle; font-size:31.84px;\">R=1</text>\n  <text x=\"98.01\" y=\"33.335\" style=\"fill:#0000ff; text-anchor:middle; dominant-baseline:middle; font-size:39.8px;\"></text>\n  <g class=\"Port\">\n    <metadata xmlns:vda=\"http://fat-ak30.eas.iis.fraunhofer.de/exchange/vda_meta\">\n      <vda:meta name=\"Name\">p</vda:meta>\n      <vda:meta name=\"X\">0.5</vda:meta>\n      <vda:meta name=\"Y\">100.0</vda:meta>\n    </metadata>\n    <path d=\"M-9.45,90.05 L10.45,90.05 L10.45,109.95 L-9.45,109.95 Z\" style=\"stroke:#0000ff; fill:#0000ff;\" />\n  </g>\n  <g class=\"Port\">\n    <metadata xmlns:vda=\"http://fat-ak30.eas.iis.fraunhofer.de/exchange/vda_meta\">\n      <vda:meta name=\"Name\">n</vda:meta>\n      <vda:meta name=\"X\">199.5</vda:meta>\n      <vda:meta name=\"Y\">100.0</vda:meta>\n    </metadata>\n    <path d=\"M209.45,90.05 L189.55,90.05 L189.55,109.95 L209.45,109.95 Z\" style=\"stroke:#0000ff; fill:#ffffff;\" />\n  </g>\n</svg>\n",
+    "SineVoltage": "<svg width=\"239.709\" height=\"240.0\" viewBox=\"-19.854 -20.0 240.0 240.0\" version=\"1.1\" preserveAspectRatio=\"none\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\">\n  <ellipse cx=\"100.0\" cy=\"100.0\" rx=\"49.75\" ry=\"49.75\" style=\"stroke:#0000ff; fill:#ffffff;\" />\n  <text x=\"100.0\" y=\"0.5\" style=\"fill:#0000ff; text-anchor:middle; dominant-baseline:middle; font-size:39.8px;\"></text>\n  <path d=\"M10.45,100.0 L189.55,100.0\" style=\"stroke:#0000ff; fill:none;\" />\n  <text x=\"30.35\" y=\"75.125\" style=\"fill:#0000ff; text-anchor:middle; dominant-baseline:middle; font-size:49.75px;\">+</text>\n  <text x=\"169.65\" y=\"75.125\" style=\"fill:#0000ff; text-anchor:middle; dominant-baseline:middle; font-size:49.75px;\">-</text>\n  <path d=\"M34.33,100.0 L44.081,70.25 L50.449,53.733 L56.021,42.191 L60.897,35.126 L65.872,31.146 L70.747,30.549 L75.623,33.335 L80.498,39.305 L85.473,48.26 L91.045,61.593 L98.03,81.493 L112.726,126.766 L119.005,143.78 L124.676,155.919 L129.552,163.68 L134.427,168.257 L139.303,169.65 L144.278,167.561 L149.153,162.188 L154.029,153.83 L159.601,141.094 L166.665,121.592 L173.63,100.0\" style=\"stroke:#c0c0c0; fill:none;\" />\n  <g class=\"Port\">\n    <metadata xmlns:vda=\"http://fat-ak30.eas.iis.fraunhofer.de/exchange/vda_meta\">\n      <vda:meta name=\"Name\">p</vda:meta>\n      <vda:meta name=\"X\">0.5</vda:meta>\n      <vda:meta name=\"Y\">100.0</vda:meta>\n    </metadata>\n    <path d=\"M-9.45,90.05 L10.45,90.05 L10.45,109.95 L-9.45,109.95 Z\" style=\"stroke:#0000ff; fill:#0000ff;\" />\n  </g>\n  <g class=\"Port\">\n    <metadata xmlns:vda=\"http://fat-ak30.eas.iis.fraunhofer.de/exchange/vda_meta\">\n      <vda:meta name=\"Name\">n</vda:meta>\n      <vda:meta name=\"X\">199.5</vda:meta>\n      <vda:meta name=\"Y\">100.0</vda:meta>\n    </metadata>\n    <path d=\"M209.45,90.05 L189.55,90.05 L189.55,109.95 L209.45,109.95 Z\" style=\"stroke:#0000ff; fill:#ffffff;\" />\n  </g>\n</svg>\n"
+  },
+  "KlayJS_Nested": {
+    "children": [
+      {
+        "class": "IdealDiode",
+        "height": 200,
+        "id": "Ideal",
+        "labels": [
+          {
+            "text": "Ideal"
+          }
+        ],
+        "ports": [
+          {
+            "class": "PositivePin",
+            "height": 20,
+            "id": "Ideal.p",
+            "labels": [
+              {
+                "text": "p"
+              }
+            ],
+            "properties": {
+              "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+            },
+            "width": 20,
+            "x": -10,
+            "y": 90
+          },
+          {
+            "class": "NegativePin",
+            "height": 20,
+            "id": "Ideal.n",
+            "labels": [
+              {
+                "text": "n"
+              }
+            ],
+            "properties": {
+              "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+            },
+            "width": 20,
+            "x": 190,
+            "y": 90
+          }
+        ],
+        "properties": {
+          "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+        },
+        "width": 200
+      },
+      {
+        "class": "IdealDiode",
+        "height": 200,
+        "id": "With_Ron_Goff",
+        "labels": [
+          {
+            "text": "With_Ron_Goff"
+          }
+        ],
+        "ports": [
+          {
+            "class": "PositivePin",
+            "height": 20,
+            "id": "With_Ron_Goff.p",
+            "labels": [
+              {
+                "text": "p"
+              }
+            ],
+            "properties": {
+              "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+            },
+            "width": 20,
+            "x": -10,
+            "y": 90
+          },
+          {
+            "class": "NegativePin",
+            "height": 20,
+            "id": "With_Ron_Goff.n",
+            "labels": [
+              {
+                "text": "n"
+              }
+            ],
+            "properties": {
+              "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+            },
+            "width": 20,
+            "x": 190,
+            "y": 90
+          }
+        ],
+        "properties": {
+          "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+        },
+        "width": 200
+      },
+      {
+        "class": "IdealDiode",
+        "height": 200,
+        "id": "With_Ron_Goff_Vknee",
+        "labels": [
+          {
+            "text": "With_Ron_Goff_Vknee"
+          }
+        ],
+        "ports": [
+          {
+            "class": "PositivePin",
+            "height": 20,
+            "id": "With_Ron_Goff_Vknee.p",
+            "labels": [
+              {
+                "text": "p"
+              }
+            ],
+            "properties": {
+              "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+            },
+            "width": 20,
+            "x": -10,
+            "y": 90
+          },
+          {
+            "class": "NegativePin",
+            "height": 20,
+            "id": "With_Ron_Goff_Vknee.n",
+            "labels": [
+              {
+                "text": "n"
+              }
+            ],
+            "properties": {
+              "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+            },
+            "width": 20,
+            "x": 190,
+            "y": 90
+          }
+        ],
+        "properties": {
+          "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+        },
+        "width": 200
+      },
+      {
+        "children": [
+          {
+            "class": "Sine",
+            "height": 200,
+            "id": "SineVoltage1.signalSource",
+            "labels": [
+              {
+                "text": "signalSource"
+              }
+            ],
+            "ports": [
+              {
+                "class": "RealOutput",
+                "height": 20,
+                "id": "SineVoltage1.signalSource.y",
+                "labels": [
+                  {
+                    "text": "y"
+                  }
+                ],
+                "properties": {
+                  "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+                },
+                "width": 20,
+                "x": 200,
+                "y": 90
+              }
+            ],
+            "properties": {
+              "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+            },
+            "width": 200
+          }
+        ],
+        "class": "SineVoltage",
+        "height": 200,
+        "id": "SineVoltage1",
+        "labels": [
+          {
+            "text": "SineVoltage1"
+          }
+        ],
+        "ports": [
+          {
+            "class": "PositivePin",
+            "height": 20,
+            "id": "SineVoltage1.p",
+            "labels": [
+              {
+                "text": "p"
+              }
+            ],
+            "properties": {
+              "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+            },
+            "width": 20,
+            "x": -10,
+            "y": 90
+          },
+          {
+            "class": "NegativePin",
+            "height": 20,
+            "id": "SineVoltage1.n",
+            "labels": [
+              {
+                "text": "n"
+              }
+            ],
+            "properties": {
+              "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+            },
+            "width": 20,
+            "x": 190,
+            "y": 90
+          }
+        ],
+        "properties": {
+          "de.cau.cs.kieler.portConstraints": "FREE"
+        },
+        "width": 200
+      },
+      {
+        "class": "Ground",
+        "height": 200,
+        "id": "Ground1",
+        "labels": [
+          {
+            "text": "Ground1"
+          }
+        ],
+        "ports": [
+          {
+            "class": "Pin",
+            "height": 20,
+            "id": "Ground1.p",
+            "labels": [
+              {
+                "text": "p"
+              }
+            ],
+            "origin": [
+              100,
+              0
+            ],
+            "properties": {
+              "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+            },
+            "rotation": 270,
+            "width": 20,
+            "x": 90,
+            "y": -10
+          }
+        ],
+        "properties": {
+          "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+        },
+        "width": 200
+      },
+      {
+        "class": "Resistor",
+        "height": 200,
+        "id": "R1",
+        "labels": [
+          {
+            "text": "R1"
+          }
+        ],
+        "ports": [
+          {
+            "class": "PositivePin",
+            "height": 20,
+            "id": "R1.p",
+            "labels": [
+              {
+                "text": "p"
+              }
+            ],
+            "properties": {
+              "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+            },
+            "width": 20,
+            "x": -10,
+            "y": 90
+          },
+          {
+            "class": "NegativePin",
+            "height": 20,
+            "id": "R1.n",
+            "labels": [
+              {
+                "text": "n"
+              }
+            ],
+            "properties": {
+              "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+            },
+            "width": 20,
+            "x": 190,
+            "y": 90
+          }
+        ],
+        "properties": {
+          "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+        },
+        "width": 200
+      },
+      {
+        "class": "Resistor",
+        "height": 200,
+        "id": "R2",
+        "labels": [
+          {
+            "text": "R2"
+          }
+        ],
+        "ports": [
+          {
+            "class": "PositivePin",
+            "height": 20,
+            "id": "R2.p",
+            "labels": [
+              {
+                "text": "p"
+              }
+            ],
+            "properties": {
+              "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+            },
+            "width": 20,
+            "x": -10,
+            "y": 90
+          },
+          {
+            "class": "NegativePin",
+            "height": 20,
+            "id": "R2.n",
+            "labels": [
+              {
+                "text": "n"
+              }
+            ],
+            "properties": {
+              "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+            },
+            "width": 20,
+            "x": 190,
+            "y": 90
+          }
+        ],
+        "properties": {
+          "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+        },
+        "width": 200
+      },
+      {
+        "class": "Resistor",
+        "height": 200,
+        "id": "R3",
+        "labels": [
+          {
+            "text": "R3"
+          }
+        ],
+        "ports": [
+          {
+            "class": "PositivePin",
+            "height": 20,
+            "id": "R3.p",
+            "labels": [
+              {
+                "text": "p"
+              }
+            ],
+            "properties": {
+              "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+            },
+            "width": 20,
+            "x": -10,
+            "y": 90
+          },
+          {
+            "class": "NegativePin",
+            "height": 20,
+            "id": "R3.n",
+            "labels": [
+              {
+                "text": "n"
+              }
+            ],
+            "properties": {
+              "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+            },
+            "width": 20,
+            "x": 190,
+            "y": 90
+          }
+        ],
+        "properties": {
+          "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+        },
+        "width": 200
+      },
+      {
+        "children": [
+          {
+            "class": "Sine",
+            "height": 200,
+            "id": "SineVoltage2.signalSource",
+            "labels": [
+              {
+                "text": "signalSource"
+              }
+            ],
+            "ports": [
+              {
+                "class": "RealOutput",
+                "height": 20,
+                "id": "SineVoltage2.signalSource.y",
+                "labels": [
+                  {
+                    "text": "y"
+                  }
+                ],
+                "properties": {
+                  "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+                },
+                "width": 20,
+                "x": 200,
+                "y": 90
+              }
+            ],
+            "properties": {
+              "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+            },
+            "width": 200
+          }
+        ],
+        "class": "SineVoltage",
+        "height": 200,
+        "id": "SineVoltage2",
+        "labels": [
+          {
+            "text": "SineVoltage2"
+          }
+        ],
+        "ports": [
+          {
+            "class": "PositivePin",
+            "height": 20,
+            "id": "SineVoltage2.p",
+            "labels": [
+              {
+                "text": "p"
+              }
+            ],
+            "properties": {
+              "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+            },
+            "width": 20,
+            "x": -10,
+            "y": 90
+          },
+          {
+            "class": "NegativePin",
+            "height": 20,
+            "id": "SineVoltage2.n",
+            "labels": [
+              {
+                "text": "n"
+              }
+            ],
+            "properties": {
+              "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+            },
+            "width": 20,
+            "x": 190,
+            "y": 90
+          }
+        ],
+        "properties": {
+          "de.cau.cs.kieler.portConstraints": "FREE"
+        },
+        "width": 200
+      },
+      {
+        "children": [
+          {
+            "class": "Sine",
+            "height": 200,
+            "id": "SineVoltage3.signalSource",
+            "labels": [
+              {
+                "text": "signalSource"
+              }
+            ],
+            "ports": [
+              {
+                "class": "RealOutput",
+                "height": 20,
+                "id": "SineVoltage3.signalSource.y",
+                "labels": [
+                  {
+                    "text": "y"
+                  }
+                ],
+                "properties": {
+                  "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+                },
+                "width": 20,
+                "x": 200,
+                "y": 90
+              }
+            ],
+            "properties": {
+              "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+            },
+            "width": 200
+          }
+        ],
+        "class": "SineVoltage",
+        "height": 200,
+        "id": "SineVoltage3",
+        "labels": [
+          {
+            "text": "SineVoltage3"
+          }
+        ],
+        "ports": [
+          {
+            "class": "PositivePin",
+            "height": 20,
+            "id": "SineVoltage3.p",
+            "labels": [
+              {
+                "text": "p"
+              }
+            ],
+            "properties": {
+              "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+            },
+            "width": 20,
+            "x": -10,
+            "y": 90
+          },
+          {
+            "class": "NegativePin",
+            "height": 20,
+            "id": "SineVoltage3.n",
+            "labels": [
+              {
+                "text": "n"
+              }
+            ],
+            "properties": {
+              "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+            },
+            "width": 20,
+            "x": 190,
+            "y": 90
+          }
+        ],
+        "properties": {
+          "de.cau.cs.kieler.portConstraints": "FREE"
+        },
+        "width": 200
+      }
+    ],
+    "class": "CharacteristicIdealDiodes",
+    "edges": [
+      {
+        "id": "1",
+        "source": "Ground1",
+        "sourcePort": "Ground1.p",
+        "target": "SineVoltage1",
+        "targetPort": "SineVoltage1.n"
+      },
+      {
+        "id": "2",
+        "source": "Ideal",
+        "sourcePort": "Ideal.n",
+        "target": "R1",
+        "targetPort": "R1.p"
+      },
+      {
+        "id": "3",
+        "source": "With_Ron_Goff",
+        "sourcePort": "With_Ron_Goff.n",
+        "target": "R2",
+        "targetPort": "R2.p"
+      },
+      {
+        "id": "4",
+        "source": "With_Ron_Goff_Vknee",
+        "sourcePort": "With_Ron_Goff_Vknee.n",
+        "target": "R3",
+        "targetPort": "R3.p"
+      },
+      {
+        "id": "5",
+        "source": "R1",
+        "sourcePort": "R1.n",
+        "target": "R2",
+        "targetPort": "R2.n"
+      },
+      {
+        "id": "6",
+        "source": "R2",
+        "sourcePort": "R2.n",
+        "target": "R3",
+        "targetPort": "R3.n"
+      },
+      {
+        "id": "7",
+        "source": "R3",
+        "sourcePort": "R3.n",
+        "target": "Ground1",
+        "targetPort": "Ground1.p"
+      },
+      {
+        "id": "8",
+        "source": "SineVoltage2",
+        "sourcePort": "SineVoltage2.p",
+        "target": "Ideal",
+        "targetPort": "Ideal.p"
+      },
+      {
+        "id": "9",
+        "source": "SineVoltage2",
+        "sourcePort": "SineVoltage2.n",
+        "target": "Ground1",
+        "targetPort": "Ground1.p"
+      },
+      {
+        "id": "10",
+        "source": "SineVoltage1",
+        "sourcePort": "SineVoltage1.p",
+        "target": "With_Ron_Goff",
+        "targetPort": "With_Ron_Goff.p"
+      },
+      {
+        "id": "11",
+        "source": "With_Ron_Goff_Vknee",
+        "sourcePort": "With_Ron_Goff_Vknee.p",
+        "target": "SineVoltage3",
+        "targetPort": "SineVoltage3.p"
+      },
+      {
+        "id": "12",
+        "source": "SineVoltage3",
+        "sourcePort": "SineVoltage3.n",
+        "target": "Ground1",
+        "targetPort": "Ground1.p"
+      }
+    ],
+    "height": 200,
+    "id": "Modelica.Electrical.Analog.Examples.CharacteristicIdealDiodes",
+    "labels": [
+      {
+        "text": "CharacteristicIdealDiodes"
+      }
+    ],
+    "properties": {
+      "de.cau.cs.kieler.portConstraints": "FREE"
+    },
+    "width": 200
+  },
+  "KlayJS_Nested_Icons": {
+    "CharacteristicIdealDiodes": "<svg width=\"200.0\" height=\"200.0\" viewBox=\"-0.0 -0.0 200.0 200.0\" version=\"1.1\" preserveAspectRatio=\"none\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\">\n  <ellipse cx=\"100.0\" cy=\"100.0\" rx=\"99.5\" ry=\"99.5\" style=\"stroke:#4b8a49; fill:#ffffff;\" />\n  <path d=\"M64.18,40.3 L163.68,100.0 L64.18,159.7 L64.18,40.3 Z\" style=\"stroke:none; fill:#4b8a49;\" />\n</svg>\n",
+    "Ground": "<svg width=\"220.0\" height=\"220.0\" viewBox=\"-10.0 -10.0 220.0 220.0\" version=\"1.1\" preserveAspectRatio=\"none\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\">\n  <path d=\"M40.3,50.25 L159.7,50.25\" style=\"stroke:#0000ff; fill:none;\" />\n  <path d=\"M60.2,70.15 L139.8,70.15\" style=\"stroke:#0000ff; fill:none;\" />\n  <path d=\"M80.1,90.05 L119.9,90.05\" style=\"stroke:#0000ff; fill:none;\" />\n  <path d=\"M100.0,10.45 L100.0,50.25\" style=\"stroke:#0000ff; fill:none;\" />\n  <text x=\"105.97\" y=\"138.805\" style=\"fill:#0000ff; text-anchor:middle; dominant-baseline:middle; font-size:39.8px;\"></text>\n  <g class=\"Port\">\n    <metadata xmlns:vda=\"http://fat-ak30.eas.iis.fraunhofer.de/exchange/vda_meta\">\n      <vda:meta name=\"Name\">p</vda:meta>\n      <vda:meta name=\"X\">109.95</vda:meta>\n      <vda:meta name=\"Y\">0.5</vda:meta>\n    </metadata>\n    <path d=\"M109.95,10.45 L109.95,-9.45 L90.05,-9.45 L90.05,10.45 Z\" style=\"stroke:#0000ff; fill:#0000ff;\" />\n  </g>\n</svg>\n",
+    "IdealDiode": "<svg width=\"220.0\" height=\"220.0\" viewBox=\"-10.0 -10.0 220.0 220.0\" version=\"1.1\" preserveAspectRatio=\"none\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\">\n  <path d=\"M129.85,100.0 L70.15,60.2 L70.15,139.8 L129.85,100.0 Z\" style=\"stroke:#000000; fill:#ffffff;\" />\n  <path d=\"M10.45,100.0 L139.8,100.0\" style=\"stroke:#0000ff; fill:none;\" />\n  <path d=\"M139.8,100.0 L189.55,100.0\" style=\"stroke:#0000ff; fill:none;\" />\n  <path d=\"M129.85,60.2 L129.85,139.8\" style=\"stroke:#0000ff; fill:none;\" />\n  <text x=\"100.0\" y=\"159.7\" style=\"fill:#0000ff; text-anchor:middle; dominant-baseline:middle; font-size:39.8px;\"></text>\n  <g class=\"Port\">\n    <metadata xmlns:vda=\"http://fat-ak30.eas.iis.fraunhofer.de/exchange/vda_meta\">\n      <vda:meta name=\"Name\">p</vda:meta>\n      <vda:meta name=\"X\">0.5</vda:meta>\n      <vda:meta name=\"Y\">100.0</vda:meta>\n    </metadata>\n    <path d=\"M-9.45,90.05 L10.45,90.05 L10.45,109.95 L-9.45,109.95 Z\" style=\"stroke:#0000ff; fill:#0000ff;\" />\n  </g>\n  <g class=\"Port\">\n    <metadata xmlns:vda=\"http://fat-ak30.eas.iis.fraunhofer.de/exchange/vda_meta\">\n      <vda:meta name=\"Name\">n</vda:meta>\n      <vda:meta name=\"X\">199.5</vda:meta>\n      <vda:meta name=\"Y\">100.0</vda:meta>\n    </metadata>\n    <path d=\"M209.45,90.05 L189.55,90.05 L189.55,109.95 L209.45,109.95 Z\" style=\"stroke:#0000ff; fill:#ffffff;\" />\n  </g>\n</svg>\n",
+    "NegativePin": "<svg width=\"200.0\" height=\"200.0\" viewBox=\"-0.0 -0.0 200.0 200.0\" version=\"1.1\" preserveAspectRatio=\"none\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\">\n  <path d=\"M0.5,0.5 L199.5,0.5 L199.5,199.5 L0.5,199.5 Z\" style=\"stroke:#0000ff; fill:#ffffff;\" />\n</svg>\n",
+    "Pin": "<svg width=\"200.0\" height=\"200.0\" viewBox=\"-0.0 -0.0 200.0 200.0\" version=\"1.1\" preserveAspectRatio=\"none\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\">\n  <path d=\"M0.5,0.5 L199.5,0.5 L199.5,199.5 L0.5,199.5 Z\" style=\"stroke:#0000ff; fill:#0000ff;\" />\n</svg>\n",
+    "PositivePin": "<svg width=\"200.0\" height=\"200.0\" viewBox=\"-0.0 -0.0 200.0 200.0\" version=\"1.1\" preserveAspectRatio=\"none\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\">\n  <path d=\"M0.5,0.5 L199.5,0.5 L199.5,199.5 L0.5,199.5 Z\" style=\"stroke:#0000ff; fill:#0000ff;\" />\n</svg>\n",
+    "RealOutput": "<svg width=\"200.0\" height=\"200.0\" viewBox=\"-0.0 -0.0 200.0 200.0\" version=\"1.1\" preserveAspectRatio=\"none\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" />\n",
+    "Resistor": "<svg width=\"220.0\" height=\"220.0\" viewBox=\"-10.0 -10.0 220.0 220.0\" version=\"1.1\" preserveAspectRatio=\"none\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\">\n  <path d=\"M30.35,70.15 L169.65,70.15 L169.65,129.85 L30.35,129.85 Z\" style=\"stroke:#0000ff; fill:#ffffff;\" />\n  <path d=\"M10.45,100.0 L30.35,100.0\" style=\"stroke:#0000ff; fill:none;\" />\n  <path d=\"M169.65,100.0 L189.55,100.0\" style=\"stroke:#0000ff; fill:none;\" />\n  <text x=\"99.005\" y=\"155.72\" style=\"fill:#000000; text-anchor:middle; dominant-baseline:middle; font-size:31.84px;\">R=1</text>\n  <text x=\"98.01\" y=\"33.335\" style=\"fill:#0000ff; text-anchor:middle; dominant-baseline:middle; font-size:39.8px;\"></text>\n  <g class=\"Port\">\n    <metadata xmlns:vda=\"http://fat-ak30.eas.iis.fraunhofer.de/exchange/vda_meta\">\n      <vda:meta name=\"Name\">p</vda:meta>\n      <vda:meta name=\"X\">0.5</vda:meta>\n      <vda:meta name=\"Y\">100.0</vda:meta>\n    </metadata>\n    <path d=\"M-9.45,90.05 L10.45,90.05 L10.45,109.95 L-9.45,109.95 Z\" style=\"stroke:#0000ff; fill:#0000ff;\" />\n  </g>\n  <g class=\"Port\">\n    <metadata xmlns:vda=\"http://fat-ak30.eas.iis.fraunhofer.de/exchange/vda_meta\">\n      <vda:meta name=\"Name\">n</vda:meta>\n      <vda:meta name=\"X\">199.5</vda:meta>\n      <vda:meta name=\"Y\">100.0</vda:meta>\n    </metadata>\n    <path d=\"M209.45,90.05 L189.55,90.05 L189.55,109.95 L209.45,109.95 Z\" style=\"stroke:#0000ff; fill:#ffffff;\" />\n  </g>\n</svg>\n",
+    "Sine": "<svg width=\"302.667\" height=\"304.0\" viewBox=\"-51.333 -52.0 304.0 304.0\" version=\"1.1\" preserveAspectRatio=\"none\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\">\n  <path d=\"M0.5,0.5 L199.5,0.5 L199.5,199.5 L0.5,199.5 Z\" style=\"stroke:#00007f; fill:#ffffff;\" />\n  <text x=\"100.0\" y=\"-29.35\" style=\"fill:#0000ff; text-anchor:middle; dominant-baseline:middle; font-size:39.8px;\"></text>\n  <path d=\"M20.4,32.34 L20.4,179.6\" style=\"stroke:#c0c0c0; fill:none;\" />\n  <path d=\"M20.4,10.45 L12.44,32.34 L28.36,32.34 L20.4,10.45 Z\" style=\"stroke:#c0c0c0; fill:#c0c0c0;\" />\n  <path d=\"M10.45,100.0 L167.66,100.0\" style=\"stroke:#c0c0c0; fill:none;\" />\n  <path d=\"M189.55,100.0 L167.66,92.04 L167.66,107.96 L189.55,100.0 Z\" style=\"stroke:#c0c0c0; fill:#c0c0c0;\" />\n  <path d=\"M20.4,100.0 L26.022,82.986 Q31.644,65.971 35.226,56.568 Q38.808,47.166 41.992,40.549 Q45.176,33.932 48.011,29.853 Q50.847,25.773 53.633,23.534 Q56.419,21.296 59.205,20.947 Q61.991,20.599 64.777,22.191 Q67.563,23.783 70.399,27.216 Q73.235,30.649 76.021,35.773 Q78.807,40.897 81.991,48.509 Q85.175,56.121 89.189,67.513 Q93.204,78.906 101.627,104.776 Q110.05,130.646 113.632,140.298 Q117.214,149.949 120.398,156.914 Q123.582,163.879 126.368,168.307 Q129.154,172.735 131.989,175.371 Q134.825,178.008 137.611,178.804 Q140.397,179.6 143.183,178.406 Q145.969,177.212 148.805,174.177 Q151.641,171.142 154.427,166.367 Q157.213,161.591 160.397,154.277 Q163.581,146.964 167.61,135.82 Q171.64,124.676 175.62,112.338 L179.6,100.0\" style=\"stroke:#000000; fill:none;\" />\n  <text x=\"102.985\" y=\"231.34\" style=\"fill:#000000; text-anchor:middle; dominant-baseline:middle; font-size:39.8px;\">freqHz=1</text>\n  <g class=\"Port\">\n    <metadata xmlns:vda=\"http://fat-ak30.eas.iis.fraunhofer.de/exchange/vda_meta\">\n      <vda:meta name=\"Name\">y</vda:meta>\n      <vda:meta name=\"X\">209.45</vda:meta>\n      <vda:meta name=\"Y\">100.0</vda:meta>\n    </metadata>\n    <path d=\"M199.5,90.05 L219.4,100.0 L199.5,109.95 L199.5,90.05 Z\" style=\"stroke:#00007f; fill:#ffffff;\" />\n  </g>\n</svg>\n",
+    "SineVoltage": "<svg width=\"239.709\" height=\"240.0\" viewBox=\"-19.854 -20.0 240.0 240.0\" version=\"1.1\" preserveAspectRatio=\"none\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\">\n  <ellipse cx=\"100.0\" cy=\"100.0\" rx=\"49.75\" ry=\"49.75\" style=\"stroke:#0000ff; fill:#ffffff;\" />\n  <text x=\"100.0\" y=\"0.5\" style=\"fill:#0000ff; text-anchor:middle; dominant-baseline:middle; font-size:39.8px;\"></text>\n  <path d=\"M10.45,100.0 L189.55,100.0\" style=\"stroke:#0000ff; fill:none;\" />\n  <text x=\"30.35\" y=\"75.125\" style=\"fill:#0000ff; text-anchor:middle; dominant-baseline:middle; font-size:49.75px;\">+</text>\n  <text x=\"169.65\" y=\"75.125\" style=\"fill:#0000ff; text-anchor:middle; dominant-baseline:middle; font-size:49.75px;\">-</text>\n  <path d=\"M34.33,100.0 L44.081,70.25 L50.449,53.733 L56.021,42.191 L60.897,35.126 L65.872,31.146 L70.747,30.549 L75.623,33.335 L80.498,39.305 L85.473,48.26 L91.045,61.593 L98.03,81.493 L112.726,126.766 L119.005,143.78 L124.676,155.919 L129.552,163.68 L134.427,168.257 L139.303,169.65 L144.278,167.561 L149.153,162.188 L154.029,153.83 L159.601,141.094 L166.665,121.592 L173.63,100.0\" style=\"stroke:#c0c0c0; fill:none;\" />\n  <g class=\"Port\">\n    <metadata xmlns:vda=\"http://fat-ak30.eas.iis.fraunhofer.de/exchange/vda_meta\">\n      <vda:meta name=\"Name\">p</vda:meta>\n      <vda:meta name=\"X\">0.5</vda:meta>\n      <vda:meta name=\"Y\">100.0</vda:meta>\n    </metadata>\n    <path d=\"M-9.45,90.05 L10.45,90.05 L10.45,109.95 L-9.45,109.95 Z\" style=\"stroke:#0000ff; fill:#0000ff;\" />\n  </g>\n  <g class=\"Port\">\n    <metadata xmlns:vda=\"http://fat-ak30.eas.iis.fraunhofer.de/exchange/vda_meta\">\n      <vda:meta name=\"Name\">n</vda:meta>\n      <vda:meta name=\"X\">199.5</vda:meta>\n      <vda:meta name=\"Y\">100.0</vda:meta>\n    </metadata>\n    <path d=\"M209.45,90.05 L189.55,90.05 L189.55,109.95 L209.45,109.95 Z\" style=\"stroke:#0000ff; fill:#ffffff;\" />\n  </g>\n</svg>\n"
+  },
+  "metadata": {
+    "generator": "OCT_Combined_JSON",
+    "type": "SVG_Combined_JSON",
+    "version": 1.0
+  }
+}
