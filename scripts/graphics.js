@@ -50,7 +50,7 @@ var light = new THREE.AmbientLight( ambientLightColor, ambientLightIntensity );
 light.name={name:"important"};
 scene.add(light);
 
-var renderer = new THREE.WebGLRenderer({alpha: true});
+var renderer = new THREE.WebGLRenderer({alpha: true, antialias: true});
 renderer.setClearColor( clearColor, 1 );
 renderer.setSize(windowWidth, windowHeight);
 
