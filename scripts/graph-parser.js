@@ -11,8 +11,6 @@ var IDs = [];
 var ports = [];
 var minX, maxX, minY, maxY;
 var worker = new Worker('klayjs.js');
-var klayOptions = {spacing:graphSpacing, algorithm: "de.cau.cs.kieler.klay.layered", layoutHierarchy: true};
-
 
 function setModelName(model) {
 	model.name = {name:"pickable", id:model.name};
@@ -85,22 +83,21 @@ function onLoadedIcons() {
 	camera_controls.reset();
 };
 
-function calculate_graph(graph) {
+function calculate_graph(_graph) {
 		
 	icons = [];
 	loaded_icons = 0;
 	IDs = [];
 	ports = [];
-
     $klay.layout({
 
-  		"graph": JSON.parse(graph),
+  		graph: _graph,
 
   		"options": klayOptions,
 
-		"success": function(graph) {
+		"success": function(_parsed_graph) {
 
-			displayParsedGraph(graph);
+			displayParsedGraph(_parsed_graph);
 
 		},
 		"error": function(error) { 
@@ -111,27 +108,28 @@ function calculate_graph(graph) {
 	});
 };
 
-function display_graph(graph) {
+function display_graph(_graph) {
 		icons = [];
 		loaded_icons = 0;
 		IDs = [];
 		ports = [];
 
-		parsed_graph = JSON.parse(graph);
-
-		if (parsed_graph.hasOwnProperty("children"))
-			displayParsedGraph(parsed_graph);
+		if (_graph.hasOwnProperty("children"))
+			displayParsedGraph(_graph);
 		else
-			for (var i = 0; i < parsed_graph.length; ++i)
-				displayParsedGraph(parsed_graph[i]);
+			for (var i = 0; i < _graph.length; ++i)
+				displayParsedGraph(_graph[i]);
 };
 
 function displayParsedGraph (graph) {
+		var has_icons_dict = false;
 		file_name = file_name.replace(/\.[^/.]+$/, "_Icons");
 		var url = "static/" + file_name + ".json";
 		minX = maxX = minY = maxY = 0;
 		components = graph.children;
 		edges = graph.edges;
+
+		console.log(url);
 
 		$.get(url)
 		.success(function(_object) {
@@ -149,7 +147,6 @@ function displayParsedGraph (graph) {
 			}
 
 			function load_icon(_icon) {
-				
 				var svg = json_dict[_icon]; 
   				var svg_element = parser.parseFromString( svg, 'text/xml' ).documentElement;
 	  			var viewbox = svg_element.getAttribute("viewBox").split(" ").map(Number);
@@ -171,6 +168,8 @@ function displayParsedGraph (graph) {
 					icons_svg[_icon] = texture;
 					icon_types[_icon] = "svg";
 
+					has_icons_dict = true;
+
 					if (++curr_icon === total_icons) {
 						onLoadedIcons();
 					}
@@ -186,6 +185,7 @@ function displayParsedGraph (graph) {
 				var c = _comps[i];
 
 				if (icon_types[c.class] === undefined) {
+					icon_types[c.class] = null;
 					icon_names.push(c.class);
 				}
 
@@ -203,7 +203,7 @@ function displayParsedGraph (graph) {
 
 		if (icon_names.length == 0)
 			onLoadedIcons();
-		else if (!iconsDict)
+		else
 			for (var i = 0; i < icon_names.length; ++i)
 				addIcon(icon_names[i]);
 			
@@ -370,7 +370,7 @@ function get_comps(_components, _edges, parent) {
 			}
 			
 			connection.userData.id = edge.id;
-			connection.setPickable();
+			//connection.setPickable();
 			scene.add(connection);
 	}
 };

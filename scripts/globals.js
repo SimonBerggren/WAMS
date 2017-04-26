@@ -6,7 +6,10 @@ var ambientLightColor = "white";
 var ambientLightIntensity = 0.5;
 
 var connectionSize = 2;
+var klayAspect = 10;
 var graphSpacing = 50;
+var klayOptions = {spacing: graphSpacing, algorithm: "de.cau.cs.kieler.klay.layered", aspectRatio: klayAspect};
+
 var clearColor = "oldlace";
 var subsystemColor = "blue";
 var connectionColor = "gray";
@@ -36,7 +39,7 @@ var camera_controls = undefined;
 var object_controls = undefined;
 var file_name = undefined;
 
-var icon_directory = "static/icons";
+var icons_directory = "static/icons";
 
 var jsonloader = new THREE.ObjectLoader();
 var svgloader = new THREE.TextureLoader();

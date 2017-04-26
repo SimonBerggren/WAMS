@@ -12,8 +12,6 @@ var controlMode = document.getElementById("2d-control-mode");
 var resetCameraButton = document.getElementById("resetCamera");
 
 resetScene = function() {
-    graph = undefined;
-    parsed_graph = undefined;
     model = undefined;
     animation = undefined;
 };
@@ -86,25 +84,25 @@ function render() {
 
     if (picked_port !== undefined) {
 
-            var raycaster = new THREE.Raycaster();
-            camera.updateProjectionMatrix();
-            raycaster.setFromCamera(input.getMouseCenterized(), camera);
-            var intersects = raycaster.intersectObjects(ports, false);
-            if (intersects.length > 0 ) {
-                var port = intersects[0].object;
-                if (port !== picked_port && picked_port.parent !== port.parent) {
-                    matched_port = port;
-                    port_found = true;
-                }
-                else {
-                    matched_port = undefined;
-                    port_found = false;
-                }
-            } 
+        var raycaster = new THREE.Raycaster();
+        camera.updateProjectionMatrix();
+        raycaster.setFromCamera(input.getMouseCenterized(), camera);
+        var intersects = raycaster.intersectObjects(ports, false);
+        if (intersects.length > 0 ) {
+            var port = intersects[0].object;
+            if (port !== picked_port && picked_port.parent !== port.parent) {
+                matched_port = port;
+                port_found = true;
+            }
             else {
                 matched_port = undefined;
                 port_found = false;
             }
+        } 
+        else {
+            matched_port = undefined;
+            port_found = false;
+        }
     }
 
     renderer.render(scene, camera);
@@ -138,6 +136,7 @@ $('#glcontainer').on('mousedown', function(event) {
     }).on('mousedown', function(event) {
         timeDownUp = new Date().getTime();
         mouseMoved = false;
+        mouseDown = true;
     }).on('mousemove', function(event) {
         var timeMove = new Date().getTime();
         timeDownUp += 10;
@@ -154,8 +153,8 @@ $('#glcontainer').on('mousedown', function(event) {
 
         timeDownUp = new Date().getTime();
 
+        mouseDown = false;
         if (mouseMoved) {
-            mouseDown = false;
             mouseMoved = false;
             return;
         }
@@ -177,7 +176,7 @@ $('#glcontainer').on('mousedown', function(event) {
     detach();    
     clearScene();
     camera_controls.reset();
-    calculate_graph(JSON.stringify(parsed_graph));
+    calculate_graph(parsed_graph);
     return;
 
             }
@@ -241,7 +240,6 @@ $('#glcontainer').on('mousedown', function(event) {
                 } 
                 if (!raycastHit)
                     detach();
-            
 
 
 }).append(renderer.domElement);
@@ -308,7 +306,7 @@ else if (event.keyCode == 9) { // TAB
                     clearScene();
                     graph = result;
                     parsed_graph = parsed_result;
-                    display_graph(graph);
+                    display_graph(parsed_graph);
                     console.log("Ready graph loaded");
                 }
                 else if (parsed_result.hasOwnProperty("id")) {
@@ -316,7 +314,7 @@ else if (event.keyCode == 9) { // TAB
                     clearScene();
                     graph = result;
                     parsed_graph = parsed_result;
-                    calculate_graph(graph);
+                    calculate_graph(parsed_graph);
                     console.log("Graph loaded");
                 }
                 else {
@@ -488,7 +486,7 @@ fileReader.readAsBinaryString(file);
         scene.remove(picked_object);
         detach();
         clearScene();
-        calculate_graph(JSON.stringify(parsed_graph));
+        calculate_graph(parsed_graph);
     };
 
     rotateButton.onclick = function() {
@@ -540,9 +538,9 @@ fileReader.readAsBinaryString(file);
 
         windowWidth = window.innerWidth;
         windowHeight = window.innerHeight * windowHeightPercentage;
-        camera.aspect = w / h;
+        camera.aspect = windowWidth / windowHeight;
         camera.updateProjectionMatrix();
-        renderer.setSize( w, h );
+        renderer.setSize( windowWidth, windowHeight );
 
     }, false);
 
