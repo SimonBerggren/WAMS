@@ -175,7 +175,6 @@ $('#glcontainer').on('mousedown', function(event) {
 
     detach();    
     clearScene();
-    camera_controls.reset();
     calculate_graph(parsed_graph);
     return;
 
