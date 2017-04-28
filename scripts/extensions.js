@@ -28,3 +28,20 @@ THREE.Group.prototype.setPickable = function() {
 	};
 	setPickableChild(this);
 };
+
+THREE.Object3D.prototype.setType = function(_type) {
+	
+	function setTypeChild(child) {
+
+		child.userData.type = _type;
+
+		if (child.children !== undefined) {
+
+			for (var i = 0; i < child.children.length; ++i) {
+
+				setTypeChild(child.children[i]);
+			}
+		}
+	};
+	setTypeChild(this);
+};

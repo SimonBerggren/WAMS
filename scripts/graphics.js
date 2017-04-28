@@ -347,7 +347,15 @@ fileReader.readAsBinaryString(file);
         if (!display_graph) {
                     return;
         }
-        var obj = picked_object.children[0];
+        var obj;
+        var type = picked_object.userData.type;
+        if (type == "edge") {
+            obj = picked_object;
+            object_controls.detach();
+        } else {
+
+            obj = picked_object.children[0];
+        }
 
         function loop(o) {
                 for (var i = 0; i < o.children.length; ++i) {
@@ -390,11 +398,11 @@ fileReader.readAsBinaryString(file);
                 }
                 var obj = picked_object.children[0];
 
-        function loop(o) {
+        function reset_opacity(o) {
                 for (var i = 0; i < o.children.length; ++i) {
                     var c = o.children[i];
                     if (c.children !== undefined)
-                        loop(c);
+                        reset_opacity(c);
 
                     if (c.material !== undefined) {
                         c.material.opacity = 1.0;
@@ -405,7 +413,7 @@ fileReader.readAsBinaryString(file);
             if (obj.children.length === 0)
                 obj.material.opacity = 1.0;
             else
-                loop(obj);
+                reset_opacity(obj);
 
             
             for(var i = 1; i < picked_object.children.length - 1; ++i) {
@@ -472,14 +480,26 @@ fileReader.readAsBinaryString(file);
     };
 
     deleteButton.onclick = function() {
-        var edgesToDelete = [];
-        for (var i = 0; i < parsed_graph.edges.length; ++i) {
-            if (parsed_graph.edges[i].source === picked_object.userData.id ||
-                parsed_graph.edges[i].target === picked_object.userData.id)
-                edgesToDelete.push(parsed_graph.edges[i]);
+
+        var edges = parsed_graph.edges;
+
+        var type = picked_object.userData.type;
+        if (type == "edge") {
+
+            edges.removeValue("id", picked_object.userData.id);
+            scene.remove(picked_object);
+            detach();
+            clearScene();
+            recalculate_graph(parsed_graph);
+
+            return;   
         }
-        for (var i = 0; i < edgesToDelete.length; ++i)
-            parsed_graph.edges.removeValue("id",edgesToDelete[i].id);
+
+        for (var i = edges.length - 1; i >= 0; --i) {
+            if (edges[i].source === userData.id ||
+                edges[i].target === userData.id)
+                edges.removeValue("id", edges[i].id);
+        }
 
         parsed_graph.children.removeValue("id", picked_object.userData.id);
 

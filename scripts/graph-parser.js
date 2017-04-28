@@ -288,6 +288,7 @@ function get_comps(_components, _edges, parent) {
 		var group = new THREE.Group();
 		group.userData = c;
 		group.add(obj);
+		group.setType("component");
 
 		if (c.origin !== undefined) {
   			group.applyMatrix( new THREE.Matrix4().makeTranslation(-(c.x-c.origin[0]), -(c.y-c.origin[1]) ,0) );
@@ -315,6 +316,7 @@ function get_comps(_components, _edges, parent) {
 				pin.visible = false;
 				ports.push(pin);
 				group.add(pin);
+				pin.setType("port");
 			}
 		}
 
@@ -330,8 +332,6 @@ function get_comps(_components, _edges, parent) {
 
 	if (_edges === undefined)
 		return;
-
-	console.log(_edges);
 
 	for(var i = 0; i < _edges.length; ++i) {
 		var edge = _edges[i];
@@ -381,7 +381,8 @@ function get_comps(_components, _edges, parent) {
 			}
 			
 			connection.userData.id = edge.id;
-			//connection.setPickable();
+			connection.setPickable();
+			connection.setType("edge");
 			scene.add(connection);
 	}
 };

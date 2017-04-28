@@ -11,7 +11,7 @@ function cylinder(pointX, pointY, size) {
 	    0, -1, 0, 0,
 	    0, 0, 0, 1));
 	var edgeGeometry = new THREE.CylinderGeometry(connectionSize, connectionSize, direction.length(), 8, 1);
-	var edge = new THREE.Mesh(edgeGeometry, new THREE.MeshPhongMaterial( { color: connectionColor } ) );
+	var edge = new THREE.Mesh(edgeGeometry, new THREE.MeshPhongMaterial( { color: connectionColor, transparent: true } ) );
 	edge.applyMatrix(orientation);
 	edge.position.set(
 		(pointY.x + pointX.x) / 2,
