@@ -28,6 +28,7 @@ var windowWidth = window.innerWidth;
 var windowHeight = window.innerHeight * windowHeightPercentage;
 
 var showingStats = false;
+var manual_mode = false;
 
 var scalingStep = 20; // higher = smaller steps
 

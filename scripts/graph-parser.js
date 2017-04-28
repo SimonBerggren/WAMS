@@ -77,7 +77,7 @@ function addIcon(_icon) {
 }
 
 function onLoadedIcons() {
-
+clearScene();
 	get_comps(components, edges);
 
 	if (resetCamera) {
