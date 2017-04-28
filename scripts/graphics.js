@@ -459,7 +459,8 @@ fileReader.readAsBinaryString(file);
                 port.source = newId.toString();
                 c.userData.ports[i - 1].id = newPortId;
                 c.userData.ports[i - 1].source = newId;
-            }          
+                ports.push(c.children[i]);
+            }    
 
             c.remove(c.children[c.children.length - 1]);
             c.add(text(newId,0,0));
@@ -481,6 +482,11 @@ fileReader.readAsBinaryString(file);
             parsed_graph.edges.removeValue("id",edgesToDelete[i].id);
 
         parsed_graph.children.removeValue("id", picked_object.userData.id);
+
+        var r = /\d+/g;
+        var s = picked_object.userData.id;
+        var newId = s.replace(/\d+/g, '');
+        IDs[newId]--;
 
         scene.remove(picked_object);
         detach();
