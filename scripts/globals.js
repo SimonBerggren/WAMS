@@ -29,6 +29,8 @@ var windowHeight = window.innerHeight * windowHeightPercentage;
 
 var showingStats = false;
 
+var scalingStep = 20; // higher = smaller steps
+
 var camera = undefined;
 var scene = undefined;
 var input = undefined;

@@ -1,4 +1,4 @@
-
+var saveButton = document.getElementById("save");
 
 var cloneButton = document.getElementById("clone");
 var deleteButton = document.getElementById("delete");
@@ -121,6 +121,7 @@ $('#glcontainer').on('mousedown', function(event) {
     if(event.changedTouches.length == 1)  {
         initTouch = new THREE.Vector2(event.changedTouches[0].clientX, event.changedTouches[0].clientY);
     }
+    e.preventDefault();
 
 }).on('touchmove', function(e) {
 
@@ -242,8 +243,6 @@ $('#glcontainer').on('mousedown', function(event) {
 
 
 }).append(renderer.domElement);
-
-
 
     $(document).on('keydown', function(event) {
 if (event.keyCode == 86) // V
@@ -471,6 +470,7 @@ fileReader.readAsBinaryString(file);
             }    
 
             c.remove(c.children[c.children.length - 1]);
+            c.userData.labels[0] = c.userData.id;
             c.add(text(newId,0,0));
             scene.add(c);
             detach();
@@ -496,8 +496,8 @@ fileReader.readAsBinaryString(file);
         }
 
         for (var i = edges.length - 1; i >= 0; --i) {
-            if (edges[i].source === userData.id ||
-                edges[i].target === userData.id)
+            if (edges[i].source === picked_object.userData.id ||
+                edges[i].target === picked_object.userData.id)
                 edges.removeValue("id", edges[i].id);
         }
 
@@ -571,5 +571,11 @@ fileReader.readAsBinaryString(file);
 
     resetCameraButton.onclick = function() {
         camera_controls.reset();
+    };
+
+    saveButton.onclick = function() {
+        var file = new File([JSON.stringify
+            (parsed_graph)], parsed_graph.id + ".json", {type: "text/plain;charset=utf-8"});
+        saveAs(file);
     };
 });

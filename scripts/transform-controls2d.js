@@ -926,7 +926,6 @@
 			event.preventDefault();
 			event.stopPropagation();
 
-
 			point.copy( planeIntersect.point );
 
 			if ( _mode === "translate" ) {
@@ -991,7 +990,7 @@
 
 					if ( scope.axis === "XYZ" ) {
 
-						scale = 1 + ( ( point.y ) / Math.max( oldScale.x, oldScale.y, oldScale.z ) );
+						scale = (1 + ( ( point.y ) / Math.max( oldScale.x, oldScale.y, oldScale.z ) )) / scalingStep;
 
 						scope.object.scale.x = oldScale.x * scale;
 						scope.object.scale.y = oldScale.y * scale;
