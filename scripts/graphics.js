@@ -175,7 +175,7 @@ $('#glcontainer').on('mousedown', function(event) {
 
     detach();    
     clearScene();
-    calculate_graph(parsed_graph);
+    recalculate_graph(parsed_graph);
     return;
 
             }
@@ -491,7 +491,7 @@ fileReader.readAsBinaryString(file);
         scene.remove(picked_object);
         detach();
         clearScene();
-        calculate_graph(parsed_graph);
+        recalculate_graph(parsed_graph);
     };
 
     rotateButton.onclick = function() {

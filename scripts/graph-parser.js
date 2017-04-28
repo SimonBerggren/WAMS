@@ -11,6 +11,7 @@ var IDs = [];
 var ports = [];
 var minX, maxX, minY, maxY;
 var worker = new Worker('klayjs.js');
+var resetCamera = true;
 
 function setModelName(model) {
 	model.name = {name:"pickable", id:model.name};
@@ -79,8 +80,11 @@ function onLoadedIcons() {
 
 	get_comps(components, edges);
 
-	camera_controls.setResetPosition((maxX - minX) / 2,   windowHeight - ( (maxY - minY) / 2) );
-	camera_controls.reset();
+	if (resetCamera) {
+		camera_controls.setResetPosition((maxX - minX) / 2,   windowHeight - ( (maxY - minY) / 2) );
+		camera_controls.reset();
+	}
+	resetCamera = true;
 };
 
 function calculate_graph(_graph) {
@@ -108,6 +112,13 @@ function calculate_graph(_graph) {
 	});
 };
 
+function recalculate_graph(_graph) {
+
+	resetCamera = false;
+	calculate_graph(_graph);
+
+}
+
 function display_graph(_graph) {
 		icons = [];
 		loaded_icons = 0;
@@ -128,8 +139,6 @@ function displayParsedGraph (graph) {
 		minX = maxX = minY = maxY = 0;
 		components = graph.children;
 		edges = graph.edges;
-
-		console.log(url);
 
 		$.get(url)
 		.success(function(_object) {
@@ -321,6 +330,8 @@ function get_comps(_components, _edges, parent) {
 
 	if (_edges === undefined)
 		return;
+
+	console.log(_edges);
 
 	for(var i = 0; i < _edges.length; ++i) {
 		var edge = _edges[i];
