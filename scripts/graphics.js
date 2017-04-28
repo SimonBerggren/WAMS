@@ -304,6 +304,7 @@ else if (event.keyCode == 9) { // TAB
                     clearScene();
                     graph = result;
                     parsed_graph = parsed_result;
+                    parsed_graph.edges = [];
                     display_graph(parsed_graph);
                     console.log("Ready graph loaded");
                 }
@@ -312,6 +313,7 @@ else if (event.keyCode == 9) { // TAB
                     clearScene();
                     graph = result;
                     parsed_graph = parsed_result;
+                    parsed_graph.edges = [];
                     calculate_graph(parsed_graph);
                     console.log("Graph loaded");
                 }
