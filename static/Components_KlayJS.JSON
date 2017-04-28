@@ -1,0 +1,463 @@
+{
+  "children": [
+    {
+      "class": "Resistor",
+      "height": 200,
+      "id": "resistor",
+      "labels": [
+        {
+          "text": "resistor"
+        }
+      ],
+      "ports": [
+        {
+          "class": "PositivePin",
+          "height": 20,
+          "id": "resistor.p",
+          "labels": [
+            {
+              "text": "p"
+            }
+          ],
+          "properties": {
+            "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+          },
+          "width": 20,
+          "x": -10,
+          "y": 90
+        },
+        {
+          "class": "NegativePin",
+          "height": 20,
+          "id": "resistor.n",
+          "labels": [
+            {
+              "text": "n"
+            }
+          ],
+          "properties": {
+            "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+          },
+          "width": 20,
+          "x": 190,
+          "y": 90
+        }
+      ],
+      "properties": {
+        "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+      },
+      "width": 200
+    },
+    {
+      "class": "Capacitor",
+      "height": 200,
+      "id": "capacitor",
+      "labels": [
+        {
+          "text": "capacitor"
+        }
+      ],
+      "ports": [
+        {
+          "class": "PositivePin",
+          "height": 20,
+          "id": "capacitor.p",
+          "labels": [
+            {
+              "text": "p"
+            }
+          ],
+          "properties": {
+            "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+          },
+          "width": 20,
+          "x": -10,
+          "y": 90
+        },
+        {
+          "class": "NegativePin",
+          "height": 20,
+          "id": "capacitor.n",
+          "labels": [
+            {
+              "text": "n"
+            }
+          ],
+          "properties": {
+            "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+          },
+          "width": 20,
+          "x": 190,
+          "y": 90
+        }
+      ],
+      "properties": {
+        "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+      },
+      "width": 200
+    },
+    {
+      "class": "Ground",
+      "height": 200,
+      "id": "ground",
+      "labels": [
+        {
+          "text": "ground"
+        }
+      ],
+      "ports": [
+        {
+          "class": "Pin",
+          "height": 20,
+          "id": "ground.p",
+          "labels": [
+            {
+              "text": "p"
+            }
+          ],
+          "origin": [
+            100,
+            0
+          ],
+          "properties": {
+            "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+          },
+          "rotation": 270,
+          "width": 20,
+          "x": 90,
+          "y": -10
+        }
+      ],
+      "properties": {
+        "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+      },
+      "width": 200
+    },
+    {
+      "class": "EMF",
+      "height": 200,
+      "id": "emf",
+      "labels": [
+        {
+          "text": "emf"
+        }
+      ],
+      "ports": [
+        {
+          "class": "PositivePin",
+          "height": 20,
+          "id": "emf.p",
+          "labels": [
+            {
+              "text": "p"
+            }
+          ],
+          "origin": [
+            100,
+            0
+          ],
+          "properties": {
+            "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+          },
+          "rotation": 90,
+          "width": 20,
+          "x": 90,
+          "y": -10
+        },
+        {
+          "class": "NegativePin",
+          "height": 20,
+          "id": "emf.n",
+          "labels": [
+            {
+              "text": "n"
+            }
+          ],
+          "origin": [
+            100,
+            200
+          ],
+          "properties": {
+            "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+          },
+          "rotation": 90,
+          "width": 20,
+          "x": 90,
+          "y": 190
+        },
+        {
+          "class": "Flange_b",
+          "height": 20,
+          "id": "emf.flange",
+          "labels": [
+            {
+              "text": "flange"
+            }
+          ],
+          "properties": {
+            "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+          },
+          "width": 20,
+          "x": 190,
+          "y": 90
+        }
+      ],
+      "properties": {
+        "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+      },
+      "width": 200
+    },
+    {
+      "class": "StepVoltage",
+      "height": 200,
+      "id": "stepVoltage",
+      "labels": [
+        {
+          "text": "stepVoltage"
+        }
+      ],
+      "ports": [
+        {
+          "class": "PositivePin",
+          "height": 20,
+          "id": "stepVoltage.p",
+          "labels": [
+            {
+              "text": "p"
+            }
+          ],
+          "properties": {
+            "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+          },
+          "width": 20,
+          "x": -10,
+          "y": 90
+        },
+        {
+          "class": "NegativePin",
+          "height": 20,
+          "id": "stepVoltage.n",
+          "labels": [
+            {
+              "text": "n"
+            }
+          ],
+          "properties": {
+            "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+          },
+          "width": 20,
+          "x": 190,
+          "y": 90
+        }
+      ],
+      "properties": {
+        "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+      },
+      "width": 200
+    },
+    {
+      "class": "SineVoltage",
+      "height": 200,
+      "id": "sineVoltage",
+      "labels": [
+        {
+          "text": "sineVoltage"
+        }
+      ],
+      "ports": [
+        {
+          "class": "PositivePin",
+          "height": 20,
+          "id": "sineVoltage.p",
+          "labels": [
+            {
+              "text": "p"
+            }
+          ],
+          "properties": {
+            "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+          },
+          "width": 20,
+          "x": -10,
+          "y": 90
+        },
+        {
+          "class": "NegativePin",
+          "height": 20,
+          "id": "sineVoltage.n",
+          "labels": [
+            {
+              "text": "n"
+            }
+          ],
+          "properties": {
+            "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+          },
+          "width": 20,
+          "x": 190,
+          "y": 90
+        }
+      ],
+      "properties": {
+        "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+      },
+      "width": 200
+    },
+    {
+      "class": "Inertia",
+      "height": 200,
+      "id": "inertia",
+      "labels": [
+        {
+          "text": "inertia"
+        }
+      ],
+      "ports": [
+        {
+          "class": "Flange_a",
+          "height": 20,
+          "id": "inertia.flange_a",
+          "labels": [
+            {
+              "text": "flange_a"
+            }
+          ],
+          "properties": {
+            "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+          },
+          "width": 20,
+          "x": -10,
+          "y": 90
+        },
+        {
+          "class": "Flange_b",
+          "height": 20,
+          "id": "inertia.flange_b",
+          "labels": [
+            {
+              "text": "flange_b"
+            }
+          ],
+          "properties": {
+            "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+          },
+          "width": 20,
+          "x": 190,
+          "y": 90
+        }
+      ],
+      "properties": {
+        "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+      },
+      "width": 200
+    },
+    {
+      "class": "SpringDamper",
+      "height": 200,
+      "id": "springDamper",
+      "labels": [
+        {
+          "text": "springDamper"
+        }
+      ],
+      "ports": [
+        {
+          "class": "Flange_a",
+          "height": 20,
+          "id": "springDamper.flange_a",
+          "labels": [
+            {
+              "text": "flange_a"
+            }
+          ],
+          "properties": {
+            "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+          },
+          "width": 20,
+          "x": -10,
+          "y": 90
+        },
+        {
+          "class": "Flange_b",
+          "height": 20,
+          "id": "springDamper.flange_b",
+          "labels": [
+            {
+              "text": "flange_b"
+            }
+          ],
+          "properties": {
+            "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+          },
+          "width": 20,
+          "x": 190,
+          "y": 90
+        }
+      ],
+      "properties": {
+        "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+      },
+      "width": 200
+    },
+    {
+      "class": "Torque",
+      "height": 200,
+      "id": "torque",
+      "labels": [
+        {
+          "text": "torque"
+        }
+      ],
+      "ports": [
+        {
+          "class": "RealInput",
+          "height": 40,
+          "id": "torque.tau",
+          "labels": [
+            {
+              "text": "tau"
+            }
+          ],
+          "properties": {
+            "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+          },
+          "width": 40,
+          "x": -40,
+          "y": 80
+        },
+        {
+          "class": "Flange_b",
+          "height": 20,
+          "id": "torque.flange",
+          "labels": [
+            {
+              "text": "flange"
+            }
+          ],
+          "properties": {
+            "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+          },
+          "width": 20,
+          "x": 190,
+          "y": 90
+        }
+      ],
+      "properties": {
+        "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+      },
+      "width": 200
+    }
+  ],
+  "class": "Components",
+  "height": 200,
+  "id": "Components",
+  "labels": [
+    {
+      "text": "Components"
+    }
+  ],
+  "properties": {
+    "de.cau.cs.kieler.portConstraints": "FREE"
+  },
+  "width": 200
+}
