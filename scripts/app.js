@@ -1,3 +1,5 @@
+// main file, contains initialization, update and render loop
+
 var manualMode = document.getElementById("manual-mode");
 var saveButton = document.getElementById("save");
 
@@ -83,29 +85,6 @@ function render() {
 
     animator.update(delta);
 
-    if (picked_port !== undefined) {
-
-        var raycaster = new THREE.Raycaster();
-        camera.updateProjectionMatrix();
-        raycaster.setFromCamera(input.getMouseCenterized(), camera);
-        var intersects = raycaster.intersectObjects(ports, false);
-        if (intersects.length > 0 ) {
-            var port = intersects[0].object;
-            if (port !== picked_port && picked_port.parent !== port.parent) {
-                matched_port = port;
-                port_found = true;
-            }
-            else {
-                matched_port = undefined;
-                port_found = false;
-            }
-        } 
-        else {
-            matched_port = undefined;
-            port_found = false;
-        }
-    }
-
     renderer.render(scene, camera);
 
     stats.end();
@@ -119,17 +98,29 @@ $('#glcontainer').on('mousedown', function(event) {
 
 }).on('touchstart', function(e) {
     var event = e.originalEvent;
-    if(event.changedTouches.length == 1)  {
-        initTouch = new THREE.Vector2(event.changedTouches[0].clientX, event.changedTouches[0].clientY);
-        timeDownUp = new Date().getTime();
-        mouseMoved = false;
-        mouseDown = true;      
+    if (event.changedTouches.length == 1) {
+        pointerDown();
     }
-    e.preventDefault();
 
 }).on('touchmove', function(e) {
 
     if(event.changedTouches.length == 1)  {
+        pointerMove();
+    }
+
+}).on('touchend', function(e) {
+    var event = e.originalEvent;
+    if (event.changedTouches.length == 1)
+        CheckRaycast(true)
+    }).on('mousedown', function(event) {
+        pointerDown();
+    }).on('mousemove', function(event) {
+        pointerMove();
+    }).on('mouseup', function(event) {
+        CheckRaycast(false);        
+    }).append(renderer.domElement);
+
+function pointerMove() {
         var timeMove = new Date().getTime();
         timeDownUp += 10;
         if (timeMove > timeDownUp) {
@@ -140,14 +131,16 @@ $('#glcontainer').on('mousedown', function(event) {
             timeDownUp = null;
             mouseMoved = false;
         }
-    }
+};
 
-}).on('touchend', function(e) {
-    var event = e.originalEvent;
-    if (event.changedTouches.length == 1) {
-        var pos = new THREE.Vector2(event.changedTouches[0].clientX, event.changedTouches[0].clientY);
-            initTouch = undefined;
+    function pointerDown() {
+        timeDownUp = new Date().getTime();
+        mouseMoved = false;
+        mouseDown = true;
+    };
 
+function CheckRaycast(touch) {
+    var center = touch ? input.getTouchCenterized() : input.getMouseCenterized();
             timeDownUp = new Date().getTime();
 
         mouseDown = false;
@@ -155,109 +148,73 @@ $('#glcontainer').on('mousedown', function(event) {
             mouseMoved = false;
             return;
         }
-
-            if (port_found) {
-                port_found = false;
-
-                var picked_edge = picked_port.userData;
-                var matched_edge = matched_port.userData;
-
-    parsed_graph.edges.push({
-        id:(parsed_graph.edges.length + 1).toString(),
-        source:picked_edge.source,
-        sourcePort:picked_edge.id,
-        target:matched_edge.source,
-        targetPort:matched_edge.id
-    });
-
-    detach();    
-    clearScene();
-    recalculate_graph(parsed_graph);
-    return;
-
-            }
             var raycaster = new THREE.Raycaster();
             camera.updateProjectionMatrix();
-            raycaster.setFromCamera(input.getTouchCenterized(), camera);
+            raycaster.setFromCamera(center, camera);
             var intersects = raycaster.intersectObjects(scene.children, true);
             var raycastHit = false;
-        
+            for (var i = 0; i < intersects.length; ++i) {
+
+                var object = intersects[i].object;
+                var obj_data = object.userData;
+
+                if (obj_data.pickable) {
+
+                    if (obj_data.type == "edge") {
+
+                        detach();
+
+                        picked_object = intersects[i].object;
+
+                        while(picked_object.parent.type !== "Scene")
+                            picked_object = picked_object.parent;
+
+                        attach(picked_object);
+
+                        raycastHit = true;
+                        break;
+
+                    } else if (obj_data.type == "port") {
+
+                        // if we already have one port and want to connect another
+                        if (picked_port !== undefined) {
+                            console.log(manual_mode);
+
+                        var picked_edge = picked_port.userData;
+                        var matched_edge = obj_data;
+
+                        parsed_graph.edges.push({
+                            id:(parsed_graph.edges.length + 1).toString(),
+                            source:picked_edge.source,
+                            sourcePort:picked_edge.id,
+                            target:matched_edge.source,
+                            targetPort:matched_edge.id
+                        });
             
-            for (var i = 0; i < intersects.length; ++i) {
-                if (intersects[i].object.userData.pickable) {
-                    if (picked_object !== undefined) {
-                        if (picked_port !== undefined) {
-                            picked_port.material.opacity = 1.0;
-                        }
-    //                     if (intersects[i].object.userData.type === "port") {
-
-    //                     if (picked_port !== undefined) {
-    //                         matched_port = intersects[i].object;
-    //             var picked_edge = picked_port.userData;
-    //             var matched_edge = matched_port.userData;
-
-    // parsed_graph.edges.push({
-    //     id:(parsed_graph.edges.length + 1).toString(),
-    //     source:picked_edge.source,
-    //     sourcePort:picked_edge.id,
-    //     target:matched_edge.source,
-    //     targetPort:matched_edge.id
-    // });
-
-    // detach();    
-    // clearScene();
-    // recalculate_graph(parsed_graph);
-    // return;                            
-    //                     } else {
-    //                         picked_port = intersects[i].object;
-    //                                 picked_port.material.opacity = 0.5;
-    //                             for (var p = 0; p < ports.length; ++p) {
-    //                                 ports[p].visible = true;
-    //                             }                            
-    //                     }
-    //                         break;
-    //                     } 
-
-                        // var picking_port = false;
-
-                        // for (var j = 1; j < picked_object.children.length - 1; ++j) {
-                        //     picked_object.children[j].visible = true;
-                        //     if (intersects[i].object === picked_object.children[j] && intersects[i].object !== picked_port) {
-
-                        //         picked_port = picked_object.children[j];
-                        //         picked_port.material.opacity = 0.5;
-                        //         picking_port = true;
-                        //         raycastHit = true;
-
-                        //         for (var p = 0; p < ports.length; ++p) {
-                        //             ports[p].visible = true;
-                        //         }
-                        //     }
-                        // }
-
-                        // if (picking_port)
-                        //     break;
-                        
-                        {
-                            
-                            var intersec = raycaster.intersectObjects(ports, true);
-
-                            console.log(intersec.toString());
-
-                        if (picked_port !== undefined) {
-                            picked_port.material.opacity = 1.0;
-                            picked_port = undefined;
-                            for (var p = 0; p < ports.length; ++p) {
-                                    ports[p].visible = false;
-                            }
-                        }
-                        }
                         detach();
-                    }
+                        if (!manual_mode)
+                            calculate_graph(parsed_graph);
 
-                    picked_object = intersects[i].object;
+                        } else {
 
-                    if (display_graph)
+                            detach();
+                            picked_object = object.parent;
+                            while(picked_object.parent.type !== "Scene")
+                                picked_object = picked_object.parent;
+
+                            picked_port = object;
+                            picked_port.material.opacity = 0.5;
+                        }
+
+                        raycastHit = true;
+                        break;
+
+                    } else if (obj_data.type == "component") {
+
+                        detach();
+
+                        picked_object = intersects[i].object;
+
                         while(picked_object.parent.type !== "Scene")
                             picked_object = picked_object.parent;
 
@@ -265,123 +222,15 @@ $('#glcontainer').on('mousedown', function(event) {
 
                         raycastHit = true;
 
-                        break;
+                        if (input.isKeyDown(17)) {
+                            cloneButton.click();
+                        }
+                    }
                     }
                 } 
                 if (!raycastHit)
                     detach();
-    }
-
-    }).on('mousedown', function(event) {
-        timeDownUp = new Date().getTime();
-        mouseMoved = false;
-        mouseDown = true;
-    }).on('mousemove', function(event) {
-        var timeMove = new Date().getTime();
-        timeDownUp += 10;
-        if (timeMove > timeDownUp) {
-            if (mouseDown) {
-                mouseMoved = true;
-            }
-        } else {
-            timeDownUp = null;
-            mouseMoved = false;
-        }
-
-    }).on('mouseup', function(event) {
-
-        timeDownUp = new Date().getTime();
-
-        mouseDown = false;
-        if (mouseMoved) {
-            mouseMoved = false;
-            return;
-        }
-
-            if (port_found) {
-                port_found = false;
-
-                var picked_edge = picked_port.userData;
-                var matched_edge = matched_port.userData;
-
-    parsed_graph.edges.push({
-        id:(parsed_graph.edges.length + 1).toString(),
-        source:picked_edge.source,
-        sourcePort:picked_edge.id,
-        target:matched_edge.source,
-        targetPort:matched_edge.id
-    });
-
-    detach();    
-    recalculate_graph(parsed_graph);
-    return;
-
-            }
-            var raycaster = new THREE.Raycaster();
-            camera.updateProjectionMatrix();
-            raycaster.setFromCamera(input.getMouseCenterized(), camera);
-            var intersects = raycaster.intersectObjects(scene.children, true);
-            var raycastHit = false;
-
-            for (var i = 0; i < intersects.length; ++i) {
-                if (intersects[i].object.userData.pickable) {
-                    if (picked_object !== undefined) {
-                        if (picked_port !== undefined) {
-                            picked_port.material.opacity = 1.0;
-                        }
-
-                        var picking_port = false;
-
-                        console.log(intersects[i].object.userData.type);
-
-                        for (var j = 1; j < picked_object.children.length - 1; ++j) {
-                            picked_object.children[j].visible = true;
-                            if (intersects[i].object === picked_object.children[j] && intersects[i].object !== picked_port) {
-
-                                picked_port = picked_object.children[j];
-                                picked_port.material.opacity = 0.5;
-                                picking_port = true;
-                                raycastHit = true;
-
-                                for (var p = 0; p < ports.length; ++p) {
-                                    ports[p].visible = true;
-                                }
-                            }
-                        }
-
-                        if (picking_port)
-                            break;
-                        
-                        else {
-                        if (picked_port !== undefined) {
-                            picked_port.material.opacity = 1.0;
-                            picked_port = undefined;
-                            for (var p = 0; p < ports.length; ++p) {
-                                    ports[p].visible = false;
-                            }
-                        }
-                        }
-                        detach();
-                    }
-
-                    picked_object = intersects[i].object;
-
-                    if (display_graph)
-                        while(picked_object.parent.type !== "Scene")
-                            picked_object = picked_object.parent;
-
-                        attach(picked_object);
-
-                        raycastHit = true;
-
-                        break;
-                    }
-                } 
-                if (!raycastHit)
-                    detach();
-
-
-}).append(renderer.domElement);
+}
 
     $(document).on('keydown', function(event) {
 if (event.keyCode == 86) // V
@@ -411,6 +260,13 @@ else if (event.keyCode == 9) { // TAB
         var file = e.target.files[0];
         if (file !== undefined) {
             file_name = file.name;
+
+            if (file.name.indexOf("_Fixed") != -1) {
+                if (!manual_mode)
+                    manualMode.click();
+            } else if (manual_mode)
+                manualMode.click();
+
             fileReader.onload = function(readFile) {
                 playButton.classList.add("disabled");
                 pauseButton.classList.add("disabled");
@@ -468,9 +324,6 @@ else if (event.keyCode == 9) { // TAB
                     pauseButton.classList.remove("disabled");
                     stopButton.classList.remove("disabled");                
                 }
-
-                camera_controls.reset();
-
 };
 detach();
 fileReader.readAsBinaryString(file);
@@ -486,15 +339,27 @@ fileReader.readAsBinaryString(file);
         if (!display_graph) {
                     return;
         }
-        var obj;
         var type = picked_object.userData.type;
+
+        // picking edge
         if (type == "edge") {
-            obj = picked_object;
-            object_controls.detach();
+
+        object_controls.detach();
+        function set_opacity(o) {
+                for (var i = 0; i < o.children.length; ++i) {
+                    var c = o.children[i];
+                    if (c.material !== undefined)
+                        c.material.color.set(connectionSelectedColor);
+                    if (c.children !== undefined)
+                        set_opacity(c);
+                }
+        }
+        set_opacity(picked_object);
+
+        // picking port or component
         } else {
 
-            obj = picked_object.children[0];
-        }
+            var obj = picked_object.children[0];
 
         function loop(o) {
                 for (var i = 0; i < o.children.length; ++i) {
@@ -513,59 +378,77 @@ fileReader.readAsBinaryString(file);
             else
                 loop(obj);
 
-        for(var i = 1; i < picked_object.children.length - 1; ++i) {
-            picked_object.children[i].visible = true;
+        // for(var i = 0; i < picked_object.children.length; ++i) {
+        //     if (picked_object.children[i].userData.type == "port")
+        //         picked_object.children[i].visible = true;
+        // }
         }
 
         };
+
+        // detaches controls from an object
         var detach = function() {
+
+            if (picked_object === undefined) return;    
+
+            // disable control buttons
             cloneButton.classList.add("disabled");
             deleteButton.classList.add("disabled");
             rotateButton.classList.add("disabled");
             object_controls.detach();
-            if (picked_object !== undefined) {
-                if (!display_graph) {
-                    picked_object = undefined;
-                    return;
-                }
+
+            if (!display_graph) {
+                picked_object = undefined;
+                return;
+            }
+            var type = picked_object.userData.type;
+
+                if (type == "edge") {
+
+                    object_controls.detach();
+                    function set_color(o) {
+                            for (var i = 0; i < o.children.length; ++i) {
+                                var c = o.children[i];
+                                if (c.material !== undefined)
+                                    c.material.color.set(connectionColor);
+                                if (c.children !== undefined)
+                                    set_color(c);
+                            }
+                    }
+                    set_color(picked_object);
+
+                } else {
+
                 if (picked_port !== undefined) {
-                for (var p = 0; p < ports.length; ++p) {
-                        ports[p].visible = false;
-                }
                     picked_port.material.opacity = 1.0;
                     picked_port = undefined;
                 }
                 var obj = picked_object.children[0];
 
-        function reset_opacity(o) {
-                for (var i = 0; i < o.children.length; ++i) {
-                    var c = o.children[i];
-                    if (c.children !== undefined)
-                        reset_opacity(c);
-
-                    if (c.material !== undefined) {
-                        c.material.opacity = 1.0;
+                function reset_opacity(o) {
+                    for (var i = 0; i < o.children.length; ++i) {
+                        var c = o.children[i];
+                        if (c.children !== undefined)
+                            reset_opacity(c);
+    
+                            if (c.material !== undefined) {
+                                c.material.opacity = 1.0;
+                            }
                     }
                 }
-            }
 
-            if (obj.children.length === 0)
-                obj.material.opacity = 1.0;
-            else
-                reset_opacity(obj);
-
+                reset_opacity(picked_object);
             
-            for(var i = 1; i < picked_object.children.length - 1; ++i) {
-                picked_object.children[i].visible = false;
+                // for(var i = 0; i < picked_object.children.length; ++i) {
+                //     if (picked_object.children[i].userData.type == "port")
+                //         picked_object.children[i].visible = false;
+                // }
             }
-
 
             picked_object = undefined;
-        }
     };
 
     cloneButton.onclick = function() {
-        if (picked_object !== undefined) {
 
             var copy = picked_object.userData;
             var c = picked_object.clone();
@@ -616,7 +499,7 @@ fileReader.readAsBinaryString(file);
             detach();
             attach(c);
             parsed_graph.children.push(c.userData);
-        }
+        
     };
 
     deleteButton.onclick = function() {
@@ -629,7 +512,8 @@ fileReader.readAsBinaryString(file);
             edges.removeValue("id", picked_object.userData.id);
             scene.remove(picked_object);
             detach();
-            recalculate_graph(parsed_graph);
+            if (!manual_mode)
+                calculate_graph(parsed_graph);
 
             return;   
         }
@@ -649,7 +533,9 @@ fileReader.readAsBinaryString(file);
 
         scene.remove(picked_object);
         detach();
-        recalculate_graph(parsed_graph);
+
+            if (!manual_mode)
+                calculate_graph(parsed_graph);
     };
 
     rotateButton.onclick = function() {

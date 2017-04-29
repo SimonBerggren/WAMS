@@ -1,3 +1,5 @@
+// used primarily for indicating if any keys and being held down, and for calculating mouse / touch position for raycasting
+
 var Input = function () {
 
 	// touch
@@ -122,7 +124,7 @@ var Input = function () {
 
 	// is key pressed?
 	var isKeyDown = function (key) {
-		return keys_down[key.toUpperCase().charCodeAt(0)];
+		return keys_down[key];
 	};
 
 	// call this at the end of each update

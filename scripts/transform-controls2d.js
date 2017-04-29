@@ -263,7 +263,7 @@
 			// ],
 
 			XY: [
-				[ new THREE.Mesh( new THREE.PlaneBufferGeometry( 0.29, 0.29 ), new GizmoMaterial2D( { color: 0xffff00, opacity: 0.25 } ) ), [ 0.15, 0.15, 0 ] ]
+				[ new THREE.Mesh( new THREE.PlaneBufferGeometry( 0.29, 0.29 ), new GizmoMaterial2D( { color: 0x000000, opacity: 0.5 } ) ), [ 0.15, 0.15, 0 ] ]
 			]
 
 			// YZ: [
@@ -853,7 +853,9 @@
 			}
 
 		}
+		this.setset = function() {
 
+		}
 		function onPointerDown( event ) {
 
 			if ( scope.object === undefined || _dragging === true || ( event.button !== undefined && event.button !== 0 ) ) return;

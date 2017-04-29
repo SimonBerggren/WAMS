@@ -1,8 +1,10 @@
+// contains functions connected to parsing graphs and models
+
+// global variables
 var icons_json = [];
 var icons_svg = [];
 var icon_types = [];
 var icon_names = [];
-var icons = [];
 var loaded_icons = 0;
 var total_icons = 0;
 var components;
@@ -10,8 +12,7 @@ var edges;
 var IDs = [];
 var ports = [];
 var minX, maxX, minY, maxY;
-var worker = new Worker('klayjs.js');
-var resetCamera = true;
+var resetCamera = true;	// always reset camera first time
 
 function setModelName(model) {
 	model.name = {name:"pickable", id:model.name};
@@ -30,69 +31,78 @@ function addModel(model) {
 	scene.add(obj);
 };
 
-function addIcon(_icon) {
+// loads an icon into the app
+function load_icon(_icon_name) {
 
-	var url = icons_directory + _icon + ".json";
+	var url = icons_directory + _icon_name + ".json";
 
+	// start using jquery to see if icon url is accessible as .json
 	$.get(url)
 	.success(function() {
 		
 		jsonloader.load(url, function(_object) {
 
-			icon_types[_icon] = "json";
-			icons_svg[_icon] = _object;			
+			icon_types[_icon_name] = "json";
+			icons_svg[_icon_name] = _object;			
 
 			if (++loaded_icons >= total_icons)
-				onLoadedIcons();
+				parse_ready_graph();
 		});
 
+		// if not, try same url but with .svg
 	}).error(function() {
 		
-		url = icons_directory + _icon + ".svg";
+		url = icons_directory + _icon_name + ".svg";
 
 		$.get(url)
 		.success(function() { 
 	
 			svgloader.load(url, function (svg) { 
 
-				// nearest power of two
+				// nearest power of two, to prevent warning messages from THREE
 				svg.image.width = Math.pow( 2, Math.round( Math.log( s.width ) / Math.LN2 ) );
 				svg.image.height = Math.pow( 2, Math.round( Math.log( s.height ) / Math.LN2 ) );
 				
-				icon_types[_icon] = "svg";
-				icons_svg[_icon] = svg;
+				icon_types[_icon_name] = "svg";
+				icons_svg[_icon_name] = svg;
 	
 				if (++loaded_icons >= total_icons)
-					onLoadedIcons();
+					parse_ready_graph();
 			});
 
+			// if neither json nor svg is present, save the type as a simple plane 
 		}).error(function() { 
 		
-			icon_types[_icon] = "plane";
+			icon_types[_icon_name] = "plane";
 			if (++loaded_icons >= total_icons)
-				onLoadedIcons();
+				parse_ready_graph();
 
 		});
 	});
 }
 
-function onLoadedIcons() {
-clearScene();
+// function is called when all icons from a graph is loaded
+// first clears scene of previous diagram or model
+// then starts parsing the graph
+function parse_ready_graph() {
+
+	clearScene();
+
 	get_comps(components, edges);
 
-	if (resetCamera) {
-		camera_controls.setResetPosition((maxX - minX) / 2,   windowHeight - ( (maxY - minY) / 2) );
+	camera_controls.setResetPosition((maxX - minX) / 2,   windowHeight - ( (maxY - minY) / 2));
+
+	if (resetCamera)
 		camera_controls.reset();
-	}
-	resetCamera = true;
 };
 
+// called when we need Klay to parse the graph
 function calculate_graph(_graph) {
 		
-	icons = [];
 	loaded_icons = 0;
 	IDs = [];
 	ports = [];
+
     $klay.layout({
 
   		graph: _graph,
@@ -112,15 +122,8 @@ function calculate_graph(_graph) {
 	});
 };
 
-function recalculate_graph(_graph) {
-
-	resetCamera = false;
-	calculate_graph(_graph);
-
-}
-
 function display_graph(_graph) {
-		icons = [];
+		
 		loaded_icons = 0;
 		IDs = [];
 		ports = [];
@@ -132,15 +135,20 @@ function display_graph(_graph) {
 				displayParsedGraph(_graph[i]);
 };
 
+// starts with parsing the icons needed for displaying the graph
 function displayParsedGraph (graph) {
+
+		// check if there is a connected _Icons file to read icons from
 		var has_icons_dict = false;
-		file_name = file_name.replace(/\.[^/.]+$/, "_Icons");
-		var url = "static/" + file_name + ".json";
+		var icons_file_name = file_name.replace(/\.[^/.]+$/, "_Icons");	// replaces _KlayJS with _Icons
+		var url = "static/" + icons_file_name + ".json";
 		minX = maxX = minY = maxY = 0;
 		components = graph.children;
 		edges = graph.edges;
-
+		
 		$.get(url)
+
+		// if there is an icons file
 		.success(function(_object) {
 
 			var json_dict = JSON.parse(_object).icons;
@@ -149,14 +157,18 @@ function displayParsedGraph (graph) {
 			var total_icons = Object.keys(json_dict).length;
 			var curr_icon = 0;
 
+			// load all icons from file
 			for (var icon in json_dict) {
 
-				load_icon(icon);
+				load_svg(icon);
 
 			}
 
-			function load_icon(_icon) {
-				var svg = json_dict[_icon]; 
+			function load_svg(_icon) {
+
+				// parse each icon, so we can extract width and height from its viewbox
+				// and update canvas width and height
+				var svg = json_dict[_icon];
   				var svg_element = parser.parseFromString( svg, 'text/xml' ).documentElement;
 	  			var viewbox = svg_element.getAttribute("viewBox").split(" ").map(Number);
 	  			var new_width = parseInt(viewbox[2]);
@@ -165,6 +177,7 @@ function displayParsedGraph (graph) {
 	  			var img = document.createElement("img");
 				img.setAttribute("src", "data:image/svg+xml;base64," + window.btoa(unescape(encodeURIComponent(svg))));
 
+				// async operation
 				img.onload = function() {
 		  			var canvas = document.createElement('canvas');
 					canvas.width = new_width; //Math.pow( 2, Math.round( Math.log( nw ) / Math.LN2 ) );
@@ -179,20 +192,24 @@ function displayParsedGraph (graph) {
 
 					has_icons_dict = true;
 
+					// because onload is async, wait with parsing graph until icons are loaded
 					if (++curr_icon === total_icons) {
-						onLoadedIcons();
+						parse_ready_graph();
 					}
 				};
 			};			
 
+		// if there is no icons file
 		}).error(function() { 
 
+		// we need to traverse the components
 		function get_icons(_comps) {
 
 			for(var i = 0; i < _comps.length; ++i) {
 
 				var c = _comps[i];
 
+				// and find each unique icon of every component, port and child
 				if (icon_types[c.class] === undefined) {
 					icon_types[c.class] = null;
 					icon_names.push(c.class);
@@ -210,17 +227,20 @@ function displayParsedGraph (graph) {
 
 		get_icons(components);
 
-		if (icon_names.length == 0)
-			onLoadedIcons();
-		else
-			for (var i = 0; i < icon_names.length; ++i)
-				addIcon(icon_names[i]);
+		// load each icon into the app
+		for (var i = 0; i < icon_names.length; ++i)
+				load_icon(icon_names[i]);
 			
+		// if there are no icons to load, go straight to parsing
+		if (icon_names.length == 0)
+			parse_ready_graph();
 	});
 };
 
+// parses the graph
 function get_comps(_components, _edges, parent) {
 
+	// in case this isnt a top level component we have to consider offsets
 	var offsetX = parent === undefined ? 0 : parent.x;
 	var offsetY = parent === undefined ? 0 : parent.y;
 
@@ -250,6 +270,8 @@ function get_comps(_components, _edges, parent) {
 		if (y < minY) minY = y;
 		if (y > maxY) maxY = y;
 
+		// strip id from its digits
+		// so we can keep check on which ID is next when cloning
     	var regex_digits = /\d+/g;
     	var id_digits = name.match(regex_digits);
     	var id_name = name.replace(regex_digits, '');
@@ -265,6 +287,7 @@ function get_comps(_components, _edges, parent) {
 		var obj;
 		var icon_type = icon_types[cl];
 
+		// if this components icon is in svg format
 		if (icon_type == "svg") {
 
 			if (!bottom_component)
@@ -275,21 +298,25 @@ function get_comps(_components, _edges, parent) {
 				obj = new THREE.Mesh(geometry,material);
 			}
 
+			// if this components icon is in json format
 		} else if (icon_type == "json") {
 
 			parseJson(obj);
 
+			// if this components icon doesnt exist
 		} else {
 
 			obj = wireframe(0, 0, w, h, 0x000000, 0);
 
 		}
 
+		// keep component and port as one object in THREE
 		var group = new THREE.Group();
 		group.userData = c;
 		group.add(obj);
 		group.setType("component");
 
+		// rotate around origin
 		if (c.origin !== undefined) {
   			group.applyMatrix( new THREE.Matrix4().makeTranslation(-(c.x-c.origin[0]), -(c.y-c.origin[1]) ,0) );
   			group.applyMatrix( new THREE.Matrix4().makeRotationZ(c.rotation  *  Math.PI/180.0 ) );
@@ -313,17 +340,19 @@ function get_comps(_components, _edges, parent) {
 				var pin = plane(px, py, pw, ph, 0x0000ff, 0.5, 1);
 				pin.userData = p;
 				pin.userData.source = name;
-				pin.visible = false;
+				pin.visible = true;
+				pin.material.opacity = 1;
 				ports.push(pin);
 				group.add(pin);
 				pin.setType("port");
 			}
 		}
 
-		// add text and to scene
-
-		group.add(text(name))
-		group.children.last().rotation.z = -group.rotation.z;
+		// add text
+		var t = text(name);
+		t.rotation.z = -group.rotation.z;
+		t.userData.type = "text";
+		group.add(t)
 		group.setPickable();
 		scene.add(group);
 	}
@@ -342,7 +371,10 @@ function get_comps(_components, _edges, parent) {
 		var targetX = edge.targetPoint.x + offsetX;
 		var targetY = windowHeight - ( edge.targetPoint.y + offsetY );
 
+		// keep connection and all its bendpoits and cylinders as one object in THREE
 		var connection = new THREE.Group();
+
+		// bendpoints
 
 		var bendPoints = edge.bendPoints;
 		
@@ -387,10 +419,13 @@ function get_comps(_components, _edges, parent) {
 	}
 };
 
+// parse json objects
 function parseJson(_object) {
 
 	obj = icons_json[cl].clone();
 
+	// javascript makes shallow copies of materials
+	// changing opacity without making deep copies, changes opacity on all objects
 	var copy_material = function(_object) {
 		for (var i = 0; i < _object.children.length; ++i) {
 			var c = _object.children[i];
@@ -408,6 +443,7 @@ function parseJson(_object) {
 	if (obj.children !== undefined)
 		copy_material(obj);
 
+	// scale of json objects is not configured correctly yet
 	if (cl == "IdealOpAmp3Pin") {
 
 		obj.scale.x = obj.scale.y = obj.scale.z = 10;
@@ -423,6 +459,7 @@ function parseJson(_object) {
 
 	}
 
+	// json objects from THREE JS Editor contains light - we dont want that to affect our objects
 	if (obj.children !== undefined) {
 		for (var j = obj.children.length - 1; j >= 0; --j) {
 			if (obj.children[j].type === "AmbientLight" || obj.children[j].type === "DirectionalLight")

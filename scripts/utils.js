@@ -1,5 +1,6 @@
+// contains functions for creating various objects
 
-
+// connections are made from cylinders
 function cylinder(pointX, pointY, size) {
 	
 	var direction = new THREE.Vector3().subVectors(pointY, pointX);
@@ -22,6 +23,7 @@ function cylinder(pointX, pointY, size) {
 	return edge;
 }
 
+// bendpoints are made from spheres
 function sphere(x, y, size) {
 	var geometry = new THREE.SphereGeometry( connectionSize, 8, 8);
 	var material = new THREE.MeshPhongMaterial( {color: connectionColor} );
@@ -33,6 +35,7 @@ function sphere(x, y, size) {
 	return sphere;
 }
 
+// wireframe only creates a square frame, used for components that contains children
 function wireframe(x, y, w, h, c, z) {
 	var geometry = new THREE.EdgesGeometry( new THREE.PlaneGeometry(w, h, 1, 1) ); // or WireframeGeometry( geometry )
 	var material = new THREE.LineBasicMaterial( { color: subsystemColor, linewidth: 2 } );
@@ -41,6 +44,7 @@ function wireframe(x, y, w, h, c, z) {
 	return wireframe;    
 }
 
+// ports are made from planes, they are simply a solid coloured 2D plane
 function plane(x, y, w, h, c, z, opacity) {
 	opacity = opacity === undefined ? 1 : opacity;
 	var geometry = new THREE.PlaneGeometry(w, h, 1, 1);
@@ -52,6 +56,7 @@ function plane(x, y, w, h, c, z, opacity) {
 	return plane;    
 }
 
+// creates 3D text, though quite heavy on the GPU
 function text(text) {
 
 	if (!textEnabled)
@@ -101,8 +106,6 @@ function text(text) {
 
 	textMesh1.rotation.x = 0;
 	textMesh1.rotation.y = Math.PI * 2;
-
-	textMesh1.name="static";
 
 	return textMesh1;
 };

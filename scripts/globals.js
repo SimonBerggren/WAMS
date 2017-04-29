@@ -1,3 +1,5 @@
+// contains global variables for easier tweaking
+
 var directionalLightPosition = {x: 0, y: 0, z: 10};
 var directionalLightColor = "white";
 var directionalLightIntensity = 0.7;
@@ -13,6 +15,7 @@ var klayOptions = {spacing: graphSpacing, algorithm: "de.cau.cs.kieler.klay.laye
 var clearColor = "oldlace";
 var subsystemColor = "blue";
 var connectionColor = "gray";
+var connectionSelectedColor = "red";
 
 var cameraFrontClip = 1;
 var cameraBackClip = 20000;

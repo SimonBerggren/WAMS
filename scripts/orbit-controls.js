@@ -583,7 +583,7 @@ THREE.OrbitControls = function ( object, domElement ) {
 
 	function handleTouchMoveRotate( event ) {
 
-		//console.log( 'handleTouchMoveRotate' );
+		console.log( 'handleTouchMoveRotate' );
 
 		rotateEnd.set( event.touches[ 0 ].pageX, event.touches[ 0 ].pageY );
 		rotateDelta.subVectors( rotateEnd, rotateStart );
@@ -603,8 +603,6 @@ THREE.OrbitControls = function ( object, domElement ) {
 	}
 
 	function handleTouchMoveDolly( event ) {
-
-		//console.log( 'handleTouchMoveDolly' );
 
 		var dx = event.touches[ 0 ].pageX - event.touches[ 1 ].pageX;
 		var dy = event.touches[ 0 ].pageY - event.touches[ 1 ].pageY;
@@ -771,7 +769,7 @@ THREE.OrbitControls = function ( object, domElement ) {
 
 		switch ( event.touches.length ) {
 
-			case 3:	// one-fingered touch: rotate
+			case 1:	// one-fingered touch: rotate
 
 				if ( scope.enableRotate === false ) return;
 
@@ -791,7 +789,7 @@ THREE.OrbitControls = function ( object, domElement ) {
 
 				break;
 
-			case 1: // three-fingered touch: pan
+			case 3: // three-fingered touch: pan
 
 				if ( scope.enablePan === false ) return;
 
@@ -819,16 +817,15 @@ THREE.OrbitControls = function ( object, domElement ) {
 
 		if ( scope.enabled === false ) return;
 
+
 		event.preventDefault();
 		event.stopPropagation();
 
 		switch ( event.touches.length ) {
-
 			case 1: // one-fingered touch: rotate
 
 				if ( scope.enableRotate === false ) return;
 				if ( state !== STATE.TOUCH_ROTATE ) return; // is this needed?...
-
 				handleTouchMoveRotate( event );
 
 				break;

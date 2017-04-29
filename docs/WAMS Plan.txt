@@ -6,16 +6,15 @@ Highest priority in priority order (preferably before Tuesday):
 + cloning and connecting
   + fixing reported problems
 + selection of connection
-  - stronger highligt for selected connection
+  + stronger highligt for selected connection
 + saving resulting model in JSON file
-- scaling has too large gain
-- make sure ports are shown (also when label not present) DONE?
-- remove Reset camera since we have escape button for that
-- allow cloning and connecting on mobile device
-- allow panning on mobile device
-- cloning by Cntrl+drag
-- allow connection by directly clicking on port without first selection of component
-- two layout modes: auto, manual
++ scaling has too large gain
++ make sure ports are shown (also when label not present) DONE?
++ allow cloning and connecting on mobile device
++ allow panning on mobile device
++ cloning by Cntrl+drag
++ allow connection by directly clicking on port without first selection of component
++ two layout modes: auto, manual
 - draw a connection line immediately when a connection is made
 - adjust connections lines when a component is moved (add one new line segment for all connection lines)
 - give the cloned component unique name (among siblings), e.g. by adding sequence number: name_1, name_2
