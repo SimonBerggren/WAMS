@@ -467,8 +467,8 @@ fileReader.readAsBinaryString(file);
                 }
             }
 
-            c.position.y += 10;
-            c.position.x += 10;
+            c.position.y += copySpacing;
+            c.position.x += copySpacing;
 
             var r = /\d+/g;
             var s = picked_object.userData.id;

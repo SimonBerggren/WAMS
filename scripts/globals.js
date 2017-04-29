@@ -1,5 +1,7 @@
 // contains global variables for easier tweaking
 
+var copySpacing = 150;
+
 var directionalLightPosition = {x: 0, y: 0, z: 10};
 var directionalLightColor = "white";
 var directionalLightIntensity = 0.7;
