@@ -1,3 +1,4 @@
+var manualMode = document.getElementById("manual-mode");
 var saveButton = document.getElementById("save");
 
 var cloneButton = document.getElementById("clone");
@@ -22,12 +23,12 @@ var mouseDown = false;
 
 var timeDownUp = null;
 var picked_port = undefined;
-var port_found = false;
 var matched_port = undefined;
 var picked_object = undefined;
 var graph = undefined;
 var parsed_graph = undefined;
 var model = undefined;
+var port_found = false;
 
 var stats = new Stats();
 stats.showPanel( 0 );
@@ -120,18 +121,155 @@ $('#glcontainer').on('mousedown', function(event) {
     var event = e.originalEvent;
     if(event.changedTouches.length == 1)  {
         initTouch = new THREE.Vector2(event.changedTouches[0].clientX, event.changedTouches[0].clientY);
+        timeDownUp = new Date().getTime();
+        mouseMoved = false;
+        mouseDown = true;      
     }
     e.preventDefault();
 
 }).on('touchmove', function(e) {
 
-// TODO: IMPLEMENT MOBILE DEVICE
+    if(event.changedTouches.length == 1)  {
+        var timeMove = new Date().getTime();
+        timeDownUp += 10;
+        if (timeMove > timeDownUp) {
+            if (mouseDown) {
+                mouseMoved = true;
+            }
+        } else {
+            timeDownUp = null;
+            mouseMoved = false;
+        }
+    }
 
 }).on('touchend', function(e) {
     var event = e.originalEvent;
     if (event.changedTouches.length == 1) {
         var pos = new THREE.Vector2(event.changedTouches[0].clientX, event.changedTouches[0].clientY);
             initTouch = undefined;
+
+            timeDownUp = new Date().getTime();
+
+        mouseDown = false;
+        if (mouseMoved) {
+            mouseMoved = false;
+            return;
+        }
+
+            if (port_found) {
+                port_found = false;
+
+                var picked_edge = picked_port.userData;
+                var matched_edge = matched_port.userData;
+
+    parsed_graph.edges.push({
+        id:(parsed_graph.edges.length + 1).toString(),
+        source:picked_edge.source,
+        sourcePort:picked_edge.id,
+        target:matched_edge.source,
+        targetPort:matched_edge.id
+    });
+
+    detach();    
+    clearScene();
+    recalculate_graph(parsed_graph);
+    return;
+
+            }
+            var raycaster = new THREE.Raycaster();
+            camera.updateProjectionMatrix();
+            raycaster.setFromCamera(input.getTouchCenterized(), camera);
+            var intersects = raycaster.intersectObjects(scene.children, true);
+            var raycastHit = false;
+        
+            
+            for (var i = 0; i < intersects.length; ++i) {
+                if (intersects[i].object.userData.pickable) {
+                    if (picked_object !== undefined) {
+                        if (picked_port !== undefined) {
+                            picked_port.material.opacity = 1.0;
+                        }
+    //                     if (intersects[i].object.userData.type === "port") {
+
+    //                     if (picked_port !== undefined) {
+    //                         matched_port = intersects[i].object;
+    //             var picked_edge = picked_port.userData;
+    //             var matched_edge = matched_port.userData;
+
+    // parsed_graph.edges.push({
+    //     id:(parsed_graph.edges.length + 1).toString(),
+    //     source:picked_edge.source,
+    //     sourcePort:picked_edge.id,
+    //     target:matched_edge.source,
+    //     targetPort:matched_edge.id
+    // });
+
+    // detach();    
+    // clearScene();
+    // recalculate_graph(parsed_graph);
+    // return;                            
+    //                     } else {
+    //                         picked_port = intersects[i].object;
+    //                                 picked_port.material.opacity = 0.5;
+    //                             for (var p = 0; p < ports.length; ++p) {
+    //                                 ports[p].visible = true;
+    //                             }                            
+    //                     }
+    //                         break;
+    //                     } 
+
+                        // var picking_port = false;
+
+                        // for (var j = 1; j < picked_object.children.length - 1; ++j) {
+                        //     picked_object.children[j].visible = true;
+                        //     if (intersects[i].object === picked_object.children[j] && intersects[i].object !== picked_port) {
+
+                        //         picked_port = picked_object.children[j];
+                        //         picked_port.material.opacity = 0.5;
+                        //         picking_port = true;
+                        //         raycastHit = true;
+
+                        //         for (var p = 0; p < ports.length; ++p) {
+                        //             ports[p].visible = true;
+                        //         }
+                        //     }
+                        // }
+
+                        // if (picking_port)
+                        //     break;
+                        
+                        {
+                            
+                            var intersec = raycaster.intersectObjects(ports, true);
+
+                            console.log(intersec.toString());
+
+                        if (picked_port !== undefined) {
+                            picked_port.material.opacity = 1.0;
+                            picked_port = undefined;
+                            for (var p = 0; p < ports.length; ++p) {
+                                    ports[p].visible = false;
+                            }
+                        }
+                        }
+                        detach();
+                    }
+
+                    picked_object = intersects[i].object;
+
+                    if (display_graph)
+                        while(picked_object.parent.type !== "Scene")
+                            picked_object = picked_object.parent;
+
+                        attach(picked_object);
+
+                        raycastHit = true;
+
+                        break;
+                    }
+                } 
+                if (!raycastHit)
+                    detach();
     }
 
     }).on('mousedown', function(event) {
@@ -175,7 +313,6 @@ $('#glcontainer').on('mousedown', function(event) {
     });
 
     detach();    
-    clearScene();
     recalculate_graph(parsed_graph);
     return;
 
@@ -194,6 +331,8 @@ $('#glcontainer').on('mousedown', function(event) {
                         }
 
                         var picking_port = false;
+
+                        console.log(intersects[i].object.userData.type);
 
                         for (var j = 1; j < picked_object.children.length - 1; ++j) {
                             picked_object.children[j].visible = true;
@@ -291,7 +430,6 @@ else if (event.keyCode == 9) { // TAB
                 if (parsed_result.hasOwnProperty("metadata")) {
                     if (parsed_result.metadata.generator === "OCT3D") {
                         object_controls.detach();
-                        clearScene();
                     }
 
                     model = JSON.parse(fileReader.result);
@@ -301,7 +439,6 @@ else if (event.keyCode == 9) { // TAB
                 
                 else if (parsed_result.length !== undefined || parsed_result.hasOwnProperty("children") && parsed_result.children[0].x !== undefined) {
                     object_controls.detach();
-                    clearScene();
                     graph = result;
                     parsed_graph = parsed_result;
                     if (parsed_graph.edges === undefined)
@@ -311,7 +448,6 @@ else if (event.keyCode == 9) { // TAB
                 }
                 else if (parsed_result.hasOwnProperty("id")) {
                     object_controls.detach();
-                    clearScene();
                     graph = result;
                     parsed_graph = parsed_result;
                     if (parsed_graph.edges === undefined)
@@ -493,7 +629,6 @@ fileReader.readAsBinaryString(file);
             edges.removeValue("id", picked_object.userData.id);
             scene.remove(picked_object);
             detach();
-            clearScene();
             recalculate_graph(parsed_graph);
 
             return;   
@@ -514,7 +649,6 @@ fileReader.readAsBinaryString(file);
 
         scene.remove(picked_object);
         detach();
-        clearScene();
         recalculate_graph(parsed_graph);
     };
 
@@ -561,6 +695,9 @@ fileReader.readAsBinaryString(file);
             object_controls = object_controls_3d;
 
         }
+    };
+    manualMode.onclick = function() {
+        manual_mode = manualMode.checked;
     };
 
     window.addEventListener('resize', function() {
