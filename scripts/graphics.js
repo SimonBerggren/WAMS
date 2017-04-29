@@ -579,7 +579,7 @@ fileReader.readAsBinaryString(file);
 
     saveButton.onclick = function() {
         var file = new File([JSON.stringify
-            (parsed_graph)], parsed_graph.id + ".json", {type: "text/plain;charset=utf-8"});
+            (parsed_graph, null, '  ')], parsed_graph.id + ".json", {type: "text/plain;charset=utf-8"});
         saveAs(file);
     };
 });
