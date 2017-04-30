@@ -3,6 +3,16 @@ WAMS Plan
 + means done
 
 Highest priority in priority order (preferably before Tuesday):
+- use special highlight of ports when one port is selected
++ allow panning on mobile device
+  - make it possible to create a small model  
+  - enable loading of icons
+- remove the x- and y-axis arrows when in 2D Object Control Mode
++ two layout modes: auto, manual
+  - make new layout when changing to aumatomatic mode
+- draw a connection line immediately when a connection is made
+- adjust connections lines when a component is moved (add one new line segment for all connection lines)
+
 + cloning and connecting
   + fixing reported problems
 + selection of connection
@@ -15,16 +25,12 @@ Highest priority in priority order (preferably before Tuesday):
   - scaling is not consistent with cursor movement
 + make sure ports are shown (also when label not present) DONE?
 + allow cloning and connecting on mobile device
-+ allow panning on mobile device
 + cloning by Cntrl+drag
 + allow connection by directly clicking on port without first selection of component
-+ two layout modes: auto, manual
-  - make new layout when changing to aumatomatic mode
-- draw a connection line immediately when a connection is made
-- adjust connections lines when a component is moved (add one new line segment for all connection lines)
 + give the cloned component unique name (among siblings), e.g. by adding sequence number: name_1, name_2
 
 Middle priority in priority order (beginning of next week):
+- when in 2D Object Control Mode, make the drag plane larger (all quadrants)
 - put connection lines that are not in the same connection set on different z-level (in order that crossings is handled correct visually)
 - Arrow left/right for rotation +/- 90 degrees (on touch screen?)
 - proper reset when loading new file (also reloading the same file)
