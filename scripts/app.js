@@ -445,16 +445,15 @@ var detach = function() {
 
         // if detaching component, reset port color and component opacity
 
-        if (picked_port !== undefined) {
-            picked_port.setColor(portColor);
-            picked_port = undefined;
-        }
-
-        picking_port = false;
-        setPortsVisible(false);
-
         picked_object.setOpacity(1.0);
     }
+
+    if (picked_port !== undefined) {
+        picked_port.setColor(portColor);
+        picked_port = undefined;
+    }
+
+    setPortsVisible(false);
 
     picked_object = undefined;
 };
@@ -519,34 +518,6 @@ cloneButton.onclick = function() {
         // move new object a bit
         clone.position.y += copySpacing;
         clone.position.x += copySpacing;
-
-
-        // // copy all materials
-        // for (var i  = 0; i < c.children.length - 1; ++i) {
-        //     var child = c.children[i];
-        //     var orig_child = picked_object.children[i];
-        //     child.material = orig_child.material.clone();
-        //     if (orig_child.material.map !== null) {
-        //         child.material.map = orig_child.material.map.clone();
-        //         child.material.map.needsUpdate = true;
-        //     }
-        // }
-
-        // copy children: ports and text
-        // for (var i = 0; i < c.children.length; ++i) {
-        //     var port = c.children[i].userData;
-        //     if (port.type == "port") {
-
-
-
-
-
-        //     } else if (port.type == "text") {
-
-        //         // create new text with new ID
-
-        //     }
-        // }
 
         // copy label, can be done much better    
         clone.userData.labels[0] = clone.userData.id;
