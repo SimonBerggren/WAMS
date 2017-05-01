@@ -3,14 +3,14 @@ WAMS Plan
 + means done
 
 Highest priority in priority order (preferably before Tuesday):
-- use special highlight of ports when one port is selected
++ use special highlight of ports when one port is selected
 + allow panning on mobile device
   - make it possible to create a small model  
   - enable loading of icons
-- remove the x- and y-axis arrows when in 2D Object Control Mode
++ remove the x- and y-axis arrows when in 2D Object Control Mode
 + two layout modes: auto, manual
-  - make new layout when changing to aumatomatic mode
-- draw a connection line immediately when a connection is made
+  + make new layout when changing to aumatomatic mode
+- draw a connection line immediately when a connection is made	
 - adjust connections lines when a component is moved (add one new line segment for all connection lines)
 
 + cloning and connecting
@@ -19,8 +19,8 @@ Highest priority in priority order (preferably before Tuesday):
   + stronger highligt for selected connection
   - Make it easier to select connection, i.e. not having to be so precise.
 + saving resulting model in JSON file
-  - allow loading again
-  - allow loading with icons
+  + allow loading again
+  + allow loading with icons
 + scaling has too large gain
   - scaling is not consistent with cursor movement
 + make sure ports are shown (also when label not present) DONE?

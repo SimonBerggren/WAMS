@@ -18,6 +18,8 @@ var clearColor = "oldlace";
 var subsystemColor = "blue";
 var connectionColor = "gray";
 var connectionSelectedColor = "red";
+var portColor = "blue";
+var portSelectedColor = "red";
 
 var cameraFrontClip = 1;
 var cameraBackClip = 20000;
@@ -35,7 +37,7 @@ var windowHeight = window.innerHeight * windowHeightPercentage;
 var showingStats = false;
 var manual_mode = false;
 
-var scalingStep = 20; // higher = smaller steps
+var scalingStep = 40; // higher = smaller steps
 
 var camera = undefined;
 var scene = undefined;

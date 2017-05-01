@@ -28,7 +28,6 @@ var picked_port = undefined;
 var matched_port = undefined;
 var picked_object = undefined;
 var graph = undefined;
-var parsed_graph = undefined;
 var model = undefined;
 var port_found = false;
 
@@ -111,43 +110,48 @@ $('#glcontainer').on('mousedown', function(event) {
 }).on('touchend', function(e) {
     var event = e.originalEvent;
     if (event.changedTouches.length == 1)
-        CheckRaycast(true)
+        pointerUp(true)
     }).on('mousedown', function(event) {
         pointerDown();
     }).on('mousemove', function(event) {
         pointerMove();
     }).on('mouseup', function(event) {
-        CheckRaycast(false);        
+        pointerUp(false);        
     }).append(renderer.domElement);
 
 function pointerMove() {
-        var timeMove = new Date().getTime();
-        timeDownUp += 10;
-        if (timeMove > timeDownUp) {
-            if (mouseDown) {
-                mouseMoved = true;
-            }
-        } else {
-            timeDownUp = null;
-            mouseMoved = false;
+    var timeMove = new Date().getTime();
+    timeDownUp += 10;
+    if (timeMove > timeDownUp) {
+        if (mouseDown) {
+            mouseMoved = true;
         }
+    } else {
+        timeDownUp = null;
+        mouseMoved = false;
+    }
 };
 
-    function pointerDown() {
-        timeDownUp = new Date().getTime();
+function pointerDown() {
+    timeDownUp = new Date().getTime();
+    mouseMoved = false;
+    mouseDown = true;
+};
+
+function pointerUp(touch) {
+    timeDownUp = new Date().getTime();
+
+    mouseDown = false;
+    if (mouseMoved) {
         mouseMoved = false;
-        mouseDown = true;
-    };
+        return;
+    }
+    CheckRaycast(touch);
+}
 
 function CheckRaycast(touch) {
     var center = touch ? input.getTouchCenterized() : input.getMouseCenterized();
-            timeDownUp = new Date().getTime();
 
-        mouseDown = false;
-        if (mouseMoved) {
-            mouseMoved = false;
-            return;
-        }
             var raycaster = new THREE.Raycaster();
             camera.updateProjectionMatrix();
             raycaster.setFromCamera(center, camera);
@@ -158,7 +162,9 @@ function CheckRaycast(touch) {
                 var object = intersects[i].object;
                 var obj_data = object.userData;
 
-                if (obj_data.pickable) {
+                if (!obj_data.pickable) {
+                    continue;
+                }
 
                     if (obj_data.type == "edge") {
 
@@ -178,22 +184,21 @@ function CheckRaycast(touch) {
 
                         // if we already have one port and want to connect another
                         if (picked_port !== undefined) {
-                            console.log(manual_mode);
+                            
+                            var picked_edge = picked_port.userData;
+                            var matched_edge = obj_data;
 
-                        var picked_edge = picked_port.userData;
-                        var matched_edge = obj_data;
-
-                        parsed_graph.edges.push({
-                            id:(parsed_graph.edges.length + 1).toString(),
-                            source:picked_edge.source,
-                            sourcePort:picked_edge.id,
-                            target:matched_edge.source,
-                            targetPort:matched_edge.id
-                        });
+                            graph.edges.push({
+                                id:(graph.edges.length + 1).toString(),
+                                source:picked_edge.source,
+                                sourcePort:picked_edge.id,
+                                target:matched_edge.source,
+                                targetPort:matched_edge.id
+                            });
             
-                        detach();
-                        if (!manual_mode)
-                            calculate_graph(parsed_graph);
+                            detach();
+                            if (!manual_mode)
+                                calculate_graph(graph);
 
                         } else {
 
@@ -203,7 +208,7 @@ function CheckRaycast(touch) {
                                 picked_object = picked_object.parent;
 
                             picked_port = object;
-                            picked_port.material.opacity = 0.5;
+                            picked_port.material.color.set(portSelectedColor);
                         }
 
                         raycastHit = true;
@@ -225,7 +230,6 @@ function CheckRaycast(touch) {
                         if (input.isKeyDown(17)) {
                             cloneButton.click();
                         }
-                    }
                     }
                 } 
                 if (!raycastHit)
@@ -256,62 +260,67 @@ else if (event.keyCode == 9) { // TAB
 }
 })
 
+// this runs when a file is loaded, it needs some work 
+// as well as consistent file conventions to determine what type of file is loaded
     $('#file').change( function(e) {
-        var file = e.target.files[0];
-        if (file !== undefined) {
-            file_name = file.name;
 
-            if (file.name.indexOf("_Fixed") != -1) {
+        var file = e.target.files[0];
+        if (file === undefined) 
+            return;
+        console.log(file);
+        file_name = file.name;
+
+        fileReader.onload = function(readFile) {
+            playButton.classList.add("disabled");
+            pauseButton.classList.add("disabled");
+            stopButton.classList.add("disabled");
+
+            var result = fileReader.result;
+            var parsed_result = undefined;
+            try {
+                var parsed = JSON.parse(result);
+                parsed_result = parsed;
+            } catch(err) {
+                alert("WAMS: " + err);
+            }
+            if (parsed_result === undefined)
+                return;
+
+            if (parsed_result.hasOwnProperty("metadata")) {
+                if (parsed_result.metadata.generator === "OCT3D") {
+                    object_controls.detach();
+                }
+
+                model = parsed_result;
+                addModel(model);
+                console.log("Model loaded");
+
+            } else if (file.name.indexOf("_Fixed") != -1) {
+
                 if (!manual_mode)
                     manualMode.click();
-            } else if (manual_mode)
-                manualMode.click();
 
-            fileReader.onload = function(readFile) {
-                playButton.classList.add("disabled");
-                pauseButton.classList.add("disabled");
-                stopButton.classList.add("disabled");
+                object_controls.detach();
+                graph = parsed_result;
+                if (graph.edges === undefined)
+                    graph.edges = [];
+                display_graph(graph);
+                console.log("Ready graph loaded");
 
-                var result = fileReader.result;
-                var success = false;
-                try {
-                    var parsed_result = JSON.parse(result);
-                    success = true;
-                } catch(err) {
-                    alert("WAMS: " + err);
-                }
-                if (!success)
-                    return;
+                } else if (parsed_result.hasOwnProperty("id")) {
 
-                if (parsed_result.hasOwnProperty("metadata")) {
-                    if (parsed_result.metadata.generator === "OCT3D") {
-                        object_controls.detach();
-                    }
+                    if (manual_mode)
+                        manualMode.click();
 
-                    model = JSON.parse(fileReader.result);
-                    addModel(model);
-                    console.log("Model loaded");
-                }
-                
-                else if (parsed_result.length !== undefined || parsed_result.hasOwnProperty("children") && parsed_result.children[0].x !== undefined) {
                     object_controls.detach();
-                    graph = result;
-                    parsed_graph = parsed_result;
-                    if (parsed_graph.edges === undefined)
-                        parsed_graph.edges = [];
-                    display_graph(parsed_graph);
-                    console.log("Ready graph loaded");
-                }
-                else if (parsed_result.hasOwnProperty("id")) {
-                    object_controls.detach();
-                    graph = result;
-                    parsed_graph = parsed_result;
-                    if (parsed_graph.edges === undefined)
-                        parsed_graph.edges = [];
-                    calculate_graph(parsed_graph);
+                    graph = parsed_result;
+                    if (graph.edges === undefined)
+                        graph.edges = [];
+                    calculate_graph(graph);
                     console.log("Graph loaded");
-                }
-                else {
+
+                } else {
+                    
                     if (model === undefined) {
                         alert("Please load a model first!");
                         return;
@@ -325,12 +334,47 @@ else if (event.keyCode == 9) { // TAB
                     stopButton.classList.remove("disabled");                
                 }
 };
+
 detach();
 fileReader.readAsBinaryString(file);
-}
+
+// allows same file to be loaded again
+this.value = null;
+
 });
 
-    var attach = function(obj) {
+// called when icons file is uploaded via Browse Icons
+$('#icons').change(function(e) {
+
+    var file = e.target.files[0];
+    if (file === undefined) 
+        return;
+
+fileReader.onload = function(readFile) {
+
+    var result = fileReader.result;
+    var success = false;
+    var parsed_result = undefined;
+
+    try {
+        var parsed = JSON.parse(result);
+        parsed_result = parsed;
+    } catch(err) {
+        alert("WAMS: " + err);
+    }
+
+    if (parsed_result === undefined)
+        return;
+    
+    parseIconsFile(parsed_result);
+
+};
+
+fileReader.readAsBinaryString(file);
+
+});
+
+var attach = function(obj) {
         cloneButton.classList.remove("disabled");
         deleteButton.classList.remove("disabled");
         rotateButton.classList.remove("disabled");
@@ -345,23 +389,21 @@ fileReader.readAsBinaryString(file);
         if (type == "edge") {
 
         object_controls.detach();
-        function set_opacity(o) {
-                for (var i = 0; i < o.children.length; ++i) {
+        function set_material_color(_object, _color) {
+                for (var i = 0; i < _object.children.length; ++i) {
                     var c = o.children[i];
                     if (c.material !== undefined)
-                        c.material.color.set(connectionSelectedColor);
+                        c.material.color.set(c);
                     if (c.children !== undefined)
-                        set_opacity(c);
+                        set_color(c);
                 }
         }
-        set_opacity(picked_object);
+        set_color(picked_object, connectionSelectedColor);
 
         // picking port or component
         } else {
 
-            var obj = picked_object.children[0];
-
-        function loop(o) {
+            function loop(o) {
                 for (var i = 0; i < o.children.length; ++i) {
                     var c = o.children[i];
                     if (c.children !== undefined)
@@ -371,17 +413,14 @@ fileReader.readAsBinaryString(file);
                         c.material.opacity = 0.5;
                     }
                 }
-        }
+            }
+
+            var obj = picked_object.children[0];
 
             if (obj.children.length === 0)
                 obj.material.opacity = 0.5;
             else
                 loop(obj);
-
-        // for(var i = 0; i < picked_object.children.length; ++i) {
-        //     if (picked_object.children[i].userData.type == "port")
-        //         picked_object.children[i].visible = true;
-        // }
         }
 
         };
@@ -389,7 +428,7 @@ fileReader.readAsBinaryString(file);
         // detaches controls from an object
         var detach = function() {
 
-            if (picked_object === undefined) return;    
+            if (picked_object === undefined) return; 
 
             // disable control buttons
             cloneButton.classList.add("disabled");
@@ -403,27 +442,25 @@ fileReader.readAsBinaryString(file);
             }
             var type = picked_object.userData.type;
 
-                if (type == "edge") {
+            if (type == "edge") {
 
-                    object_controls.detach();
-                    function set_color(o) {
-                            for (var i = 0; i < o.children.length; ++i) {
-                                var c = o.children[i];
-                                if (c.material !== undefined)
-                                    c.material.color.set(connectionColor);
-                                if (c.children !== undefined)
-                                    set_color(c);
-                            }
+                function set_color(o) {
+                    for (var i = 0; i < o.children.length; ++i) {
+                        var c = o.children[i];
+                        if (c.material !== undefined)
+                            c.material.color.set(connectionColor);
+                        if (c.children !== undefined)
+                            set_color(c);
                     }
-                    set_color(picked_object);
+                }
+                set_color(picked_object);
 
-                } else {
+            } else {
 
                 if (picked_port !== undefined) {
-                    picked_port.material.opacity = 1.0;
+                    picked_port.material.color.set(portColor);
                     picked_port = undefined;
                 }
-                var obj = picked_object.children[0];
 
                 function reset_opacity(o) {
                     for (var i = 0; i < o.children.length; ++i) {
@@ -438,11 +475,6 @@ fileReader.readAsBinaryString(file);
                 }
 
                 reset_opacity(picked_object);
-            
-                // for(var i = 0; i < picked_object.children.length; ++i) {
-                //     if (picked_object.children[i].userData.type == "port")
-                //         picked_object.children[i].visible = false;
-                // }
             }
 
             picked_object = undefined;
@@ -478,73 +510,81 @@ fileReader.readAsBinaryString(file);
 
             c.userData.id = newId;
 
-            var portIDs = [];
-
-            for (var i = 1; i < c.children.length - 1; ++i) {
+            for (var i = 0; i < c.children.length; ++i) {
                 var port = c.children[i].userData;
-                var newPortId = port.id.split('.');
-                newPortId[0] = newId;
-                newPortId = newPortId.join('.');
-                port.id = newPortId.toString();
-                port.source = newId.toString();
-                c.userData.ports[i - 1].id = newPortId;
-                c.userData.ports[i - 1].source = newId;
-                ports.push(c.children[i]);
-            }    
-
-            c.remove(c.children[c.children.length - 1]);
+                if (port.type == "port") {
+                    var newPortId = port.id.split('.');
+                    newPortId[0] = newId;
+                    newPortId = newPortId.join('.');
+                    port.id = newPortId.toString();
+                    port.source = newId.toString();
+                    c.userData.ports[i - 1].id = newPortId;
+                    c.userData.ports[i - 1].source = newId;
+                    ports.push(c.children[i]);
+                } else if (port.type == "text") {
+                    c.remove(port);
+                    var t = text(newId);
+                    t.userData.type = "text";
+                    scene.add(t);
+                }
+            }
+            // copy label, can be done much better    
             c.userData.labels[0] = c.userData.id;
-            c.add(text(newId,0,0));
-            scene.add(c);
+
             detach();
             attach(c);
-            parsed_graph.children.push(c.userData);
-        
+            graph.children.push(c.userData);
     };
 
-    deleteButton.onclick = function() {
+    // removes an object from the graph
+    function deleteObject(_object) {
 
-        var edges = parsed_graph.edges;
+        var edges = graph.edges;
+        var type = _object.userData.type;
+        var id = _object.userData.id;
 
-        var type = picked_object.userData.type;
         if (type == "edge") {
 
-            edges.removeValue("id", picked_object.userData.id);
-            scene.remove(picked_object);
-            detach();
-            if (!manual_mode)
-                calculate_graph(parsed_graph);
+            // remove edge from graph
+            edges.removeValue("id", id);
 
-            return;   
+        } else {
+
+            // remove edges connected to component
+            // start from end because we're removing objects
+            for (var i = edges.length - 1; i >= 0; --i) {
+                var e = edges[i];
+                if (e.source == id || e.target == id)
+                    edges.removeValue("id", e.id);
+            }
+
+            // remove component from graph
+            graph.children.removeValue("id", id);
+
         }
 
-        for (var i = edges.length - 1; i >= 0; --i) {
-            if (edges[i].source === picked_object.userData.id ||
-                edges[i].target === picked_object.userData.id)
-                edges.removeValue("id", edges[i].id);
-        }
-
-        parsed_graph.children.removeValue("id", picked_object.userData.id);
-
-        var r = /\d+/g;
-        var s = picked_object.userData.id;
-        var newId = s.replace(/\d+/g, '');
-        IDs[newId]--;
-
-        scene.remove(picked_object);
+        scene.remove(_object);
         detach();
 
-            if (!manual_mode)
-                calculate_graph(parsed_graph);
+        if (!manual_mode)
+            calculate_graph(graph);
     };
 
     rotateButton.onclick = function() {
         picked_object.rotateZ(Math.PI / 2);
-        for (var i = 1; i < picked_object.children.length - 1; ++i) {
-            var data = picked_object.children[i].userData;
-            data.properties["de.cau.cs.kieler.portSide"] = rotatePortside(data.properties["de.cau.cs.kieler.portSide"]);
+        for (var i = 0; i < picked_object.children.length; ++i) {
+            var child = picked_object.children[i].userData;
+
+            if (child.type == "port") {
+
+                child.properties["de.cau.cs.kieler.portSide"] = rotatePortside(child.properties["de.cau.cs.kieler.portSide"]);
+
+            } else if (child.type == "text") {
+
+                picked_object.children[i].rotation.z = -picked_object.rotation.z;
+
+            }
         }
-        picked_object.children[picked_object.children.length - 1].rotation.z = -picked_object.rotation.z;
     };
 
     var rotatePortside = function(portSide) {
@@ -557,7 +597,9 @@ fileReader.readAsBinaryString(file);
         else if (portSide == "SOUTH")
             return "WEST";
     };
-
+    deleteButton.onclick = function() {
+        deleteObject(picked_object);        
+    };
     playButton.onclick = function() {
         animator.play();
     };
@@ -584,6 +626,9 @@ fileReader.readAsBinaryString(file);
     };
     manualMode.onclick = function() {
         manual_mode = manualMode.checked;
+        if (!manual_mode) {
+            calculate_graph(graph);
+        }
     };
 
     window.addEventListener('resize', function() {
@@ -602,7 +647,7 @@ fileReader.readAsBinaryString(file);
 
     saveButton.onclick = function() {
         var file = new File([JSON.stringify
-            (parsed_graph, null, '  ')], parsed_graph.id + ".json", {type: "text/plain;charset=utf-8"});
+            (graph, null, '  ')], graph.id + ".json", {type: "text/plain;charset=utf-8"});
         saveAs(file);
     };
 });
