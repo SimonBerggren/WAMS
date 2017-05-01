@@ -4,8 +4,6 @@ var Animator = function () {
 	var animation = undefined;
 	var playing_animation = false;
 	var looping = true;
-	var looping_bounce = false;
-	var animation_backwards = false;
 	var animated_objects = [];
 	var animated_object_names = [];
 	var frame = 0;
@@ -20,30 +18,33 @@ var Animator = function () {
           		var child = parent.children[i];
           		if (child.children !== undefined && child.children.length > 0)
             		loop_children(child, func);
-          		else
+          		
             		func(child);
         	}
 		};
 
 		animated_object_names = [];
-      	loop_children(model.object, function(child) {
+  	loop_children(model.object, function(child) {
         	animated_object_names.push(child.name);
       	});
 
+
       	animated_objects = [];
       	loop_children(scene, function(child) {
-          for (var i = 0; i < animated_object_names.length; ++i)
-            if (child.name.id === animated_object_names[i]) {
+          for (var i = 0; i < animated_object_names.length; ++i) {
+              if (child.name === animated_object_names[i]) {
                 animated_objects.push(child);
                 animated_object_names.splice(i, 1);
       	      break;
       	  }
+        }
       	});
 
       	//slider.setAttribute("max", animation.time[animation.time.length - 1]);
       	//slider.refresh();
       	//slider.enable();
       	frame = delta = 0;
+        console.log(animated_objects);
   	};
 
 	var update = function (deltaTime) {
@@ -54,10 +55,13 @@ var Animator = function () {
       if (frame < animation.time.length) {
         for (var i = 0; i < animated_objects.length; ++i) {
           var obj = animated_objects[i];
-          var name = obj.name.id;
-          var m = JSON.parse(animation[name][frame]);
-          obj.matrixAutoUpdate = false;
-          obj.matrix.elements.set(m);
+          var name = obj.name;
+          var anim = animation[name];
+          if (anim !== undefined) {
+            var m = JSON.parse(anim[frame]);
+            obj.matrixAutoUpdate = false;
+            obj.matrix.elements.set(m);
+          }
         }; 
       }
 
@@ -88,17 +92,9 @@ var Animator = function () {
 	var stop = function () {
 		playing_animation = false;
 		frame = delta = 0;
-    slider.setValue(cc = cl = 0);
+    // slider.setValue(cc = cl = 0);
     console.log("stop");
 	};
-
-  $('#looping').click( function(e) {
-    looping = e.target.checked;
-    if (!looping && looping_bounce)
-      document.getElementById("bouncing").click();
-  });
-
-  
 
   playButton.onclick = function() {
       play();

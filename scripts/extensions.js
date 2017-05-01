@@ -46,6 +46,23 @@ THREE.Object3D.prototype.setType = function(_type) {
 	setTypeChild(this);
 };
 
+THREE.Object3D.prototype.setName = function(_name) {
+	
+	function setNameChild(child) {
+
+		child.name = _name;
+
+		if (child.children !== undefined) {
+
+			for (var i = 0; i < child.children.length; ++i) {
+
+				setNameChild(child.children[i]);
+			}
+		}
+	};
+	setNameChild(this);
+};
+
 THREE.Object3D.prototype.setOpacity = function(_opacity) {
 	
 	function setOpacityChild(child) {

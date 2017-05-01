@@ -117,8 +117,6 @@ function displayParsedGraph(graph) {
 		components = graph.children;
 		edges = graph.edges;
 
-		console.log(url);
-		
 		$.get(url)
 
 		// if there is an icons file
@@ -472,9 +470,9 @@ function parseJson(_object) {
 };
 
 // adds a 3D model to the scene, scales to 100 because test models are very small
-function addModel(model) {
+function addModel(_model) {
 	var scale = 100;
-	var obj = objloader.parse(model);
+	var obj = objloader.parse(_model);
 	obj.scale.x = obj.scale.y = obj.scale.z = scale;
 	obj.setPickable();
 	scene.add(obj);

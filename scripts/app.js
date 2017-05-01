@@ -51,6 +51,7 @@ renderer.setSize(windowWidth, windowHeight);
 camera = new THREE.PerspectiveCamera( camerFieldOfView, windowWidth / windowHeight, cameraFrontClip, cameraBackClip );
 camera_controls = new THREE.OrbitControls(camera, renderer.domElement);
 camera_controls.addEventListener('change', function() { renderer.render(scene, camera); }); 
+camera_controls.setResetPosition(0,0);
 
 // set up lights
 
@@ -304,6 +305,7 @@ else if (event.keyCode == 9) { // TAB
 
                 model = parsed_result;
                 addModel(model);
+                camera_controls.reset();
 
             } else if (parsed_result.hasOwnProperty("id")) {
 
@@ -464,8 +466,6 @@ cloneButton.onclick = function() {
         // when cloning three js objects, materials and maps need to be explicitly cloned
         // otherwise they reference to the same map, resulting in two objects sharing i.e opacity
 
-        
-
         // generate a new ID, i.e Clutch1 -> Clutch2
         var r = /\d+/g;
         var s = picked_object.userData.id;
@@ -480,8 +480,6 @@ cloneButton.onclick = function() {
         for (var i = 0; i < clone.children.length; ++i) {
             var c = clone.children[i];
             var data = c.userData;
-
-
 
             if (data.type == "component") {
 
