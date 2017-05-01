@@ -12,6 +12,8 @@ var rotateButton = document.getElementById("rotate90");
 var controlMode = document.getElementById("2d-control-mode");
 var resetCameraButton = document.getElementById("resetCamera");
 
+var renderContainer = document.getElementById("glcontainer");
+
 // variabels used within app
 
 var mouseMoved = false;
@@ -91,22 +93,20 @@ function render() {
 
     stats.end();
 
+    renderContainer.focus();
+
     requestAnimationFrame(render);
 }
 
 // hook up events to canvas
 
-$('#glcontainer').on('mousedown', function(event) {
-    mouseDown = true;
-}).on('touchstart', function(e) {
-    e.preventDefault();
+$('#glcontainer').on('touchstart', function(e) {
     pointerDown();    
 }).on('touchmove', function(e) {
     pointerMove();
 }).on('touchend', function(e) {
     pointerUp(true, e.originalEvent)
 }).on('mousedown', function(e) {
-    e.preventDefault();
     pointerDown();
 }).on('mousemove', function(e) {
     pointerMove();
@@ -474,6 +474,7 @@ cloneButton.onclick = function() {
         newId = newId + num;
 
         var clone = picked_object.clone();
+        scene.add(clone);
         clone.userData.id = newId;
 
         for (var i = 0; i < clone.children.length; ++i) {
@@ -503,6 +504,8 @@ cloneButton.onclick = function() {
                 data.source = newId.toString();
                 clone.userData.ports[i - 1].id = newPortId;
                 clone.userData.ports[i - 1].source = newId;
+
+                // add to all ports
                 ports.push(clone.children[i]);                
 
             } else if (data.type == "text") {
@@ -523,10 +526,10 @@ cloneButton.onclick = function() {
         clone.userData.labels[0] = clone.userData.id;
 
         // detach old object, attach new and add cloned component to graph
+        
         detach();
         attach(clone);
         graph.children.push(clone.userData);
-        scene.add(clone);
 };
 
 // removes an object from the graph
