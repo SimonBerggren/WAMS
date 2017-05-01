@@ -92,32 +92,20 @@ function render() {
 }
 
 $('#glcontainer').on('mousedown', function(event) {
-
     mouseDown = true;
-
 }).on('touchstart', function(e) {
-    var event = e.originalEvent;
-    if (event.changedTouches.length == 1) {
-        pointerDown();
-    }
-
+    pointerDown();    
 }).on('touchmove', function(e) {
-
-    if(event.changedTouches.length == 1)  {
-        pointerMove();
-    }
-
+    pointerMove();
 }).on('touchend', function(e) {
-    var event = e.originalEvent;
-    if (event.changedTouches.length == 1)
-        pointerUp(true)
-    }).on('mousedown', function(event) {
-        pointerDown();
-    }).on('mousemove', function(event) {
-        pointerMove();
-    }).on('mouseup', function(event) {
-        pointerUp(false);        
-    }).append(renderer.domElement);
+    pointerUp(true, e.originalEvent)
+}).on('mousedown', function(event) {
+    pointerDown();
+}).on('mousemove', function(event) {
+    pointerMove();
+}).on('mouseup', function(event) {
+    pointerUp(false);        
+}).append(renderer.domElement);
 
 function pointerMove() {
     var timeMove = new Date().getTime();
@@ -138,7 +126,7 @@ function pointerDown() {
     mouseDown = true;
 };
 
-function pointerUp(touch) {
+function pointerUp(touch, event) {
     timeDownUp = new Date().getTime();
 
     mouseDown = false;
@@ -146,7 +134,8 @@ function pointerUp(touch) {
         mouseMoved = false;
         return;
     }
-    CheckRaycast(touch);
+    if (!touch || touch && event.changedTouches.length == 1)
+        CheckRaycast(touch);
 }
 
 function CheckRaycast(touch) {
@@ -365,7 +354,7 @@ fileReader.onload = function(readFile) {
 
     if (parsed_result === undefined)
         return;
-    
+
     parseIconsFile(parsed_result);
 
 };

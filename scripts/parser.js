@@ -116,6 +116,8 @@ function displayParsedGraph(graph) {
 		minX = maxX = minY = maxY = 0;
 		components = graph.children;
 		edges = graph.edges;
+
+		console.log(url);
 		
 		$.get(url)
 
