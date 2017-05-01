@@ -251,7 +251,7 @@ function graphToScene(_components, _edges, parent) {
 		var bottom_component = false;
 
 		if (c.children !== undefined) {
-			get_comps(c.children, c.edges, c);
+			graphToScene(c.children, c.edges, c);
 		} else {
 			bottom_component = true;
 		}
