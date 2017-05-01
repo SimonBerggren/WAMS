@@ -45,3 +45,39 @@ THREE.Object3D.prototype.setType = function(_type) {
 	};
 	setTypeChild(this);
 };
+
+THREE.Object3D.prototype.setOpacity = function(_opacity) {
+	
+	function setOpacityChild(child) {
+
+		if (child.material !== undefined)
+			child.material.opacity = _opacity;
+
+		if (child.children !== undefined) {
+
+			for (var i = 0; i < child.children.length; ++i) {
+
+				setOpacityChild(child.children[i]);
+			}
+		}
+	};
+	setOpacityChild(this);
+};
+
+THREE.Object3D.prototype.setColor = function(_color) {
+	
+	function setColorChild(child) {
+
+		if (child.material !== undefined)
+			child.material.color.set(_color);
+
+		if (child.children !== undefined) {
+
+			for (var i = 0; i < child.children.length; ++i) {
+
+				setColorChild(child.children[i]);
+			}
+		}
+	};
+	setColorChild(this);
+};

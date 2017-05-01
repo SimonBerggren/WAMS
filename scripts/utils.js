@@ -45,13 +45,10 @@ function wireframe(x, y, w, h, c, z) {
 }
 
 // ports are made from planes, they are simply a solid coloured 2D plane
-function plane(x, y, w, h, c, z, opacity) {
-	opacity = opacity === undefined ? 1 : opacity;
+function plane(x, y, z, w, h, c) {
 	var geometry = new THREE.PlaneGeometry(w, h, 1, 1);
 	var material = new THREE.MeshLambertMaterial({color:c, transparent:true});
 	var plane = new THREE.Mesh(geometry, material);
-	material.opacity = opacity;
-	material.needsUpdate = true;
 	plane.position.set(x,y,z);
 	return plane;    
 }

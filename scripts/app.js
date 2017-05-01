@@ -1,5 +1,7 @@
 // main file, contains initialization, update and render loop
 
+// global elements from HTML
+
 var manualMode = document.getElementById("manual-mode");
 var saveButton = document.getElementById("save");
 
@@ -7,29 +9,19 @@ var cloneButton = document.getElementById("clone");
 var deleteButton = document.getElementById("delete");
 var rotateButton = document.getElementById("rotate90");
 
-var playButton = document.getElementById("play");
-var pauseButton = document.getElementById("pause");
-var stopButton = document.getElementById("stop");
-
 var controlMode = document.getElementById("2d-control-mode");
 var resetCameraButton = document.getElementById("resetCamera");
 
-resetScene = function() {
-    model = undefined;
-    animation = undefined;
-};
-var initTouch;
+// variabels used within app
 
 var mouseMoved = false;
 var mouseDown = false;
 
+var graph = undefined;
 var timeDownUp = null;
 var picked_port = undefined;
-var matched_port = undefined;
 var picked_object = undefined;
-var graph = undefined;
-var model = undefined;
-var port_found = false;
+var picking_port = false;
 
 var stats = new Stats();
 stats.showPanel( 0 );
@@ -37,42 +29,53 @@ stats.showPanel( 0 );
 if (showingStats)
     document.body.append(stats.dom);
 
+
+// main initialize function
+
 $(function() {
 
-    input = new Input();
-    scene = new THREE.Scene();
-    animator = new Animator();
+input = new Input();
+scene = new THREE.Scene();
+animator = new Animator();
 
-    var directionalLight = new THREE.DirectionalLight( directionalLightColor, directionalLightIntensity );
-    directionalLight.position.set(directionalLightPosition.x, directionalLightPosition.y, directionalLightPosition.z);
-    directionalLight.name={name:"important"};
-    scene.add(directionalLight);
-
-var light = new THREE.AmbientLight( ambientLightColor, ambientLightIntensity );
-light.name={name:"important"};
-scene.add(light);
+// set up renderer
 
 var renderer = new THREE.WebGLRenderer({alpha: true, antialias: true});
 renderer.setClearColor( clearColor, 1 );
 renderer.setSize(windowWidth, windowHeight);
 
-camera = new THREE.PerspectiveCamera( camerFieldOfView, windowWidth / windowHeight, cameraFrontClip, cameraBackClip );
+// set up camera and camera controls
 
+camera = new THREE.PerspectiveCamera( camerFieldOfView, windowWidth / windowHeight, cameraFrontClip, cameraBackClip );
 camera_controls = new THREE.OrbitControls(camera, renderer.domElement);
 camera_controls.addEventListener('change', function() { renderer.render(scene, camera); }); 
 
+// set up lights
+
+var directionalLight = new THREE.DirectionalLight( directionalLightColor, directionalLightIntensity );
+directionalLight.position.set(directionalLightPosition.x, directionalLightPosition.y, directionalLightPosition.z);
+directionalLight.userData.type = "static";
+scene.add(directionalLight);
+
+var light = new THREE.AmbientLight( ambientLightColor, ambientLightIntensity );
+light.userData.type = "static";
+scene.add(light);
+
+// set up object controls
+
 object_controls_2d = new THREE.TransformControls2D(camera, camera_controls, renderer.domElement);
-object_controls_2d.name={name:"important"};
-object_controls_2d.setOnMove(function(){mouseMoved = true;});
+object_controls_2d.userData.type = "static";
+object_controls_2d.setOnMove(function(){mouseMoved = true;});   // disable picking if using object controls
 scene.add(object_controls_2d);
 
 object_controls_3d = new THREE.TransformControls3D(camera, camera_controls, renderer.domElement);
-object_controls_3d.name={name:"important"};
-object_controls_3d.setOnMove(function(){mouseMoved = true;});
+object_controls_3d.userData.type = "static";
+object_controls_3d.setOnMove(function(){mouseMoved = true;});   // disable picking if using object controls
 scene.add(object_controls_3d);
 
 object_controls = object_controls_2d;
 
+// init delta time, start rendering
 var clock = new THREE.Clock();
 render();
 
@@ -91,6 +94,8 @@ function render() {
     requestAnimationFrame(render);
 }
 
+// hook up events to canvas
+
 $('#glcontainer').on('mousedown', function(event) {
     mouseDown = true;
 }).on('touchstart', function(e) {
@@ -108,6 +113,8 @@ $('#glcontainer').on('mousedown', function(event) {
 }).on('mouseup', function(e) {
     pointerUp(false);        
 }).append(renderer.domElement);
+
+// functions
 
 function pointerMove() {
     var timeMove = new Date().getTime();
@@ -140,6 +147,8 @@ function pointerUp(touch, event) {
         CheckRaycast(touch);
 }
 
+// casts a ray on click point
+// some repetetive code in here that needs cleanup
 function CheckRaycast(touch) {
     var center = touch ? input.getTouchCenterized() : input.getMouseCenterized();
 
@@ -148,6 +157,8 @@ function CheckRaycast(touch) {
             raycaster.setFromCamera(center, camera);
             var intersects = raycaster.intersectObjects(scene.children, true);
             var raycastHit = false;
+
+            // for each objects hit by raycast
             for (var i = 0; i < intersects.length; ++i) {
 
                 var object = intersects[i].object;
@@ -156,79 +167,83 @@ function CheckRaycast(touch) {
                 if (!obj_data.pickable) {
                     continue;
                 }
+                
+                if (obj_data.type == "port") {
 
-                    if (obj_data.type == "edge") {
+                    // if we already have one port and want to connect another
+                    // and other port is not part of same component
+                    if (picked_port !== undefined && object.parent !== picked_object) {
+                        
+                        var picked_edge = picked_port.userData;
+                        var matched_edge = obj_data;
+
+                        graph.edges.push({
+                            id:(graph.edges.length + 1).toString(),
+                            source:picked_edge.source,
+                            sourcePort:picked_edge.id,
+                            target:matched_edge.source,
+                            targetPort:matched_edge.id
+                        });
+        
+                        detach();
+                        if (!manual_mode)
+                            calculate_graph(graph);
+
+                    } else {
 
                         detach();
-
-                        picked_object = intersects[i].object;
-
+                        picked_object = object.parent;
                         while(picked_object.parent.type !== "Scene")
                             picked_object = picked_object.parent;
 
                         attach(picked_object);
 
-                        raycastHit = true;
-                        break;
+                        picked_port = object;
+                        picked_port.material.color.set(portSelectedColor);
 
-                    } else if (obj_data.type == "port") {
+                        setPortsVisible(true);
 
-                        // if we already have one port and want to connect another
-                        if (picked_port !== undefined && object.parent !== picked_object) {
-                            
-                            var picked_edge = picked_port.userData;
-                            var matched_edge = obj_data;
-
-                            graph.edges.push({
-                                id:(graph.edges.length + 1).toString(),
-                                source:picked_edge.source,
-                                sourcePort:picked_edge.id,
-                                target:matched_edge.source,
-                                targetPort:matched_edge.id
-                            });
-            
-                            detach();
-                            if (!manual_mode)
-                                calculate_graph(graph);
-
-                        } else {
-
-                            detach();
-                            picked_object = object.parent;
-                            while(picked_object.parent.type !== "Scene")
-                                picked_object = picked_object.parent;
-
-                            attach(picked_object);
-
-                            picked_port = object;
-                            picked_port.material.color.set(portSelectedColor);
-                        }
-
-                        raycastHit = true;
-                        break;
-
-                    } else if (obj_data.type == "component") {
-
-                        detach();
-
-                        picked_object = intersects[i].object;
-
-                        while(picked_object.parent.type !== "Scene")
-                            picked_object = picked_object.parent;
-
-                        attach(picked_object);
-
-                        raycastHit = true;
-
-                        if (input.isKeyDown(17)) {
-                            cloneButton.click();
-                        }
                     }
-                } 
-                if (!raycastHit)
-                    detach();
+
+                    raycastHit = true;
+                    break;
+                }                
+
+                detach();
+                
+                picked_object = intersects[i].object;
+
+                while(picked_object.parent.type !== "Scene")
+                    picked_object = picked_object.parent;
+
+                attach(picked_object);
+
+                raycastHit = true;
+
+                picking_port = true;
+
+                // if holding ctrl, clone component
+                if (obj_data.type == "component") {
+
+                    if (input.isKeyDown(17)) {
+                        cloneButton.click();
+                    }
+                }
+            break;
+            }
+
+            if (!raycastHit) {
+                detach();
+        }
 }
 
+function setPortsVisible(_visible) {
+    for(var i = 0; i < ports.length; ++i) {
+        ports[i].visible = _visible;
+    }
+}
+
+// short cuts
 $(document).on('keydown', function(event) {
 if (event.keyCode == 86) // V
     cloneButton.click();
@@ -262,7 +277,10 @@ else if (event.keyCode == 9) { // TAB
             return;
         file_name = file.name;
 
+        // set up callback for when reading file is complete
         fileReader.onload = function(readFile) {
+
+            // assume diagram, disable animation
             playButton.classList.add("disabled");
             pauseButton.classList.add("disabled");
             stopButton.classList.add("disabled");
@@ -278,6 +296,7 @@ else if (event.keyCode == 9) { // TAB
             if (parsed_result === undefined)
                 return;
 
+            // if file contains the metadata, assume 3D model
             if (parsed_result.hasOwnProperty("metadata")) {
                 if (parsed_result.metadata.generator === "OCT3D") {
                     object_controls.detach();
@@ -285,32 +304,29 @@ else if (event.keyCode == 9) { // TAB
 
                 model = parsed_result;
                 addModel(model);
-                console.log("Model loaded");
 
-            } else if (file.name.indexOf("_Fixed") != -1) {
+            } else if (parsed_result.hasOwnProperty("id")) {
 
-                if (!manual_mode)
-                    manualMode.click();
+                // if diagram
+                // detach any old 
 
                 object_controls.detach();
+
                 graph = parsed_result;
+
                 if (graph.edges === undefined)
                     graph.edges = [];
-                display_graph(graph);
-                console.log("Ready graph loaded");
 
-                } else if (parsed_result.hasOwnProperty("id")) {
+                // if file name contains _Fixed, we don't send the graph to Klay JS
+                manualMode.checked = manual_mode = file.name.indexOf("_Fixed") != -1;
 
-                    if (manual_mode)
-                        manualMode.click();
-
-                    object_controls.detach();
-                    graph = parsed_result;
-                    if (graph.edges === undefined)
-                        graph.edges = [];
+                if (manual_mode) {
+                    display_graph(graph);
+                } else {
                     calculate_graph(graph);
-                    console.log("Graph loaded");
+                }
 
+                // if we dont find metadata or id, assume animation to currently loaded model
                 } else {
                     
                     if (model === undefined) {
@@ -366,63 +382,50 @@ fileReader.readAsBinaryString(file);
 
 });
 
+// attaches control to an object
 var attach = function(obj) {
-        cloneButton.classList.remove("disabled");
-        deleteButton.classList.remove("disabled");
-        rotateButton.classList.remove("disabled");
-        object_controls.attach(obj);
-        picked_object = obj;
-        if (!display_graph) {
-                    return;
-        }
-        var type = picked_object.userData.type;
 
-        // picking edge
-        if (type == "edge") {
+    // enable controls
+    cloneButton.classList.remove("disabled");
+    deleteButton.classList.remove("disabled");
+    rotateButton.classList.remove("disabled");
+    object_controls.attach(obj);
+    picked_object = obj;
+
+    if (!display_graph) {
+        return;
+    }
+
+    // picking edge
+    if (picked_object.userData.type == "edge") {
+
+        // detach controls so user dont move edge, need to support this feature later
+        // update selected edge color
 
         object_controls.detach();
-        function set_material_color(_object, _color) {
-                for (var i = 0; i < _object.children.length; ++i) {
-                    var c = o.children[i];
-                    if (c.material !== undefined)
-                        c.material.color.set(c);
-                    if (c.children !== undefined)
-                        set_color(c);
-                }
+        picked_object.setColor(connectionSelectedColor);
+
+    // picking component, ports may not be attached
+    } else {
+
+        // set opacity for selected component
+        for (var i = 0; i < picked_object.children.length; ++i) {
+            var c = picked_object.children[i];
+            if (c.userData.type == "component") {
+                c.setOpacity(selectedComponentOpacity);
+            } else if (c.userData.type == "port")
+                c.visible = true;
         }
-        set_color(picked_object, connectionSelectedColor);
+    }
 
-        // picking port or component
-        } else {
-
-            function loop(o) {
-                for (var i = 0; i < o.children.length; ++i) {
-                    var c = o.children[i];
-                    if (c.children !== undefined)
-                        loop(c);
-
-                    if (c.material !== undefined) {
-                        c.material.opacity = 0.5;
-                    }
-                }
-            }
-
-            var obj = picked_object.children[0];
-
-            if (obj.children.length === 0)
-                obj.material.opacity = 0.5;
-            else
-                loop(obj);
-        }
-
-        };
+};
 
 // detaches controls from an object
 var detach = function() {
 
     if (picked_object === undefined) return; 
 
-    // disable control buttons
+    // disable controls
     cloneButton.classList.add("disabled");
     deleteButton.classList.add("disabled");
     rotateButton.classList.add("disabled");
@@ -432,100 +435,127 @@ var detach = function() {
         picked_object = undefined;
         return;
     }
-    var type = picked_object.userData.type;
 
-    if (type == "edge") {
+    if (picked_object.userData.type == "edge") {
 
-        function set_color(o) {
-            for (var i = 0; i < o.children.length; ++i) {
-                var c = o.children[i];
-                if (c.material !== undefined)
-                    c.material.color.set(connectionColor);
-                if (c.children !== undefined)
-                    set_color(c);
-            }
-        }
-        set_color(picked_object);
+        // if detaching edge, only reset color
+        picked_object.setColor(connectionColor);
 
     } else {
 
+        // if detaching component, reset port color and component opacity
+
         if (picked_port !== undefined) {
-            picked_port.material.color.set(portColor);
+            picked_port.setColor(portColor);
             picked_port = undefined;
         }
 
-        function reset_opacity(o) {
-            for (var i = 0; i < o.children.length; ++i) {
-                var c = o.children[i];
-                if (c.children !== undefined)
-                    reset_opacity(c);
+        picking_port = false;
+        setPortsVisible(false);
 
-                    if (c.material !== undefined) {
-                        c.material.opacity = 1.0;
-                    }
-            }
-        }
-
-        reset_opacity(picked_object);
+        picked_object.setOpacity(1.0);
     }
 
     picked_object = undefined;
 };
 
+// need to clean this up
 cloneButton.onclick = function() {
 
-        var copy = picked_object.userData;
-        var c = picked_object.clone();
-        var map = picked_object.children[0].material.map.clone();
-        c.children[0].material = picked_object.children[0].material.clone();
-        c.children[0].material.map = map;
-        c.children[0].material.map.needsUpdate = true;
+        // when cloning three js objects, materials and maps need to be explicitly cloned
+        // otherwise they reference to the same map, resulting in two objects sharing i.e opacity
 
-        for (var i  = 0; i < c.children.length - 1; ++i) {
-            var child = c.children[i];
-            var orig_child = picked_object.children[i];
-            child.material = orig_child.material.clone();
-            if (orig_child.material.map !== null) {
-                child.material.map = orig_child.material.map.clone();
-                child.material.map.needsUpdate = true;
-            }
-        }
+        
 
-        c.position.y += copySpacing;
-        c.position.x += copySpacing;
-
+        // generate a new ID, i.e Clutch1 -> Clutch2
         var r = /\d+/g;
         var s = picked_object.userData.id;
         var newId = s.replace(/\d+/g, '');
         var num = IDs[newId]++;
         newId = newId + num;
 
-        c.userData.id = newId;
+        var clone = picked_object.clone();
+        clone.userData.id = newId;
 
-        for (var i = 0; i < c.children.length; ++i) {
-            var port = c.children[i].userData;
-            if (port.type == "port") {
-                var newPortId = port.id.split('.');
+        for (var i = 0; i < clone.children.length; ++i) {
+            var c = clone.children[i];
+            var data = c.userData;
+
+
+
+            if (data.type == "component") {
+
+                var material = picked_object.children[i].material.clone();
+                c.material = material;
+                c.material.map = material.map.clone();
+                c.material.map.needsUpdate = true;
+
+            } else if (data.type == "port") {
+
+                c.material = picked_object.children[i].material.clone();
+
+                // change port IDs
+                // i.e Clutch1.port = Clutch2.port
+
+                var newPortId = data.id.split('.');
                 newPortId[0] = newId;
                 newPortId = newPortId.join('.');
-                port.id = newPortId.toString();
-                port.source = newId.toString();
-                c.userData.ports[i - 1].id = newPortId;
-                c.userData.ports[i - 1].source = newId;
-                ports.push(c.children[i]);
-            } else if (port.type == "text") {
-                c.remove(port);
+                data.id = newPortId.toString();
+                data.source = newId.toString();
+                clone.userData.ports[i - 1].id = newPortId;
+                clone.userData.ports[i - 1].source = newId;
+                ports.push(clone.children[i]);                
+
+            } else if (data.type == "text") {
+
+                c.remove(c);
                 var t = text(newId);
                 t.userData.type = "text";
-                scene.add(t);
+                scene.add(t);                
+
             }
         }
-        // copy label, can be done much better    
-        c.userData.labels[0] = c.userData.id;
 
+        // move new object a bit
+        clone.position.y += copySpacing;
+        clone.position.x += copySpacing;
+
+
+        // // copy all materials
+        // for (var i  = 0; i < c.children.length - 1; ++i) {
+        //     var child = c.children[i];
+        //     var orig_child = picked_object.children[i];
+        //     child.material = orig_child.material.clone();
+        //     if (orig_child.material.map !== null) {
+        //         child.material.map = orig_child.material.map.clone();
+        //         child.material.map.needsUpdate = true;
+        //     }
+        // }
+
+        // copy children: ports and text
+        // for (var i = 0; i < c.children.length; ++i) {
+        //     var port = c.children[i].userData;
+        //     if (port.type == "port") {
+
+
+
+
+
+        //     } else if (port.type == "text") {
+
+        //         // create new text with new ID
+
+        //     }
+        // }
+
+        // copy label, can be done much better    
+        clone.userData.labels[0] = clone.userData.id;
+
+        // detach old object, attach new and add cloned component to graph
         detach();
-        attach(c);
-        graph.children.push(c.userData);
+        attach(clone);
+        graph.children.push(clone.userData);
+        scene.add(clone);
 };
 
 // removes an object from the graph
@@ -543,12 +573,19 @@ function deleteObject(_object) {
     } else {
 
         // remove edges connected to component
-        // start from end because we're removing objects
+        // start from end because we're removing objects and dont want to miss objects
         for (var i = edges.length - 1; i >= 0; --i) {
             var e = edges[i];
             if (e.source == id || e.target == id)
                 edges.removeValue("id", e.id);
         }
+
+        // for (var i = 0; i <  _object.children.length; ++i) {
+        //     var c = _object.children[i];
+        //     if (c.userData.type == "port") {
+        //         ports.removeValue( c);
+        //     }
+        // }
 
         // remove component from graph
         graph.children.removeValue("id", id);
@@ -593,15 +630,7 @@ var rotatePortside = function(portSide) {
 deleteButton.onclick = function() {
     deleteObject(picked_object);        
 };
-playButton.onclick = function() {
-    animator.play();
-};
-pauseButton.onclick = function() {
-    animator.pause();
-};
-stopButton.onclick = function() {
-    animator.stop();
-};
+
 controlMode.onclick = function() {
     if(controlMode.checked) {     // 2D
 

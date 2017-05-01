@@ -1,3 +1,7 @@
+var playButton = document.getElementById("play");
+var pauseButton = document.getElementById("pause");
+var stopButton = document.getElementById("stop");
+
 var translationButton = document.getElementById("translation");
 var rotationButton = document.getElementById("rotation");
 var scalingButton = document.getElementById("scaling");

@@ -227,8 +227,10 @@ function iconsLoaded() {
 
 	camera_controls.setResetPosition((maxX - minX) / 2,   windowHeight - ( (maxY - minY) / 2));
 
-	if (resetCamera)
+	if (resetCamera) {
 		camera_controls.reset();
+		resetCamera = false;
+	}
 };
 
 // parses the graph
@@ -333,9 +335,10 @@ function graphToScene(_components, _edges, parent) {
 				var pw = p.width;
 				var ph = p.height;
 				var px = p.x - w/2 + pw/2;
-				var py = -p.y + ( h/2 - ph/2 );
+				var py = -p.y + h/2 - ph/2;
+				var pz = portZpos;
+				var pin = plane(px, py, pz, pw * portScale, ph * portScale, portColor);
 
-				var pin = plane(px, py, pw, ph, 0x0000ff, 0.5, 1);
 				pin.userData = p;
 				pin.userData.source = name;
 				pin.visible = true;
@@ -343,6 +346,7 @@ function graphToScene(_components, _edges, parent) {
 				ports.push(pin);
 				group.add(pin);
 				pin.setType("port");
+				pin.visible = false;
 			}
 		}
 

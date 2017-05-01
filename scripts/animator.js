@@ -98,6 +98,18 @@ var Animator = function () {
       document.getElementById("bouncing").click();
   });
 
+  
+
+  playButton.onclick = function() {
+      play();
+  };
+  pauseButton.onclick = function() {
+      pause();
+  };
+  stopButton.onclick = function() {
+      stop();
+  };  
+
 	return {
 		addAnimation, addAnimation,
 		update: update,

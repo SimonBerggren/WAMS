@@ -1,34 +1,54 @@
 // contains global variables for easier tweaking
 
+// SCENE
+var clearColor = "oldlace";
 var copySpacing = 150;
+
+// DIRECTIONAL LIGHT
 
 var directionalLightPosition = {x: 0, y: 0, z: 10};
 var directionalLightColor = "white";
 var directionalLightIntensity = 0.7;
 
+// AMBIENT LIGHT
+
 var ambientLightColor = "white";
 var ambientLightIntensity = 0.5;
 
-var connectionSize = 2;
+
+// KLAY
+
 var klayAspect = 10;
 var graphSpacing = 50;
 var klayOptions = {spacing: graphSpacing, algorithm: "de.cau.cs.kieler.klay.layered", aspectRatio: klayAspect};
 
-var clearColor = "oldlace";
+// COMPONENTS, PORTS & CONNECTIONS
+
+var connectionSize = 2;
 var subsystemColor = "blue";
 var connectionColor = "gray";
 var connectionSelectedColor = "red";
 var portColor = "blue";
 var portSelectedColor = "red";
+var selectedComponentOpacity = 0.5;
+var portScale = 2;
+var portColor = "blue";
+var portZpos = 0.5;	// so ports dont clip with components
+
+// CAMERA
 
 var cameraFrontClip = 1;
 var cameraBackClip = 20000;
 var camerFieldOfView = 50;
 
-var textEnabled = true;
+// TEXT
+
+var textEnabled = false;
 var textOffsetX = 0;
 var textOffsetY = -110;
 var textSize = 20;
+
+// WINDOW
 
 var windowHeightPercentage = 0.85;
 var windowWidth = window.innerWidth;
@@ -43,6 +63,7 @@ var camera = undefined;
 var scene = undefined;
 var input = undefined;
 var animator = undefined;
+var model = undefined;
 var camera_controls_2d = undefined;
 var camera_controls_3d = undefined;
 var camera_controls = undefined;
@@ -69,8 +90,8 @@ var resetScene;
 
 var clearScene = function() {
 	for( var i = scene.children.length - 1; i >= 0; i--) { 
-		if (scene.children[i].name.name !== "important")
+		if (scene.children[i].userData.type !== "static")
 		scene.remove(scene.children[i]);
 	}
-	resetScene();
+	model = undefined;
 };
