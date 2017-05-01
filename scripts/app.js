@@ -94,16 +94,18 @@ function render() {
 $('#glcontainer').on('mousedown', function(event) {
     mouseDown = true;
 }).on('touchstart', function(e) {
+    e.preventDefault();
     pointerDown();    
 }).on('touchmove', function(e) {
     pointerMove();
 }).on('touchend', function(e) {
     pointerUp(true, e.originalEvent)
-}).on('mousedown', function(event) {
+}).on('mousedown', function(e) {
+    e.preventDefault();
     pointerDown();
-}).on('mousemove', function(event) {
+}).on('mousemove', function(e) {
     pointerMove();
-}).on('mouseup', function(event) {
+}).on('mouseup', function(e) {
     pointerUp(false);        
 }).append(renderer.domElement);
 
@@ -172,7 +174,7 @@ function CheckRaycast(touch) {
                     } else if (obj_data.type == "port") {
 
                         // if we already have one port and want to connect another
-                        if (picked_port !== undefined) {
+                        if (picked_port !== undefined && object.parent !== picked_object) {
                             
                             var picked_edge = picked_port.userData;
                             var matched_edge = obj_data;
@@ -195,6 +197,8 @@ function CheckRaycast(touch) {
                             picked_object = object.parent;
                             while(picked_object.parent.type !== "Scene")
                                 picked_object = picked_object.parent;
+
+                            attach(picked_object);
 
                             picked_port = object;
                             picked_port.material.color.set(portSelectedColor);
@@ -256,7 +260,6 @@ else if (event.keyCode == 9) { // TAB
         var file = e.target.files[0];
         if (file === undefined) 
             return;
-        console.log(file);
         file_name = file.name;
 
         fileReader.onload = function(readFile) {
