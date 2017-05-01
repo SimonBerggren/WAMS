@@ -229,7 +229,7 @@ function CheckRaycast(touch) {
                     detach();
 }
 
-    $(document).on('keydown', function(event) {
+$(document).on('keydown', function(event) {
 if (event.keyCode == 86) // V
     cloneButton.click();
 else if (event.keyCode == 46) // delete
@@ -417,229 +417,230 @@ var attach = function(obj) {
 
         };
 
-        // detaches controls from an object
-        var detach = function() {
+// detaches controls from an object
+var detach = function() {
 
-            if (picked_object === undefined) return; 
+    if (picked_object === undefined) return; 
 
-            // disable control buttons
-            cloneButton.classList.add("disabled");
-            deleteButton.classList.add("disabled");
-            rotateButton.classList.add("disabled");
-            object_controls.detach();
+    // disable control buttons
+    cloneButton.classList.add("disabled");
+    deleteButton.classList.add("disabled");
+    rotateButton.classList.add("disabled");
+    object_controls.detach();
 
-            if (!display_graph) {
-                picked_object = undefined;
-                return;
+    if (!display_graph) {
+        picked_object = undefined;
+        return;
+    }
+    var type = picked_object.userData.type;
+
+    if (type == "edge") {
+
+        function set_color(o) {
+            for (var i = 0; i < o.children.length; ++i) {
+                var c = o.children[i];
+                if (c.material !== undefined)
+                    c.material.color.set(connectionColor);
+                if (c.children !== undefined)
+                    set_color(c);
             }
-            var type = picked_object.userData.type;
+        }
+        set_color(picked_object);
 
-            if (type == "edge") {
+    } else {
 
-                function set_color(o) {
-                    for (var i = 0; i < o.children.length; ++i) {
-                        var c = o.children[i];
-                        if (c.material !== undefined)
-                            c.material.color.set(connectionColor);
-                        if (c.children !== undefined)
-                            set_color(c);
-                    }
-                }
-                set_color(picked_object);
-
-            } else {
-
-                if (picked_port !== undefined) {
-                    picked_port.material.color.set(portColor);
-                    picked_port = undefined;
-                }
-
-                function reset_opacity(o) {
-                    for (var i = 0; i < o.children.length; ++i) {
-                        var c = o.children[i];
-                        if (c.children !== undefined)
-                            reset_opacity(c);
-    
-                            if (c.material !== undefined) {
-                                c.material.opacity = 1.0;
-                            }
-                    }
-                }
-
-                reset_opacity(picked_object);
-            }
-
-            picked_object = undefined;
-    };
-
-    cloneButton.onclick = function() {
-
-            var copy = picked_object.userData;
-            var c = picked_object.clone();
-            var map = picked_object.children[0].material.map.clone();
-            c.children[0].material = picked_object.children[0].material.clone();
-            c.children[0].material.map = map;
-            c.children[0].material.map.needsUpdate = true;
-
-            for (var i  = 0; i < c.children.length - 1; ++i) {
-                var child = c.children[i];
-                var orig_child = picked_object.children[i];
-                child.material = orig_child.material.clone();
-                if (orig_child.material.map !== null) {
-                    child.material.map = orig_child.material.map.clone();
-                    child.material.map.needsUpdate = true;
-                }
-            }
-
-            c.position.y += copySpacing;
-            c.position.x += copySpacing;
-
-            var r = /\d+/g;
-            var s = picked_object.userData.id;
-            var newId = s.replace(/\d+/g, '');
-            var num = IDs[newId]++;
-            newId = newId + num;
-
-            c.userData.id = newId;
-
-            for (var i = 0; i < c.children.length; ++i) {
-                var port = c.children[i].userData;
-                if (port.type == "port") {
-                    var newPortId = port.id.split('.');
-                    newPortId[0] = newId;
-                    newPortId = newPortId.join('.');
-                    port.id = newPortId.toString();
-                    port.source = newId.toString();
-                    c.userData.ports[i - 1].id = newPortId;
-                    c.userData.ports[i - 1].source = newId;
-                    ports.push(c.children[i]);
-                } else if (port.type == "text") {
-                    c.remove(port);
-                    var t = text(newId);
-                    t.userData.type = "text";
-                    scene.add(t);
-                }
-            }
-            // copy label, can be done much better    
-            c.userData.labels[0] = c.userData.id;
-
-            detach();
-            attach(c);
-            graph.children.push(c.userData);
-    };
-
-    // removes an object from the graph
-    function deleteObject(_object) {
-
-        var edges = graph.edges;
-        var type = _object.userData.type;
-        var id = _object.userData.id;
-
-        if (type == "edge") {
-
-            // remove edge from graph
-            edges.removeValue("id", id);
-
-        } else {
-
-            // remove edges connected to component
-            // start from end because we're removing objects
-            for (var i = edges.length - 1; i >= 0; --i) {
-                var e = edges[i];
-                if (e.source == id || e.target == id)
-                    edges.removeValue("id", e.id);
-            }
-
-            // remove component from graph
-            graph.children.removeValue("id", id);
-
+        if (picked_port !== undefined) {
+            picked_port.material.color.set(portColor);
+            picked_port = undefined;
         }
 
-        scene.remove(_object);
+        function reset_opacity(o) {
+            for (var i = 0; i < o.children.length; ++i) {
+                var c = o.children[i];
+                if (c.children !== undefined)
+                    reset_opacity(c);
+
+                    if (c.material !== undefined) {
+                        c.material.opacity = 1.0;
+                    }
+            }
+        }
+
+        reset_opacity(picked_object);
+    }
+
+    picked_object = undefined;
+};
+
+cloneButton.onclick = function() {
+
+        var copy = picked_object.userData;
+        var c = picked_object.clone();
+        var map = picked_object.children[0].material.map.clone();
+        c.children[0].material = picked_object.children[0].material.clone();
+        c.children[0].material.map = map;
+        c.children[0].material.map.needsUpdate = true;
+
+        for (var i  = 0; i < c.children.length - 1; ++i) {
+            var child = c.children[i];
+            var orig_child = picked_object.children[i];
+            child.material = orig_child.material.clone();
+            if (orig_child.material.map !== null) {
+                child.material.map = orig_child.material.map.clone();
+                child.material.map.needsUpdate = true;
+            }
+        }
+
+        c.position.y += copySpacing;
+        c.position.x += copySpacing;
+
+        var r = /\d+/g;
+        var s = picked_object.userData.id;
+        var newId = s.replace(/\d+/g, '');
+        var num = IDs[newId]++;
+        newId = newId + num;
+
+        c.userData.id = newId;
+
+        for (var i = 0; i < c.children.length; ++i) {
+            var port = c.children[i].userData;
+            if (port.type == "port") {
+                var newPortId = port.id.split('.');
+                newPortId[0] = newId;
+                newPortId = newPortId.join('.');
+                port.id = newPortId.toString();
+                port.source = newId.toString();
+                c.userData.ports[i - 1].id = newPortId;
+                c.userData.ports[i - 1].source = newId;
+                ports.push(c.children[i]);
+            } else if (port.type == "text") {
+                c.remove(port);
+                var t = text(newId);
+                t.userData.type = "text";
+                scene.add(t);
+            }
+        }
+        // copy label, can be done much better    
+        c.userData.labels[0] = c.userData.id;
+
         detach();
+        attach(c);
+        graph.children.push(c.userData);
+};
 
-        if (!manual_mode)
-            calculate_graph(graph);
-    };
+// removes an object from the graph
+function deleteObject(_object) {
 
-    rotateButton.onclick = function() {
-        picked_object.rotateZ(Math.PI / 2);
-        for (var i = 0; i < picked_object.children.length; ++i) {
-            var child = picked_object.children[i].userData;
+    var edges = graph.edges;
+    var type = _object.userData.type;
+    var id = _object.userData.id;
 
-            if (child.type == "port") {
+    if (type == "edge") {
 
-                child.properties["de.cau.cs.kieler.portSide"] = rotatePortside(child.properties["de.cau.cs.kieler.portSide"]);
+        // remove edge from graph
+        edges.removeValue("id", id);
 
-            } else if (child.type == "text") {
+    } else {
 
-                picked_object.children[i].rotation.z = -picked_object.rotation.z;
-
-            }
+        // remove edges connected to component
+        // start from end because we're removing objects
+        for (var i = edges.length - 1; i >= 0; --i) {
+            var e = edges[i];
+            if (e.source == id || e.target == id)
+                edges.removeValue("id", e.id);
         }
-    };
 
-    var rotatePortside = function(portSide) {
-        if (portSide == "WEST")
-            return "NORTH";
-        else if (portSide == "EAST")
-            return "SOUTH";
-        else if (portSide == "NORTH")
-            return "EAST";
-        else if (portSide == "SOUTH")
-            return "WEST";
-    };
-    deleteButton.onclick = function() {
-        deleteObject(picked_object);        
-    };
-    playButton.onclick = function() {
-        animator.play();
-    };
-    pauseButton.onclick = function() {
-        animator.pause();
-    };
-    stopButton.onclick = function() {
-        animator.stop();
-    };
-    controlMode.onclick = function() {
-        if(controlMode.checked) {     // 2D
+        // remove component from graph
+        graph.children.removeValue("id", id);
 
-            object_controls_2d.attach(picked_object);
-            object_controls_3d.detach();
-            object_controls = object_controls_2d;
+    }
 
-        } else {
+    scene.remove(_object);
+    detach();
 
-            object_controls_3d.attach(picked_object);
-            object_controls_2d.detach();
-            object_controls = object_controls_3d;
+    if (!manual_mode)
+        calculate_graph(graph);
+};
+
+rotateButton.onclick = function() {
+    picked_object.rotateZ(Math.PI / 2);
+    for (var i = 0; i < picked_object.children.length; ++i) {
+        var child = picked_object.children[i].userData;
+
+        if (child.type == "port") {
+
+            child.properties["de.cau.cs.kieler.portSide"] = rotatePortside(child.properties["de.cau.cs.kieler.portSide"]);
+
+        } else if (child.type == "text") {
+
+            picked_object.children[i].rotation.z = -picked_object.rotation.z;
 
         }
-    };
-    manualMode.onclick = function() {
-        manual_mode = manualMode.checked;
-        if (!manual_mode) {
-            calculate_graph(graph);
-        }
-    };
+    }
+};
 
-    window.addEventListener('resize', function() {
+var rotatePortside = function(portSide) {
+    if (portSide == "WEST")
+        return "NORTH";
+    else if (portSide == "EAST")
+        return "SOUTH";
+    else if (portSide == "NORTH")
+        return "EAST";
+    else if (portSide == "SOUTH")
+        return "WEST";
+};
 
-        windowWidth = window.innerWidth;
-        windowHeight = window.innerHeight * windowHeightPercentage;
-        camera.aspect = windowWidth / windowHeight;
-        camera.updateProjectionMatrix();
-        renderer.setSize( windowWidth, windowHeight );
+deleteButton.onclick = function() {
+    deleteObject(picked_object);        
+};
+playButton.onclick = function() {
+    animator.play();
+};
+pauseButton.onclick = function() {
+    animator.pause();
+};
+stopButton.onclick = function() {
+    animator.stop();
+};
+controlMode.onclick = function() {
+    if(controlMode.checked) {     // 2D
 
-    }, false);
+        object_controls_2d.attach(picked_object);
+        object_controls_3d.detach();
+        object_controls = object_controls_2d;
 
-    resetCameraButton.onclick = function() {
-        camera_controls.reset();
-    };
+    } else {
 
-    saveButton.onclick = function() {
-        var file = new File([JSON.stringify
-            (graph, null, '  ')], graph.id + ".json", {type: "text/plain;charset=utf-8"});
-        saveAs(file);
-    };
+        object_controls_3d.attach(picked_object);
+        object_controls_2d.detach();
+        object_controls = object_controls_3d;
+
+    }
+};
+manualMode.onclick = function() {
+    manual_mode = manualMode.checked;
+    if (!manual_mode) {
+        calculate_graph(graph);
+    }
+};
+
+window.addEventListener('resize', function() {
+
+    windowWidth = window.innerWidth;
+    windowHeight = window.innerHeight * windowHeightPercentage;
+    camera.aspect = windowWidth / windowHeight;
+    camera.updateProjectionMatrix();
+    renderer.setSize( windowWidth, windowHeight );
+
+}, false);
+
+resetCameraButton.onclick = function() {
+    camera_controls.reset();
+};
+
+saveButton.onclick = function() {
+    var file = new File([JSON.stringify
+        (graph, null, '  ')], graph.id + ".json", {type: "text/plain;charset=utf-8"});
+    saveAs(file);
+};
 });

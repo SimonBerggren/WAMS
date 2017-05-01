@@ -6,11 +6,11 @@ Highest priority in priority order (preferably before Tuesday):
 + use special highlight of ports when one port is selected
 + allow panning on mobile device
   - make it possible to create a small model  
-  - enable loading of icons
+  + enable loading of icons
 + remove the x- and y-axis arrows when in 2D Object Control Mode
 + two layout modes: auto, manual
   + make new layout when changing to aumatomatic mode
-- draw a connection line immediately when a connection is made	
+-  draw a connection line immediately when a connection is made	
 - adjust connections lines when a component is moved (add one new line segment for all connection lines)
 
 + cloning and connecting
@@ -47,7 +47,7 @@ Lower unsorted issues:
 + introducing constants for width of connections, color of background, color of group rectangle, etc 
 - missing bus connector icons: fullRobot
 
-- allowing larger zooming interval DONE?
++ allowing larger zooming interval DONE?
 + panning on left button
 - reading info from combined file
 - occasional problem with selecting
