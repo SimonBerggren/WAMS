@@ -1,4 +1,4 @@
-// 
+// setup hooks for object control modes
 
 var translationButton = document.getElementById("translation");
 var rotationButton = document.getElementById("rotation");
