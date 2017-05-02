@@ -3,6 +3,7 @@
 
 var manualMode = document.getElementById("manual-mode");
 var saveButton = document.getElementById("save");
+var newButton = document.getElementById("new");
 
 var playButton = document.getElementById("play");
 var pauseButton = document.getElementById("pause");
@@ -17,6 +18,17 @@ var resetCameraButton = document.getElementById("resetCamera");
 
 var renderContainer = document.getElementById("glcontainer");
 
+var animationTimeScale = document.getElementById("animationTimeScale");
+
+animationTimeScale.value = 100;
+var timeScale = animationTimeScale.value / 100;
+
+animationTimeScale.onchange = function(event) {
+    var num = parseInt(event.target.value);
+    if (isNaN(num))
+        return;
+    timeScale = num / 100;
+};
 // variabels used within app
 
 var mouseMoved = false;
@@ -87,7 +99,7 @@ function render() {
     object_controls.update();
     var delta = clock.getDelta();
 
-    animator.update(delta);
+    animator.update(delta * timeScale);
 
     renderer.render(scene, camera);
 
@@ -538,6 +550,11 @@ saveButton.onclick = function() {
     saveAs(file);
 };
 
+newButton.onclick = function() {
+    detach();
+    clearScene();
+};
+
 playButton.onclick = function() {
   animator.play();
 };
@@ -665,3 +682,4 @@ $('#icons').change(function(e) {
     fileReader.readAsBinaryString(file);
 
 });
+

@@ -21,23 +21,46 @@
                 <strong >Input</strong>
                 <div class="row"></div>
                 <input style="width:16px;height:16px;" type="checkbox" id="manual-mode"/> Manual
-            <button class="btn btn-default" onclick="document.getElementById('file').click();">Browse...</button>
-            <button class="btn btn-default" onclick="document.getElementById('icons').click();">Browse Icons...</button>
+            <button class="btn btn-default" onclick="document.getElementById('file').click();">Open</button>
+            <button class="btn btn-default" onclick="document.getElementById('icons').click();">Open Icons</button>
             <div class="row"></div>
+            <button class="btn btn-default" id="new">New</button>
             <button class="btn btn-default" id="save">Save</button>
           </div>
-          <div class="col-md-2 col-xs-6">
+          <div class="col-md-1 col-xs-6">
+            <form action="">
+                <input type="radio" name="mode" checked> Automatic<br>
+                <input type="radio" name="mode" > Manual<br>
+                <input type="radio" name="mode" > Visualization
+            </form>
+          </div>
+          <div class="col-md-1 col-xs-6">
                 <strong >Camera</strong>
                 <div class="row"></div>
-            <button class="btn btn-danger" id="resetCamera">Reset Camera</button>
+            <button class="btn btn-danger" id="resetCamera">Reset</button>
           </div>
             <div class="col-md-3 col-xs-6">
-                <strong>Animation controls</strong>
+                <strong>Animation</strong>
                 <div class="row"></div>
             <button class="btn btn-primary disabled" id="play">Play</button>
             <button class="btn btn-primary disabled" id="pause">Pause</button>
-            <button class="btn btn-primary disabled" id="stop">Stop</button>
+            <button class="btn btn-primary disabled" id="stop">Rewind</button>
+            <div class="row"></div>
+            Time Scale:
+            <input type="number" id="animationTimeScale" style="width:50px;" />
+            %
           </div>
+            <div class="col-md-2 col-xs-6">
+                <strong>Simulation</strong>
+                <div class="row"></div>
+            <button class="btn btn-primary" id="play">Simulate</button>
+            <div class="row"></div>
+            Start Time:
+            <input type="number" id="simulationStartTime" value="0" style="width:50px;" />
+            <div class="row"></div>
+            Stop Time:
+            <input type="number" id="simulationEndTime" value="1" style="width:50px;" />
+          </div>          
           <div class="col-md-3 col-xs-6">
                 <strong >Selected Object</strong>
                 <div class="row"></div>

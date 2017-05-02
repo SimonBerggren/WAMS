@@ -3,21 +3,21 @@ WAMS Plan
 + means done
 
 Highest priority in priority order (preferably before Tuesday):
-- New, Open
-- Modes (radio buttons?)
-  - Authoring/Visualization
-  - Automatic layout/Manual layout
++ New, Open
++ Modes (radio buttons?)
+  + Authoring/Visualization
+  + Automatic layout/Manual layout
 - use combined JSON file
-- Animation: Stop -> Rewind, Speed
-- Simulate
-  - Set time interval: start time (default=0) and stop time
-  - Simulate
++ Animation: Stop -> Rewind, Speed
++ Simulate
+  + Set time interval: start time (default=0) and stop time
+  + Simulate
 - Arrow left/right for rotation +/- 90 degrees
 - Up/Down buttons for tilting +/- 10 degrees  
 
 + use special highlight of ports when one port is selected
 + allow panning on mobile device
-  - make it possible to create a small model  
+  + make it possible to create a small model
   + enable loading of icons
 + remove the x- and y-axis arrows when in 2D Object Control Mode
 + two layout modes: auto, manual
