@@ -1,5 +1,4 @@
 // main file, contains most logic in app, picking, loading, button events
-
 // global elements from HTML
 
 var manualMode = document.getElementById("manual-mode");
@@ -211,10 +210,10 @@ function CheckRaycast(touch) {
                         var newId = (graph.edges.length + 1).toString();
                         graph.edges.push({
                             id: newId,
-                            source:     picked_edge.source,
-                            sourcePort: picked_edge.id,
-                            target:     matched_edge.source,
-                            targetPort: matched_edge.id
+                            source:     picked_port.userData.source,
+                            sourcePort: picked_port.userData.id,
+                            target:     obj_data.source,
+                            targetPort: obj_data.id
                         });
                         
                         // reset controls

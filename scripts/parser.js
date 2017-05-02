@@ -191,8 +191,8 @@ function load_icon(_icon_name) {
 			svgloader.load(url, function (svg) { 
 
 				// nearest power of two, to prevent warning messages from THREE
-				svg.image.width = Math.pow( 2, Math.round( Math.log( s.width ) / Math.LN2 ) );
-				svg.image.height = Math.pow( 2, Math.round( Math.log( s.height ) / Math.LN2 ) );
+				svg.image.width = Math.pow( 2, Math.round( Math.log( svg.image.width ) / Math.LN2 ) );
+				svg.image.height = Math.pow( 2, Math.round( Math.log( svg.image.height ) / Math.LN2 ) );
 				
 				icon_types[_icon_name] = "svg";
 				icons_svg[_icon_name] = svg;
