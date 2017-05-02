@@ -1,6 +1,4 @@
-/*
-	contains functions connected to parsing graphs and models
-*/
+// contains functions for parsing graphs and models
 
 // global variables
 var icons_json = [];
@@ -323,7 +321,7 @@ function graphToScene(_components, _edges, parent) {
 			group.translateOnAxis(new THREE.Vector3(x, y, 0), 1);
 		}
 
-		// parse components ports
+		// parse component's ports
 
 		if (c.ports !== undefined && c.ports.length > 0) {
 
@@ -339,12 +337,10 @@ function graphToScene(_components, _edges, parent) {
 
 				pin.userData = p;
 				pin.userData.source = name;
-				pin.visible = true;
-				pin.material.opacity = 1;
+				pin.visible = false;
+				pin.setType("port");
 				ports.push(pin);
 				group.add(pin);
-				pin.setType("port");
-				pin.visible = false;
 			}
 		}
 
@@ -374,7 +370,8 @@ function graphToScene(_components, _edges, parent) {
 		// keep connection and all its bendpoits and cylinders as one object in THREE
 		var connection = new THREE.Group();
 
-		// bendpoints
+		// parse any bendpoints and add cylinders between components
+		// add spheres to mimic curves on bendpoints
 
 		var bendPoints = edge.bendPoints;
 		

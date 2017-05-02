@@ -54,6 +54,17 @@ var windowHeightPercentage = 0.85;
 var windowWidth = window.innerWidth;
 var windowHeight = window.innerHeight * windowHeightPercentage;
 
+// SHORTCUTS
+
+var cloneHoldKey = 17;      // hold CTRL and click component to clone
+var cloneKey = 86;          // clone component with V
+var deleteKey = 46;         // delete component with delete
+var translationKey = 87;    // activate translation mode on W
+var rotationKey = 69;       // activate rotation mode on E
+var scalingKey = 82;        // activate scaling mode on R
+var resetKey = 27;          // reset camera on ESC
+var statsKey = 9;           // show stats with TAB
+
 var showingStats = false;
 var manual_mode = false;
 

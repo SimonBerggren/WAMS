@@ -1,9 +1,13 @@
-// main file, contains initialization, update and render loop
+// main file, contains most logic in app, picking, loading, button events
 
 // global elements from HTML
 
 var manualMode = document.getElementById("manual-mode");
 var saveButton = document.getElementById("save");
+
+var playButton = document.getElementById("play");
+var pauseButton = document.getElementById("pause");
+var stopButton = document.getElementById("stop");
 
 var cloneButton = document.getElementById("clone");
 var deleteButton = document.getElementById("delete");
@@ -31,17 +35,13 @@ stats.showPanel( 0 );
 if (showingStats)
     document.body.append(stats.dom);
 
-
 // main initialize function
-
-$(function() {
 
 input = new Input();
 scene = new THREE.Scene();
 animator = new Animator();
 
 // set up renderer
-
 var renderer = new THREE.WebGLRenderer({alpha: true, antialias: true});
 renderer.setClearColor( clearColor, 1 );
 renderer.setSize(windowWidth, windowHeight);
@@ -94,8 +94,6 @@ function render() {
 
     stats.end();
 
-    renderContainer.focus();
-
     requestAnimationFrame(render);
 }
 
@@ -115,8 +113,35 @@ $('#glcontainer').on('touchstart', function(e) {
     pointerUp(false);        
 }).append(renderer.domElement);
 
-// functions
+// shortcuts
+$(document).on('keydown', function(event) {
+    if (event.keyCode == cloneKey) // clone object
+        cloneButton.click();
+    else if (event.keyCode == deleteKey) // delete object
+        deleteButton.click();
+    else if (event.keyCode == translationKey) // object translation mode
+        translation.click();
+    else if (event.keyCode == rotationKey) // object rotation mode
+        rotation.click();
+    else if (event.keyCode == scalingKey) // object scaling mode
+        scalingButton.click();
+    else if (event.keyCode == resetKey) // reset camera
+        camera_controls.reset();
+    else if (event.keyCode == statsKey) { // show stats
+        event.preventDefault();
+        if (showingStats)
+            document.body.removeChild(stats.dom);
+        else
+            document.body.append(stats.dom);
 
+        showingStats = !showingStats;
+    }
+});
+
+// called on mousemove and touchmove
+// it is also called 10ms after moseup and touchend
+// timeMove checks if it was 10ms since mouseup, 
+// in that case we ignore the call to pointerMove
 function pointerMove() {
     var timeMove = new Date().getTime();
     timeDownUp += 10;
@@ -130,12 +155,14 @@ function pointerMove() {
     }
 };
 
+// called on mousedown and touchstart
 function pointerDown() {
     timeDownUp = new Date().getTime();
     mouseMoved = false;
     mouseDown = true;
 };
 
+// called on mouseup and touchend
 function pointerUp(touch, event) {
     timeDownUp = new Date().getTime();
 
@@ -144,6 +171,8 @@ function pointerUp(touch, event) {
         mouseMoved = false;
         return;
     }
+
+    // when using touch, only try raycasting if using 1 finger
     if (!touch || touch && event.changedTouches.length == 1)
         CheckRaycast(touch);
 }
@@ -168,224 +197,83 @@ function CheckRaycast(touch) {
                 if (!obj_data.pickable) {
                     continue;
                 }
+
+                raycastHit = true;
                 
                 if (obj_data.type == "port") {
 
-                    // if we already have one port and want to connect another
+                    // if we already have one port
                     // and other port is not part of same component
                     if (picked_port !== undefined && object.parent !== picked_object) {
                         
-                        var picked_edge = picked_port.userData;
-                        var matched_edge = obj_data;
-
+                        // add new edge to graph
+                        // generate new id 
+                        var newId = (graph.edges.length + 1).toString();
                         graph.edges.push({
-                            id:(graph.edges.length + 1).toString(),
-                            source:picked_edge.source,
-                            sourcePort:picked_edge.id,
-                            target:matched_edge.source,
-                            targetPort:matched_edge.id
+                            id: newId,
+                            source:     picked_edge.source,
+                            sourcePort: picked_edge.id,
+                            target:     matched_edge.source,
+                            targetPort: matched_edge.id
                         });
-        
+                        
+                        // reset controls
                         detach();
                         if (!manual_mode)
                             calculate_graph(graph);
 
+                    // if no port is picked or other port has same parent
                     } else {
 
-                        detach();
-                        picked_object = object.parent;
-                        while(picked_object.parent.type !== "Scene")
-                            picked_object = picked_object.parent;
-
-                        attach(picked_object);
-
+                        // hightlight & display ports
                         picked_port = object;
-                        picked_port.material.color.set(portSelectedColor);
-
+                        picked_port.setColor(portSelectedColor);
                         setPortsVisible(true);
 
                     }
 
-                    raycastHit = true;
+                    
                     break;
                 }                
 
+                // deselect any old objects
                 detach();
                 
-                picked_object = intersects[i].object;
+                picked_object = object;
+
+                // get the top most object in the hierarchy 
+                // so all components and ports moves with the controls
 
                 while(picked_object.parent.type !== "Scene")
                     picked_object = picked_object.parent;
 
                 attach(picked_object);
 
-                raycastHit = true;
-
-                picking_port = true;
-
-                // if holding ctrl, clone component
+                // if holding key, clone component
                 if (obj_data.type == "component") {
 
-                    if (input.isKeyDown(17)) {
+                    if (input.isKeyDown(cloneHoldKey)) {
                         cloneButton.click();
                     }
                 }
             break;
             }
 
+            // if nothing pickable was hit, detach any picked object
             if (!raycastHit) {
                 detach();
         }
 }
 
+// hides or show all ports in the scene
 function setPortsVisible(_visible) {
     for(var i = 0; i < ports.length; ++i) {
         ports[i].visible = _visible;
     }
 }
 
-// short cuts
-$(document).on('keydown', function(event) {
-if (event.keyCode == 86) // V
-    cloneButton.click();
-else if (event.keyCode == 46) // delete
-    deleteButton.click();
-else if (event.keyCode == 87) // W
-    translation.click();
-else if (event.keyCode == 69) // E
-    rotation.click();
-else if (event.keyCode == 82) // R
-    scalingButton.click();
-else if (event.keyCode == 27) // ESC
-    camera_controls.reset();
-else if (event.keyCode == 9) { // TAB 
-    event.preventDefault();
-    if (showingStats)
-        document.body.removeChild(stats.dom);
-    else
-        document.body.append(stats.dom);
-
-    showingStats = !showingStats;
-}
-})
-
-// this runs when a file is loaded, it needs some work 
-// as well as consistent file conventions to determine what type of file is loaded
-    $('#file').change( function(e) {
-
-        var file = e.target.files[0];
-        if (file === undefined) 
-            return;
-        file_name = file.name;
-
-        // set up callback for when reading file is complete
-        fileReader.onload = function(readFile) {
-
-            // assume diagram, disable animation
-            playButton.classList.add("disabled");
-            pauseButton.classList.add("disabled");
-            stopButton.classList.add("disabled");
-
-            var result = fileReader.result;
-            var parsed_result = undefined;
-            try {
-                var parsed = JSON.parse(result);
-                parsed_result = parsed;
-            } catch(err) {
-                alert("WAMS: " + err);
-            }
-            if (parsed_result === undefined)
-                return;
-
-            // if file contains the metadata, assume 3D model
-            if (parsed_result.hasOwnProperty("metadata")) {
-                if (parsed_result.metadata.generator === "OCT3D") {
-                    object_controls.detach();
-                }
-
-                model = parsed_result;
-                addModel(model);
-                camera_controls.reset();
-
-            } else if (parsed_result.hasOwnProperty("id")) {
-
-                // if diagram
-                // detach any old 
-
-                object_controls.detach();
-
-                graph = parsed_result;
-
-                if (graph.edges === undefined)
-                    graph.edges = [];
-
-                // if file name contains _Fixed, we don't send the graph to Klay JS
-                manualMode.checked = manual_mode = file.name.indexOf("_Fixed") != -1;
-
-                if (manual_mode) {
-                    display_graph(graph);
-                } else {
-                    calculate_graph(graph);
-                }
-
-                // if we dont find metadata or id, assume animation to currently loaded model
-                } else {
-                    
-                    if (model === undefined) {
-                        alert("Please load a model first!");
-                        return;
-                    }
-
-                    animation = JSON.parse(fileReader.result);
-                    animator.addAnimation(model, animation);
-                    console.log("Animation loaded");
-                    playButton.classList.remove("disabled");
-                    pauseButton.classList.remove("disabled");
-                    stopButton.classList.remove("disabled");                
-                }
-};
-
-detach();
-fileReader.readAsBinaryString(file);
-
-// allows same file to be loaded again
-this.value = null;
-
-});
-
-// called when icons file is uploaded via Browse Icons
-$('#icons').change(function(e) {
-
-    var file = e.target.files[0];
-    if (file === undefined) 
-        return;
-
-fileReader.onload = function(readFile) {
-
-    var result = fileReader.result;
-    var success = false;
-    var parsed_result = undefined;
-
-    try {
-        var parsed = JSON.parse(result);
-        parsed_result = parsed;
-    } catch(err) {
-        alert("WAMS: " + err);
-    }
-
-    if (parsed_result === undefined)
-        return;
-
-    parseIconsFile(parsed_result);
-
-};
-
-fileReader.readAsBinaryString(file);
-
-});
-
 // attaches control to an object
-var attach = function(obj) {
+function attach(obj) {
 
     // enable controls
     cloneButton.classList.remove("disabled");
@@ -423,7 +311,7 @@ var attach = function(obj) {
 };
 
 // detaches controls from an object
-var detach = function() {
+function detach() {
 
     if (picked_object === undefined) return; 
 
@@ -460,17 +348,14 @@ var detach = function() {
     picked_object = undefined;
 };
 
-// need to clean this up
+// clones selected component
 cloneButton.onclick = function() {
-
-        // when cloning three js objects, materials and maps need to be explicitly cloned
-        // otherwise they reference to the same map, resulting in two objects sharing i.e opacity
 
         // generate a new ID, i.e Clutch1 -> Clutch2
         var r = /\d+/g;
         var s = picked_object.userData.id;
-        var newId = s.replace(/\d+/g, '');
-        var num = IDs[newId]++;
+        var newId = s.replace(/\d+/g, '');  // strip ID of any digits
+        var num = IDs[newId]++;             // generate new digits to ID
         newId = newId + num;
 
         var clone = picked_object.clone();
@@ -480,6 +365,9 @@ cloneButton.onclick = function() {
         for (var i = 0; i < clone.children.length; ++i) {
             var c = clone.children[i];
             var data = c.userData;
+
+            // when cloning three js objects, materials and maps need to be explicitly cloned
+            // otherwise they reference to the same map, resulting in two objects sharing i.e opacity            
 
             if (data.type == "component") {
 
@@ -516,18 +404,19 @@ cloneButton.onclick = function() {
             }
         }
 
+        // copy label, can be done much better    
+        clone.userData.labels[0] = clone.userData.id;
+
         // move new object a bit
         clone.position.y += copySpacing;
         clone.position.x += copySpacing;
-
-        // copy label, can be done much better    
-        clone.userData.labels[0] = clone.userData.id;
 
         // detach old object, attach new and add cloned component to graph
         
         detach();
         attach(clone);
         graph.children.push(clone.userData);
+        renderContainer.focus();
 };
 
 // removes an object from the graph
@@ -571,8 +460,28 @@ function deleteObject(_object) {
         calculate_graph(graph);
 };
 
+
+
+// BUTTONS
+
+deleteButton.onclick = function() {
+    deleteObject(picked_object);        
+};
+
 rotateButton.onclick = function() {
     picked_object.rotateZ(Math.PI / 2);
+
+    function rotatePortside(portSide) {
+        if (portSide == "WEST")
+            return "NORTH";
+        else if (portSide == "EAST")
+            return "SOUTH";
+        else if (portSide == "NORTH")
+            return "EAST";
+        else if (portSide == "SOUTH")
+            return "WEST";
+    };
+
     for (var i = 0; i < picked_object.children.length; ++i) {
         var child = picked_object.children[i].userData;
 
@@ -586,21 +495,6 @@ rotateButton.onclick = function() {
 
         }
     }
-};
-
-var rotatePortside = function(portSide) {
-    if (portSide == "WEST")
-        return "NORTH";
-    else if (portSide == "EAST")
-        return "SOUTH";
-    else if (portSide == "NORTH")
-        return "EAST";
-    else if (portSide == "SOUTH")
-        return "WEST";
-};
-
-deleteButton.onclick = function() {
-    deleteObject(picked_object);        
 };
 
 controlMode.onclick = function() {
@@ -644,4 +538,131 @@ saveButton.onclick = function() {
         (graph, null, '  ')], graph.id + ".json", {type: "text/plain;charset=utf-8"});
     saveAs(file);
 };
+
+playButton.onclick = function() {
+  animator.play();
+};
+pauseButton.onclick = function() {
+  animator.pause();
+};
+stopButton.onclick = function() {
+  animator.stop();
+};  
+
+
+// file loading
+
+  // this runs when a file is loaded, it needs some work 
+// as well as consistent file conventions to determine what type of file is loaded
+    $('#file').change( function(e) {
+
+        var file = e.target.files[0];
+        if (file === undefined) 
+            return;
+        file_name = file.name;
+
+        // set up callback for when reading file is complete
+        fileReader.onload = function(readFile) {
+
+            // assume diagram, disable animation
+            playButton.classList.add("disabled");
+            pauseButton.classList.add("disabled");
+            stopButton.classList.add("disabled");
+
+            var result = fileReader.result;
+            var parsed_result = undefined;
+            try {
+                var parsed = JSON.parse(result);
+                parsed_result = parsed;
+            } catch(err) {
+                alert("WAMS: " + err);
+            }
+            if (parsed_result === undefined)
+                return;
+
+            // if file contains the metadata, assume 3D model
+            if (parsed_result.hasOwnProperty("metadata")) {
+                if (parsed_result.metadata.generator === "OCT3D") {
+                    object_controls.detach();
+                }
+
+                model = parsed_result;
+                addModel(model);
+                camera_controls.reset();
+
+            } else if (parsed_result.hasOwnProperty("id")) {
+
+                // display_graph
+
+                object_controls.detach();
+
+                graph = parsed_result;
+
+                if (graph.edges === undefined)
+                    graph.edges = [];
+
+                // if file name contains _Fixed, we don't send the graph to Klay JS
+                manualMode.checked = manual_mode = file.name.indexOf("_Fixed") != -1;
+
+                if (manual_mode) {
+                    display_graph(graph);
+                } else {
+                    calculate_graph(graph);
+                }
+
+                // if we dont find metadata or id, assume animation to currently loaded model
+                } else {
+                    
+                    if (model === undefined) {
+                        alert("Please load a model first!");
+                        return;
+                    }
+
+                    animation = JSON.parse(fileReader.result);
+                    animator.addAnimation(model, animation);
+                    console.log("Animation loaded");
+                    playButton.classList.remove("disabled");
+                    pauseButton.classList.remove("disabled");
+                    stopButton.classList.remove("disabled");                
+                }
+};
+
+// detach any old object and read file
+detach();
+fileReader.readAsBinaryString(file);
+
+// allows same file to be loaded again
+this.value = null;
+
+});
+
+  // called when icons file is uploaded via Browse Icons
+$('#icons').change(function(e) {
+
+    var file = e.target.files[0];
+    if (file === undefined) 
+        return;
+
+    fileReader.onload = function(readFile) {
+
+        var result = fileReader.result;
+        var success = false;
+        var parsed_result = undefined;
+
+        try {
+            var parsed = JSON.parse(result);
+            parsed_result = parsed;
+        } catch(err) {
+            alert("WAMS: " + err);
+        }
+
+        if (parsed_result === undefined)
+            return;
+
+        parseIconsFile(parsed_result);
+
+    };
+
+    fileReader.readAsBinaryString(file);
+
 });
