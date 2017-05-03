@@ -9,6 +9,10 @@
           "text": "J1"
         }
       ],
+      "parameters": {
+        "J": "1",
+        "stateSelect": "StateSelect.default"
+      },
       "ports": [
         {
           "class": "Flange_a",
@@ -57,6 +61,9 @@
           "text": "torque"
         }
       ],
+      "parameters": {
+        "useSupport": "true"
+      },
       "ports": [
         {
           "class": "RealInput",
@@ -121,6 +128,16 @@
           "text": "clutch1"
         }
       ],
+      "parameters": {
+        "cgeo": "1",
+        "fn_max": "20",
+        "mue_pos": "[0, 0.5]",
+        "peak": "1.1",
+        "phi_nominal": "1.0E-4",
+        "stateSelect": "StateSelect.prefer",
+        "useHeatPort": "false",
+        "w_small": "1.0E10"
+      },
       "ports": [
         {
           "class": "RealInput",
@@ -190,6 +207,13 @@
           "text": "sin1"
         }
       ],
+      "parameters": {
+        "amplitude": "10",
+        "freqHz": "5",
+        "offset": "0",
+        "phase": "0",
+        "startTime": "0"
+      },
       "ports": [
         {
           "class": "RealOutput",
@@ -222,6 +246,11 @@
           "text": "step1"
         }
       ],
+      "parameters": {
+        "height": "1",
+        "offset": "0",
+        "startTime": "T2"
+      },
       "ports": [
         {
           "class": "RealOutput",
@@ -254,6 +283,10 @@
           "text": "J2"
         }
       ],
+      "parameters": {
+        "J": "1",
+        "stateSelect": "StateSelect.default"
+      },
       "ports": [
         {
           "class": "Flange_a",
@@ -302,6 +335,16 @@
           "text": "clutch2"
         }
       ],
+      "parameters": {
+        "cgeo": "1",
+        "fn_max": "20",
+        "mue_pos": "[0, 0.5]",
+        "peak": "1.1",
+        "phi_nominal": "1.0E-4",
+        "stateSelect": "StateSelect.prefer",
+        "useHeatPort": "false",
+        "w_small": "1.0E10"
+      },
       "ports": [
         {
           "class": "RealInput",
@@ -371,6 +414,10 @@
           "text": "J3"
         }
       ],
+      "parameters": {
+        "J": "1",
+        "stateSelect": "StateSelect.default"
+      },
       "ports": [
         {
           "class": "Flange_a",
@@ -419,6 +466,16 @@
           "text": "clutch3"
         }
       ],
+      "parameters": {
+        "cgeo": "1",
+        "fn_max": "20",
+        "mue_pos": "[0, 0.5]",
+        "peak": "1.1",
+        "phi_nominal": "1.0E-4",
+        "stateSelect": "StateSelect.prefer",
+        "useHeatPort": "false",
+        "w_small": "1.0E10"
+      },
       "ports": [
         {
           "class": "RealInput",
@@ -488,6 +545,10 @@
           "text": "J4"
         }
       ],
+      "parameters": {
+        "J": "1",
+        "stateSelect": "StateSelect.default"
+      },
       "ports": [
         {
           "class": "Flange_a",
@@ -536,6 +597,13 @@
           "text": "sin2"
         }
       ],
+      "parameters": {
+        "amplitude": "1",
+        "freqHz": "freqHz",
+        "offset": "0",
+        "phase": "1.57",
+        "startTime": "0"
+      },
       "ports": [
         {
           "class": "RealOutput",
@@ -568,6 +636,11 @@
           "text": "step2"
         }
       ],
+      "parameters": {
+        "height": "1",
+        "offset": "0",
+        "startTime": "T3"
+      },
       "ports": [
         {
           "class": "RealOutput",
@@ -600,6 +673,9 @@
           "text": "fixed"
         }
       ],
+      "parameters": {
+        "phi0": "0"
+      },
       "ports": [
         {
           "class": "Flange_b",
@@ -718,6 +794,11 @@
       "text": "CoupledClutches"
     }
   ],
+  "parameters": {
+    "T2": "0.4",
+    "T3": "0.9",
+    "freqHz": "0.2"
+  },
   "properties": {
     "de.cau.cs.kieler.portConstraints": "FREE"
   },
