@@ -1,7 +1,7 @@
 // main file, contains most logic in app, picking, loading, button events
 // global elements from HTML
 
-var manualMode = document.getElementById("manual-mode");
+//var manualMode = document.getElementById("manual-mode");
 var saveButton = document.getElementById("save");
 var newButton = document.getElementById("new");
 
@@ -523,12 +523,12 @@ controlMode.onclick = function() {
 
     }
 };
-manualMode.onclick = function() {
-    manual_mode = manualMode.checked;
-    if (!manual_mode) {
-        calculate_graph(graph);
-    }
-};
+// manualMode.onclick = function() {
+//     manual_mode = manualMode.checked;
+//     if (!manual_mode) {
+//         calculate_graph(graph);
+//     }
+// };
 
 window.addEventListener('resize', function() {
 
@@ -618,7 +618,7 @@ stopButton.onclick = function() {
                     graph.edges = [];
 
                 // if file name contains _Fixed, we don't send the graph to Klay JS
-                manualMode.checked = manual_mode = file.name.indexOf("_Fixed") != -1;
+                //manualMode.checked = manual_mode = file.name.indexOf("_Fixed") != -1;
 
                 if (manual_mode) {
                     display_graph(graph);
