@@ -59,16 +59,17 @@ var Animator = function () {
         if (playing_animation) {
 
             if (frame < animation.time.length) {
-
                 for (var i = 0; i < animated_objects.length; ++i) {
 
                     var obj = animated_objects[i];
                     var name = obj.name;
                     var anim = animation[name];
-
-                        var m = JSON.parse(anim[frame]);
-                        obj.matrixAutoUpdate = false;
-                        obj.matrix.elements.set(m);
+                    var type = typeof(anim[frame]); // if we need to JSON parse
+                    var m = anim[frame];
+                    if (type != "object")
+                        m = JSON.parse(m);
+                    obj.matrixAutoUpdate = false;
+                    obj.matrix.elements.set(m);
 
                 }; 
             }
