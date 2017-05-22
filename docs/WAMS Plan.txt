@@ -7,7 +7,7 @@ Highest priority in priority order (preferably before Tuesday):
 + Modes (radio buttons?)
   + Authoring/Visualization
   + Automatic layout/Manual layout
-- use combined JSON file
++ use combined JSON file
 + Animation: Stop -> Rewind, Speed
 + Simulate
   + Set time interval: start time (default=0) and stop time
@@ -22,20 +22,20 @@ Highest priority in priority order (preferably before Tuesday):
 + remove the x- and y-axis arrows when in 2D Object Control Mode
 + two layout modes: auto, manual
   + make new layout when changing to aumatomatic mode
-- draw a connection line immediately when a connection is made	
-- double click to deselect
-- adjust connections lines when a component is moved (also in z-direction) (add one new line segment for all connection lines)
++ draw a connection line immediately when a connection is made	
++ double click to deselect
++ adjust connections lines when a component is moved (also in z-direction) (add one new line segment for all connection lines)
 
 + cloning and connecting
   + fixing reported problems
 + selection of connection
   + stronger highligt for selected connection
-  - Make it easier to select connection, i.e. not having to be so precise.
+  ? Make it easier to select connection, i.e. not having to be so precise.
 + saving resulting model in JSON file
   + allow loading again
   + allow loading with icons
 + scaling has too large gain
-  - scaling is not consistent with cursor movement
+  + scaling is not consistent with cursor movement
 + make sure ports are shown (also when label not present) DONE?
 + allow cloning and connecting on mobile device
 + cloning by Cntrl+drag
@@ -55,12 +55,10 @@ Lower unsorted issues:
 + using viewBox information for a larger canvas
 - making connections long enough also with automatic layout
 + introducing constants for width of connections, color of background, color of group rectangle, etc 
-- missing bus connector icons: fullRobot
+? missing bus connector icons: fullRobot
 
 + allowing larger zooming interval DONE?
 + panning on left button
-- reading info from combined file
-- occasional problem with selecting
 - allowing use on iOS
 + larger name text below icon (with parameters)
 - automatic calculation of extent for the whole model and initial zooming
