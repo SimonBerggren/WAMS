@@ -36,6 +36,7 @@ var Animator = function () {
                 animated_object_names.push(child.name);
             });
 
+
         // match all parts to objects in scene, so we know what to animate
         animated_objects = [];
         loop_children(scene, function(child) {
@@ -58,26 +59,21 @@ var Animator = function () {
         if (playing_animation) {
 
             if (frame < animation.time.length) {
-
                 for (var i = 0; i < animated_objects.length; ++i) {
 
                     var obj = animated_objects[i];
                     var name = obj.name;
-                    var mat = animation[name];
+                    var anim = animation[name];
+                    var type = typeof(anim[frame]); // if we need to JSON parse
+                    var m = anim[frame];
 
-                    if (mat == undefined) {
-                        continue;
-                    }
-
-                    var matrix = mat[frame];
                     // need to be removed when we have new animation file structure
-                    if (typeof(matrix) != "object") 
-                        matrix = JSON.parse(matrix);
-                    
-
+                    if (type != "object")
+                        m = JSON.parse(m);
 
                     obj.matrixAutoUpdate = false;
-                    obj.matrix.elements = matrix; 
+                    obj.matrix.elements.set(m);
+
                 }; 
             }
 
@@ -92,6 +88,9 @@ var Animator = function () {
             if (looping) {
                 frame = delta = 0;
             }
+        } else {  // looping
+            playing_animation = false;
+
         } // playing animation 
     };
 

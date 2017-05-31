@@ -5,22 +5,25 @@ var rotationButton = document.getElementById("rotation");
 var scalingButton = document.getElementById("scaling");
 
 translationButton.onclick = function() {
-	translationButton.classList.add("btn-primary");
-	rotationButton.classList.remove("btn-primary");
-	scalingButton.classList.remove("btn-primary");
-	object_controls.setMode("translate");
+	translationButton.classList.add("selected");
+	rotationButton.classList.remove("selected");
+	scalingButton.classList.remove("selected");
+	object_controls_2d.setMode("translate");
+	object_controls_3d.setMode("translate");
 }
 
 rotationButton.onclick = function() {
-	translationButton.classList.remove("btn-primary");
-	rotationButton.classList.add("btn-primary");
-	scalingButton.classList.remove("btn-primary");
-	object_controls.setMode("rotate");
+	translationButton.classList.remove("selected");
+	rotationButton.classList.add("selected");
+	scalingButton.classList.remove("selected");
+	object_controls_2d.setMode("rotate");
+	object_controls_3d.setMode("rotate");	
 }
 
 scalingButton.onclick = function() {
-	translationButton.classList.remove("btn-primary");
-	rotationButton.classList.remove("btn-primary");
-	scalingButton.classList.add("btn-primary");
-	object_controls.setMode("scale");
+	translationButton.classList.remove("selected");
+	rotationButton.classList.remove("selected");
+	scalingButton.classList.add("selected");
+	object_controls_2d.setMode("scale");
+	object_controls_3d.setMode("scale");	
 }

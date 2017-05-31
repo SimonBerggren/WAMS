@@ -1,7 +1,7 @@
 // contains functions for creating various objects
 
 // connections are made from cylinders
-function cylinder(pointX, pointY, size) {
+function cylinder(pointX, pointY) {
 	
 	var direction = new THREE.Vector3().subVectors(pointY, pointX);
 	var orientation = new THREE.Matrix4();
@@ -18,17 +18,20 @@ function cylinder(pointX, pointY, size) {
 		(pointY.x + pointX.x) / 2,
 		(pointY.y + pointX.y) / 2,
 		(pointY.z + pointX.z) / 2);
+	edge.userData.start = pointX;
+	edge.userData.end = pointY;
 	return edge;
 }
 
 // bendpoints are made from spheres
-function sphere(x, y, size) {
+function sphere(x, y) {
 	var geometry = new THREE.SphereGeometry( connectionSize, 8, 8);
 	var material = new THREE.MeshPhongMaterial( {color: connectionColor} );
 	var sphere = new THREE.Mesh( geometry, material );
 	sphere.position.x = x;
 	sphere.position.y = y;
 	sphere.position.z = 0;
+	sphere.name="static"
 	return sphere;
 }
 

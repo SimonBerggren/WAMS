@@ -1,0 +1,1138 @@
+{
+  "children": [
+    {
+      "class": "World",
+      "fullClassName": "Modelica.Mechanics.MultiBody.World",
+      "height": 200,
+      "id": "world",
+      "labels": [
+        {
+          "text": "world"
+        }
+      ],
+      "parameters": {
+        "animateGravity": {
+          "description": "= true, if gravity field shall be visualized (acceleration vector or field center)",
+          "value": "true"
+        },
+        "animateWorld": {
+          "description": "= true, if world coordinate system shall be visualized",
+          "value": "true"
+        },
+        "axisDiameter": {
+          "description": "Diameter of world axes arrows",
+          "value": "axisLength \\/ defaultFrameDiameterFraction"
+        },
+        "axisLength": {
+          "description": "Length of world axes arrows",
+          "value": "nominalLength \\/ 2"
+        },
+        "axisShowLabels": {
+          "description": "= true, if labels shall be shown",
+          "value": "true"
+        },
+        "defaultArrowDiameter": {
+          "description": "Default for arrow diameter (e.g., of forces, torques, sensors)",
+          "value": "nominalLength \\/ 40"
+        },
+        "defaultAxisLength": {
+          "description": "Default for length of a frame axis (but not world frame)",
+          "value": "nominalLength \\/ 5"
+        },
+        "defaultBodyDiameter": {
+          "description": "Default for diameter of sphere representing the center of mass of a body",
+          "value": "nominalLength \\/ 9"
+        },
+        "defaultForceLength": {
+          "description": "Default for the fixed length of a shape representing a force (e.g., damper)",
+          "value": "nominalLength \\/ 10"
+        },
+        "defaultForceWidth": {
+          "description": "Default for the fixed width of a shape representing a force (e.g., spring, bushing)",
+          "value": "nominalLength \\/ 20"
+        },
+        "defaultFrameDiameterFraction": {
+          "description": "Default for arrow diameter of a coordinate system as a fraction of axis length",
+          "value": "40"
+        },
+        "defaultJointLength": {
+          "description": "Default for the fixed length of a shape representing a joint",
+          "value": "nominalLength \\/ 10"
+        },
+        "defaultJointWidth": {
+          "description": "Default for the fixed width of a shape representing a joint",
+          "value": "nominalLength \\/ 20"
+        },
+        "defaultN_to_m": {
+          "description": "Default scaling of force arrows (length = force/defaultN_to_m)",
+          "value": "1000"
+        },
+        "defaultNm_to_m": {
+          "description": "Default scaling of torque arrows (length = torque/defaultNm_to_m)",
+          "value": "1000"
+        },
+        "defaultSpecularCoefficient": {
+          "description": "Default reflection of ambient light (= 0: light is completely absorbed)",
+          "value": "0.7"
+        },
+        "defaultWidthFraction": {
+          "description": "Default for shape width as a fraction of shape length (e.g., for Parts.FixedTranslation)",
+          "value": "20"
+        },
+        "driveTrainMechanics3D": {
+          "description": "= true, if 3-dim. mechanical effects of Parts.Mounting1D/Rotor1D/BevelGear1D shall be taken into account",
+          "value": "true"
+        },
+        "enableAnimation": {
+          "description": "= true, if animation of all components is enabled",
+          "value": "true"
+        },
+        "g": {
+          "description": "Constant gravity acceleration",
+          "value": "9.81"
+        },
+        "gravityArrowDiameter": {
+          "description": "Diameter of gravity arrow",
+          "value": "gravityArrowLength \\/ defaultWidthFraction"
+        },
+        "gravityArrowLength": {
+          "description": "Length of gravity arrow",
+          "value": "axisLength \\/ 2"
+        },
+        "gravityArrowTail": {
+          "description": "Position vector from origin of world frame to arrow tail, resolved in world frame",
+          "value": "{0, 0, 0}"
+        },
+        "gravityHeadLength": {
+          "description": null,
+          "value": "min(gravityArrowLength, gravityArrowDiameter * Types.Defaults.ArrowHeadLengthFraction)"
+        },
+        "gravityHeadWidth": {
+          "description": null,
+          "value": "gravityArrowDiameter * Types.Defaults.ArrowHeadWidthFraction"
+        },
+        "gravityLineLength": {
+          "description": null,
+          "value": "max(0, gravityArrowLength - gravityHeadLength)"
+        },
+        "gravitySphereDiameter": {
+          "description": "Diameter of sphere representing gravity center (default = mean diameter of earth)",
+          "value": "12742000"
+        },
+        "gravityType": {
+          "description": "Type of gravity field",
+          "value": "GravityTypes.UniformGravity"
+        },
+        "headLength": {
+          "description": null,
+          "value": "min(axisLength, axisDiameter * Types.Defaults.FrameHeadLengthFraction)"
+        },
+        "headWidth": {
+          "description": null,
+          "value": "axisDiameter * Types.Defaults.FrameHeadWidthFraction"
+        },
+        "label1": {
+          "description": "Label of horizontal axis in icon",
+          "value": "x"
+        },
+        "label2": {
+          "description": "Label of vertical axis in icon",
+          "value": "y"
+        },
+        "labelStart": {
+          "description": null,
+          "value": "1.05 * axisLength"
+        },
+        "lineLength": {
+          "description": null,
+          "value": "max(0, axisLength - headLength)"
+        },
+        "lineWidth": {
+          "description": null,
+          "value": "axisDiameter"
+        },
+        "mue": {
+          "description": "Gravity field constant (default = field constant of earth)",
+          "value": "3.986E14"
+        },
+        "n": {
+          "description": "Direction of gravity resolved in world frame (gravity = g*n/length(n))",
+          "value": "{0, -1, 0}"
+        },
+        "ndim": {
+          "description": null,
+          "value": "if enableAnimation and animateWorld then 1 else 0"
+        },
+        "ndim2": {
+          "description": null,
+          "value": "if enableAnimation and animateWorld and axisShowLabels then 1 else 0"
+        },
+        "ndim_pointGravity": {
+          "description": null,
+          "value": "if enableAnimation and animateGravity and gravityType == GravityTypes.UniformGravity then 1 else 0"
+        },
+        "nominalLength": {
+          "description": "\\\"Nominal\\\" length of multi-body system",
+          "value": "1"
+        },
+        "scaledLabel": {
+          "description": null,
+          "value": "Modelica.Mechanics.MultiBody.Types.Defaults.FrameLabelHeightFraction * axisDiameter"
+        }
+      },
+      "ports": [
+        {
+          "class": "Frame_b",
+          "fullClassName": "Modelica.Mechanics.MultiBody.Interfaces.Frame_b",
+          "height": 32,
+          "id": "world.frame_b",
+          "labels": [
+            {
+              "text": "frame_b"
+            }
+          ],
+          "properties": {
+            "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+          },
+          "variables": [
+            "world.frame_b.r_0",
+            "world.frame_b.R",
+            "world.frame_b.f",
+            "world.frame_b.t"
+          ],
+          "width": 32,
+          "x": 184,
+          "y": 84
+        }
+      ],
+      "properties": {
+        "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+      },
+      "variables": [
+        "world.frame_b",
+        "world.enableAnimation",
+        "world.animateWorld",
+        "world.animateGravity",
+        "world.label1",
+        "world.label2",
+        "world.gravityType",
+        "world.g",
+        "world.n",
+        "world.mue",
+        "world.driveTrainMechanics3D",
+        "world.axisLength",
+        "world.axisDiameter",
+        "world.axisShowLabels",
+        "world.axisColor_x",
+        "world.axisColor_y",
+        "world.axisColor_z",
+        "world.gravityArrowTail",
+        "world.gravityArrowLength",
+        "world.gravityArrowDiameter",
+        "world.gravityArrowColor",
+        "world.gravitySphereDiameter",
+        "world.gravitySphereColor",
+        "world.nominalLength",
+        "world.defaultAxisLength",
+        "world.defaultJointLength",
+        "world.defaultJointWidth",
+        "world.defaultForceLength",
+        "world.defaultForceWidth",
+        "world.defaultBodyDiameter",
+        "world.defaultWidthFraction",
+        "world.defaultArrowDiameter",
+        "world.defaultFrameDiameterFraction",
+        "world.defaultSpecularCoefficient",
+        "world.defaultN_to_m",
+        "world.defaultNm_to_m",
+        "world.ndim",
+        "world.ndim2",
+        "world.headLength",
+        "world.headWidth",
+        "world.lineLength",
+        "world.lineWidth",
+        "world.scaledLabel",
+        "world.labelStart",
+        "world.x_arrowLine",
+        "world.x_arrowHead",
+        "world.x_label",
+        "world.y_arrowLine",
+        "world.y_arrowHead",
+        "world.y_label",
+        "world.z_arrowLine",
+        "world.z_arrowHead",
+        "world.z_label",
+        "world.gravityHeadLength",
+        "world.gravityHeadWidth",
+        "world.gravityLineLength",
+        "world.gravityArrowLine",
+        "world.gravityArrowHead",
+        "world.ndim_pointGravity",
+        "world.gravitySphere"
+      ],
+      "width": 200
+    },
+    {
+      "class": "Revolute",
+      "fullClassName": "Modelica.Mechanics.MultiBody.Joints.Revolute",
+      "height": 200,
+      "id": "revolute1",
+      "labels": [
+        {
+          "text": "revolute1"
+        }
+      ],
+      "parameters": {
+        "animation": {
+          "description": "= true, if animation shall be enabled (show axis as cylinder)",
+          "value": "true"
+        },
+        "cylinderDiameter": {
+          "description": "Diameter of cylinder representing the joint axis",
+          "value": "world.defaultJointWidth"
+        },
+        "cylinderLength": {
+          "description": "Length of cylinder representing the joint axis",
+          "value": "world.defaultJointLength"
+        },
+        "e": {
+          "description": "Unit vector in direction of rotation axis, resolved in frame_a (= same as in frame_b)",
+          "value": "Modelica.Math.Vectors.normalizeWithAssert(n)"
+        },
+        "n": {
+          "description": "Axis of rotation resolved in frame_a (= same as in frame_b)",
+          "value": "{0, 0, 1}"
+        },
+        "stateSelect": {
+          "description": "Priority to use joint angle phi and w=der(phi) as states",
+          "value": "StateSelect.prefer"
+        },
+        "useAxisFlange": {
+          "description": "= true, if axis flange is enabled",
+          "value": "true"
+        }
+      },
+      "ports": [
+        {
+          "class": "Flange_a",
+          "fullClassName": "Modelica.Mechanics.Rotational.Interfaces.Flange_a",
+          "height": 20,
+          "id": "revolute1.axis",
+          "labels": [
+            {
+              "text": "axis"
+            }
+          ],
+          "properties": {
+            "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+          },
+          "variables": [
+            "revolute1.axis.phi",
+            "revolute1.axis.tau"
+          ],
+          "width": 20,
+          "x": 90,
+          "y": -10
+        },
+        {
+          "class": "Flange_b",
+          "fullClassName": "Modelica.Mechanics.Rotational.Interfaces.Flange_b",
+          "height": 20,
+          "id": "revolute1.support",
+          "labels": [
+            {
+              "text": "support"
+            }
+          ],
+          "properties": {
+            "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+          },
+          "variables": [
+            "revolute1.support.phi",
+            "revolute1.support.tau"
+          ],
+          "width": 20,
+          "x": 30,
+          "y": -10
+        },
+        {
+          "class": "Frame_a",
+          "fullClassName": "Modelica.Mechanics.MultiBody.Interfaces.Frame_a",
+          "height": 32,
+          "id": "revolute1.frame_a",
+          "labels": [
+            {
+              "text": "frame_a"
+            }
+          ],
+          "properties": {
+            "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+          },
+          "variables": [
+            "revolute1.frame_a.r_0",
+            "revolute1.frame_a.R",
+            "revolute1.frame_a.f",
+            "revolute1.frame_a.t"
+          ],
+          "width": 32,
+          "x": -16,
+          "y": 84
+        },
+        {
+          "class": "Frame_b",
+          "fullClassName": "Modelica.Mechanics.MultiBody.Interfaces.Frame_b",
+          "height": 32,
+          "id": "revolute1.frame_b",
+          "labels": [
+            {
+              "text": "frame_b"
+            }
+          ],
+          "properties": {
+            "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+          },
+          "variables": [
+            "revolute1.frame_b.r_0",
+            "revolute1.frame_b.R",
+            "revolute1.frame_b.f",
+            "revolute1.frame_b.t"
+          ],
+          "width": 32,
+          "x": 184,
+          "y": 84
+        }
+      ],
+      "properties": {
+        "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+      },
+      "variables": [
+        "revolute1.axis",
+        "revolute1.support",
+        "revolute1.frame_a",
+        "revolute1.frame_b",
+        "revolute1.useAxisFlange",
+        "revolute1.animation",
+        "revolute1.n",
+        "revolute1.phi_offset",
+        "revolute1.cylinderLength",
+        "revolute1.cylinderDiameter",
+        "revolute1.cylinderColor",
+        "revolute1.specularCoefficient",
+        "revolute1.stateSelect",
+        "revolute1.phi",
+        "revolute1.w",
+        "revolute1.a",
+        "revolute1.tau",
+        "revolute1.angle",
+        "revolute1.world",
+        "revolute1.e",
+        "revolute1.R_rel",
+        "revolute1.cylinder",
+        "revolute1.fixed",
+        "revolute1.internalAxis",
+        "revolute1.constantTorque"
+      ],
+      "width": 200
+    },
+    {
+      "class": "Damper",
+      "fullClassName": "Modelica.Mechanics.Rotational.Components.Damper",
+      "height": 200,
+      "id": "damper",
+      "labels": [
+        {
+          "text": "damper"
+        }
+      ],
+      "parameters": {
+        "d": {
+          "description": "Damping constant",
+          "value": "0.1"
+        },
+        "phi_nominal": {
+          "description": "Nominal value of phi_rel (used for scaling)",
+          "value": "1.0E-4"
+        },
+        "stateSelect": {
+          "description": "Priority to use phi_rel and w_rel as states",
+          "value": "StateSelect.prefer"
+        },
+        "useHeatPort": {
+          "description": "=true, if heatPort is enabled",
+          "value": "false"
+        }
+      },
+      "ports": [
+        {
+          "class": "Flange_a",
+          "fullClassName": "Modelica.Mechanics.Rotational.Interfaces.Flange_a",
+          "height": 20,
+          "id": "damper.flange_a",
+          "labels": [
+            {
+              "text": "flange_a"
+            }
+          ],
+          "properties": {
+            "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+          },
+          "variables": [
+            "damper.flange_a.phi",
+            "damper.flange_a.tau"
+          ],
+          "width": 20,
+          "x": -10,
+          "y": 90
+        },
+        {
+          "class": "Flange_b",
+          "fullClassName": "Modelica.Mechanics.Rotational.Interfaces.Flange_b",
+          "height": 20,
+          "id": "damper.flange_b",
+          "labels": [
+            {
+              "text": "flange_b"
+            }
+          ],
+          "properties": {
+            "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+          },
+          "variables": [
+            "damper.flange_b.phi",
+            "damper.flange_b.tau"
+          ],
+          "width": 20,
+          "x": 190,
+          "y": 90
+        }
+      ],
+      "properties": {
+        "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+      },
+      "variables": [
+        "damper.d",
+        "damper.phi_rel",
+        "damper.w_rel",
+        "damper.a_rel",
+        "damper.tau",
+        "damper.flange_a",
+        "damper.flange_b",
+        "damper.phi_nominal",
+        "damper.stateSelect",
+        "damper.useHeatPort",
+        "damper.heatPort",
+        "damper.lossPower"
+      ],
+      "width": 200
+    },
+    {
+      "class": "BodyBox",
+      "fullClassName": "Modelica.Mechanics.MultiBody.Parts.BodyBox",
+      "height": 200,
+      "id": "boxBody1",
+      "labels": [
+        {
+          "text": "boxBody1"
+        }
+      ],
+      "parameters": {
+        "I": {
+          "description": "Inertia tensor of body box with respect to center of mass, parallel to frame_a",
+          "value": "Frames.resolveDyade1(R, diagonal({mo * (width * width + height * height) - mi * (innerWidth * innerWidth + innerHeight * innerHeight), mo * (length * length + height * height) - mi * (length * length + innerHeight * innerHeight), mo * (length * length + width * width) - mi * (length * length + innerWidth * innerWidth)} \\/ 12))"
+        },
+        "R": {
+          "description": "Orientation object from frame_a to coordinates system spanned by r and widthDirection",
+          "value": "Frames.from_nxy(r, widthDirection)"
+        },
+        "angles_fixed": {
+          "description": "= true, if angles_start are used as initial values, else as guess values",
+          "value": "false"
+        },
+        "angles_start": {
+          "description": "Initial values of angles to rotate frame_a around 'sequence_start' axes into frame_b",
+          "value": "{0, 0, 0}"
+        },
+        "animation": {
+          "description": "= true, if animation shall be enabled (show box between frame_a and frame_b)",
+          "value": "true"
+        },
+        "density": {
+          "description": "Density of cylinder (e.g., steel: 7700 .. 7900, wood : 400 .. 800)",
+          "value": "7700"
+        },
+        "enforceStates": {
+          "description": "= true, if absolute variables of body object shall be used as states (StateSelect.always)",
+          "value": "false"
+        },
+        "height": {
+          "description": "Height of box",
+          "value": "width"
+        },
+        "innerHeight": {
+          "description": "Height of inner box surface (0 <= innerHeight <= height)",
+          "value": "innerWidth"
+        },
+        "innerWidth": {
+          "description": "Width of inner box surface (0 <= innerWidth <= width)",
+          "value": "0"
+        },
+        "length": {
+          "description": "Length of box",
+          "value": "Modelica.Math.Vectors.length(r - r_shape)"
+        },
+        "lengthDirection": {
+          "description": "Vector in length direction of box, resolved in frame_a",
+          "value": "to_unit1(r - r_shape)"
+        },
+        "m": {
+          "description": "Mass of box",
+          "value": "mo - mi"
+        },
+        "mi": {
+          "description": "Mass of hole of box",
+          "value": "density * length * innerWidth * innerHeight"
+        },
+        "mo": {
+          "description": "Mass of box without hole",
+          "value": "density * length * width * height"
+        },
+        "r": {
+          "description": "Vector from frame_a to frame_b resolved in frame_a",
+          "value": "{0.5, 0, 0}"
+        },
+        "r_CM": {
+          "description": "Position vector from origin of frame_a to center of mass, resolved in frame_a",
+          "value": "r_shape + normalizeWithAssert(lengthDirection) * length \\/ 2"
+        },
+        "r_shape": {
+          "description": "Vector from frame_a to box origin, resolved in frame_a",
+          "value": "{0, 0, 0}"
+        },
+        "sequence_angleStates": {
+          "description": "Sequence of rotations to rotate world frame into frame_a around the 3 angles used as potential states",
+          "value": "{1, 2, 3}"
+        },
+        "sequence_start": {
+          "description": "Sequence of rotations to rotate frame_a into frame_b at initial time",
+          "value": "{1, 2, 3}"
+        },
+        "useQuaternions": {
+          "description": "= true, if quaternions shall be used as potential states otherwise use 3 angles as potential states",
+          "value": "true"
+        },
+        "w_0_fixed": {
+          "description": "= true, if w_0_start are used as initial values, else as guess values",
+          "value": "false"
+        },
+        "w_0_start": {
+          "description": "Initial or guess values of angular velocity of frame_a resolved in world frame",
+          "value": "{0, 0, 0}"
+        },
+        "width": {
+          "description": "Width of box",
+          "value": "0.06"
+        },
+        "widthDirection": {
+          "description": "Vector in width direction of box, resolved in frame_a",
+          "value": "{0, 1, 0}"
+        },
+        "z_0_fixed": {
+          "description": "= true, if z_0_start are used as initial values, else as guess values",
+          "value": "false"
+        },
+        "z_0_start": {
+          "description": "Initial values of angular acceleration z_0 = der(w_0)",
+          "value": "{0, 0, 0}"
+        }
+      },
+      "ports": [
+        {
+          "class": "Frame_a",
+          "fullClassName": "Modelica.Mechanics.MultiBody.Interfaces.Frame_a",
+          "height": 32,
+          "id": "boxBody1.frame_a",
+          "labels": [
+            {
+              "text": "frame_a"
+            }
+          ],
+          "properties": {
+            "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+          },
+          "variables": [
+            "boxBody1.frame_a.r_0",
+            "boxBody1.frame_a.R",
+            "boxBody1.frame_a.f",
+            "boxBody1.frame_a.t"
+          ],
+          "width": 32,
+          "x": -16,
+          "y": 84
+        },
+        {
+          "class": "Frame_b",
+          "fullClassName": "Modelica.Mechanics.MultiBody.Interfaces.Frame_b",
+          "height": 32,
+          "id": "boxBody1.frame_b",
+          "labels": [
+            {
+              "text": "frame_b"
+            }
+          ],
+          "properties": {
+            "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+          },
+          "variables": [
+            "boxBody1.frame_b.r_0",
+            "boxBody1.frame_b.R",
+            "boxBody1.frame_b.f",
+            "boxBody1.frame_b.t"
+          ],
+          "width": 32,
+          "x": 184,
+          "y": 84
+        }
+      ],
+      "properties": {
+        "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+      },
+      "variables": [
+        "boxBody1.frame_a",
+        "boxBody1.frame_b",
+        "boxBody1.animation",
+        "boxBody1.r",
+        "boxBody1.r_shape",
+        "boxBody1.lengthDirection",
+        "boxBody1.widthDirection",
+        "boxBody1.length",
+        "boxBody1.width",
+        "boxBody1.height",
+        "boxBody1.innerWidth",
+        "boxBody1.innerHeight",
+        "boxBody1.density",
+        "boxBody1.color",
+        "boxBody1.specularCoefficient",
+        "boxBody1.r_0",
+        "boxBody1.v_0",
+        "boxBody1.a_0",
+        "boxBody1.angles_fixed",
+        "boxBody1.angles_start",
+        "boxBody1.sequence_start",
+        "boxBody1.w_0_fixed",
+        "boxBody1.w_0_start",
+        "boxBody1.z_0_fixed",
+        "boxBody1.z_0_start",
+        "boxBody1.enforceStates",
+        "boxBody1.useQuaternions",
+        "boxBody1.sequence_angleStates",
+        "boxBody1.mo",
+        "boxBody1.mi",
+        "boxBody1.m",
+        "boxBody1.R",
+        "boxBody1.r_CM",
+        "boxBody1.I",
+        "boxBody1.body",
+        "boxBody1.frameTranslation",
+        "boxBody1.world"
+      ],
+      "width": 200
+    },
+    {
+      "class": "Revolute",
+      "fullClassName": "Modelica.Mechanics.MultiBody.Joints.Revolute",
+      "height": 200,
+      "id": "revolute2",
+      "labels": [
+        {
+          "text": "revolute2"
+        }
+      ],
+      "parameters": {
+        "animation": {
+          "description": "= true, if animation shall be enabled (show axis as cylinder)",
+          "value": "true"
+        },
+        "cylinderDiameter": {
+          "description": "Diameter of cylinder representing the joint axis",
+          "value": "world.defaultJointWidth"
+        },
+        "cylinderLength": {
+          "description": "Length of cylinder representing the joint axis",
+          "value": "world.defaultJointLength"
+        },
+        "e": {
+          "description": "Unit vector in direction of rotation axis, resolved in frame_a (= same as in frame_b)",
+          "value": "Modelica.Math.Vectors.normalizeWithAssert(n)"
+        },
+        "n": {
+          "description": "Axis of rotation resolved in frame_a (= same as in frame_b)",
+          "value": "{0, 0, 1}"
+        },
+        "stateSelect": {
+          "description": "Priority to use joint angle phi and w=der(phi) as states",
+          "value": "StateSelect.prefer"
+        },
+        "useAxisFlange": {
+          "description": "= true, if axis flange is enabled",
+          "value": "false"
+        }
+      },
+      "ports": [
+        {
+          "class": "Frame_a",
+          "fullClassName": "Modelica.Mechanics.MultiBody.Interfaces.Frame_a",
+          "height": 32,
+          "id": "revolute2.frame_a",
+          "labels": [
+            {
+              "text": "frame_a"
+            }
+          ],
+          "properties": {
+            "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+          },
+          "variables": [
+            "revolute2.frame_a.r_0",
+            "revolute2.frame_a.R",
+            "revolute2.frame_a.f",
+            "revolute2.frame_a.t"
+          ],
+          "width": 32,
+          "x": -16,
+          "y": 84
+        },
+        {
+          "class": "Frame_b",
+          "fullClassName": "Modelica.Mechanics.MultiBody.Interfaces.Frame_b",
+          "height": 32,
+          "id": "revolute2.frame_b",
+          "labels": [
+            {
+              "text": "frame_b"
+            }
+          ],
+          "properties": {
+            "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+          },
+          "variables": [
+            "revolute2.frame_b.r_0",
+            "revolute2.frame_b.R",
+            "revolute2.frame_b.f",
+            "revolute2.frame_b.t"
+          ],
+          "width": 32,
+          "x": 184,
+          "y": 84
+        }
+      ],
+      "properties": {
+        "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+      },
+      "variables": [
+        "revolute2.axis",
+        "revolute2.support",
+        "revolute2.frame_a",
+        "revolute2.frame_b",
+        "revolute2.useAxisFlange",
+        "revolute2.animation",
+        "revolute2.n",
+        "revolute2.phi_offset",
+        "revolute2.cylinderLength",
+        "revolute2.cylinderDiameter",
+        "revolute2.cylinderColor",
+        "revolute2.specularCoefficient",
+        "revolute2.stateSelect",
+        "revolute2.phi",
+        "revolute2.w",
+        "revolute2.a",
+        "revolute2.tau",
+        "revolute2.angle",
+        "revolute2.world",
+        "revolute2.e",
+        "revolute2.R_rel",
+        "revolute2.cylinder",
+        "revolute2.fixed",
+        "revolute2.internalAxis",
+        "revolute2.constantTorque"
+      ],
+      "width": 200
+    },
+    {
+      "class": "BodyBox",
+      "fullClassName": "Modelica.Mechanics.MultiBody.Parts.BodyBox",
+      "height": 200,
+      "id": "boxBody2",
+      "labels": [
+        {
+          "text": "boxBody2"
+        }
+      ],
+      "parameters": {
+        "I": {
+          "description": "Inertia tensor of body box with respect to center of mass, parallel to frame_a",
+          "value": "Frames.resolveDyade1(R, diagonal({mo * (width * width + height * height) - mi * (innerWidth * innerWidth + innerHeight * innerHeight), mo * (length * length + height * height) - mi * (length * length + innerHeight * innerHeight), mo * (length * length + width * width) - mi * (length * length + innerWidth * innerWidth)} \\/ 12))"
+        },
+        "R": {
+          "description": "Orientation object from frame_a to coordinates system spanned by r and widthDirection",
+          "value": "Frames.from_nxy(r, widthDirection)"
+        },
+        "angles_fixed": {
+          "description": "= true, if angles_start are used as initial values, else as guess values",
+          "value": "false"
+        },
+        "angles_start": {
+          "description": "Initial values of angles to rotate frame_a around 'sequence_start' axes into frame_b",
+          "value": "{0, 0, 0}"
+        },
+        "animation": {
+          "description": "= true, if animation shall be enabled (show box between frame_a and frame_b)",
+          "value": "true"
+        },
+        "density": {
+          "description": "Density of cylinder (e.g., steel: 7700 .. 7900, wood : 400 .. 800)",
+          "value": "7700"
+        },
+        "enforceStates": {
+          "description": "= true, if absolute variables of body object shall be used as states (StateSelect.always)",
+          "value": "false"
+        },
+        "height": {
+          "description": "Height of box",
+          "value": "width"
+        },
+        "innerHeight": {
+          "description": "Height of inner box surface (0 <= innerHeight <= height)",
+          "value": "innerWidth"
+        },
+        "innerWidth": {
+          "description": "Width of inner box surface (0 <= innerWidth <= width)",
+          "value": "0"
+        },
+        "length": {
+          "description": "Length of box",
+          "value": "Modelica.Math.Vectors.length(r - r_shape)"
+        },
+        "lengthDirection": {
+          "description": "Vector in length direction of box, resolved in frame_a",
+          "value": "to_unit1(r - r_shape)"
+        },
+        "m": {
+          "description": "Mass of box",
+          "value": "mo - mi"
+        },
+        "mi": {
+          "description": "Mass of hole of box",
+          "value": "density * length * innerWidth * innerHeight"
+        },
+        "mo": {
+          "description": "Mass of box without hole",
+          "value": "density * length * width * height"
+        },
+        "r": {
+          "description": "Vector from frame_a to frame_b resolved in frame_a",
+          "value": "{0.5, 0, 0}"
+        },
+        "r_CM": {
+          "description": "Position vector from origin of frame_a to center of mass, resolved in frame_a",
+          "value": "r_shape + normalizeWithAssert(lengthDirection) * length \\/ 2"
+        },
+        "r_shape": {
+          "description": "Vector from frame_a to box origin, resolved in frame_a",
+          "value": "{0, 0, 0}"
+        },
+        "sequence_angleStates": {
+          "description": "Sequence of rotations to rotate world frame into frame_a around the 3 angles used as potential states",
+          "value": "{1, 2, 3}"
+        },
+        "sequence_start": {
+          "description": "Sequence of rotations to rotate frame_a into frame_b at initial time",
+          "value": "{1, 2, 3}"
+        },
+        "useQuaternions": {
+          "description": "= true, if quaternions shall be used as potential states otherwise use 3 angles as potential states",
+          "value": "true"
+        },
+        "w_0_fixed": {
+          "description": "= true, if w_0_start are used as initial values, else as guess values",
+          "value": "false"
+        },
+        "w_0_start": {
+          "description": "Initial or guess values of angular velocity of frame_a resolved in world frame",
+          "value": "{0, 0, 0}"
+        },
+        "width": {
+          "description": "Width of box",
+          "value": "0.06"
+        },
+        "widthDirection": {
+          "description": "Vector in width direction of box, resolved in frame_a",
+          "value": "{0, 1, 0}"
+        },
+        "z_0_fixed": {
+          "description": "= true, if z_0_start are used as initial values, else as guess values",
+          "value": "false"
+        },
+        "z_0_start": {
+          "description": "Initial values of angular acceleration z_0 = der(w_0)",
+          "value": "{0, 0, 0}"
+        }
+      },
+      "ports": [
+        {
+          "class": "Frame_a",
+          "fullClassName": "Modelica.Mechanics.MultiBody.Interfaces.Frame_a",
+          "height": 32,
+          "id": "boxBody2.frame_a",
+          "labels": [
+            {
+              "text": "frame_a"
+            }
+          ],
+          "properties": {
+            "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+          },
+          "variables": [
+            "boxBody2.frame_a.r_0",
+            "boxBody2.frame_a.R",
+            "boxBody2.frame_a.f",
+            "boxBody2.frame_a.t"
+          ],
+          "width": 32,
+          "x": -16,
+          "y": 84
+        },
+        {
+          "class": "Frame_b",
+          "fullClassName": "Modelica.Mechanics.MultiBody.Interfaces.Frame_b",
+          "height": 32,
+          "id": "boxBody2.frame_b",
+          "labels": [
+            {
+              "text": "frame_b"
+            }
+          ],
+          "properties": {
+            "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+          },
+          "variables": [
+            "boxBody2.frame_b.r_0",
+            "boxBody2.frame_b.R",
+            "boxBody2.frame_b.f",
+            "boxBody2.frame_b.t"
+          ],
+          "width": 32,
+          "x": 184,
+          "y": 84
+        }
+      ],
+      "properties": {
+        "de.cau.cs.kieler.portConstraints": "FIXED_POS"
+      },
+      "variables": [
+        "boxBody2.frame_a",
+        "boxBody2.frame_b",
+        "boxBody2.animation",
+        "boxBody2.r",
+        "boxBody2.r_shape",
+        "boxBody2.lengthDirection",
+        "boxBody2.widthDirection",
+        "boxBody2.length",
+        "boxBody2.width",
+        "boxBody2.height",
+        "boxBody2.innerWidth",
+        "boxBody2.innerHeight",
+        "boxBody2.density",
+        "boxBody2.color",
+        "boxBody2.specularCoefficient",
+        "boxBody2.r_0",
+        "boxBody2.v_0",
+        "boxBody2.a_0",
+        "boxBody2.angles_fixed",
+        "boxBody2.angles_start",
+        "boxBody2.sequence_start",
+        "boxBody2.w_0_fixed",
+        "boxBody2.w_0_start",
+        "boxBody2.z_0_fixed",
+        "boxBody2.z_0_start",
+        "boxBody2.enforceStates",
+        "boxBody2.useQuaternions",
+        "boxBody2.sequence_angleStates",
+        "boxBody2.mo",
+        "boxBody2.mi",
+        "boxBody2.m",
+        "boxBody2.R",
+        "boxBody2.r_CM",
+        "boxBody2.I",
+        "boxBody2.body",
+        "boxBody2.frameTranslation",
+        "boxBody2.world"
+      ],
+      "width": 200
+    }
+  ],
+  "class": "DoublePendulum",
+  "edges": [
+    {
+      "id": "1",
+      "source": "damper",
+      "sourcePort": "damper.flange_b",
+      "target": "revolute1",
+      "targetPort": "revolute1.axis"
+    },
+    {
+      "id": "2",
+      "source": "revolute1",
+      "sourcePort": "revolute1.support",
+      "target": "damper",
+      "targetPort": "damper.flange_a"
+    },
+    {
+      "id": "3",
+      "source": "revolute1",
+      "sourcePort": "revolute1.frame_b",
+      "target": "boxBody1",
+      "targetPort": "boxBody1.frame_a"
+    },
+    {
+      "id": "4",
+      "source": "revolute2",
+      "sourcePort": "revolute2.frame_b",
+      "target": "boxBody2",
+      "targetPort": "boxBody2.frame_a"
+    },
+    {
+      "id": "5",
+      "source": "boxBody1",
+      "sourcePort": "boxBody1.frame_b",
+      "target": "revolute2",
+      "targetPort": "revolute2.frame_a"
+    },
+    {
+      "id": "6",
+      "source": "world",
+      "sourcePort": "world.frame_b",
+      "target": "revolute1",
+      "targetPort": "revolute1.frame_a"
+    }
+  ],
+  "fullClassName": "Modelica.Mechanics.MultiBody.Examples.Elementary.DoublePendulum",
+  "height": 200,
+  "id": "Modelica.Mechanics.MultiBody.Examples.Elementary.DoublePendulum",
+  "labels": [
+    {
+      "text": "DoublePendulum"
+    }
+  ],
+  "properties": {
+    "de.cau.cs.kieler.portConstraints": "FREE"
+  },
+  "variables": [
+    "world",
+    "revolute1",
+    "damper",
+    "boxBody1",
+    "revolute2",
+    "boxBody2"
+  ],
+  "width": 200
+}

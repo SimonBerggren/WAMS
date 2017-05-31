@@ -1,18 +1,15 @@
 (function(){Math.clamp=function(a,b,c){return Math.max(b,Math.min(c,a));}})();
 
+THREE.Matrix4.elements.set = function(_elements) {
+	console.log("setting elements");
+};
+
 Array.prototype.removeValue = function(name, value){
         var array = $.map(this, function(v,i){
             return v[name] === value ? null : v;
         });
         this.length = 0;
         this.push.apply(this, array);
-};
-
-Array.prototype.remove = function(_value){
-	var index = this.indexOf(_value);
-    if(index > -1) {
-    	this.splice(index, 1);
-    }
 };
 
 Array.prototype.last = function(){
@@ -22,7 +19,6 @@ Array.prototype.last = function(){
 Array.prototype.first = function(){
     return this[0];
 };
-
 
 THREE.Group.prototype.setPickable = function() {
 	
@@ -56,6 +52,23 @@ THREE.Object3D.prototype.setType = function(_type) {
 		}
 	};
 	setTypeChild(this);
+};
+
+THREE.Object3D.prototype.setUserData = function(_key, _data) {
+	
+	function setUserDataChild(child) {
+
+		child.userData[_key] = _data;
+
+		if (child.children !== undefined) {
+
+			for (var i = 0; i < child.children.length; ++i) {
+
+				setUserDataChild(child.children[i]);
+			}
+		}
+	};
+	setUserDataChild(this);
 };
 
 THREE.Object3D.prototype.setName = function(_name) {

@@ -21,7 +21,7 @@ var Input = function () {
 	var omy = 0;				// old mouse y (from previous update)
 	var right_mouse = false;	// right mouse button
 	var left_mouse = false;		// left mouse button
-
+	
 	var rect = undefined;	// area where input moves
 
 	// keyboard
@@ -57,19 +57,19 @@ var Input = function () {
     };
 
 	// get mouse x position
-	var getTouchX = function () {
-		return tx;
+	var getTouchX = function () { 
+		return tx; 
 	};
 
 	// get mouse y position
-	var getTouchY = function () {
-		return ty;
+	var getTouchY = function () { 
+		return ty; 
 	};
 
 	// transform mouse position so that 0,0 is in center
 	var getTouchCenterized = function () {
 		return new THREE.Vector2(
-			( tx / rect.width ) * 2 - 1,
+			( tx / rect.width ) * 2 - 1, 
 		  -	( ty / rect.height ) * 2 + 1);
 	};
 
@@ -89,26 +89,26 @@ var Input = function () {
 	var getMouse = function () {
 		return new THREE.Vector2(mx, my);
 	};
-
+	
 	// get mouse delta position
 	var getMouseDelta = function () {
-		return new THREE.Vector2(dmx, dmy);
+		return new THREE.Vector2(dmx, dmy);	
 	};
 
 	// get mouse x position
-	var getMouseX = function () {
-		return mx;
+	var getMouseX = function () { 
+		return mx; 
 	};
 
 	// get mouse y position
-	var getMouseY = function () {
-		return my;
+	var getMouseY = function () { 
+		return my; 
 	};
 
 	// transform mouse position so that 0,0 is in center
 	var getMouseCenterized = function () {
 		return new THREE.Vector2(
-			( mx / rect.width ) * 2 - 1,
+			( mx / rect.width ) * 2 - 1, 
 		  -	( my / rect.height ) * 2 + 1);
 	};
 
@@ -183,8 +183,8 @@ var Input = function () {
 
 	// hook up mouse events
 
-	$('#projection-canvas').on('mousedown', mouseDown);
-	$('#projection-canvas').on('touchstart', touchDown);
+	$('#glcontainer').on('mousedown', mouseDown);
+	$('#glcontainer').on('touchstart', touchDown);
 	$(document).on('mouseup', mouseUp);
 	$(document).on('mousemove', mouseMove);
 

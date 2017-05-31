@@ -29,10 +29,10 @@
           </div>
           <div class="col-md-1 col-xs-6">
             <form action="">
-                <input type="radio" name="mode" checked> Automatic<br>
-                <input type="radio" name="mode" > Nested<br>
-                <input type="radio" name="mode" > Manual<br>
-                <input type="radio" name="mode" > Visualization
+                <input type="radio" class="type-mode" name="mode" value="automatic" checked> Automatic<br>
+                <input type="radio" class="type-mode" name="mode" value="nested" > Nested<br>
+                <input type="radio" class="type-mode" name="mode" value="manual" > Manual<br>
+                <input type="radio" class="type-mode" name="mode" value="visualization" > Visualization
             </form>
           </div>
           <div class="col-md-1 col-xs-6">
@@ -43,9 +43,9 @@
             <div class="col-md-3 col-xs-6">
                 <strong>Animation</strong>
                 <div class="row"></div>
-            <button class="btn btn-primary disabled" id="play">Play</button>
-            <button class="btn btn-primary disabled" id="pause">Pause</button>
-            <button class="btn btn-primary disabled" id="stop">Rewind</button>
+            <button class="btn btn-primary" id="play">Play</button>
+            <button class="btn btn-primary" id="pause">Pause</button>
+            <button class="btn btn-primary" id="stop">Rewind</button>
             <div class="row"></div>
             Time Scale:
             <input type="number" id="animationTimeScale" style="width:50px;" />
@@ -81,23 +81,26 @@
           </div>
           <div class="row"></div>
 
-        <div id="glcontainer" tabindex="1"></div>
-        <script src="scripts/three.js"></script>
-        <script src="scripts/stats.js"></script>
-        <script src="scripts/extensions.js"></script>
-        <script src="scripts/globals.js"></script>
-        <script src="scripts/filesaver.js"></script>
-        <script src="klayjs.js"></script>
-        <script src="scripts/input.js"></script>
-        <script src="scripts/utils.js"></script>
-        <script src="scripts/hooks.js"></script>
-        <script src="scripts/animator.js"></script>
-        <script src="scripts/orbit-controls.js"></script>
-        <script src="scripts/transform-controls2d.js"></script>
-        <script src="scripts/transform-controls3d.js"></script>
-        <script src="scripts/camera.js"></script>
-        <script src="scripts/parser.js"></script>
-        <script src="scripts/app.js"></script>
+        <div id="projection-canvas" tabindex="1"></div>
+
+    <script src="scripts/three.min.js"></script>
+    <script src="scripts/stats.js"></script>
+    <script src="scripts/mtl-loader.js"></script>
+    <script src="scripts/obj-loader.js"></script>
+    <script src="scripts/extensions.js"></script>
+    <script src="scripts/globals.js"></script>
+    <script src="scripts/filesaver.js"></script>
+    <script src="scripts/klayjs.js"></script>
+    <script src="scripts/input.js"></script>
+    <script src="scripts/utils.js"></script>
+    <script src="scripts/hooks.js"></script>
+    <script src="scripts/animator.js"></script>
+    <script src="scripts/orbit-controls.js"></script>
+    <script src="scripts/transform-controls2d.js"></script>
+    <script src="scripts/transform-controls3d.js"></script>
+    <script src="scripts/camera.js"></script>
+    <script src="scripts/parser.js"></script>
+    <script src="scripts/app.js"></script>
 
         <div style="margin:10px;">
         <h4><strong>Camera controls:</strong></h4>

@@ -10,31 +10,16 @@ var total_icons = 0;
 var components;
 var edges;
 var IDs = [];
-var edgeID;
 var ports = [];
 var minX, maxX, minY, maxY;
 var resetCamera = true;	// always reset camera first time
 
-// generate a new ID, i.e Clutch1 -> Clutch2
-// pass class or oldId
-function generateNewId(_oldId) {
-    var r = /\d+/g;
-    var newId = _oldId.replace(/\d+/g, '');  // strip ID of any digits
-    if (isNaN(IDs[newId]))
-    	IDs[newId] = 0;
-    var num = IDs[newId]++;             // generate new digits to ID
-    newId = newId + num;
-    return newId.toString();
-};
-
 // called when we need Klay to parse the graph
 function calculate_graph(_graph) {
-
+		
 	loaded_icons = 0;
 	IDs = [];
 	ports = [];
-
-	if (_graph.children == undefined || _graph.children.length == 0) return;
 
     $klay.layout({
 
@@ -47,7 +32,7 @@ function calculate_graph(_graph) {
 			displayParsedGraph(_parsed_graph);
 
 		},
-		"error": function(error) {
+		"error": function(error) { 
 
   			alert(error.text);
 
@@ -56,85 +41,42 @@ function calculate_graph(_graph) {
 };
 
 // called when we dont want Klay to parse the graph
-function display_graph(_graph, _icons) {
-
+function display_graph(_graph) {
+		
 		loaded_icons = 0;
 		IDs = [];
 		ports = [];
 
-		if (_graph.children == undefined || _graph.children.length == 0) return;
-
-		if (_icons == undefined) {
-
+		if (_graph.hasOwnProperty("children"))
 			displayParsedGraph(_graph);
-
-		} else {
-
-			components = _graph.children;
-			edges = _graph.edges;
-			edgeID = edges.length;			
-			parseIconsFile(_icons, iconsLoaded);
-		}
-};
-
-// called when we have one large file containing all graphs and icons
-function calculateCombinedGraph(_graph, _icons) {
-
-	minX = maxX = minY = maxY = 0;
-	loaded_icons = 0;
-	IDs = [];
-	ports = [];
-
-	if (_graph.children == undefined || _graph.children.length == 0) return;	
-
-    $klay.layout({
-
-  		graph: _graph,
-
-  		"options": klayOptions,
-
-		"success": function(_parsed_graph) {
-
-			components = _parsed_graph.children;
-			edges = _parsed_graph.edges;
-			edgeID = edges.length;
-
-			parseIconsFile(_icons, iconsLoaded);
-
-		},
-		"error": function(error) {
-
-  			alert(error.text);
-
-  		}
-	});
+		else
+			for (var i = 0; i < _graph.length; ++i)
+				displayParsedGraph(_graph[i]);
 };
 
 // loads all icons from a file
-// if onIconsLoaded is defined,
+// if onIconsLoaded is defined, 
 // it is called when all icons in file are loaded into memory
-function parseIconsFile(_icons, onIconsLoaded) {
+function parseIconsFile(_icons_file, onIconsLoaded) {
 
-	var total_icons = Object.keys(_icons).length;
+	var parser = new DOMParser();
+
+	var icons_dict = _icons_file.icons;	
+	var total_icons = Object.keys(icons_dict).length;
 	var curr_icon = 0;
 
 	// load all icons from file
-	for (var icon in _icons) {
+	for (var icon in icons_dict) {
 
-		loadSVG(_icons[icon], icon, function() {
-			// because onload is async, wait with parsing graph until icons are loaded
-			if (onIconsLoaded !== undefined && ++curr_icon === total_icons) {
-				iconsLoaded();
-			}
-		})
+		load_svg(icon);
 	}
 
 	function load_svg(_icon) {
 
 		// parse each icon, so we can extract width and height from its viewbox
 		// and update canvas width and height
-		var svg = _icons[_icon];
-		var svg_element = domParser.parseFromString( svg, 'text/xml' ).documentElement;
+		var svg = icons_dict[_icon];
+		var svg_element = parser.parseFromString( svg, 'text/xml' ).documentElement;
 		var viewbox = svg_element.getAttribute("viewBox").split(" ").map(Number);
 		var new_width = parseInt(viewbox[2]);
 		var new_height = parseInt(viewbox[3]);
@@ -149,69 +91,39 @@ function parseIconsFile(_icons, onIconsLoaded) {
 			canvas.height = new_height;//Math.pow( 2, Math.round( Math.log( nh ) / Math.LN2 ) );
 		    canvas.getContext('2d').drawImage(img, 0, 0);
 
-			var texture = new THREE.Texture(canvas);
-			texture.needsUpdate = true;
-
+				var texture = new THREE.Texture(canvas);
+				texture.needsUpdate = true;
+		
 			icons_svg[_icon] = texture;
 			icon_types[_icon] = "svg";
+
+			// because onload is async, wait with parsing graph until icons are loaded
+			if (onIconsLoaded !== undefined && ++curr_icon === total_icons) {
+				iconsLoaded();
+			}
 		};
-	};
+	};		
 };
 
-// called when we only want to add one new svg and already has the path
-function loadSVG(_svg, _svgName, onLoad) {
-	var svg_element = domParser.parseFromString( _svg, 'text/xml' ).documentElement;
-	var viewbox = svg_element.getAttribute("viewBox").split(" ").map(Number);
-	var new_width = parseInt(viewbox[2]);
-	var new_height = parseInt(viewbox[3]);
-
-	var img = document.createElement("img");
-	img.setAttribute("src", "data:image/svg+xml;base64," + window.btoa(unescape(encodeURIComponent(_svg))));
-
-	// async operation
-	img.onload = function() {
-			var canvas = document.createElement('canvas');
-		canvas.width = new_width; //Math.pow( 2, Math.round( Math.log( nw ) / Math.LN2 ) );
-		canvas.height = new_height;//Math.pow( 2, Math.round( Math.log( nh ) / Math.LN2 ) );
-	    canvas.getContext('2d').drawImage(img, 0, 0);
-
-		var texture = new THREE.Texture(canvas);
-		texture.needsUpdate = true;
-
-		icons_svg[_svgName] = texture;
-		icon_types[_svgName] = "svg";
-
-		if (onLoad !== undefined) {
-			onLoad();
-		}
-	};
-}
-
 // starts with parsing the icons needed for displaying the graph
-function displayParsedGraph(_graph) {
-
-		minX = maxX = minY = maxY = 0;
-		components = _graph.children;
-		edges = _graph.edges;
-		
-		if (file_name == undefined) {
-			iconsLoaded();
-			return;
-		}
+function displayParsedGraph(graph) {
 
 		// check if there is a connected _Icons file to read icons from
 		var icons_file_name = file_name.replace(/\.[^/.]+$/, "_Icons");	// replaces _KlayJS with _Icons
 		var url = "static/" + icons_file_name + ".json";
+		minX = maxX = minY = maxY = 0;
+		components = graph.children;
+		edges = graph.edges;
 
 		$.get(url)
 
 		// if there is an icons file
 		.success(function(_file) {
 
-			parseIconsFile(JSON.parse(_file).icons, iconsLoaded);
+			parseIconsFile(JSON.parse(_file), iconsLoaded);
 
 		// if there is no icons file
-		}).error(function() {
+		}).error(function() { 
 
 		function extract_icons(_comps) {
 
@@ -241,12 +153,14 @@ function displayParsedGraph(_graph) {
 		// load each icon into the app
 		for (var i = 0; i < icon_names.length; ++i)
 				load_icon(icon_names[i]);
-
+			
 		// if there are no icons to load, go straight to parsing
 		if (icon_names.length == 0)
 			iconsLoaded();
 	});
 };
+
+
 
 // loads an icon into the app
 function load_icon(_icon_name) {
@@ -256,11 +170,11 @@ function load_icon(_icon_name) {
 	// start using jquery to see if icon url is accessible as .json
 	$.get(url)
 	.success(function() {
-
+		
 		jsonloader.load(url, function(_object) {
 
 			icon_types[_icon_name] = "json";
-			icons_svg[_icon_name] = _object;
+			icons_svg[_icon_name] = _object;			
 
 			if (++loaded_icons >= total_icons)
 				iconsLoaded();
@@ -268,28 +182,28 @@ function load_icon(_icon_name) {
 
 		// if not, try same url but with .svg
 	}).error(function() {
-
+		
 		url = icons_directory + _icon_name + ".svg";
 
 		$.get(url)
-		.success(function() {
-
-			svgloader.load(url, function (svg) {
+		.success(function() { 
+	
+			svgloader.load(url, function (svg) { 
 
 				// nearest power of two, to prevent warning messages from THREE
 				svg.image.width = Math.pow( 2, Math.round( Math.log( svg.image.width ) / Math.LN2 ) );
 				svg.image.height = Math.pow( 2, Math.round( Math.log( svg.image.height ) / Math.LN2 ) );
-
+				
 				icon_types[_icon_name] = "svg";
 				icons_svg[_icon_name] = svg;
-
+	
 				if (++loaded_icons >= total_icons)
 					iconsLoaded();
 			});
 
-			// if neither json nor svg is present, save the type as a simple plane
-		}).error(function() {
-
+			// if neither json nor svg is present, save the type as a simple plane 
+		}).error(function() { 
+		
 			icon_types[_icon_name] = "plane";
 			if (++loaded_icons >= total_icons)
 				iconsLoaded();
@@ -329,7 +243,7 @@ function graphToScene(_components, _edges, parent) {
 		var c = _components[i];
 		c.x += offsetX;
 		c.y += offsetY;
-
+				
 		var bottom_component = false;
 
 		if (c.children !== undefined) {
@@ -361,8 +275,8 @@ function graphToScene(_components, _edges, parent) {
     	if (id_digits !== null) {
     	    id_num = parseInt(id_digits.last()) + 1;
     	}
-    	if (IDs[id_name] < id_num)
-    		IDs[id_name] = id_num;
+    	if (IDs[id_name] < id_num) 
+    		IDs[id_name] = id_num;            	
 
 		var obj;
 		var icon_type = icon_types[cl];
@@ -395,7 +309,6 @@ function graphToScene(_components, _edges, parent) {
 		// keep components and their ports as part of one object in THREE
 		var group = new THREE.Group();
 		group.userData = c;
-		group.userData.connections = [];
 		group.add(obj);
 		group.setType("component");
 
@@ -403,8 +316,7 @@ function graphToScene(_components, _edges, parent) {
 		if (c.origin !== undefined) {
   			group.applyMatrix( new THREE.Matrix4().makeTranslation(-(c.x-c.origin[0]), -(c.y-c.origin[1]) ,0) );
   			group.applyMatrix( new THREE.Matrix4().makeRotationZ(c.rotation  *  Math.PI/180.0 ) );
-  			//group.applyMatrix( new THREE.Matrix4().makeTranslation(c.x+c.x-c.origin[0], c.y-c.height/2+c.y-c.origin[1], 0) );
-  			group.applyMatrix( new THREE.Matrix4().makeTranslation(c.x+c.x-c.origin[0], c.y+c.y-c.origin[1], 0) );
+  			group.applyMatrix( new THREE.Matrix4().makeTranslation(c.x+c.x-c.origin[0], c.y-c.height/2+c.y-c.origin[1], 0) );
 		} else {
 			group.translateOnAxis(new THREE.Vector3(x, y, 0), 1);
 		}
@@ -447,6 +359,7 @@ function graphToScene(_components, _edges, parent) {
 		return;
 
 	for(var i = 0; i < _edges.length; ++i) {
+		
 		var edge = _edges[i];
 
 		var sourceX = edge.sourcePoint.x + offsetX;
@@ -500,41 +413,19 @@ function graphToScene(_components, _edges, parent) {
 			for (var j = 0; j < ports.length; ++j) {
 				var p = ports[j];
 				if (p.userData.id == edge.sourcePort) {
-
-					connection.userData.startPort = p;
-
-					if (p.parent.userData.connections === undefined)
-						p.parent.userData.connections = [];
-					p.parent.userData.connections.push(connection);
+					connection.userData.sourcePort = p;
 				} else if (p.userData.id == edge.targetPort) {
-
-					connection.userData.endPort = p;
-					
-					if (p.parent.userData.connections === undefined)
-						p.parent.userData.connections = [];
-					p.parent.userData.connections.push(connection);
-				}	
+					connection.userData.targetPort = p;
+				}
 			}
 			
 			connection.userData.id = edge.id;
-			connection.userData.numBendPoints = bendPoints == undefined ? 0 : bendPoints.length;
-			connection.userData.startPosition = new THREE.Vector3(firstBendX, firstBendY, 0);
-			connection.userData.endPosition = new THREE.Vector3(lastBendX, lastBendY, 0);
-			connection.userData.startConnection = connection.children.first();
-			connection.userData.endConnection = connection.children.last();
+			connection.userData.source = edge.source;
+			connection.userData.target = edge.target;
+			connection.userData.sourcePoint = new THREE.Vector3(sourceX, sourceY, 0);
+			connection.userData.targetPoint = new THREE.Vector3(targetX, targetY, 0);
 			connection.setPickable();
 			connection.setType("edge");
-
-			if (connection.userData.numBendPoints == 0) {
-				connection.userData.startPosition = new THREE.Vector3(targetX, targetY, 0);
-				connection.userData.endPosition = new THREE.Vector3(sourceX, sourceY, 0);
-				connection.userData.startConnection = connection.children.first();
-				connection.userData.endConnection = connection.children.first();
-			}
-
-			// connection.add(sphere(targetX ,targetY));
-			// connection.add(sphere(sourceX, sourceY));
-
 			scene.add(connection);
 	}
 };
@@ -585,47 +476,15 @@ function parseJson(_object) {
 			if (obj.children[j].type === "AmbientLight" || obj.children[j].type === "DirectionalLight")
 				obj.remove(obj.children[j]);
 		}
-	}
+	}	
+
 };
 
 // adds a 3D model to the scene, scales to 100 because test models are very small
-function addModel(_model, _type) {
+function addModel(_model) {
 	var scale = 100;
-	var obj;
-	if (_type == "obj" || _type == "mtl") {
-		if (material == undefined) {
-			mtlloader.setPath("C:/Users/Simon/Desktop/Adelaide city/Adelaide city");
-			material = mtlloader.parse(_model);
-			material.preload();
-			return;
-		} else {
-			objloader.setMaterials( material );
-			obj = objloader.parse(_model);
-			scale = 1;
-			material = undefined;
-		}
-	} else {
-		scale = 100;
-		obj = jsonloader.parse(_model);
-	}
-	if (obj.type != "Scene") {
-		obj.setPickable();
-	} else {
-		for (var i = 0; i < obj.children.length; ++i) {
-			if (obj.children[i].type == "Object3D")	{ // only added pickable function to Object3D
-				obj.children[i].setPickable = THREE.Group.prototype.setPickable;
-				obj.children[i].setPickable();
-			}
-		}
-	}
+	var obj = objloader.parse(_model);
 	obj.scale.x = obj.scale.y = obj.scale.z = scale;
+	obj.setPickable();
 	scene.add(obj);
-	camera_controls.setResetPosition(0,0);
-	camera_controls.reset();
-
-	if (model != undefined && animation != undefined) {
-        if (!document.body.classList.contains('is-animateable'))
-            document.body.classList.add('is-animateable');
-            animator.addAnimation(model, animation);
-    }
 };
