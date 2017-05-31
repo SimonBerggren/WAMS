@@ -23,7 +23,6 @@ var mode = undefined;
 for (var i = 0; i < typeModes.length; ++i) {
 
     modeButtons[typeModes[i].value] = typeModes[i];
-    console.log(typeModes[i].value);
     typeModes[i].onclick = function() {
 
          mode = this.value;
@@ -37,14 +36,16 @@ for (var i = 0; i < typeModes.length; ++i) {
         model_mode = false;
         manual_mode = false;
 
-        for( var i = scene.children.length - 1; i >= 0; i--) {
+     
+
+        if (mode == MODES.AUTO) {
+
+                    for( var i = scene.children.length - 1; i >= 0; i--) {
             if (scene.children[i].userData.type !== "static") {
                 scene.children[i].userData.connections = undefined;
                 scene.remove(scene.children[i]);
             }
-        }        
-
-        if (mode == MODES.AUTO) {
+        }  
 
             if (combined_mode) {
                 calculateCombinedGraph(graph, graph_icons);
@@ -55,14 +56,22 @@ for (var i = 0; i < typeModes.length; ++i) {
         } else if (mode == MODES.MANUAL) {
 
             manual_mode = true;
+            
 
-            if (combined_mode) {
-                display_graph(graph_fixed, graph_fixed_icons);
-            } else {
-                display_graph(graph);
-            }            
+            // if (combined_mode) {
+            //     display_graph(graph_fixed, graph_fixed_icons);
+            // } else {
+            //     display_graph(graph);
+            // }
 
         } else if (mode == MODES.NESTED) {
+
+                    for( var i = scene.children.length - 1; i >= 0; i--) {
+            if (scene.children[i].userData.type !== "static") {
+                scene.children[i].userData.connections = undefined;
+                scene.remove(scene.children[i]);
+            }
+        }  
 
             if (combined_mode) {
                 calculateCombinedGraph(graph_nested, graph_nested_icons);
@@ -71,6 +80,13 @@ for (var i = 0; i < typeModes.length; ++i) {
             }             
 
         } else if (mode == MODES.VISUAL) {
+
+                    for( var i = scene.children.length - 1; i >= 0; i--) {
+            if (scene.children[i].userData.type !== "static") {
+                scene.children[i].userData.connections = undefined;
+                scene.remove(scene.children[i]);
+            }
+        }  
 
             model_mode = true;
 
@@ -357,6 +373,7 @@ function CheckRaycast(touch) {
 
                             if (manual_mode) {
                                 // graph_fixed.edges.push(edge);
+                                graph.edges.push(edge);
                             } else {
                                 graph.edges.push(edge);
                             }
@@ -392,6 +409,7 @@ function CheckRaycast(touch) {
                             object.parent.userData.connections.push(connection);
                             picked_port.setColor(portColor);
                             setPortsVisible(false);
+                            attach(picked_object);
 
                         } else {
 
@@ -637,6 +655,7 @@ cloneButton.onclick = function() {
         if (combined_mode) {
             if (manual_mode) {
                  // graph_fixed.children.push(clone.userData);
+                 graph.children.push(clone.userData);
             } else {
                 graph.children.push(clone.userData);    
             }
@@ -657,6 +676,7 @@ function deleteObject(_object) {
     if (combined_mode) {
         if (manual_mode) {
             // edges = graph_fixed.edges;
+            edges = graph.edges;
         } else {
             edges = graph.edges;
         }
@@ -721,6 +741,7 @@ function deleteObject(_object) {
         if (combined_mode)
             if (manual_mode) {
                 // graph_fixed.children.removeValue("id", id);
+                graph.children.removeValue("id", id);
             } else {
                 graph.children.removeValue("id", id);    
             }
@@ -735,7 +756,7 @@ function deleteObject(_object) {
 
     var connections = _object.userData.connections;
     if (manual_mode) {
-        for(var i = 0; i < picked_object.userData.connections; ++i) {
+        for(var i = 0; i < picked_object.userData.connections.length; ++i) {
             scene.remove(picked_object.userData.connections[i]);
         }
         scene.remove(_object);
@@ -1134,6 +1155,7 @@ function addObject(_name, _svg, _info) {
         if (combined_mode) {
             if (manual_mode) {
                 // graph_fixed.children.push(child);
+                graph.children.push(child);
             } else {
                 graph.children.push(child);
             }
@@ -1146,5 +1168,3 @@ function addObject(_name, _svg, _info) {
         }
     });
 };
-
-
