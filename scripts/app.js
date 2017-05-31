@@ -168,12 +168,12 @@ if (showingStats)
 // main initialize function
 
 input = new Input();
-scene = new THREE.Scene();
 animator = new Animator();
+scene = new THREE.Scene();
 
 // set up renderer
 var renderer = new THREE.WebGLRenderer({alpha: true, antialias: true});
-renderer.setClearColor( clearColor, 0 );
+renderer.setClearColor( clearColor, 1 );
 renderer.setSize(windowWidth, windowHeight);
 
 // set up camera and camera controls

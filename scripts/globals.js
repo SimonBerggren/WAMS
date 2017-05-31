@@ -1,7 +1,7 @@
 // contains global variables for easier tweaking
 
 // SCENE
-var clearColor = "darkblue";
+var clearColor = "#ffffcc";
 var copySpacing = 150;
 
 // DIRECTIONAL LIGHT
